@@ -1,0 +1,113 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
+*{
+  box-sizing: border-box !important;
+  margin: 0px ;
+  padding: 0px;
+}
+body,
+button {
+  font-family: "Inter", sans-serif;
+}
+:root {
+  --offcanvas-width: 270px;
+  --topNavbarHeight: 56px;
+  --light: #ffffff;
+  --grey: #efefef;
+}
+
+.bg-mix { background: linear-gradient(180deg, var(--light) 50%, var(--grey) 0); }
+
+.navbar{
+  background-color: #232F3E;
+}
+.sidebar-nav {
+  width: var(--offcanvas-width);
+  background-color: #232F3E;
+}
+.sidebar-link {
+  display: flex;
+  align-items: center;
+}
+.sidebar-link .right-icon {
+  display: inline-flex;
+}
+.sidebar-link[aria-expanded="true"] .right-icon {
+  transform: rotate(180deg);
+}
+
+.container-extend{
+  width: 100%;
+  height: 100%;
+  background-color: var(--grey);
+}
+.container-welcome{
+  background-color: var(--light);
+}
+.container-charts{
+  width: 100%;
+  margin: auto;
+}
+.title-box{
+  width: 100%;
+  background-color: var(--light);
+}
+.title-box h4{
+  margin: 0px;
+}
+
+.last_sells-box{
+  width: 60%;
+  margin: auto;
+}
+.container-datatable{
+  width: 100%;
+  margin: auto;
+}
+.box-btn-acciones{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.box-btn-acciones button{
+  margin: 3px;
+  width: 30px;
+  height: 30px;
+  font-size: .9rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.box-btn-acciones i{
+  color: #fff;
+}
+.btns-table{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 5px;
+}
+@media (min-width: 992px) {
+  body {
+    overflow: auto !important;
+  }
+  main {
+    margin-left: var(--offcanvas-width);
+  }
+  /* this is to remove the backdrop */
+  .offcanvas-backdrop::before {
+    display: none;
+  }
+  .sidebar-nav {
+    -webkit-transform: none;
+    transform: none;
+    visibility: visible !important;
+    height: calc(100% - var(--topNavbarHeight));
+    top: var(--topNavbarHeight);
+  }
+}
+@media(max-width:768px){
+  .last_sells-box{
+    width: 100%;
+    padding: 10px;
+  }
+}
