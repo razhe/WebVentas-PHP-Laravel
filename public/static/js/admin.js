@@ -53,4 +53,35 @@ function editor_init(field){
       { name: 'document', items: ['CodeSnippet', 'EmojiPanel', 'Preview', 'Souce'] }
     ]
   });
+};
+
+function editarCategoria(id) {
+    $.ajax({
+      url:'categories/edit/'+id,
+      method:'get',
+      data:'',
+      success:function(data){
+        $('#id-categoria-editar').val(data.id);
+        $('#nombre-categoria-editar').val(data.name);
+        $('#estado-categoria-editar').val(data.status);
+        
+      }
+    });
+}
+
+function EditarUsuario(id) {
+  $.ajax({
+    url:'users/edit/'+id,
+    method:'get',
+    data:'',
+    success:function(data){
+      $('#id-editar-usuario').val(data.id);
+      $('#nombre-editar-usuario').val(data.name);
+      $('#apellido-editar-usuario').val(data.last_name);
+      $('#telefono-editar-usuario').val(data.phone);
+      $('#correo-editar-usuario').val(data.email);
+      $('#estado-editar-usuario').val(data.status);
+      $('#rol-editar-usuario').val(data.id_tasks);
+    }
+  });
 }

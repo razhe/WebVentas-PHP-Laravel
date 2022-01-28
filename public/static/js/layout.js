@@ -77,10 +77,6 @@ document.querySelectorAll('#menu .subcategorias-box .btn-regresar').forEach((bot
     });
 });
     
-
-
-
-
 btnCerrarMenu.addEventListener('click', (e)=>{
     e.preventDefault();
     document.querySelectorAll('#menu .activo').forEach((elemento)=>{

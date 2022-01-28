@@ -81,10 +81,10 @@
             <input type="submit" name="registrarse" id="" class="btn btn-success">
         </form>
         <!--Validacion formulario-->
-        @if(Session::has('authMsgError'))
+        @if(Session::has('MsgResponse'))
             <div class="container box-msgAuth-error">
                 <div class="alert alert-{{ Session::get('typealert') }}" style="display:none;">
-                {{Session::get('authMsgError')}}
+                {{Session::get('MsgResponse')}}
                 @if($errors -> any())
                 <ul>
                     @foreach($errors->all() as $error)

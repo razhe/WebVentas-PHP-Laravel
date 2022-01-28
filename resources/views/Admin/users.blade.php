@@ -7,8 +7,8 @@
 @section('title', 'Usuarios') 
 
 @section('content')
-    <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <!-- Modal Agregar-->
+    <div class="modal fade" id="addForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -16,7 +16,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="register__form needs-validation" action="{{url('/admin/users')}}" method="post" novalidate>
+                    <form class="register__form needs-validation" action="{{url('/admin/users/add')}}" method="post" novalidate>
                         @csrf
                         <!--Nombre y apellido-->
                         <div class="2-columns-row row">
@@ -76,9 +76,8 @@
                             <label for="status">Seleccione un estado:</label>
                             <select class="form-select" aria-label="Default select example" name="status">
                                 <option selected disabled>Estado...</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <option value="1">Activo</option>
+                                <option value="2">Suspendido</option>
                             </select>
                         </div>
                         <!--Rol-->
@@ -86,22 +85,106 @@
                             <label for="id_tasks">Seleccione un rol:</label>
                             <select class="form-select" aria-label="Default select example" name="id_tasks">
                                 <option selected disabled>Rol...</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <option value="1">Usuario</option>
+                                <option value="2">Administrador</option>
                             </select>
                         </div>
 
                         <br>
                         <div class="d-flex justify-content-between">
                             <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary">Aceptar</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Modal editar-->
+    <div class="modal fade" id="editForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Editar Usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="register__form needs-validation" action="{{url('admin/users/edit')}}" method="post" novalidate>
+                        @csrf
+                        <input id="id-editar-usuario" type="hidden" name="id" class="form-control">
+                        <!--Nombre y apellido-->
+                        <div class="2-columns-row row">
+                            <div class="input__container col-md-6">
+                                <label for="name">Nombre:</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="bi bi-person"></i>
+                                    </span>
+                                    <input id="nombre-editar-usuario" type="text" name="name" class="form-control" required>
+                                </div>
+                            </div>
+                            <!--Apellido-->
+                            <div class="input__container col-md-6">
+                                <label for="last_name">Apellido:</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="bi bi-person-fill"></i>
+                                    </span>
+                                    <input id="apellido-editar-usuario" type="text" name="last_name" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Telefono-->
+                        <div class="input__container">
+                            <label for="phone">Numero telefónico:</label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="bi bi-telephone"></i>
+                                </span>
+                                <input id="telefono-editar-usuario" type="text" name="phone" class="form-control" required>
+                            </div>
+                        </div>
+                        <!--Email-->
+                        <div class="input__container">
+                            <label for="email">Correo electrónico:</label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="bi bi-envelope"></i>
+                                </span>
+                                <input id="correo-editar-usuario" type="email" name="email" class="form-control" required>
+                            </div>
+                        </div>
+                        <!--Estado-->
+                        <div class="input__container mb-2">
+                            <label for="status">Seleccione un estado:</label>
+                            <select id="estado-editar-usuario" class="form-select" aria-label="Default select example" name="status">
+                                <option selected disabled>Estado...</option>
+                                <option value="1">Activo</option>
+                                <option value="2">Suspendido</option>
+                            </select>
+                        </div>
+                        <!--Rol-->
+                        <div class="input__container mb-2">
+                            <label for="id_tasks">Seleccione un rol:</label>
+                            <select id="rol-editar-usuario" class="form-select" aria-label="Default select example" name="id_tasks">
+                                <option selected disabled>Rol...</option>
+                                <option value="1">Usuario</option>
+                                <option value="2">Administrador</option>
+                            </select>
+                        </div>
+
+                        <br>
+                        <div class="d-flex justify-content-between">
+                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-warning">Editar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container-extend">
         <section class="bg-mix py-3">
             <div class="container">
@@ -141,7 +224,44 @@
                 </div>
             </div>
         </section>
-
+        <!--Validacion formulario-->
+        @if(Session::has('MsgResponse'))
+            <div class="container box-msgAuth-error">
+                <div class="alert alert-{{ Session::get('typealert') }}" style="display:none;">
+                {{Session::get('MsgResponse')}}
+                @if($errors -> any())
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+                @endif
+                <script>
+                    $('.alert').slideDown();
+                    setTimeout(function() {$('.alert').slideUp();}, 8000);
+                </script>
+                </div>
+            </div>
+        @endif
+        <!--Validacion formulario-->
+        @if(Session::has('MsgError'))
+            <div class="container box-msgAuth-error">
+                <div class="alert alert-{{ Session::get('typealert') }}" style="display:none;">
+                {{Session::get('MsgError')}}
+                @if($errors -> any())
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+                @endif
+                <script>
+                    $('.alert').slideDown();
+                    setTimeout(function() {$('.alert').slideUp();}, 8000);
+                </script>
+                </div>
+            </div>
+        @endif
         <div class="row container-datatable">
             <div class="col-md-12 mb-3">
                 <div class="card">
@@ -152,7 +272,7 @@
                         <div class="table-responsive">
                             <table id="users-table" class="table table-striped data-table" style="width: 100%">
                                 <div class="btns-table">
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addForm">
                                         <i class="bi bi-plus-lg"></i> Agregar
                                     </button>
                                 </div>
@@ -196,9 +316,12 @@
                                                     @break
                                             @endswitch
                                             <td class="box-btn-acciones">
-                                                <a href="{{url('/admin/user/'.$user->id.'/edit')}}"><button class="btn btn-warning"><i class="bi bi-pen-fill"></i></button></a>
-                                                <a href="{{url('/admin/user/'.$user->id.'/delete')}}"><button class="btn btn-danger"><i class="bi bi-trash2-fill"></i></button></a>
-                                            </td>
+                                                <button class="btn btn-warning btn-edit-user" onclick="EditarUsuario({{ $user -> id }})" data-bs-toggle="modal" data-bs-target="#editForm"><i class="bi bi-pen-fill"></i></button>
+                                                <form action="{{ url('admin/users/delete', $user -> id) }}" method="post">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-danger"><i class="bi bi-trash2-fill"></i></button>
+                                                </form>
+                                                
                                         </tr>
                                     @endforeach
                                 </tbody>

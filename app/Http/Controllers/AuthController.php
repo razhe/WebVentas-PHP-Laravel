@@ -38,12 +38,12 @@ class AuthController extends Controller
 
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator -> fails()):
-            return back() -> withErrors($validator)->with('authMsgError','Se ha producido un error')->with( 'typealert', 'danger');
+            return back() -> withErrors($validator)->with('MsgResponse','Se ha producido un error')->with( 'typealert', 'danger');
         else:
             if(Auth::attempt(['email'=>$request['email'],'password'=>$request['password']], true)):
                 return redirect('/');
             else:
-                return back()->with('authMsgError','Correo electrónico o contraseña erronea')->with( 'typealert', 'danger');
+                return back()->with('MsgResponse','Correo electrónico o contraseña erronea')->with( 'typealert', 'danger');
             endif;
         endif;
 
@@ -77,7 +77,7 @@ class AuthController extends Controller
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator -> fails()):
-            return back() -> withErrors($validator)->with('authMsgError','Se ha producido un error')->with( 'typealert', 'danger');
+            return back() -> withErrors($validator)->with('MsgResponse','Se ha producido un error')->with( 'typealert', 'danger');
         else:
             $user = new User;
             //"e" aplica un encode a los datos que enviamos para evitar que hagan inyecciones por scripts, o vulnerabilidades en general.
@@ -90,7 +90,7 @@ class AuthController extends Controller
             $user-> id_tasks  = e(1);
 
             if($user -> save()):
-                return redirect('/login')->with('authMsgError', '¡Usuario creado con éxito! Ya puedes iniciar sesión.')->with('typealert', 'success');
+                return redirect('/login')->with('MsgResponse', '¡Usuario creado con éxito! Ya puedes iniciar sesión.')->with('typealert', 'success');
             endif;
         endif;
     }

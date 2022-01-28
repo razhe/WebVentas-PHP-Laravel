@@ -114,7 +114,7 @@
                         <br>
                         <div class="d-flex justify-content-between">
                             <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary">Aceptar</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
                         </div>
                     </form>
                 </div>
@@ -160,7 +160,25 @@
                 </div>
             </div>
         </section>
-
+        <!--Validacion formulario-->
+        @if(Session::has('MsgError'))
+            <div class="container box-msgAuth-error">
+                <div class="alert alert-{{ Session::get('typealert') }}" style="display:none;">
+                {{Session::get('MsgError')}}
+                @if($errors -> any())
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+                @endif
+                <script>
+                    $('.alert').slideDown();
+                    setTimeout(function() {$('.alert').slideUp();}, 8000);
+                </script>
+                </div>
+            </div>
+        @endif
         <div class="row container-datatable">
             <div class="col-md-12 mb-3">
             <div class="card">
@@ -217,7 +235,6 @@
     <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
     <!--CKeditor (Darle formato a los text áreas)-->
     <script src="{{url('/static/libs/ckeditor/ckeditor.js')}}"></script>
-    <script src="{{url('/static/js/admin.js')}}"></script>
     <script>
     $(document).ready(function() {
         $('#products-table').DataTable();
