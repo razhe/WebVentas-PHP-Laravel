@@ -115,7 +115,7 @@ class UserController extends Controller
             $user-> id_tasks  = e($request['id_tasks']);
 
             if($user -> save()):
-                return back() -> withErrors($validator)-> with('MsgResponse', '¡El usuario se ha modificado exitosamente!')->with('typealert', 'success');
+                return back() -> withErrors($validator)-> with('MsgResponse', '¡El usuario se ha modificado exitosamente!')->with('typealert', 'warning');
             endif;
         endif;
     }

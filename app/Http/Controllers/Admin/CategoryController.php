@@ -20,6 +20,12 @@ class CategoryController extends Controller
         $categoriesData = ['categories' => $categories];
         return view('Admin.categories', $categoriesData);
     }
+    public function getCategoriesNames(){
+        $categories = Category::where('categories.status', '<>', '3') -> orderBy('id', 'Asc')->get();
+        $categoriesData = ['categories' => $categories];
+        //return response()->json($categories);
+        return response($categoriesData);
+    }
     public function postAddCategory(Request $request){
         $rules = 
         [
@@ -81,7 +87,7 @@ class CategoryController extends Controller
             $category->name   = e($request['name']);
             $category->status = e($request['status']);
             if ($category -> save()):
-                return back() -> withErrors($validator)->with('MsgResponse','¡Categoría guardada con Éxito!')->with( 'typealert', 'success');
+                return back() -> withErrors($validator)->with('MsgResponse','¡Categoría guardada con Éxito!')->with( 'typealert', 'warning');
             endif;
                 
             

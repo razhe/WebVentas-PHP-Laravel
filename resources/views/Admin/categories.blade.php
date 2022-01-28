@@ -9,7 +9,7 @@
 
 @section('content')
 
-    <!-- Modal Agregar-->
+    <!-- Modal Agregar categoria-->
     <div class="modal fade" id="addForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -49,7 +49,7 @@
             </div>
         </div>
     </div>
-    <!-- Modal Editar-->
+    <!-- Modal Editar categoria-->
     <div class="modal fade" id="editForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -210,8 +210,6 @@
             </div>
         </div>
     </div>
-
-
 
 @endsection
 

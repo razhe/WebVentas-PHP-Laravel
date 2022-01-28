@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\SubCategoryController;
 
 Route::prefix('/admin')->group(function(){
     Route::get('/', [DashboardController::class, 'getDashboard']);
@@ -19,10 +20,18 @@ Route::prefix('/admin')->group(function(){
     Route::post('/products',[ProductController::class, 'postAddProduct']);
     //Categorías
     Route::get('/categories',[CategoryController::class, 'getCategories']);
+    Route::get('/categories/opts',[CategoryController::class, 'getCategoriesNames']);
+
     Route::post('/categories/add',[CategoryController::class, 'postAddCategory']);
     Route::post('/categories/edit',[CategoryController::class, 'postEditCategory']);
     Route::get('/categories/edit/{id}',[CategoryController::class, 'getFindCategory']);
     Route::post('/categories/delete/{id}',[CategoryController::class, 'postDeleteCategory']);
+    //Subcategoría
+    Route::get('/subcategories',[SubCategoryController::class, 'getSubcategories']) -> name('admin.subcategories');
+    Route::post('/subcategories/delete/{id}',[SubCategoryController::class, 'postDeleteSubcategory']);
+    Route::post('/subcategories/add',[SubCategoryController::class, 'postAddSubcategory']);
+    Route::get('/subcategories/edit/{id}',[SubCategoryController::class, 'getFindSubcategory']);
+    Route::post('/subcategories/edit',[SubCategoryController::class, 'postEditSubcategory']);
 });
 
 

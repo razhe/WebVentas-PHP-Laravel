@@ -112,16 +112,38 @@
                         </ul>
                     </div>
                 </li>
+
+                <li>
+                    <a class="nav-link px-3 sidebar-link" data-bs-toggle="collapse" href="#objetos">
+                        <span class="me-2"><i class="bi bi-archive"></i></span>
+                        <span>Objetos</span>
+                        <span class="ms-auto">
+                        <span class="right-icon">
+                            <i class="bi bi-chevron-down"></i>
+                        </span>
+                        </span>
+                    </a>
+                    <div class="collapse" id="objetos">
+                        <ul class="navbar-nav ps-3">
+                            <li>
+                                <a href="{{url('admin/categories')}}" class="nav-link px-3">
+                                    <span class="me-2"><i class="bi bi-people"></i></span>
+                                    <span>Categorías</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{url('admin/subcategories')}}" class="nav-link px-3">
+                                    <span class="me-2"><i class="bi bi-boxes"></i></span>
+                                    <span>Subcategorías</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
                 <li>
                     <a href="{{url('admin/sales')}}" class="nav-link px-3">
                         <span class="me-2"><i class="bi bi-cash-coin"></i></span>
                         <span>Ventas</span>
-                    </a>                
-                </li>
-                <li>
-                    <a href="{{url('admin/categories')}}" class="nav-link px-3">
-                        <span class="me-2"><i class="bi bi-card-text"></i></span>
-                        <span>Categorías</span>
                     </a>                
                 </li>
                 <li class="my-4"><hr class="dropdown-divider bg-light" /></li>

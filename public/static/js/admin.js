@@ -68,6 +68,25 @@ function editarCategoria(id) {
       }
     });
 }
+function traerCategorias() {
+  $.ajax({
+    url:'categories/opts',
+    method:'get',
+    data:'',
+    success:function(data){
+      let html = '<option selected disabled>Categoría...</option>';
+      for (let i = 0; i < data.categories.length; i++) {
+        html += 
+        `
+        <option value="${data.categories[i].id}">${data.categories[i].name}</option>
+        `;
+        data.categories[i];
+      }
+      document.getElementById('select-category-add').innerHTML = html;
+      document.getElementById('select-category-edit').innerHTML = html;
+    }
+  });
+}
 
 function EditarUsuario(id) {
   $.ajax({
@@ -82,6 +101,19 @@ function EditarUsuario(id) {
       $('#correo-editar-usuario').val(data.email);
       $('#estado-editar-usuario').val(data.status);
       $('#rol-editar-usuario').val(data.id_tasks);
+    }
+  });
+}
+function editarSubCategoria(id) {
+  $.ajax({
+    url:'subcategories/edit/'+id,
+    method:'get',
+    data:'',
+    success:function(data){
+      $('#id-subcategoria-editar').val(data.id);
+      $('#nombre-subcategoria-editar').val(data.name);
+      $('#estado-subcategoria-editar').val(data.status);
+      $('#select-category-edit').val(data.id_category);
     }
   });
 }
