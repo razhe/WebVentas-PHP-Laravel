@@ -104,9 +104,9 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{url('admin/providers')}}" class="nav-link px-3">
+                                <a href="{{url('admin/brands')}}" class="nav-link px-3">
                                     <span class="me-2"><i class="bi bi-clipboard-check"></i></span>
-                                    <span>Proveedores</span>
+                                    <span>Marcas</span>
                                 </a>
                             </li>
                         </ul>

@@ -66,8 +66,6 @@ button {
 }
 .box-btn-acciones{
   display: flex;
-  width: 100%;
-  justify-content: center;
 }
 .box-btn-acciones button{
   margin: 3px;

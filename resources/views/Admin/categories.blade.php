@@ -219,7 +219,6 @@
     <script>
         $(document).ready(function() {
             $('#categories-table').DataTable();
-            editor_init('description-area');
         } );
     </script>
 @endsection

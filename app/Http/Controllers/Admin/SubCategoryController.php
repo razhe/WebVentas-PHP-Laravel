@@ -15,6 +15,18 @@ class SubCategoryController extends Controller
         $this-> middleware('auth');
         $this-> middleware('admincheck');
     }
+    public function getSubcategoriesSelect($id){
+        
+        $subcategories = Subcategory::where
+            ([
+            ['subcategories.status', '<>', '3'],
+            ['subcategories.id_category', '=', $id],
+            ]) 
+            -> orderBy('id', 'Asc')->get();
+        $subcategoriesData = ['subcategories' => $subcategories];
+        //return response()->json($categories);
+        return response($subcategoriesData);
+    }
     public function getSubcategories(){
         $subcategories = DB::select('CALL subcategories_join_categories()');
         /*
@@ -96,7 +108,7 @@ class SubCategoryController extends Controller
             $subcategory->status      = e($request['status']);
             $subcategory->id_category = e($request['id_category']);
             if ($subcategory -> save()):
-                return back() -> withErrors($validator)->with('MsgResponse','¡Subcategoría guardada con Éxito!')->with( 'typealert', 'warning');
+                return back() -> withErrors($validator)->with('MsgResponse','¡Subcategoría guardada con Éxito!')->with( 'typealert', 'success');
             endif;
         endif;
     }

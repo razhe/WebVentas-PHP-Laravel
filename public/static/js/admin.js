@@ -55,19 +55,7 @@ function editor_init(field){
   });
 };
 
-function editarCategoria(id) {
-    $.ajax({
-      url:'categories/edit/'+id,
-      method:'get',
-      data:'',
-      success:function(data){
-        $('#id-categoria-editar').val(data.id);
-        $('#nombre-categoria-editar').val(data.name);
-        $('#estado-categoria-editar').val(data.status);
-        
-      }
-    });
-}
+//traer las categorias al frontend
 function traerCategorias() {
   $.ajax({
     url:'categories/opts',
@@ -87,7 +75,21 @@ function traerCategorias() {
     }
   });
 }
-
+//traer valores de categoria al frontend
+function editarCategoria(id) {
+  $.ajax({
+    url:'categories/edit/'+id,
+    method:'get',
+    data:'',
+    success:function(data){
+      $('#id-categoria-editar').val(data.id);
+      $('#nombre-categoria-editar').val(data.name);
+      $('#estado-categoria-editar').val(data.status);
+      
+    }
+  });
+}
+//traer valores de usuario al frontend
 function EditarUsuario(id) {
   $.ajax({
     url:'users/edit/'+id,
@@ -104,6 +106,7 @@ function EditarUsuario(id) {
     }
   });
 }
+//traer valores de subcategoria al frontend
 function editarSubCategoria(id) {
   $.ajax({
     url:'subcategories/edit/'+id,
@@ -117,3 +120,59 @@ function editarSubCategoria(id) {
     }
   });
 }
+//Traer valores de marca al frontend
+function EditarMarca(id){
+  $.ajax({
+    url:'brands/edit/'+id,
+    method:'get',
+    data:'',
+    success:function(data){
+      $('#id-marca-editar').val(data.brand[0].id);
+      $('#nombre-marca-editar').val(data.brand[0].name);
+      $('#estado-marca-editar').val(data.brand[0].status);
+    }
+  });
+}
+//filtro de categoria a subcategoria en producto
+const selectCategoryAdd = document.getElementById('select-category-add');
+const selectCategoryEdit = document.getElementById('select-category-edit');
+
+selectCategoryAdd.addEventListener('change', (event) => {
+  let id = event.target.value
+  $.ajax({
+    url:'subcategories/find/'+id,
+    method:'get',
+    data:'',
+    success:function(data){
+      let html = ''
+      let selectSubcategoryAdd = document.getElementById('select-subcategory-add');     
+      html = '<option selected disabled>Ya puede seleccionar...</option>';
+      for (let i = 0; i < data.subcategories.length; i++) {
+        html += `<option value="${data.subcategories[i].id}">${data.subcategories[i].name}</option>`;
+        data.subcategories[i];
+      }
+      selectSubcategoryAdd.innerHTML = html;
+    }
+  });
+  
+});
+
+selectCategoryEdit.addEventListener('change', (event) => {
+  let id = event.target.value
+  $.ajax({
+    url:'subcategories/find/'+id,
+    method:'get',
+    data:'',
+    success:function(data){
+      let html = ''
+      let selectSubcategoryEdit = document.getElementById('select-subcategory-edit');   
+      html = '<option selected disabled>Ya puede seleccionar...</option>';
+      for (let i = 0; i < data.subcategories.length; i++) {
+        html += `<option value="${data.subcategories[i].id}">${data.subcategories[i].name}</option>`;
+        data.subcategories[i];
+      }
+      selectSubcategoryEdit.innerHTML = html;
+    }
+  });
+  
+});

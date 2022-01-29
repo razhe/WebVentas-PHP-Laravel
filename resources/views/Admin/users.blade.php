@@ -321,7 +321,7 @@
                                                     @csrf
                                                     <button type="submit" class="btn btn-danger"><i class="bi bi-trash2-fill"></i></button>
                                                 </form>
-                                                
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -334,6 +334,7 @@
                                         <th>Telefono</th>
                                         <th>Estado</th>
                                         <th>Rol</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </tfoot>
                             </table>

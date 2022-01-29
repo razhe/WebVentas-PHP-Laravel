@@ -23,7 +23,6 @@ class CategoryController extends Controller
     public function getCategoriesNames(){
         $categories = Category::where('categories.status', '<>', '3') -> orderBy('id', 'Asc')->get();
         $categoriesData = ['categories' => $categories];
-        //return response()->json($categories);
         return response($categoriesData);
     }
     public function postAddCategory(Request $request){
@@ -87,7 +86,7 @@ class CategoryController extends Controller
             $category->name   = e($request['name']);
             $category->status = e($request['status']);
             if ($category -> save()):
-                return back() -> withErrors($validator)->with('MsgResponse','¡Categoría guardada con Éxito!')->with( 'typealert', 'warning');
+                return back() -> withErrors($validator)->with('MsgResponse','¡Categoría guardada con Éxito!')->with( 'typealert', 'success');
             endif;
                 
             
