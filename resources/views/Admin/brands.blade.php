@@ -192,7 +192,7 @@
                                         @break
                                 @endswitch
                                 <td>
-                                    <img src="{{asset($brand -> image)}}" alt="{{$brand -> name}}" class="img-fluid" width="60px">
+                                    <img src="{{asset($brand -> image)}}" alt="{{$brand -> name}}" class="img-fluid" style="max-width: 60px; max-height: 30px">
                                 </td>
                                 <td class="box-btn-acciones">
                                     <button class="btn btn-warning btn-edit-user" onclick="EditarMarca({{$brand -> id}})" data-bs-toggle="modal" data-bs-target="#modalBrandEdit"><i class="bi bi-pen-fill"></i></button>
@@ -229,7 +229,6 @@
     <script>
     $(document).ready(function() {
         $('#brands-table').DataTable();
-        
     } ); 
     
     </script>

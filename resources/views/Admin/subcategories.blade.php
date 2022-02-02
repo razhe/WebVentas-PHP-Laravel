@@ -77,7 +77,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="modal-form" class="register__form needs-validation" action="{{url('admin/subcategories/add')}}" method="post" novalidate>
+                        <form id="modal-form" enctype="multipart/form-data" class="register__form needs-validation" action="{{url('admin/subcategories/add')}}" method="post" novalidate>
                             @csrf
                             <!--Nombre-->
                             <div class="input__container mb-2">
@@ -105,6 +105,31 @@
 
                                 </select>
                             </div>
+                            <!--Banner-->
+                            <div class="mb-2">
+                                <label for="banner" class="form-label">Banner:</label>
+                                <input class="form-control" type="file" name="banner" id="banner">
+                            </div>
+                            <!--Imagen 1-->
+                            <div class="mb-2">
+                                <label for="image1" class="form-label">Primera imagen secundaria:</label>
+                                <input class="form-control" type="file" name="image1" id="image1">
+                            </div>
+                            <!--Imagen 2-->
+                            <div class="mb-2">
+                                <label for="image2" class="form-label">Segunda imagen secundaria:</label>
+                                <input class="form-control" type="file" name="image2" id="image2">
+                            </div>
+                            <!--Imagen 3-->
+                            <div class="mb-2">
+                                <label for="image3" class="form-label">Tercera imagen secundaria:</label>
+                                <input class="form-control" type="file" name="image3" id="image3">
+                            </div>
+                            <!--Imagen 4-->
+                            <div class="mb-2">
+                                <label for="image4" class="form-label">Cuarta imagen secundaria:</label>
+                                <input class="form-control" type="file" name="image4" id="image4">
+                            </div>
                             <br>
                             <div class="d-flex justify-content-between">
                                 <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
@@ -124,7 +149,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="modal-form" class="register__form needs-validation" action="{{url('admin/subcategories/edit')}}" method="post" novalidate>
+                        <form id="modal-form" enctype="multipart/form-data" class="register__form needs-validation" action="{{url('admin/subcategories/edit')}}" method="post" novalidate>
                             @csrf
                             <input id="id-subcategoria-editar" type="hidden" name="id" class="form-control">
                             <!--Nombre-->
@@ -152,6 +177,31 @@
                                 <select id="select-category-edit" class="form-select" aria-label="Default select example" name="id_category">
                                                                       
                                 </select>
+                            </div>
+                            <!--Banner-->
+                            <div class="mb-2">
+                                <label for="banner" class="form-label">Banner:</label>
+                                <input class="form-control" type="file" name="banner" id="banner">
+                            </div>
+                            <!--Imagen 1-->
+                            <div class="mb-2">
+                                <label for="image1" class="form-label">Primera imagen secundaria:</label>
+                                <input class="form-control" type="file" name="image1" id="image1">
+                            </div>
+                            <!--Imagen 2-->
+                            <div class="mb-2">
+                                <label for="image2" class="form-label">Segunda imagen secundaria:</label>
+                                <input class="form-control" type="file" name="image2" id="image2">
+                            </div>
+                            <!--Imagen 3-->
+                            <div class="mb-2">
+                                <label for="image3" class="form-label">Tercera imagen secundaria:</label>
+                                <input class="form-control" type="file" name="image3" id="image3">
+                            </div>
+                            <!--Imagen 4-->
+                            <div class="mb-2">
+                                <label for="image4" class="form-label">Cuarta imagen secundaria:</label>
+                                <input class="form-control" type="file" name="image4" id="image4">
                             </div>
                             <br>
                             <div class="d-flex justify-content-between">
@@ -184,6 +234,11 @@
                                     <th>Nombre subcategoría</th>
                                     <th>Estado</th>
                                     <th>Categoría padre</th>
+                                    <th>Banner</th>
+                                    <th>Primera imagen</th>
+                                    <th>Segunda imagen</th>
+                                    <th>Tercera imagen</th>
+                                    <th>Cuarta imagen</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -200,8 +255,13 @@
                                                 <td><strong class="text-warning">Suspendido <i class="bi bi-exclamation-circle"></i></strong></td>
                                                 @break
                                         @endswitch
-                                        <td>{{$subcategory -> category_name}}</td>
-                                        <td id="box-btn-acciones" class="box-btn-acciones">        
+                                        <td><strong>{{$subcategory -> category_name}}</strong></td>
+                                        <td><img src="{{asset($subcategory -> banner)}}" alt="" style="max-width: 60px; max-height: 30px"></td>
+                                        <td><img src="{{asset($subcategory -> image1)}}" alt="" style="max-width: 60px; max-height: 30px"></td>
+                                        <td><img src="{{asset($subcategory -> image2)}}" alt="" style="max-width: 60px; max-height: 30px"></td>
+                                        <td><img src="{{asset($subcategory -> image3)}}" alt="" style="max-width: 60px; max-height: 30px"></td>
+                                        <td><img src="{{asset($subcategory -> image4)}}" alt="" style="max-width: 60px; max-height: 30px"></td>
+                                        <td id="" class="box-btn-acciones">        
                                             <button onclick="editarSubCategoria({{ $subcategory -> id }})" id="btn-editar" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editFormSubcategoria" type="submit"><i class="bi bi-pen-fill"></i></button>
                                             
                                             <form action="{{ url('admin/subcategories/delete', $subcategory -> id) }}" method="post">
@@ -218,6 +278,11 @@
                                     <th>Nombre subcategoría</th>
                                     <th>Estado</th>
                                     <th>Categoría padre</th>
+                                    <th>Banner</th>
+                                    <th>Primera imagen</th>
+                                    <th>Segunda imagen</th>
+                                    <th>Tercera imagen</th>
+                                    <th>Cuarta imagen</th>
                                     <th>Acciones</th>
                                 </tr>
                             </tfoot>
@@ -237,7 +302,6 @@
         $(document).ready(function() {
             $('#subcategories-table').DataTable();
             traerCategorias();
-            editor_init('description-area');
         } );
     </script>
 @endsection

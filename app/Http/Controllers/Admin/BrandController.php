@@ -99,4 +99,10 @@ class BrandController extends Controller
             return back() ->with('MsgResponse','¡Marca eliminada con Éxito!')->with( 'typealert', 'success');
         }
     }
+    public function getBrandsNames()
+    {
+        $brands = Brand::where('brands.status', '<>', '3') -> orderBy('id', 'Asc')->get();
+        $brandsData = ['brands' => $brands];
+        return response($brandsData);
+    }
 }

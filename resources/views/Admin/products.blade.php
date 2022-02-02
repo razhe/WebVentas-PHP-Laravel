@@ -3,6 +3,7 @@
 
 @section('CSS')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="{{url('/static/libs/summernote/summernote.min.css')}}">
 @endsection
 
 @section('title', 'Productos')
@@ -18,7 +19,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="register__form needs-validation" action="{{url('/admin/products')}}" method="post" novalidate>
+                    <form class="register__form needs-validation" enctype="multipart/form-data" action="{{url('/admin/products/add')}}" method="post" novalidate>
                         @csrf
                         <!--Nombre-->
                         <div class="input__container mb-2">
@@ -47,20 +48,18 @@
                                     <span class="input-group-text" id="basic-addon1">
                                         <i class="bi bi-percent"></i>
                                     </span>
-                                    <input type="text" name="discount" class="form-control" required>
+                                    <input placeholder="Sin % Ej. 20" type="text" name="discount" class="form-control" required>
                                 </div>
                             </div>
                         </div>
                         <!--Marca y stock-->
                         <div class="2-columns-row row mb-2">
-                            <div class="input__container col-md-6">
-                                <label for="brand">Marca:</label>
-                                <div class="input-group">
-                                    <span class="input-group-text" id="basic-addon1">
-                                        <i class="bi bi-tag-fill"></i>
-                                    </span>
-                                    <input type="text" name="brand" class="form-control" required>
-                                </div>
+                            <!--marca-->
+                            <div class="input__container mb-2 col-md-6">
+                                <label for="category">Seleccione una marca:</label>
+                                <select id="select-brands-add" class="form-select brand-select" aria-label="Default select example" name="id_brand">
+                                    
+                                </select>
                             </div>
                             <div class="input__container col-md-6">
                                 <label for="stock">Stock:</label>
@@ -80,7 +79,7 @@
                                 <span class="input-group-text" id="basic-addon1">
                                     <i class="bi bi-upc"></i>
                                 </span>
-                                <input type="text" name="sku" class="form-control" required>
+                                <input placeholder="Escribe las dos primeras iniciales de la marca y nombre del producto." type="text" name="sku" class="form-control" required>
                             </div>
                         </div>
                         <!--estado-->
@@ -91,31 +90,39 @@
                                 <option value="2">Suspendido</option>
                             </select>
                         </div>
-                        <!--Categoria-->
-                        <div class="input__container mb-2">
-                            <label for="category">Seleccione una categoría:</label>
-                            <select id="select-category-add" class="form-select category-select" aria-label="Default select example" name="category">
-                            </select>
-                        </div>
                         <!--Subcategoria-->
                         <div class="input__container mb-2">
                             <label for="category">Seleccione una subcategoría:</label>
-                            <select id="select-subcategory-add" class="form-select subcategoria-select" aria-label="Default select example" name="category">
-                                <option selected disabled>Seleccione una categoría primero...</option>
+                            <select id="select-subcategory-add" class="form-select subcategoria-select" aria-label="Default select example" name="id_subcategory">
                             </select>
                         </div>
                         <!--Descripción-->
                         <div class="input__container mb-2"">
                             <label for="description">Descripción:</label>
                             <div class="form-floating">
-                                <textarea name="description" class="form-control" placeholder="" id="description-area"></textarea>
+                                <textarea name="description" class="form-control" placeholder="" id="area-description-add"></textarea>
                             </div>
                         </div>
                         
                         <!--Imagen-->
                         <div class="mb-2">
-                            <label for="image" class="form-label">Imagen:</label>
-                            <input class="form-control" type="file" name="image" id="image">
+                            <label for="image1" class="form-label">Primera imagen:</label>
+                            <input class="form-control" type="file" name="image1" id="image1">
+                        </div>
+                        <!--Imagen-->
+                        <div class="mb-2">
+                            <label for="image2" class="form-label">Segunda imagen:</label>
+                            <input class="form-control" type="file" name="image2" id="image2">
+                        </div>
+                        <!--Imagen-->
+                        <div class="mb-2">
+                            <label for="image3" class="form-label">Tercera imagen:</label>
+                            <input class="form-control" type="file" name="image3" id="image3">
+                        </div>
+                        <!--Imagen-->
+                        <div class="mb-2">
+                            <label for="image4" class="form-label">Cuarta imagen:</label>
+                            <input class="form-control" type="file" name="image4" id="image4">
                         </div>
                         <!--certificado-->
                         <div class="mb-2">
@@ -141,8 +148,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="register__form needs-validation" action="{{url('/admin/products')}}" method="post" novalidate>
+                    <form class="register__form needs-validation" enctype="multipart/form-data" action="{{url('/admin/products')}}" method="post" novalidate>
                         @csrf
+                        <input type="hidden" id="id-producto-editar" name="id">
                         <!--Nombre-->
                         <div class="input__container mb-2">
                             <label for="name">Nombre:</label>
@@ -150,7 +158,7 @@
                                 <span class="input-group-text" id="basic-addon1">
                                     <i class="bi bi-tag"></i>
                                 </span>
-                                <input type="text" name="name" class="form-control" required>
+                                <input id="nombre-producto-editar" type="text" name="name" class="form-control" required>
                             </div>
                         </div>
                         <!--Precio y descuento-->
@@ -161,7 +169,7 @@
                                     <span class="input-group-text" id="basic-addon1">
                                         <i class="bi bi-currency-dollar"></i>
                                     </span>
-                                    <input type="number" name="price" id="price" class="form-control" required>
+                                    <input id="precio-producto-editar" type="number" name="price" id="price" class="form-control" required>
                                 </div>
                             </div>
                             <div class="input__container col-md-6">
@@ -170,20 +178,18 @@
                                     <span class="input-group-text" id="basic-addon1">
                                         <i class="bi bi-percent"></i>
                                     </span>
-                                    <input type="text" name="discount" class="form-control" required>
+                                    <input id="descuento-producto-editar" placeholder="Sin % Ej. 20" type="text" name="discount" class="form-control" required>
                                 </div>
                             </div>
                         </div>
                         <!--Marca y stock-->
                         <div class="2-columns-row row mb-2">
-                            <div class="input__container col-md-6">
-                                <label for="brand">Marca:</label>
-                                <div class="input-group">
-                                    <span class="input-group-text" id="basic-addon1">
-                                        <i class="bi bi-tag-fill"></i>
-                                    </span>
-                                    <input type="text" name="brand" class="form-control" required>
-                                </div>
+                            <!--marca-->
+                            <div class="input__container mb-2 col-md-6">
+                                <label for="category">Seleccione una marca:</label>
+                                <select id="select-brands-edit" class="form-select brand-select" aria-label="Default select example" name="id_brand">
+                                    
+                                </select>
                             </div>
                             <div class="input__container col-md-6">
                                 <label for="stock">Stock:</label>
@@ -191,7 +197,7 @@
                                     <span class="input-group-text" id="basic-addon1">
                                         <i class="bi bi-boxes"></i>
                                     </span>
-                                    <input type="text" name="stock" class="form-control" required>
+                                    <input id="stock-producto-editar" type="text" name="stock" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -203,42 +209,50 @@
                                 <span class="input-group-text" id="basic-addon1">
                                     <i class="bi bi-upc"></i>
                                 </span>
-                                <input type="text" name="sku" class="form-control" required>
+                                <input id="sku-producto-editar" placeholder="Escribe las dos primeras iniciales de la marca y nombre del producto." type="text" name="sku" class="form-control" required>
                             </div>
                         </div>
                         <!--estado-->
                         <div class="input__container mb-2">
                             <label for="status">Seleccione un estado:</label>
-                            <select id="" class="form-select category-select" aria-label="Default select example" name="status">
+                            <select id="estado-producto-editar" class="form-select category-select" aria-label="Default select example" name="status">
                                 <option value="1">Activo</option>
                                 <option value="2">Suspendido</option>
-                            </select>
-                        </div>
-                        <!--Categoria-->
-                        <div class="input__container mb-2">
-                            <label for="category">Seleccione una categoría:</label>
-                            <select id="select-category-edit" class="form-select category-select" aria-label="Default select example" name="category">
                             </select>
                         </div>
                         <!--Subcategoria-->
                         <div class="input__container mb-2">
                             <label for="category">Seleccione una subcategoría:</label>
                             <select id="select-subcategory-edit" class="form-select subcategoria-select" aria-label="Default select example" name="category">
-                                <option selected disabled>Seleccione una categoría primero...</option>
                             </select>
                         </div>
                         <!--Descripción-->
                         <div class="input__container mb-2"">
                             <label for="description">Descripción:</label>
                             <div class="form-floating">
-                                <textarea name="description" class="form-control" placeholder="" id="description-area"></textarea>
+                                <textarea name="description" class="form-control" placeholder="" id="area-description-edit"></textarea>
                             </div>
                         </div>
                         
                         <!--Imagen-->
                         <div class="mb-2">
-                            <label for="image" class="form-label">Imagen:</label>
-                            <input class="form-control" type="file" name="image" id="image">
+                            <label for="image1" class="form-label">Primera imagen:</label>
+                            <input class="form-control" type="file" name="image1" id="image1">
+                        </div>
+                        <!--Imagen-->
+                        <div class="mb-2">
+                            <label for="image2" class="form-label">Segunda imagen:</label>
+                            <input class="form-control" type="file" name="image2" id="image2">
+                        </div>
+                        <!--Imagen-->
+                        <div class="mb-2">
+                            <label for="image3" class="form-label">Tercera imagen:</label>
+                            <input class="form-control" type="file" name="image3" id="image3">
+                        </div>
+                        <!--Imagen-->
+                        <div class="mb-2">
+                            <label for="image4" class="form-label">Cuarta imagen:</label>
+                            <input class="form-control" type="file" name="image4" id="image4">
                         </div>
                         <!--certificado-->
                         <div class="mb-2">
@@ -327,36 +341,84 @@
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalProductAdd">
                                     <i class="bi bi-plus-lg"></i> Agregar
                                 </button>
-                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalProductEdit">
-                                    <i class="bi bi-plus-lg"></i> editar
-                                </button>
                             </div>
                             <thead>
                                 <tr>
-                                <th>ID</th>
-                                <th>Nombre</th>
-                                <th>Apellido</th>
-                                <th>Email</th>
-                                <th>Telefono</th>
-                                <th>Estado</th>
-                                <th>Rol</th>
-                                <th>Acciones</th>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Precio</th>
+                                    <th>Descuento</th>
+                                    <th>descripción</th>
+                                    <th>Stock</th>
+                                    <th>Sku</th>
+                                    <th>Marca</th>
+                                    <th>Subcategoría</th>
+                                    <th>Estado</th>
+                                    <th>Imagen1</th>
+                                    <th>Imagen2</th>
+                                    <th>Imagen3</th>
+                                    <th>Imagen4</th>
+                                    <th>Certificado</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                
-                                
-                                
-                            </tbody>
+                             @foreach ($products as $product)
+                                 <tr>
+                                     <td>{{$product-> id}}</td>
+                                     <td>{{$product-> name}}</td>
+                                     <td>{{$product-> price}}</td>
+                                     @if($product-> discount == 0)
+                                        <td><strong class="">Sin descuento</strong></td>
+                                    @else
+                                        <td>{{$product-> discount}}</td>
+                                    @endif
+                                     <td>{{$product-> description}}</td>
+                                     <td>{{$product-> stock}}</td>
+                                     <td>{{$product-> sku}}</td>
+                                     <td>{{$product-> brand_name}}</td>
+                                     <td>{{$product-> subcategory_name}}</td>
+                                     @switch($product-> status)
+                                        @case(1)
+                                            <td><strong class="text-success">Activo <i class="bi bi-check-circle"></i></strong></td>
+                                            @break
+                                        @case(2)
+                                            <td><strong class="text-warning">Suspendido <i class="bi bi-exclamation-circle"></i></strong></td>
+                                            @break
+                                    @endswitch
+                                     <td>{{$product-> image1}}</td>
+                                     <td>{{$product-> image2}}</td>
+                                     <td>{{$product-> image3}}</td>
+                                     <td>{{$product-> image4}}</td>
+                                     <td>{{$product-> certificate}}</td>
+
+                                     <td class="box-btn-acciones">
+                                        <button class="btn btn-warning btn-edit-user" onclick="EditarProducto({{$product -> id}})" data-bs-toggle="modal" data-bs-target="#modalProductEdit"><i class="bi bi-pen-fill"></i></button>
+                                        <form action="{{ url('admin/products/delete', $product-> id) }}" method="post">
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger"><i class="bi bi-trash2-fill"></i></button>
+                                        </form>
+                                    </td>
+                                 </tr>
+                             @endforeach   
+                         </tbody>
                             <tfoot>
                                 <tr>
                                     <th>ID</th>
                                     <th>Nombre</th>
-                                    <th>Apellido</th>
-                                    <th>Email</th>
-                                    <th>Telefono</th>
+                                    <th>Precio</th>
+                                    <th>Descuento</th>
+                                    <th>descripción</th>
+                                    <th>Stock</th>
+                                    <th>Sku</th>
+                                    <th>Marca</th>
+                                    <th>Subcategoría</th>
                                     <th>Estado</th>
-                                    <th>Rol</th>
+                                    <th>Imagen1</th>
+                                    <th>Imagen2</th>
+                                    <th>Imagen3</th>
+                                    <th>Imagen4</th>
+                                    <th>Certificado</th>
                                     <th>Acciones</th>
                                 </tr>
                             </tfoot>
@@ -372,13 +434,15 @@
 @section('JS')
     <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
-    <!--CKeditor (Darle formato a los text áreas)-->
-    <script src="{{url('/static/libs/ckeditor/ckeditor.js')}}"></script>
+    <script src="{{url('/static/libs/summernote/summernote.min.js')}}"></script>
+    <script src="{{url('/static/libs/summernote/summernote.js')}}"></script>
     <script>
     $(document).ready(function() {
         $('#products-table').DataTable();
-        editor_init('description-area');
-        traerCategorias();
+        $('#area-description-add').summernote();
+        $('#area-description-edit').summernote();
+        traerSubcategorias();
+        traerMarcas();
     } ); 
     
     </script>

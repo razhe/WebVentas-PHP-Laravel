@@ -18,7 +18,9 @@ Route::prefix('/admin')->group(function(){
 
     //Modulo productos
     Route::get('/products',[ProductController::class, 'getProducts']);
-    Route::post('/products',[ProductController::class, 'postAddProduct']);
+    Route::post('/products/add',[ProductController::class, 'postAddProduct']);
+    Route::get('/products/edit/{id}',[ProductController::class, 'getFindProduct']);
+    
     //Categorías
     Route::get('/categories',[CategoryController::class, 'getCategories']);
     Route::get('/categories/opts',[CategoryController::class, 'getCategoriesNames']);
@@ -28,6 +30,8 @@ Route::prefix('/admin')->group(function(){
     Route::get('/categories/edit/{id}',[CategoryController::class, 'getFindCategory']);
     Route::post('/categories/delete/{id}',[CategoryController::class, 'postDeleteCategory']);
     //Subcategoría
+    Route::get('/subcategories/get',[SubCategoryController::class, 'getSubcategoriesNames']);
+
     Route::get('/subcategories',[SubCategoryController::class, 'getSubcategories']) -> name('admin.subcategories');
     Route::post('/subcategories/delete/{id}',[SubCategoryController::class, 'postDeleteSubcategory']);
     Route::post('/subcategories/add',[SubCategoryController::class, 'postAddSubcategory']);
@@ -35,6 +39,8 @@ Route::prefix('/admin')->group(function(){
     Route::post('/subcategories/edit',[SubCategoryController::class, 'postEditSubcategory']);
     Route::get('/subcategories/find/{id}',[SubCategoryController::class, 'getSubcategoriesSelect']);
     //Marcas
+    Route::get('/brands/opts',[BrandController::class, 'getBrandsNames']);
+
     Route::get('/brands',[BrandController::class, 'getBrands']);
     Route::post('/brands/add',[BrandController::class, 'postAddBrand']);
     Route::get('/brands/edit/{id}',[BrandController::class, 'getFindBrand']);

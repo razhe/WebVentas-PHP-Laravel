@@ -17,6 +17,11 @@ class Subcategories extends Migration
             $table->id();
             $table->string('name');
             $table->integer('status');
+            $table->string('banner');
+            $table->string('image1');
+            $table->string('image2');
+            $table->string('image3');
+            $table->string('image4');
             $table->unsignedBigInteger('id_category');
             $table->foreign('id_category')-> references('id')->on('categories')->onUpdate('cascade')->onDelete('cascade'); 
             $table->timestamps();

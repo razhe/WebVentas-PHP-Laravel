@@ -66,12 +66,13 @@ button {
 }
 .box-btn-acciones{
   display: flex;
+  height: 100%;
 }
 .box-btn-acciones button{
   margin: 3px;
-  width: 30px;
-  height: 30px;
-  font-size: .9rem;
+  width: 43px;
+  height: 43px;
+  font-size: 1.1rem;
   display: flex;
   justify-content: center;
   align-items: center;

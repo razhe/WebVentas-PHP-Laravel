@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Product;
+use Validator, File, DB;
 
 class ProductController extends Controller
 {
@@ -12,9 +14,108 @@ class ProductController extends Controller
         $this-> middleware('admincheck');
     }
     public function getProducts(){
-        return view('Admin.products');
+        $products=DB::select('CALL select_products()');
+        $productsArray=[
+            'products'=> $products
+        ];
+
+        return view('Admin.products',$productsArray);
     }
-    public function postAddProduct(){
-        return 'Agregado!';
+    public function getFindProduct($id)
+    {
+        $products = Product::find($id);
+        return response()->json($products);   
+    }
+
+    public function postAddProduct(Request $request){
+        $rules = 
+        [
+            'name'     => 'required',
+            'price'    => 'required|numeric',
+            'id_brand' => 'required|numeric',
+            'stock'    => 'required|numeric',
+            'sku'      => 'required',
+            'status'   => 'required|numeric',
+            'id_subcategory'   => 'required|numeric',
+            'description'      => 'required',
+            'image1'      => 'required',
+            'image2'      => 'required',
+            'image3'      => 'required',
+            'image4'      => 'required',
+            'certificate' => 'required',
+        ];
+        $messages =
+        [
+            'name.required'           => 'Se requiere de un nombre para el producto.',
+            'status.required'         => 'Se requiere de un estado para el producto.',
+            'status.numeric'          => 'Error al intentar ingresar una subcategoría.',
+            'id_subcategory.required' => 'Se requiere de una categoría padre para la Subcategoría.',
+            'sku.required'            => 'Se requiere del SKU del producto.',
+            'id_subcategory.numeric'  => 'Error al intentar ingresar una subcategoría',
+            'id_brand.required'       => 'Se requiere un certificado para el producto.',
+            'id_brand.numeric'        => 'Se requiere un certificado para el producto.',
+            'price.required'          => 'Se requiere de un precio para el producto.',
+            'price.numeric'           => 'El precio debe contener caracteres numéricos.',
+            'description.required'    => 'El precio debe contener caracteres numéricos.',
+            'stock.required'          => 'Se requiere del stock del producto.',
+            'certificate.required'    => ' El certificado es requerido',
+            'stock.numeric'           => 'El stock debe contener SOLO caracteres numéricos.',
+            'image1.required'  => 'Se necesita la primera imagen secundaria para esta subcategoría.',
+            'image2.required'  => 'Se necesita la segunda imagen secundaria para esta subcategoría.',
+            'image3.required'  => 'Se necesita la tercera imagen secundaria para esta subcategoría.',
+            'image4.required'  => 'Se necesita la cuarta imagen secundaria para esta subcategoría.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator -> fails()):
+            return back() -> withErrors($validator)->with('MsgResponse','Se ha producido un error al intentar guardar una subcategoría')->with( 'typealert', 'danger');
+        else:
+            //Ruta
+            $pathImg     = 'img/products/';
+            $pathDocs    = 'docs/products/';
+            //Peticiones
+            $fileDoc     = $request->file('certificate');
+            $fileImg1    = $request->file('image1');
+            $fileImg2    = $request->file('image2');
+            $fileImg3    = $request->file('image3');
+            $fileImg4    = $request->file('image4');
+
+            //Nombres
+            $file_certificate = time().'-'.$fileDoc->getClientOriginalName();
+            $file_img1        = time().'-'.$fileImg1->getClientOriginalName();
+            $file_img2        = time().'-'.$fileImg2->getClientOriginalName();
+            $file_img3        = time().'-'.$fileImg3->getClientOriginalName();
+            $file_img4        = time().'-'.$fileImg4->getClientOriginalName();
+            
+            $product = new Product;
+
+            $product->name           = e($request['name']);
+            $product->price          = e($request['price']);
+            if ($request['discount'] == '') {
+                $product->discount = e(0);
+            }else {
+                $product->discount       = e($request['discount']);
+            }
+            $product->description    = e($request['description']);
+            $product->stock          = e($request['stock']);
+            $product->sku            = e($request['sku'].time());
+            $product->status         = e($request['status']);
+            $product->image1         = $pathImg.$file_img1;
+            $product->image2         = $pathImg.$file_img2;
+            $product->image3         = $pathImg.$file_img3;
+            $product->image4         = $pathImg.$file_img4;
+            $product->certificate    = $pathDocs.$file_certificate;
+            $product->id_brand       = e($request['id_brand']);
+            $product->id_subcategory = e($request['id_subcategory']);
+            if ($product -> save()):
+                //Moviendose la carpeta
+                $fileDoc    -> move($pathDocs, $file_certificate);
+                $fileImg1   -> move($pathImg, $file_img1);
+                $fileImg2   -> move($pathImg, $file_img2);
+                $fileImg3   -> move($pathImg, $file_img3);
+                $fileImg4   -> move($pathImg, $file_img4);
+                return back() -> withErrors($validator)->with('MsgResponse','¡Producto guardada con Éxito!')->with( 'typealert', 'success');
+            endif;
+        endif;
     }
 }
