@@ -160,7 +160,8 @@ function EditarProducto(id) {
       $('#nombre-producto-editar').val(data.name);
       $('#precio-producto-editar').val(data.price);
       $('#descuento-producto-editar').val(data.discount);
-      $('#area-description-edit').val(data.description);
+      CKEDITOR.instances["area-description-edit"].setData(data.description);
+      //$('#area-description-edit').val(data.description);
       $('#stock-producto-editar').val(data.stock);
       $('#sku-producto-editar').val(data.sku);
       $('#select-brands-edit').val(data.id_brand);

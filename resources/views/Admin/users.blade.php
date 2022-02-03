@@ -296,15 +296,20 @@
                                             <td>{{$user -> last_name}}</td>
                                             <td>{{$user -> email}}</td>
                                             <td>{{$user -> phone}}</td>
-                                            @switch($user -> status)
+                                            @switch($user-> status)
                                                 @case(1)
-                                                    <td><strong class="text-success">Activo <i class="bi bi-check-circle"></i></strong></td>
+                                                    <td>
+                                                        <div class="box-status-active">
+                                                            <p>Activo</p>
+                                                        </div>
+                                                    </td>
                                                     @break
                                                 @case(2)
-                                                    <td><strong class="text-warning">Suspendido <i class="bi bi-exclamation-circle"></i></strong></td>
-                                                    @break
-                                                @case(3)
-                                                    <td><strong class="text-danger">Eliminado <i class="bi bi-dash-circle"></i></strong></td>
+                                                    <td>
+                                                        <div class="box-status-suspended">
+                                                            <p>Suspendido</p>
+                                                        </div>
+                                                    </td>
                                                     @break
                                             @endswitch
                                             @switch($user -> id_tasks)
@@ -315,12 +320,14 @@
                                                     <td><strong class="">Administrador</strong></td>
                                                     @break
                                             @endswitch
-                                            <td class="box-btn-acciones">
-                                                <button class="btn btn-warning btn-edit-user" onclick="EditarUsuario({{ $user -> id }})" data-bs-toggle="modal" data-bs-target="#editForm"><i class="bi bi-pen-fill"></i></button>
-                                                <form action="{{ url('admin/users/delete', $user -> id) }}" method="post">
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-danger"><i class="bi bi-trash2-fill"></i></button>
-                                                </form>
+                                            <td>
+                                                <div class="box-btn-acciones">
+                                                    <button class="btn btn-warning btn-edit-user" onclick="EditarUsuario({{ $user -> id }})" data-bs-toggle="modal" data-bs-target="#editForm"><i class="bi bi-pen-fill"></i></button>
+                                                    <form action="{{ url('admin/users/delete', $user -> id) }}" method="post">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-danger"><i class="bi bi-trash2-fill"></i></button>
+                                                    </form>
+                                                </div>  
                                             </td>
                                         </tr>
                                     @endforeach

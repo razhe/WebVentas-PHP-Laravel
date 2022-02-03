@@ -183,23 +183,33 @@
                             <tr>
                                 <td>{{$brand -> id}}</td>
                                 <td>{{$brand -> name}}</td>
-                                @switch($brand -> status)
+                                @switch($brand-> status)
                                     @case(1)
-                                        <td><strong class="text-success">Activo <i class="bi bi-check-circle"></i></strong></td>
+                                        <td>
+                                            <div class="box-status-active">
+                                                <p>Activo</p>
+                                            </div>
+                                        </td>
                                         @break
                                     @case(2)
-                                        <td><strong class="text-warning">Suspendido <i class="bi bi-exclamation-circle"></i></strong></td>
+                                        <td>
+                                            <div class="box-status-suspended">
+                                                <p>Suspendido</p>
+                                            </div>
+                                        </td>
                                         @break
                                 @endswitch
                                 <td>
                                     <img src="{{asset($brand -> image)}}" alt="{{$brand -> name}}" class="img-fluid" style="max-width: 60px; max-height: 30px">
                                 </td>
-                                <td class="box-btn-acciones">
-                                    <button class="btn btn-warning btn-edit-user" onclick="EditarMarca({{$brand -> id}})" data-bs-toggle="modal" data-bs-target="#modalBrandEdit"><i class="bi bi-pen-fill"></i></button>
-                                    <form action="{{ url('admin/brands/delete', $brand -> id) }}" method="post">
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger"><i class="bi bi-trash2-fill"></i></button>
-                                    </form>
+                                <td>
+                                    <div class="box-btn-acciones">
+                                        <button class="btn btn-warning btn-edit-user" onclick="EditarMarca({{$brand -> id}})" data-bs-toggle="modal" data-bs-target="#modalBrandEdit"><i class="bi bi-pen-fill"></i></button>
+                                        <form action="{{ url('admin/brands/delete', $brand -> id) }}" method="post">
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger"><i class="bi bi-trash2-fill"></i></button>
+                                        </form>
+                                    </div>   
                                 </td>
                             </tr>
                             @endforeach

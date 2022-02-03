@@ -118,4 +118,118 @@ class ProductController extends Controller
             endif;
         endif;
     }
+    public function postEditProduct(Request $request)
+    {
+        $rules = 
+        [
+            'name'     => 'required',
+            'price'    => 'required|numeric',
+            'id_brand' => 'required|numeric',
+            'stock'    => 'required|numeric',
+            'sku'      => 'required',
+            'status'   => 'required|numeric',
+            'id_subcategory'   => 'required|numeric',
+            'description'      => 'required',
+        ];
+        $messages =
+        [
+            'name.required'           => 'Se requiere de un nombre para el producto.',
+            'status.required'         => 'Se requiere de un estado para el producto.',
+            'status.numeric'          => 'Error al intentar ingresar una subcategoría.',
+            'id_subcategory.required' => 'Se requiere de una categoría padre para la Subcategoría.',
+            'sku.required'            => 'Se requiere del SKU del producto.',
+            'id_subcategory.numeric'  => 'Error al intentar ingresar una subcategoría',
+            'id_brand.required'       => 'Se requiere un certificado para el producto.',
+            'id_brand.numeric'        => 'Se requiere un certificado para el producto.',
+            'price.required'          => 'Se requiere de un precio para el producto.',
+            'price.numeric'           => 'El precio debe contener caracteres numéricos.',
+            'description.required'    => 'El precio debe contener caracteres numéricos.',
+            'stock.required'          => 'Se requiere del stock del producto.',
+            'stock.numeric'           => 'El stock debe contener SOLO caracteres numéricos.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator -> fails()):
+            return back() -> withErrors($validator)->with('MsgResponse','Se ha producido un error al intentar guardar una subcategoría')->with( 'typealert', 'danger');
+        else:
+            //Ruta
+            $pathImg     = 'img/products/';
+            $pathDocs    = 'docs/products/';
+            
+            $product = Product::find($request['id']);
+
+            $product->name           = e($request['name']);
+            $product->price          = e($request['price']);
+            if ($request['discount'] == '') {
+                $product->discount = e(0);
+            }else {
+                $product->discount       = e($request['discount']);
+            }
+            $product->description    = e($request['description']);
+            $product->stock          = e($request['stock']);
+            if (!$request['sku'] == $product->sku) {
+                $product->sku = e($request['sku'].time());
+            }
+            $product->status         = e($request['status']);
+            $product->id_brand       = e($request['id_brand']);
+            $product->id_subcategory = e($request['id_subcategory']);
+
+            if ($request->hasFile('certificate')) {
+                //peticion
+                $fileDoc     = $request->file('certificate');
+                //nombre
+                $file_certificate   = time().'-'.$fileDoc->getClientOriginalName();
+                //Eliminacion e insercin
+                File::delete($product -> certificate);
+                $product -> image1  = $pathDocs.$file_certificate;
+                //Moviendo a la carpeta
+                $fileDoc -> move($pathDocs, $file_certificate);
+            }elseif ($request->hasFile('image1')) {
+                //peticion
+                $fileImg1    = $request->file('image1');
+                //nombre
+                $file_img1   = time().'-'.$fileImg1->getClientOriginalName();
+                //Eliminacion e insercin
+                File::delete($product -> image1);
+                $product -> image1  = $pathImg.$file_img1;
+                //Moviendo a la carpeta
+                $fileImg1 -> move($pathImg, $file_img1);
+            }elseif ($request->hasFile('image2')) {
+                //peticion
+                $fileImg2    = $request->file('image2');
+                //nombre
+                $file_img2   = time().'-'.$fileImg2->getClientOriginalName();
+                //Eliminacion e insercin
+                File::delete($product -> image2);
+                $product -> image2  = $pathImg.$file_img2;
+                //Moviendo a la carpeta
+                $fileImg2 -> move($pathImg, $file_img2);
+            }elseif ($request->hasFile('image3')) {
+                //peticion
+                $fileImg3    = $request->file('image3');
+                //nombre
+                $file_img3   = time().'-'.$fileImg3->getClientOriginalName();
+                //Eliminacion e insercin
+                File::delete($product -> image3);
+                $product -> image3  = $pathImg.$file_img3;
+                //Moviendo a la carpeta
+                $fileImg3 -> move($pathImg, $file_img3);
+            }elseif ($request->hasFile('image4')) {
+                //peticion
+                $fileImg4    = $request->file('image4');
+                //nombre
+                $file_img4   = time().'-'.$fileImg4->getClientOriginalName();
+                //Eliminacion e insercin
+                File::delete($product -> image4);
+                $product -> image4  = $pathImg.$file_img4;
+                //Moviendo a la carpeta
+                $fileImg4 -> move($pathImg, $file_img4);
+            }
+
+            if ($product -> save()):
+                //Moviendose la carpeta
+                return back() -> withErrors($validator)->with('MsgResponse','¡Producto guardada con Éxito!')->with( 'typealert', 'success');
+            endif;
+        endif;   
+    }
 }

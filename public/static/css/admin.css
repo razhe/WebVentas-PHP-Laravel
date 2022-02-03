@@ -66,13 +66,14 @@ button {
 }
 .box-btn-acciones{
   display: flex;
-  height: 100%;
+  margin: auto;
+  justify-content: center;
 }
 .box-btn-acciones button{
   margin: 3px;
-  width: 43px;
-  height: 43px;
-  font-size: 1.1rem;
+  width: 30px;
+  height: 30px;
+  font-size: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -85,6 +86,29 @@ button {
   justify-content: flex-end;
   align-items: center;
   padding: 5px;
+}
+.box-status-active{
+  max-height: 30px;
+  max-width: 75px;
+  background-color: #b0f2c2;
+  border-radius: 10px;
+  text-align: center;
+  color: #1fac45;
+  padding: 3px;
+  line-height: 24px;
+  width: 90%;
+  font-size: .9rem;
+}
+.box-status-suspended{
+  font-size: .9rem;
+  max-height: 30px;
+  max-width: 105px;
+  background-color: #ffb6af;
+  border-radius: 10px;
+  text-align: center;
+  color: #c74f45;
+  padding: 3px;
+  line-height: 24px;
 }
 @media (min-width: 992px) {
   body {

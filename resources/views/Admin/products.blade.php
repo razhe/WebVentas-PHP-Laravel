@@ -3,7 +3,6 @@
 
 @section('CSS')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" href="{{url('/static/libs/summernote/summernote.min.css')}}">
 @endsection
 
 @section('title', 'Productos')
@@ -148,7 +147,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="register__form needs-validation" enctype="multipart/form-data" action="{{url('/admin/products')}}" method="post" novalidate>
+                    <form class="register__form needs-validation" enctype="multipart/form-data" action="{{url('/admin/products/edit')}}" method="post" novalidate>
                         @csrf
                         <input type="hidden" id="id-producto-editar" name="id">
                         <!--Nombre-->
@@ -223,7 +222,7 @@
                         <!--Subcategoria-->
                         <div class="input__container mb-2">
                             <label for="category">Seleccione una subcategoría:</label>
-                            <select id="select-subcategory-edit" class="form-select subcategoria-select" aria-label="Default select example" name="category">
+                            <select id="select-subcategory-edit" class="form-select subcategoria-select" aria-label="Default select example" name="id_subcategory">
                             </select>
                         </div>
                         <!--Descripción-->
@@ -380,10 +379,18 @@
                                      <td>{{$product-> subcategory_name}}</td>
                                      @switch($product-> status)
                                         @case(1)
-                                            <td><strong class="text-success">Activo <i class="bi bi-check-circle"></i></strong></td>
+                                            <td>
+                                                <div class="box-status-active">
+                                                    <p>Activo</p>
+                                                </div>
+                                            </td>
                                             @break
                                         @case(2)
-                                            <td><strong class="text-warning">Suspendido <i class="bi bi-exclamation-circle"></i></strong></td>
+                                            <td>
+                                                <div class="box-status-suspended">
+                                                    <p>Suspendido</p>
+                                                </div>
+                                            </td>
                                             @break
                                     @endswitch
                                      <td>{{$product-> image1}}</td>
@@ -392,12 +399,14 @@
                                      <td>{{$product-> image4}}</td>
                                      <td>{{$product-> certificate}}</td>
 
-                                     <td class="box-btn-acciones">
-                                        <button class="btn btn-warning btn-edit-user" onclick="EditarProducto({{$product -> id}})" data-bs-toggle="modal" data-bs-target="#modalProductEdit"><i class="bi bi-pen-fill"></i></button>
-                                        <form action="{{ url('admin/products/delete', $product-> id) }}" method="post">
-                                            @csrf
-                                            <button type="submit" class="btn btn-danger"><i class="bi bi-trash2-fill"></i></button>
-                                        </form>
+                                     <td class="">
+                                        <div class="box-btn-acciones">
+                                            <button class="btn btn-warning btn-edit-user" onclick="EditarProducto({{$product -> id}})" data-bs-toggle="modal" data-bs-target="#modalProductEdit"><i class="bi bi-pen-fill"></i></button>
+                                            <form action="{{ url('admin/products/delete', $product-> id) }}" method="post">
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger"><i class="bi bi-trash2-fill"></i></button>
+                                            </form>
+                                        </div>
                                     </td>
                                  </tr>
                              @endforeach   
@@ -434,13 +443,12 @@
 @section('JS')
     <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
-    <script src="{{url('/static/libs/summernote/summernote.min.js')}}"></script>
-    <script src="{{url('/static/libs/summernote/summernote.js')}}"></script>
+    <script src="{{url('/static/libs/CKEDITOR/ckeditor.js')}}"></script>
     <script>
     $(document).ready(function() {
         $('#products-table').DataTable();
-        $('#area-description-add').summernote();
-        $('#area-description-edit').summernote();
+        CKEDITOR.replace('area-description-add');
+        CKEDITOR.replace('area-description-edit');
         traerSubcategorias();
         traerMarcas();
     } ); 

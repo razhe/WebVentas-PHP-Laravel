@@ -175,21 +175,31 @@
                                     <tr>
                                         <td>{{$category -> id}}</td>
                                         <td>{{$category -> name}}</td>
-                                        @switch($category -> status)
+                                        @switch($category-> status)
                                             @case(1)
-                                                <td><strong class="text-success">Activo <i class="bi bi-check-circle"></i></strong></td>
+                                                <td>
+                                                    <div class="box-status-active">
+                                                        <p>Activo</p>
+                                                    </div>
+                                                </td>
                                                 @break
                                             @case(2)
-                                                <td><strong class="text-warning">Suspendido <i class="bi bi-exclamation-circle"></i></strong></td>
+                                                <td>
+                                                    <div class="box-status-suspended">
+                                                        <p>Suspendido</p>
+                                                    </div>
+                                                </td>
                                                 @break
                                         @endswitch
-                                        <td id="box-btn-acciones" class="box-btn-acciones">        
-                                            <button onclick="editarCategoria({{ $category -> id }})" id="btn-editar" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editForm" type="submit"><i class="bi bi-pen-fill"></i></button>
+                                        <td>
+                                            <div class="box-btn-acciones">
+                                                <button onclick="editarCategoria({{ $category -> id }})" id="btn-editar" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editForm" type="submit"><i class="bi bi-pen-fill"></i></button>
                                             
-                                            <form action="{{ url('admin/categories/delete', $category -> id) }}" method="post">
-                                                @csrf 
-                                                <button class="btn btn-danger" type="submit"><i class="bi bi-trash2-fill"></i></button>
-                                            </form>                                        
+                                                <form action="{{ url('admin/categories/delete', $category -> id) }}" method="post">
+                                                    @csrf 
+                                                    <button class="btn btn-danger" type="submit"><i class="bi bi-trash2-fill"></i></button>
+                                                </form>  
+                                            </div>                                              
                                         </td>
                                     </tr>
                                     

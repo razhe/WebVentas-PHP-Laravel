@@ -247,12 +247,20 @@
                                     <tr>
                                         <td>{{$subcategory -> id}}</td>
                                         <td>{{$subcategory -> name}}</td>
-                                        @switch($subcategory -> status)
+                                        @switch($subcategory-> status)
                                             @case(1)
-                                                <td><strong class="text-success">Activo <i class="bi bi-check-circle"></i></strong></td>
+                                                <td>
+                                                    <div class="box-status-active">
+                                                        <p>Activo</p>
+                                                    </div>
+                                                </td>
                                                 @break
                                             @case(2)
-                                                <td><strong class="text-warning">Suspendido <i class="bi bi-exclamation-circle"></i></strong></td>
+                                                <td>
+                                                    <div class="box-status-suspended">
+                                                        <p>Suspendido</p>
+                                                    </div>
+                                                </td>
                                                 @break
                                         @endswitch
                                         <td><strong>{{$subcategory -> category_name}}</strong></td>
@@ -261,13 +269,15 @@
                                         <td><img src="{{asset($subcategory -> image2)}}" alt="" style="max-width: 60px; max-height: 30px"></td>
                                         <td><img src="{{asset($subcategory -> image3)}}" alt="" style="max-width: 60px; max-height: 30px"></td>
                                         <td><img src="{{asset($subcategory -> image4)}}" alt="" style="max-width: 60px; max-height: 30px"></td>
-                                        <td id="" class="box-btn-acciones">        
-                                            <button onclick="editarSubCategoria({{ $subcategory -> id }})" id="btn-editar" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editFormSubcategoria" type="submit"><i class="bi bi-pen-fill"></i></button>
+                                        <td>
+                                            <div class="box-btn-acciones">
+                                                <button onclick="editarSubCategoria({{ $subcategory -> id }})" id="btn-editar" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editFormSubcategoria" type="submit"><i class="bi bi-pen-fill"></i></button>
                                             
-                                            <form action="{{ url('admin/subcategories/delete', $subcategory -> id) }}" method="post">
-                                                @csrf 
-                                                <button class="btn btn-danger" type="submit"><i class="bi bi-trash2-fill"></i></button>
-                                            </form>                                        
+                                                <form action="{{ url('admin/subcategories/delete', $subcategory -> id) }}" method="post">
+                                                    @csrf 
+                                                    <button class="btn btn-danger" type="submit"><i class="bi bi-trash2-fill"></i></button>
+                                                </form> 
+                                            </div>                                                
                                         </td>
                                     </tr>
                                 @endforeach                       
