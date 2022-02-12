@@ -271,11 +271,11 @@
                                         <td><img src="{{asset($subcategory -> image4)}}" alt="" style="max-width: 60px; max-height: 30px"></td>
                                         <td>
                                             <div class="box-btn-acciones">
-                                                <button onclick="editarSubCategoria({{ $subcategory -> id }})" id="btn-editar" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editFormSubcategoria" type="submit"><i class="bi bi-pen-fill"></i></button>
+                                                <button onclick="editarSubCategoria({{ $subcategory -> id }})" id="btn-editar" class="btn btn-edit" data-bs-toggle="modal" data-bs-target="#editFormSubcategoria" type="submit"><i class="bi bi-pen-fill"></i></button>
                                             
                                                 <form action="{{ url('admin/subcategories/delete', $subcategory -> id) }}" method="post">
                                                     @csrf 
-                                                    <button class="btn btn-danger" type="submit"><i class="bi bi-trash2-fill"></i></button>
+                                                    <button class="btn btn-delete" type="submit"><i class="bi bi-trash2-fill"></i></button>
                                                 </form> 
                                             </div>                                                
                                         </td>
@@ -310,7 +310,25 @@
     <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('#subcategories-table').DataTable();
+            $('#subcategories-table').DataTable({
+                language: {
+                "lengthMenu": "Mostrar _MENU_ registros",
+                "zeroRecords": "No se encontraron resultados",
+                "info": "Registros del _START_ al _END_ de un total de _TOTAL_. ",
+                "infoEmpty": "Registros del 0 al 0 de un total de 0. ",
+                "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sSearch": "Buscar:",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast":"Último",
+                    "sNext":"Siguiente",
+                    "sPrevious": "Anterior"
+			     },
+			     "sProcessing":"Procesando...",
+            },
+            //para usar los botones
+            responsive: "true",
+            });
             traerCategorias();
         } );
     </script>

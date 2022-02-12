@@ -83,7 +83,6 @@ Navbar
 }
 .menu .contenedor-btn-nav{
     display: none;
-    /*display: flex;*/
     justify-content: space-between;
 }
 .menu .contenedor-btn-nav button{
@@ -121,11 +120,12 @@ border: 1px solid rgba(255, 255, 255, 0.473);
     left: 3px;
 }
 .contenedor-enlaces-directos a{
-    color: #fff;
+    color: rgba(255, 255, 255, 0.842);
     padding: 5px 10px 5px 10px;
     border-radius: 4px;
     border: 1px solid transparent;
-    font-size: .9rem;
+    font-size: .85rem;
+    font-weight: 500;
 }
 .contenedor-enlaces-directos a:hover{
     background: #324255d3;
@@ -142,7 +142,7 @@ border: 1px solid rgba(255, 255, 255, 0.473);
     margin: auto;
     background-color: #cecece;
     position: absolute;
-    z-index: 1000px; /*Para que se sobreponga*/
+    z-index: 1000; /*Para que se sobreponga*/
     display:none;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: 1fr;
@@ -371,3 +371,37 @@ border: 1px solid rgba(255, 255, 255, 0.473);
 Fin Navbar
 ================
 */
+/*
+================
+footer
+================
+*/
+.footer-top {
+    padding-top: 40px;
+    padding-bottom: 30px;
+ }
+ .footer-bottom {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+ }
+ 
+ footer .footer-links a,
+ footer .footer-links p,
+ footer .social-icons a {
+    color: #898fa1;
+ }
+ 
+ footer .social-icons a {
+    font-size: 24px;
+ }
+ 
+ footer .footer-links a {
+    display: block;
+    font-weight: 400;
+ }
+ 
+ footer .social-icons a:hover,
+ footer .footer-links a:hover {
+    color: #eba117;
+ }

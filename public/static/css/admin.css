@@ -37,7 +37,7 @@ button {
 
 .container-extend{
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   background-color: var(--grey);
   position: relative;
 }
@@ -109,6 +109,22 @@ button {
   color: #c74f45;
   padding: 3px;
   line-height: 24px;
+}
+/*estilos para la tabla*/
+table th {
+  background-color: #576677 !important;
+  color: white;
+  font-weight: normal;
+  font-size: .95rem;
+}
+table>tbody>tr>td {
+  vertical-align: middle !important;
+}
+.btn-delete{
+  background-color: #da3752;
+}
+.btn-edit{
+  background-color: #ffb641;
 }
 @media (min-width: 992px) {
   body {

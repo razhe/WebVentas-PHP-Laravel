@@ -266,7 +266,7 @@
             <div class="col-md-12 mb-3">
                 <div class="card">
                     <div class="card-header">
-                        <span><i class="bi bi-table me-2"></i></span> Data Table
+                        <span><i class="bi bi-table me-2"></i></span> tabla de usuarios
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -322,10 +322,10 @@
                                             @endswitch
                                             <td>
                                                 <div class="box-btn-acciones">
-                                                    <button class="btn btn-warning btn-edit-user" onclick="EditarUsuario({{ $user -> id }})" data-bs-toggle="modal" data-bs-target="#editForm"><i class="bi bi-pen-fill"></i></button>
+                                                    <button class="btn btn-edit" onclick="EditarUsuario({{ $user -> id }})" data-bs-toggle="modal" data-bs-target="#editForm"><i class="bi bi-pen-fill"></i></button>
                                                     <form action="{{ url('admin/users/delete', $user -> id) }}" method="post">
                                                         @csrf
-                                                        <button type="submit" class="btn btn-danger"><i class="bi bi-trash2-fill"></i></button>
+                                                        <button type="submit" class="btn btn-delete"><i class="bi bi-trash2-fill"></i></button>
                                                     </form>
                                                 </div>  
                                             </td>
@@ -358,7 +358,25 @@
 
         <script>
         $(document).ready(function() {
-            $('#users-table').DataTable();
+            $('#users-table').DataTable({
+                language: {
+                "lengthMenu": "Mostrar _MENU_ registros",
+                "zeroRecords": "No se encontraron resultados",
+                "info": "Registros del _START_ al _END_ de un total de _TOTAL_. ",
+                "infoEmpty": "Registros del 0 al 0 de un total de 0. ",
+                "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sSearch": "Buscar:",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast":"Último",
+                    "sNext":"Siguiente",
+                    "sPrevious": "Anterior"
+			     },
+			     "sProcessing":"Procesando...",
+            },
+            //para usar los botones
+            responsive: "true",
+            });
         } );
         </script>
     @endsection

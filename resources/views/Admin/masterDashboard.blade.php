@@ -60,8 +60,8 @@
             </div>
         </div>
     </nav>
-      <!-- Parte de arriba del navbar -->
-      <!-- sidebar offcanvas -->
+    <!-- Parte de arriba del navbar -->
+    <!-- sidebar offcanvas -->
     <div class="offcanvas offcanvas-start sidebar-nav" tabindex="-1" id="sidebar">
         <div class="offcanvas-body p-0">
             <nav class="navbar-dark">
@@ -148,22 +148,6 @@
                 </li>
                 <li class="my-4"><hr class="dropdown-divider bg-light" /></li>
                 <li>
-                <div class="text-muted small fw-bold text-uppercase px-3 mb-3">
-                    COMPLEMENTOS
-                </div>
-                </li>
-                <li>
-                <a href="#" class="nav-link px-3">
-                    <span class="me-2"><i class="bi bi-graph-up"></i></span>
-                    <span>Gráficos</span>
-                </a>
-                </li>
-                <li>
-                <a href="#" class="nav-link px-3">
-                    <span class="me-2"><i class="bi bi-table"></i></span>
-                    <span>Tablas</span>
-                </a>
-                </li>
             </ul>
             </nav>
         </div>

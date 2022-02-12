@@ -1,0 +1,229 @@
+.details-product{
+    background-color: #f6f6f6;
+}
+/*breadcrumbs*/
+.breadcrumbs{
+    padding: 10px;
+    width: 100%;
+}
+.breadcrumbs .box-breadcrumbs{
+    background-color: #fff;
+    border-radius: 4px;
+    margin: 30px 0 30px 0;
+}
+.breadcrumbs .breadcrumbs__item{
+    display: inline-block;
+}
+.breadcrumbs .breadcrumbs__item:not(:last-of-type)::after{
+    content: '/';
+    margin: 0 5px;
+    color: #cccccc;
+}
+.breadcrumbs .bradcrumbs--link{
+    text-decoration: none;
+    color: #999999;
+}
+.breadcrumbs .bradcrumbs--link:hover{
+    text-decoration: underline;
+    color: #F2994A;
+}
+.breadcrumbs .bradcrumbs--link--active{
+    color: #F2994A;
+    font-weight: 500;
+}
+/*breadcrumbs*/
+.container-product-detail{
+    max-width: 1150px;
+    margin: auto !important;
+    padding:0 0 120px;    
+}
+img{
+    width: 100%;
+    display: block;
+}
+.img-display{
+    overflow: hidden;
+}
+.img-showcase{
+    display: flex;
+    width: 100%;
+    transition: all 0.5s ease;
+}
+.img-showcase img{
+    min-width: 100%;
+}
+.img-select{
+    display: flex;
+}
+.img-item{
+    margin: 0.3rem;
+}
+.img-item:nth-child(1),
+.img-item:nth-child(2),
+.img-item:nth-child(3){
+    margin-right: 0;
+}
+.img-item:hover{
+    opacity: 0.8;
+}
+.product-content{
+    padding: 2rem 1rem;
+}
+.product-title{
+    font-size: 3rem;
+    text-transform: capitalize;
+    font-weight: 700;
+    position: relative;
+    color: #12263a;
+    margin: 1rem 0;
+}
+.product-title::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 4px;
+    width: 80px;
+    background: #12263a;
+}
+.product-status{
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 0.9rem;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    background: #256eff;
+    color: #fff;
+    padding: 0 0.3rem;
+}
+.product-price{
+    margin: 1rem 0;
+    font-size: 1rem;
+    font-weight: 700;
+}
+.product-price span{
+    font-weight: 400;
+}
+.last-price span{
+    color: #f64749;
+    text-decoration: line-through;
+}
+.new-price span{
+    color: #256eff;
+}
+.product-detail h2{
+    text-transform: capitalize;
+    color: #12263a;
+    padding-bottom: 0.6rem;
+}
+.product-detail p{
+    font-size: 0.9rem;
+    padding: 0.3rem;
+    opacity: 0.8;
+}
+.product-detail ul{
+    margin: 1rem 0;
+    font-size: 0.9rem;
+}
+.product-detail ul li{
+    margin: 0;
+    list-style: none;
+    margin: 0.4rem 0;
+    font-weight: 600;
+    opacity: 0.9;
+}
+.product-detail ul li i{
+    padding-right: 10px;
+    color: #999999;
+    font-size: 1rem;
+}
+.product-detail ul li span{
+    font-weight: 400;
+}
+
+.purchase-info{
+    margin: 1.5rem 0;
+    display: flex;
+    justify-content: baseline;
+}
+.purchase-info input,
+.purchase-info .btn{
+    border: 1.5px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+    padding: 0.45rem 0.8rem;
+    outline: 0;
+    margin-right: 0.2rem;
+    margin-bottom: 1rem;
+}
+.purchase-info input{
+    width: 60px;
+}
+.purchase-info .btn{
+    cursor: pointer;
+    color: #fff;
+}
+.purchase-info .btn:first-of-type{
+    background: #256eff;
+}
+.purchase-info .btn:last-of-type{
+    background: #f64749;
+}
+.purchase-info .btn:hover{
+    opacity: 0.9;
+}
+/*tabs*/
+.tabs__container{
+    margin-top: 60px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, .05);
+}
+.tabs__head{
+    display: flex;
+    align-items: stretch;
+}
+.tabs__toggle{
+    display: flex;
+    width: 50%;
+    height: 50px;
+    align-items:center;
+    justify-content: center;
+    background-color: #f2f2f2;
+    cursor: pointer;
+}
+.tabs__toggle.active{
+    background: #F2994A;
+    background: -webkit-linear-gradient(to right, #F2C94C, #F2994A);
+    background: linear-gradient(to right, #F2C94C, #F2994A);
+    color: #fff;
+    font-weight: 500;
+    letter-spacing: 2px;
+    transition: .3s;
+}
+.tabs__toggle .hline{
+    background-color: #F2994A;
+    opacity: 0;
+}
+.tabs__toggle.active > .hline{
+    opacity: 1;
+}
+.tabs__content{
+    padding: 30px;
+    display: none;
+}
+.tabs__content.active{
+    display: block;
+}
+.tabs__title{
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 20px;
+}
+.tabs__text{
+    font: .95rem;
+}
+/*tabs*/

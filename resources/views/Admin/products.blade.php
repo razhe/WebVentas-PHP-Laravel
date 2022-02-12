@@ -331,7 +331,7 @@
             <div class="col-md-12 mb-3">
             <div class="card">
                 <div class="card-header">
-                    <span><i class="bi bi-table me-2"></i></span> Data Table
+                    <span><i class="bi bi-table me-2"></i></span> Tabla de productos
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -401,10 +401,10 @@
 
                                      <td class="">
                                         <div class="box-btn-acciones">
-                                            <button class="btn btn-warning btn-edit-user" onclick="EditarProducto({{$product -> id}})" data-bs-toggle="modal" data-bs-target="#modalProductEdit"><i class="bi bi-pen-fill"></i></button>
+                                            <button class="btn btn-edit" onclick="EditarProducto({{$product -> id}})" data-bs-toggle="modal" data-bs-target="#modalProductEdit"><i class="bi bi-pen-fill"></i></button>
                                             <form action="{{ url('admin/products/delete', $product-> id) }}" method="post">
                                                 @csrf
-                                                <button type="submit" class="btn btn-danger"><i class="bi bi-trash2-fill"></i></button>
+                                                <button type="submit" class="btn btn-delete"><i class="bi bi-trash2-fill"></i></button>
                                             </form>
                                         </div>
                                     </td>
@@ -446,11 +446,30 @@
     <script src="{{url('/static/libs/CKEDITOR/ckeditor.js')}}"></script>
     <script>
     $(document).ready(function() {
-        $('#products-table').DataTable();
+        $('#products-table').DataTable({
+            language: {
+                "lengthMenu": "Mostrar _MENU_ registros",
+                "zeroRecords": "No se encontraron resultados",
+                "info": "Registros del _START_ al _END_ de un total de _TOTAL_. ",
+                "infoEmpty": "Registros del 0 al 0 de un total de 0. ",
+                "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sSearch": "Buscar:",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast":"Último",
+                    "sNext":"Siguiente",
+                    "sPrevious": "Anterior"
+			     },
+			     "sProcessing":"Procesando...",
+            },
+            //para usar los botones
+            responsive: "true",
+        });
         CKEDITOR.replace('area-description-add');
         CKEDITOR.replace('area-description-edit');
         traerSubcategorias();
         traerMarcas();
+        
     } ); 
     
     </script>
