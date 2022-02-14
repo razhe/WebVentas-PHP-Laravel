@@ -17,10 +17,12 @@
                 <div class="banner-categoria-item">
                     <div class="img-categoria-item"><img src="{{asset('img/banner/herramientas-default.jpg')}}" alt=""></div>
                     <div class="contenido-categoria-item">
-                        <h3>Titulo</h3>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam est provident aliquid expedita?</p>
-                        <p>234 productos</p>
-                        <a href="">Comprar Ahora</a>
+                        <div class="box-contenido-categoria">
+                            <h3>Titulo</h3>
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam est provident aliquid expedita?</p>
+                            <p>234 productos</p>
+                            <a href="">Comprar Ahora</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -29,37 +31,45 @@
                     <div class="banner-categoria-item col-lg-6 col-md-6 p-1">
                         <div class="img-categoria-item"><img src="{{asset('img/banner/herramientas-default.jpg')}}" alt=""></div>
                         <div class="contenido-categoria-item">
-                            <h3>Titulo</h3>
-                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam est provident aliquid expedita?</p>
-                            <p>234 productos</p>
-                            <a href="">Comprar Ahora</a>
+                            <div class="box-contenido-categoria">
+                                <h3>Titulo</h3>
+                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam est provident aliquid expedita?</p>
+                                <p>234 productos</p>
+                                <a href="">Comprar Ahora</a>
+                            </div>
                         </div>
                     </div>
                     <div class="banner-categoria-item col-lg-6 col-md-6 p-1">
                         <div class="img-categoria-item"><img src="{{asset('img/banner/herramientas-default.jpg')}}" alt=""></div>
                         <div class="contenido-categoria-item">
-                            <h3>Titulo</h3>
-                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam est provident aliquid expedita?</p>
-                            <p>234 productos</p>
-                            <a href="">Comprar Ahora</a>
+                            <div class="box-contenido-categoria">
+                                <h3>Titulo</h3>
+                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam est provident aliquid expedita?</p>
+                                <p>234 productos</p>
+                                <a href="">Comprar Ahora</a>
+                            </div>
                         </div>
                     </div>
                     <div class="banner-categoria-item col-lg-6 col-md-6 p-1">
                         <div class="img-categoria-item"><img src="{{asset('img/banner/herramientas-default.jpg')}}" alt=""></div>
                         <div class="contenido-categoria-item">
-                            <h3>Titulo</h3>
-                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam est provident aliquid expedita?</p>
-                            <p>234 productos</p>
-                            <a href="">Comprar Ahora</a>
+                            <div class="box-contenido-categoria">
+                                <h3>Titulo</h3>
+                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam est provident aliquid expedita?</p>
+                                <p>234 productos</p>
+                                <a href="">Comprar Ahora</a>
+                            </div>
                         </div>
                     </div>
                     <div class="banner-categoria-item col-lg-6 col-md-6 p-1">
                         <div class="img-categoria-item"><img src="{{asset('img/banner/herramientas-default.jpg')}}" alt=""></div>
                         <div class="contenido-categoria-item">
-                            <h3>Titulo</h3>
-                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam est provident aliquid expedita?</p>
-                            <p>234 productos</p>
-                            <a href="">Comprar Ahora</a>
+                            <div class="box-contenido-categoria">
+                                <h3>Titulo</h3>
+                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam est provident aliquid expedita?</p>
+                                <p>234 productos</p>
+                                <a href="">Comprar Ahora</a>
+                            </div>
                         </div>
                     </div>
                 </div>

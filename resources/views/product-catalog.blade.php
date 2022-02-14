@@ -125,8 +125,84 @@
                         </div>
                     </div>
                 </div>
-                <div class="seccion__derecha col-lg-9 col-md-9">
-                    asdasdaasdasdas
+                <div class="seccion__derecha col-lg-9 col-md-9 p-0">
+                    <div class="row contenedor-productos g-0">  
+                        <div class="box-producto col-lg-3 col-md-4 col-sm-6 p-2">
+                            <div class="item-producto">
+                                <div class="imagen-producto">
+                                    <img src="{{asset('static/images/default.jpg')}}" alt="">
+                                    <div class="acciones-producto">
+                                        <a href="{{url('/details-product')}}"><i class="bi bi-eye"></i></a>
+                                        <a href="#"><i class="bi bi-bag"></i></a>
+                                    </div>
+                                </div>
+                                <div class="info-producto p-1">
+                                    <h5 class="titulo-producto">Zapatos</h5>
+                                    <div class="detalle-item-producto">
+                                        <small class="">Nike</small>
+                                        <small class="">$20000</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="box-producto col-lg-3 col-md-4 col-sm-6 p-2">
+                            <div class="item-producto">
+                                <div class="imagen-producto">
+                                    <img src="{{asset('static/images/default.jpg')}}" alt="">
+                                    <div class="acciones-producto">
+                                        <a href="{{url('/details-product')}}"><i class="bi bi-eye"></i></a>
+                                        <a href="#"><i class="bi bi-bag"></i></a>
+                                    </div>
+                                </div>
+                                <div class="info-producto p-1">
+                                    <h5 class="titulo-producto">Zapatos</h5>
+                                    <div class="detalle-item-producto">
+                                        <small class="">Nike</small>
+                                        <small class="">$20000</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="box-producto col-lg-3 col-md-4 col-sm-6 p-2">
+                            <div class="item-producto">
+                                <div class="imagen-producto">
+                                    <img src="{{asset('static/images/default.jpg')}}" alt="">
+                                    <div class="acciones-producto">
+                                        <a href="{{url('/details-product')}}"><i class="bi bi-eye"></i></a>
+                                        <a href="#"><i class="bi bi-bag"></i></a>
+                                    </div>
+                                </div>
+                                <div class="info-producto p-1">
+                                    <h5 class="titulo-producto">Zapatos</h5>
+                                    <div class="detalle-item-producto">
+                                        <small class="">Nike</small>
+                                        <small class="">$20000</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="box-producto col-lg-3 col-md-4 col-sm-6 p-2">
+                            <div class="item-producto">
+                                <div class="imagen-producto">
+                                    <img src="{{asset('static/images/default.jpg')}}" alt="">
+                                    <div class="acciones-producto">
+                                        <a href="{{url('/details-product')}}"><i class="bi bi-eye"></i></a>
+                                        <a href="#"><i class="bi bi-bag"></i></a>
+                                    </div>
+                                </div>
+                                <div class="info-producto p-1">
+                                    <h5 class="titulo-producto">Zapatos</h5>
+                                    <div class="detalle-item-producto">
+                                        <small class="">Nike</small>
+                                        <small class="">$20000</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+                <div class="seccion__inferior">
+                    paginacion
                 </div>
             </div>
             
