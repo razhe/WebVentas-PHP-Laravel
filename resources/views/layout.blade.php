@@ -29,16 +29,33 @@
                 <div class="contenedor-opt-usr">
                     <div class="contenedor-cuenta">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle dropdown-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-person-circle"></i>
-                                Cuenta
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">                          
-                                <li><a class="dropdown-item" href="{{url('/login')}}">Iniciar sesión</a></li>
-                                <li><a class="dropdown-item" href="{{url('/register')}}">Registrarse</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="{{url('/logout')}}">Salir <i class="bi bi-box-arrow-right"></i></a></li>
-                            </ul>
+                            @if (Auth::guest())
+                                <a class="nav-link dropdown-toggle dropdown-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-person-circle"></i>
+                                    Cuenta
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="{{url('/login')}}">Iniciar sesión</a></li>
+                                    <li><a class="dropdown-item" href="{{url('/register')}}">Registrarse</a></li>
+                                </ul>
+                                @else
+                                    <a class="nav-link dropdown-toggle dropdown-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-person-circle"></i>
+                                        {{Auth::user() -> name}}
+                                    </a>
+                                    @if (Auth::user() -> id_tasks == 2)
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <li><a class="dropdown-item" href="{{url('/profile')}}">Perfil <i class="bi bi-gear"></i></a></li>
+                                            <li><a class="dropdown-item" href="{{url('/admin')}}">Dashboard <i class="bi bi-speedometer2"></i></a></li>
+                                            <li><a class="dropdown-item" href="{{url('/logout')}}">Salir <i class="bi bi-box-arrow-right"></i></a></li>
+                                        </ul>
+                                    @endif
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="{{url('/profile')}}">Perfil <i class="bi bi-gear"></i></a></li>
+                                        <li><a class="dropdown-item" href="{{url('/logout')}}">Salir <i class="bi bi-box-arrow-right"></i></a></li>
+                                    </ul>
+                                @endif                          
+                            
                         </li>
                     </div>
                     <div class="contenedor-carrito">

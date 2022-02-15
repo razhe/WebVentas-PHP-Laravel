@@ -14,6 +14,7 @@ class CategoryController extends Controller
     public function __construct(){
         $this-> middleware('auth');
         $this-> middleware('admincheck');
+        $this-> middleware('user.status');
     }
     public function getCategories(){
         $categories = Category::where('categories.status', '<>', '3') -> orderBy('id', 'Asc')->get();
@@ -53,7 +54,7 @@ class CategoryController extends Controller
         endif;
     }
     public function postDeleteCategory($id){
-        $category = Category::find($id);
+        $category = Category::findOrFail($id);
 
         $category->status = e(3);
 
@@ -81,7 +82,7 @@ class CategoryController extends Controller
         if ($validator -> fails()):
             return back() -> withErrors($validator)->with('MsgResponse','Se ha producido un error al intentar guardar una categoría')->with( 'typealert', 'danger');
         else:
-            $category = Category::find($request['id']);
+            $category = Category::findOrFail($request['id']);
 
             $category->name   = e($request['name']);
             $category->status = e($request['status']);
@@ -93,7 +94,7 @@ class CategoryController extends Controller
         endif;
     }
     public function getFindCategory($id){
-        $category = Category::find($id);
+        $category = Category::findOrFail($id);
         return response()->json($category);
     }
 }

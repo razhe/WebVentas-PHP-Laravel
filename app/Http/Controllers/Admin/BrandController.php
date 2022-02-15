@@ -11,6 +11,7 @@ class BrandController extends Controller
     public function __construct(){
         $this-> middleware('auth');
         $this-> middleware('admincheck');
+        $this-> middleware('user.status');
     }
     public function getBrands(){
         $brands = Brand::where('brands.status', '<>', '3') -> orderby('id', 'Asc')->get();
@@ -51,7 +52,7 @@ class BrandController extends Controller
     }
     public function getFindBrand($id)
     {
-        $brand = Brand::find($id)->where('brands.status','<>','3') -> orderby('id', 'asc') ->get();
+        $brand = Brand::findOrFail($id)->where('brands.status','<>','3') -> orderby('id', 'asc') ->get();
         $brandData = ['brand' => $brand];
         return response($brandData);
     }
@@ -72,7 +73,7 @@ class BrandController extends Controller
         if ($validator -> fails()) {
             return back() -> withErrors($validator)->with('MsgResponse','Se ha producido un error al intentar guardar la marca')->with( 'typealert', 'danger');
         }else {
-            $brand = Brand::find($request['id']);
+            $brand = Brand::findOrFail($request['id']);
 
             $brand -> name   = e($request['name']);
             $brand -> status = e($request['status']);
@@ -93,7 +94,7 @@ class BrandController extends Controller
     }
     public function postDeleteBrand($id)
     {
-        $brand = Brand::find($id);
+        $brand = Brand::findOrFail($id);
         $brand -> status = '3';
         if ($brand -> save()) {
             return back() ->with('MsgResponse','¡Marca eliminada con Éxito!')->with( 'typealert', 'success');

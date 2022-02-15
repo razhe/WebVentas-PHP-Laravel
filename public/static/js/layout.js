@@ -1,3 +1,15 @@
+//======================
+//Código del sitio
+//======================
+let base = location.protocol+'//'+location.host;
+    //route = document.getElementsByName('routeName')[0].getAttribute('content');
+
+document.addEventListener('DOMContentLoaded', function(){
+    
+});
+//======================
+//Código de la plantilla
+//======================
 const btnCategorias = document.getElementById('btn-categorias'),
     btnCerrarMenu = document.getElementById('btn-close-nav'),
     contenedorEnlaces = document.querySelector('#menu #contenedor-enlaces-nav'),

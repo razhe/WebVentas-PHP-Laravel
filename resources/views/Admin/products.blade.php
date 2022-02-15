@@ -381,14 +381,14 @@
                                         @case(1)
                                             <td>
                                                 <div class="box-status-active">
-                                                    <p>Activo</p>
+                                                    <p>Público</p>
                                                 </div>
                                             </td>
                                             @break
                                         @case(2)
                                             <td>
                                                 <div class="box-status-suspended">
-                                                    <p>Suspendido</p>
+                                                    <p>Borrador</p>
                                                 </div>
                                             </td>
                                             @break

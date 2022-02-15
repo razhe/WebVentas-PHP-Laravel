@@ -14,6 +14,7 @@ class SubCategoryController extends Controller
     public function __construct(){
         $this-> middleware('auth');
         $this-> middleware('admincheck');
+        $this-> middleware('user.status');
     }
     public function getSubcategoriesSelect($id){
         
@@ -42,7 +43,7 @@ class SubCategoryController extends Controller
         return response($subcategoriesData);   
     }
     public function postDeleteSubcategory($id){
-        $subcategory = Subcategory::find($id);
+        $subcategory = Subcategory::findOrFail($id);
 
         $subcategory->status = e(3);
 
@@ -122,7 +123,7 @@ class SubCategoryController extends Controller
     }
     public function getFindSubcategory($id)
     {
-        $subcategory = Subcategory::find($id);
+        $subcategory = Subcategory::findOrFail($id);
         return response()->json($subcategory);
     }
 
@@ -147,7 +148,7 @@ class SubCategoryController extends Controller
             //Ruta
             $path        = 'img/brands/';
             
-            $subcategory = Subcategory::find($request['id']);
+            $subcategory = Subcategory::findOrFail($request['id']);
 
             $subcategory->name        = e($request['name']);
             $subcategory->status      = e($request['status']);

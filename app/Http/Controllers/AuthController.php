@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 //Peticiones desde el http
 use Illuminate\Http\Request;
 //Validacion de laravel, hash y auth
-use Validator, Hash, Auth;
+use Validator, Hash, Auth, Mail, Str;
 //Modelo de usuario
 use \App\Models\User;
+//Envio de correos
+use App\Mail\UserSendRecover;
 
 class AuthController extends Controller
 {
@@ -40,8 +42,12 @@ class AuthController extends Controller
         if ($validator -> fails()):
             return back() -> withErrors($validator)->with('MsgResponse','Se ha producido un error')->with( 'typealert', 'danger');
         else:
-            if(Auth::attempt(['email'=>$request['email'],'password'=>$request['password']], true)):
-                return redirect('/');
+            if(Auth::attempt(['email'=>$request['email'],'password'=>$request['password']], false)):
+                if(Auth::user()->status == 2):
+                    return redirect('/logout');
+                else:
+                    return redirect('/'); 
+                endif;
             else:
                 return back()->with('MsgResponse','Correo electrónico o contraseña erronea')->with( 'typealert', 'danger');
             endif;
@@ -90,13 +96,136 @@ class AuthController extends Controller
             $user-> id_tasks  = e(1);
 
             if($user -> save()):
-                return redirect('/login')->with('MsgResponse', '¡Usuario creado con éxito! Ya puedes iniciar sesión.')->with('typealert', 'success');
+                return redirect('/login')->with('MsgResponse', '¡Usuario creado con éxito! Ya puedes iniciar sesión!')->with('typealert', 'success');
             endif;
         endif;
     }
 
     public function getLogout(){
+        $status = Auth::user() -> status;
         Auth::logout();
+        if ($status == 2): 
+            return redirect('/login')->with('MsgResponse', 'Esta cuenta está suspendida.')->with('typealert', 'warning');
+        else: 
+            # code...
+        endif;
+        
         return redirect('/');
     }
+    public function getRecover()
+    {
+        return view('Auth.recover'); 
+    }
+    public function postRecover(Request $request)
+    {
+        $rules = 
+        [
+            'email'    => 'required|email',
+        ];
+        $messages=
+        [
+            'email.required'    => 'Debe poner un correo electrónico.',
+            'email.email'       => 'El formato de su correo electronico no es válido.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator -> fails()):
+            return back() -> withErrors($validator)->with('MsgResponse','Se ha producido un error')->with( 'typealert', 'danger');
+        else:
+            $user = User::where('email', $request['email']) -> count();
+            if($user == 1):
+                $user = User::where('email', $request['email']) -> first();
+                $code = rand(100000, 999999);
+                $data = ['name' => $user->name, 'email' => $user->email, 'code'=> $code];
+
+                $userUpdate = User::findOrFail($user->id);
+                $userUpdate -> password_code =  $code;
+
+                if($userUpdate->save());
+
+                Mail::to($user->email)->send(new UserSendRecover($data));
+                return redirect('/reset?email='.$user->email)-> with('MsgResponse','Se ha enviado un correo electrónico con la solicitud.')->with( 'typealert', 'success');
+                //return view('Email.user_pass_recover', $data);
+            else:
+                return back() -> withErrors($validator)->with('MsgResponse','No existe ninguna cuenta asociada a este correo.')->with( 'typealert', 'danger');
+            endif;
+          
+        endif;
+    }
+
+    public function getReset(Request $request){
+        $data = ['email'=> $request['email']];
+        return view('Auth.reset', $data);
+    }
+    public function postReset(Request $request){
+        $rules = 
+        [
+            'email'    => 'required|email',
+            'password_code'    => 'required|numeric',
+        ];
+        $messages=
+        [
+            'email.required'         => 'Debe poner un correo electrónico.',
+            'email.email'            => 'El formato de su correo electronico no es válido.',
+            'password_code.required' => 'Se requiere del código de verificación',
+            'password_code.numeric'   => 'El código solo puede contener letras.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator -> fails()):
+            return back() -> withErrors($validator)->with('MsgResponse','Se ha producido un error')->with( 'typealert', 'danger');
+        else:
+            $user = User::where('email', $request['email'])->where('password_code', $request['password_code'])->count();
+            if($user == 1):
+                $user = User::where('email', $request['email']) -> first();
+                return redirect('/change-password')->with('email', $user->email);
+            else:
+                return back() -> withErrors($validator)->with('MsgResponse','El correo electrónico o código de verificación son inválidos.')->with( 'typealert', 'danger');
+            endif;
+        endif;
+    }
+    public function getChangePassword()
+    {
+        
+        return view('Auth.change-password');
+    }
+    public function postChangePassword(Request $request)
+    {
+        $rules = 
+        [
+            'email'     => 'required|email',
+            'password'  => 'required|min:8',
+            'cpassword' => 'required|min:8|same:password'
+        ];
+        $messages=
+        [
+            'email.required'     => 'Debe poner un correo electrónico.',
+            'email.email'        => 'El formato de su correo electronico no es válido.',
+            'password.required'  => 'Por favor escriba una contraseña.',
+            'password.min'       => 'la contraseña debe tener minimo 8 caracteres.',
+            'cpassword.required' => 'Debe confirmar la contraseña.',
+            'cpassword.min'      => 'la confirmación de la contraseña debe tener minimo 8 caracteres.',
+            'cpassword.same'     => 'La contraseña y su confirmación deben ser identicas.',
+
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator -> fails()):
+            return back() -> withErrors($validator)->with('MsgResponse','Se ha producido un error')->with( 'typealert', 'danger');
+        else:
+            //$user = User::where('email', $request['email']) -> first();
+            $user = User::where('email', $request['email']) -> first();
+            if($user -> password_code == null):
+                return back() -> withErrors($validator)->with('MsgResponse','Esta cuenta no ha solicitado un cambio de contraseña.')->with( 'typealert', 'danger');
+            else:
+                $user -> password = Hash::make($request['password']);
+                $user -> password_code = null;
+                if($user -> save()):
+                    session()->forget('email');
+                    return redirect('/login')->with('MsgResponse', 'Contraseña actualizada éxitosamente')->with('typealert', 'success');
+                endif;
+            endif;
+            
+        endif;
+    }
+
 }

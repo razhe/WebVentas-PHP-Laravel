@@ -26,7 +26,7 @@ class CreateProductsTable extends Migration
             $table->string('image2');
             $table->string('image3');
             $table->string('image4');
-            $table->string('certificate')->nullable(true);;
+            $table->string('certificate')->nullable(true);
             $table->unsignedBigInteger('id_brand');
             $table->foreign('id_brand')-> references('id')->on('brands')->onUpdate('cascade')->onDelete('cascade'); 
             $table->unsignedBigInteger('id_subcategory');

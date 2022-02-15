@@ -45,7 +45,7 @@
                     <span class="input-group-text" id="basic-addon1">
                         <i class="bi bi-telephone"></i>
                     </span>
-                    <input type="text" name="phone" class="form-control" required>
+                    <input type="text" name="phone" value="" class="form-control" required>
                 </div>
             </div>
             <!--Email-->

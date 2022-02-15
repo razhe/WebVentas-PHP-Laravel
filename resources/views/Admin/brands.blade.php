@@ -205,9 +205,9 @@
                                 <td>
                                     <div class="box-btn-acciones">
                                         <button class="btn btn-edit" onclick="EditarMarca({{$brand -> id}})" data-bs-toggle="modal" data-bs-target="#modalBrandEdit"><i class="bi bi-pen-fill"></i></button>
-                                        <form action="{{ url('admin/brands/delete', $brand -> id) }}" method="post">
+                                        <form action="{{ url('admin/brands/delete', $brand -> id) }}" method="post" name="deleteBrand">
                                             @csrf
-                                            <button type="submit" class="btn btn-delete"><i class="bi bi-trash2-fill"></i></button>
+                                            <button type="submit" id="btn-delete" class="btn btn-delete"><i class="bi bi-trash2-fill"></i></button>
                                         </form>
                                     </div>   
                                 </td>
@@ -257,7 +257,7 @@
             //para usar los botones
             responsive: "true",
         });
-    } ); 
+    } );
     
     </script>
 @endsection

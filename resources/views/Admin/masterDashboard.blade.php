@@ -22,6 +22,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <!--Chart.js-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js" integrity="sha512-TW5s0IT/IppJtu76UbysrBH9Hy/5X41OTAbQuffZFU6lQ1rdcLHzpU5BzVvr/YFykoiMYZVWlr/PX1mDcfM9Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        
 </head>
 <body>
     <!-- Parte de arriba del navbar -->
@@ -35,24 +36,16 @@
             <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="topNavBar">
-            <form class="d-flex ms-auto my-3 my-lg-0">
-                <div class="input-group">
-                <input class="form-control" type="search" placeholder="Search" aria-label="Search"/>
-                <button class="btn btn-primary" type="submit">
-                    <i class="bi bi-search"></i>
-                </button>
-                </div>
-            </form>
-            <ul class="navbar-nav">
+           
+            <ul class="navbar-nav d-flex ms-auto my-3 my-lg-0">
                 <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle ms-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="bi bi-person-fill"></i> {{Auth::user()->name}}
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="{{url('/')}}">Volver al inicio</a></li>
                     <li>
-                    <a class="dropdown-item" href="#">Salir <i class="bi bi-box-arrow-left"></i></a>
+                    <a class="dropdown-item" href="{{url('/logout')}}">Salir <i class="bi bi-box-arrow-left"></i></a>
                     </li>
                 </ul>
                 </li>

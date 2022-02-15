@@ -12,6 +12,7 @@ class UserController extends Controller
     public function __construct(){
         $this-> middleware('auth');
         $this-> middleware('admincheck');
+        $this-> middleware('user.status');
     }
     public function getUsers(){
         $users = User::where('users.status', '<>', '3') -> orderBy('id', 'Asc')->get();
@@ -64,7 +65,7 @@ class UserController extends Controller
         endif;
     }
     public function postDeleteUser($id){
-        $user = User::find($id);
+        $user = User::findOrFail($id);
 
         $user->status = e(3);
 
@@ -76,7 +77,7 @@ class UserController extends Controller
         }
     }
     public function getFindUser($id){
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         return response()->json($user);
     }
     public function postEditUser(Request $request){
@@ -105,7 +106,7 @@ class UserController extends Controller
         if ($validator -> fails()):
             return back() -> withErrors($validator)->with('MsgResponse','Se ha producido un error')->with( 'typealert', 'danger');
         else:
-            $user = User::find($request['id']);
+            $user = User::findOrFail($request['id']);
             //"e" aplica un encode a los datos que enviamos para evitar que hagan inyecciones por scripts, o vulnerabilidades en general.
             $user-> name      = e($request['name']);
             $user-> last_name = e($request['last_name']);

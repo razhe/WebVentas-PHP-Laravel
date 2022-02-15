@@ -12,6 +12,7 @@ class ProductController extends Controller
     public function __construct(){
         $this-> middleware('auth');
         $this-> middleware('admincheck');
+        $this-> middleware('user.status');
     }
     public function getProducts(){
         $products=DB::select('CALL select_products()');
@@ -23,7 +24,7 @@ class ProductController extends Controller
     }
     public function getFindProduct($id)
     {
-        $products = Product::find($id);
+        $products = Product::findOrFail($id);
         return response()->json($products);   
     }
 
@@ -156,7 +157,7 @@ class ProductController extends Controller
             $pathImg     = 'img/products/';
             $pathDocs    = 'docs/products/';
             
-            $product = Product::find($request['id']);
+            $product = Product::findOrFail($request['id']);
 
             $product->name           = e($request['name']);
             $product->price          = e($request['price']);
