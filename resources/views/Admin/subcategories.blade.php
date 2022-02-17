@@ -94,8 +94,8 @@
                                 <label for="status">Seleccione un estado:</label>
                                 <select class="form-select" aria-label="Default select example" name="status">
                                     <option selected disabled>Estado...</option>
-                                    <option value="1">Activo</option>
-                                    <option value="2">Suspendido</option>
+                                    <option value="1">Público</option>
+                                    <option value="2">Borrador</option>
                                 </select>
                             </div>
                             <!--La categoría-->
@@ -104,31 +104,6 @@
                                 <select id="select-category-add" class="form-select" aria-label="Default select example" name="id_category">
 
                                 </select>
-                            </div>
-                            <!--Banner-->
-                            <div class="mb-2">
-                                <label for="banner" class="form-label">Banner:</label>
-                                <input class="form-control" type="file" name="banner" id="banner">
-                            </div>
-                            <!--Imagen 1-->
-                            <div class="mb-2">
-                                <label for="image1" class="form-label">Primera imagen secundaria:</label>
-                                <input class="form-control" type="file" name="image1" id="image1">
-                            </div>
-                            <!--Imagen 2-->
-                            <div class="mb-2">
-                                <label for="image2" class="form-label">Segunda imagen secundaria:</label>
-                                <input class="form-control" type="file" name="image2" id="image2">
-                            </div>
-                            <!--Imagen 3-->
-                            <div class="mb-2">
-                                <label for="image3" class="form-label">Tercera imagen secundaria:</label>
-                                <input class="form-control" type="file" name="image3" id="image3">
-                            </div>
-                            <!--Imagen 4-->
-                            <div class="mb-2">
-                                <label for="image4" class="form-label">Cuarta imagen secundaria:</label>
-                                <input class="form-control" type="file" name="image4" id="image4">
                             </div>
                             <br>
                             <div class="d-flex justify-content-between">
@@ -167,8 +142,8 @@
                                 <label for="status">Seleccione un estado:</label>
                                 <select id="estado-subcategoria-editar" class="form-select" aria-label="Default select example" name="status">
                                     <option selected disabled>Estado...</option>
-                                    <option value="1">Activo</option>
-                                    <option value="2">Suspendido</option>
+                                    <option value="1">Público</option>
+                                    <option value="2">Borrador</option>
                                 </select>
                             </div>
                             <!--La categoría-->
@@ -177,31 +152,6 @@
                                 <select id="select-category-edit" class="form-select" aria-label="Default select example" name="id_category">
                                                                       
                                 </select>
-                            </div>
-                            <!--Banner-->
-                            <div class="mb-2">
-                                <label for="banner" class="form-label">Banner:</label>
-                                <input class="form-control" type="file" name="banner" id="banner">
-                            </div>
-                            <!--Imagen 1-->
-                            <div class="mb-2">
-                                <label for="image1" class="form-label">Primera imagen secundaria:</label>
-                                <input class="form-control" type="file" name="image1" id="image1">
-                            </div>
-                            <!--Imagen 2-->
-                            <div class="mb-2">
-                                <label for="image2" class="form-label">Segunda imagen secundaria:</label>
-                                <input class="form-control" type="file" name="image2" id="image2">
-                            </div>
-                            <!--Imagen 3-->
-                            <div class="mb-2">
-                                <label for="image3" class="form-label">Tercera imagen secundaria:</label>
-                                <input class="form-control" type="file" name="image3" id="image3">
-                            </div>
-                            <!--Imagen 4-->
-                            <div class="mb-2">
-                                <label for="image4" class="form-label">Cuarta imagen secundaria:</label>
-                                <input class="form-control" type="file" name="image4" id="image4">
                             </div>
                             <br>
                             <div class="d-flex justify-content-between">
@@ -234,11 +184,6 @@
                                     <th>Nombre subcategoría</th>
                                     <th>Estado</th>
                                     <th>Categoría padre</th>
-                                    <th>Banner</th>
-                                    <th>Primera imagen</th>
-                                    <th>Segunda imagen</th>
-                                    <th>Tercera imagen</th>
-                                    <th>Cuarta imagen</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -251,24 +196,19 @@
                                             @case(1)
                                                 <td>
                                                     <div class="box-status-active">
-                                                        <p>Activo</p>
+                                                        <p>Público</p>
                                                     </div>
                                                 </td>
                                                 @break
                                             @case(2)
                                                 <td>
                                                     <div class="box-status-suspended">
-                                                        <p>Suspendido</p>
+                                                        <p>Borrador</p>
                                                     </div>
                                                 </td>
                                                 @break
                                         @endswitch
                                         <td><strong>{{$subcategory -> category_name}}</strong></td>
-                                        <td><img src="{{asset($subcategory -> banner)}}" alt="" style="max-width: 60px; max-height: 30px"></td>
-                                        <td><img src="{{asset($subcategory -> image1)}}" alt="" style="max-width: 60px; max-height: 30px"></td>
-                                        <td><img src="{{asset($subcategory -> image2)}}" alt="" style="max-width: 60px; max-height: 30px"></td>
-                                        <td><img src="{{asset($subcategory -> image3)}}" alt="" style="max-width: 60px; max-height: 30px"></td>
-                                        <td><img src="{{asset($subcategory -> image4)}}" alt="" style="max-width: 60px; max-height: 30px"></td>
                                         <td>
                                             <div class="box-btn-acciones">
                                                 <button onclick="editarSubCategoria({{ $subcategory -> id }})" id="btn-editar" class="btn btn-edit" data-bs-toggle="modal" data-bs-target="#editFormSubcategoria" type="submit"><i class="bi bi-pen-fill"></i></button>
@@ -288,11 +228,6 @@
                                     <th>Nombre subcategoría</th>
                                     <th>Estado</th>
                                     <th>Categoría padre</th>
-                                    <th>Banner</th>
-                                    <th>Primera imagen</th>
-                                    <th>Segunda imagen</th>
-                                    <th>Tercera imagen</th>
-                                    <th>Cuarta imagen</th>
                                     <th>Acciones</th>
                                 </tr>
                             </tfoot>

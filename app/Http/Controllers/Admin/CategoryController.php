@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 //Validator
-use Validator;
+use Validator, Str, File;
 //Modelo categorias
 use App\Models\Category;
+//Paquete intervention images
+use Intervention\Image\Facades\Image;
 
 class CategoryController extends Controller
 {
@@ -31,21 +33,36 @@ class CategoryController extends Controller
         [
             'name'   => 'required',
             'status' => 'required',
+            'banner' => 'required|image',
         ];
         $messages =
         [
             'name.required'   => 'Se requiere de un nombre para la categoría.',
             'status.required' => 'Se requiere de un estado para la categoría.',
+            'banner.required' => 'Se requiere de una imagen para la categoría.',
+            'banner.image'    => 'El archivo seleccionado no es una imagen.',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator -> fails()):
-            return back() -> withErrors($validator)->with('MsgResponse','Se ha producido un error al intentar guardar una categoría')->with( 'typealert', 'danger');
+            return back() -> withErrors($validator)->with('MsgResponse','Se ha producido un error al intentar guardar esta categoría')->with( 'typealert', 'danger');
         else:
+            $file        = $request->file('banner');
+            $path        = 'img/categories/';
+            $file_name   = time().'-'.$file->getClientOriginalName();
+            $upload_file = $path. $file_name;
+            //mover la imagen con el paquete intervention image
+            Image::make($file)
+                ->resize(1000, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                }) 
+                -> save($upload_file);
+
             $category = new Category;
 
             $category->name   = e($request['name']);
             $category->status = e($request['status']);
+            $category->banner = $path.$file_name;
             if ($category -> save()):
                 return back() -> withErrors($validator)->with('MsgResponse','¡Categoría guardada con Éxito!')->with( 'typealert', 'success');
             endif;
@@ -71,21 +88,40 @@ class CategoryController extends Controller
         [
             'name'   => 'required',
             'status' => 'required',
+            'banner' => 'image',
         ];
         $messages =
         [
             'name.required'   => 'Se requiere de un nombre para la categoría.',
             'status.required' => 'Se requiere de un estado para la categoría.',
+            'banner.image'    => 'El archivo seleccionado no es una imagen.',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator -> fails()):
-            return back() -> withErrors($validator)->with('MsgResponse','Se ha producido un error al intentar guardar una categoría')->with( 'typealert', 'danger');
+            return back() -> withErrors($validator)->with('MsgResponse','Se ha producido un error al intentar actualizar esta categoría')->with( 'typealert', 'danger');
         else:
             $category = Category::findOrFail($request['id']);
 
             $category->name   = e($request['name']);
             $category->status = e($request['status']);
+
+            if ($request->hasFile('banner')) {
+                $file        = $request->file('banner');
+                $path        = 'img/categories/';
+                $file_name   = time().'-'.$file->getClientOriginalName();
+                $upload_file = $path. $file_name;
+                //mover la imagen con el paquete intervention image
+                Image::make($file)
+                    ->resize(1000, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    }) 
+                    -> save($upload_file);
+
+
+                File::delete($category -> banner);
+                $category -> banner  = $path.$file_name;
+            }
             if ($category -> save()):
                 return back() -> withErrors($validator)->with('MsgResponse','¡Categoría guardada con Éxito!')->with( 'typealert', 'success');
             endif;

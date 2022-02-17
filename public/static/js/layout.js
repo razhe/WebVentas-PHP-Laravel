@@ -2,97 +2,108 @@
 //Código del sitio
 //======================
 let base = location.protocol+'//'+location.host;
-    //route = document.getElementsByName('routeName')[0].getAttribute('content');
+    route = document.getElementsByName('routeName')[0].getAttribute('content');
 
 document.addEventListener('DOMContentLoaded', function(){
-    
+
 });
 //======================
 //Código de la plantilla
 //======================
-const btnCategorias = document.getElementById('btn-categorias'),
-    btnCerrarMenu = document.getElementById('btn-close-nav'),
-    contenedorEnlaces = document.querySelector('#menu #contenedor-enlaces-nav'),
-    contenedorSubcategorias = document.querySelector('#grid .subcategorias-box'),
-    grid = document.getElementById('grid'),
-    esDispositivoMovil = () => window.innerWidth <= 825;
+const btnDepartamentos = document.getElementById('btn-categorias'),
+	  btnCerrarMenu = document.getElementById('btn-menu-cerrar'),
+	  grid = document.getElementById('grid'),
+	  contenedorEnlacesNav = document.querySelector('#menu .contenedor-enlaces-nav'),
+	  contenedorSubCategorias = document.querySelector('#grid .contenedor-subcategorias'),
+	  esDispositivoMovil = () => window.innerWidth <= 800;
 
-btnCategorias.addEventListener('mouseover', (e)=>{
-    if(!esDispositivoMovil()){
-        grid.classList.add('activo')
-    }
-});
-
-grid.addEventListener('mouseleave', (e)=>{
-    if(!esDispositivoMovil()){
-        grid.classList.remove('activo')
-    }
+btnDepartamentos.addEventListener('mouseover', () => {
+	if(!esDispositivoMovil()){
+		grid.classList.add('activo');
+	}
 });
 
-//Obtener el data set de categorias
-document.querySelectorAll('#menu .categorias-box a').forEach((elemento)=>{
-    elemento.addEventListener('mouseenter', (e) =>{
-        //subcategorias
-        if(!esDispositivoMovil()){
-            document.querySelectorAll('#menu .subcategoria').forEach((categoria)=>{
-                categoria.classList.remove('activo')
-                if(categoria.dataset.categoria == e.target.dataset.categoria){
-                    categoria.classList.add('activo');
-                }
-            });
-        };
-    });
+grid.addEventListener('mouseleave', () => {
+	if(!esDispositivoMovil()){
+		grid.classList.remove('activo');
+	}
 });
-//Responsividad dispositivos moviles
-document.querySelector('#btn-barras-nav').addEventListener('click', (e)=>{
-    e.preventDefault();//Prevenir que cambie la ruta porque es un enlace
-    contenedorEnlaces.classList.toggle('activo');
-    if(contenedorEnlaces.classList.contains('activo')){
-        document.querySelector('body').style.overflow = 'hidden';
-    }else{
-        document.querySelector('body').style.overflow = 'visible';
-    }
+//Subcategorias escritorio
+document.querySelectorAll('#menu .categorias a').forEach((elemento) => {
+	elemento.addEventListener('mouseenter', (e) => {
+		let subtitulo = document.getElementById('subtitulo')
+		subtitulo.setAttribute('data-categoria', elemento.dataset.categoria);
+		subtitulo.innerHTML = elemento.dataset.categoria;
+		if(!esDispositivoMovil()){
+			let subcategorias = document.getElementsByClassName('item-subcategoria');
+
+			for (let i = 0; i < subcategorias.length; i++) {
+				subcategorias[i].classList.remove('activo');
+				if(subcategorias[i].dataset.categoria == e.target.dataset.categoria){
+					subcategorias[i].classList.add('activo');
+				}
+			}
+		};
+	});
 });
 
-document.querySelector('#btn-categorias').addEventListener('click', (e)=>{
-    e.preventDefault();//Prevenir que cambie la ruta porque es un enlace
-    let grid = document.querySelector('#menu #grid');
-    grid.classList.toggle('activo');
-    btnCerrarMenu.classList.add('activo');
+// EventListeners para dispositivo movil.
+document.querySelector('#btn-menu-barras').addEventListener('click', (e) => {
+	e.preventDefault();
+	if(contenedorEnlacesNav.classList.contains('activo')){
+		contenedorEnlacesNav.classList.remove('activo');
+		document.querySelector('body').style.overflow = 'visible';
+	} else {
+		contenedorEnlacesNav.classList.add('activo');
+		document.querySelector('body').style.overflow = 'hidden';
+	}
 });
 
-document.querySelector('#menu .btn-regresar').addEventListener('click', (e)=>{
-    e.preventDefault();
-    grid.classList.remove('activo');
-    btnCerrarMenu.classList.remove('activo');
+// Click en boton de todos los departamentos (Para version movil).
+btnDepartamentos.addEventListener('click', (e) => {
+	e.preventDefault();
+	grid.classList.add('activo');
+	btnCerrarMenu.classList.add('activo');
 });
 
-document.querySelectorAll('#menu .categorias-box a').forEach((elemento)=>{
-    elemento.addEventListener('click', (e) =>{
-        contenedorSubcategorias.classList.add('activo');
-        //subcategorias
-        if(esDispositivoMovil()){
-            document.querySelectorAll('#menu .subcategoria').forEach((categoria)=>{
-                categoria.classList.remove('activo')
-                if(categoria.dataset.categoria == e.target.dataset.categoria){
-                    categoria.classList.add('activo');
-                }
-            });
-        };
-    });
+// Boton de regresar en el menu de categorias
+document.querySelector('#grid .categorias .btn-regresar').addEventListener('click', (e) => {
+	e.preventDefault();
+	grid.classList.remove('activo');
+	btnCerrarMenu.classList.remove('activo');
+});
+//subcategorías movil
+document.querySelectorAll('#menu .categorias a').forEach((elemento) => {
+	elemento.addEventListener('click', (e) => {
+		let subtitulo = document.getElementById('subtitulo')
+		subtitulo.setAttribute('data-categoria', elemento.dataset.categoria);
+		subtitulo.innerHTML = elemento.dataset.categoria;
+		if(esDispositivoMovil()){
+			contenedorSubCategorias.classList.add('activo');
+			let subcategorias = document.getElementsByClassName('item-subcategoria');
+
+			for (let i = 0; i < subcategorias.length; i++) {
+				subcategorias[i].classList.remove('activo');
+				if(subcategorias[i].dataset.categoria == e.target.dataset.categoria){
+					subcategorias[i].classList.add('activo');
+				}
+			}
+		}
+	});
 });
 
-document.querySelectorAll('#menu .subcategorias-box .btn-regresar').forEach((boton) => {
-    boton.addEventListener('click', (e)=>{
-        e.preventDefault();
-        contenedorSubcategorias.classList.remove('activo');
-    });
+// Boton de regresar en el menu de categorias
+document.querySelectorAll('#grid .contenedor-subcategorias .btn-regresar').forEach((boton) => {
+	boton.addEventListener('click', (e) => {
+		e.preventDefault();
+		contenedorSubCategorias.classList.remove('activo');
+	});
 });
-    
-btnCerrarMenu.addEventListener('click', (e)=>{
-    e.preventDefault();
-    document.querySelectorAll('#menu .activo').forEach((elemento)=>{
-        elemento.classList.remove('activo');
-    });
-    document.querySelector('body').style.overflow = 'visible';
+
+btnCerrarMenu.addEventListener('click', (e)=> {
+	e.preventDefault();
+	document.querySelectorAll('#menu .activo').forEach((elemento) => {
+		elemento.classList.remove('activo');
+	});
+	document.querySelector('body').style.overflow = 'visible';
 });

@@ -177,9 +177,9 @@ function EditarMarca(id){
     method:'get',
     data:'',
     success:function(data){
-      $('#id-marca-editar').val(data.brand[0].id);
-      $('#nombre-marca-editar').val(data.brand[0].name);
-      $('#estado-marca-editar').val(data.brand[0].status);
+      $('#id-marca-editar').val(data.brand.id);
+      $('#nombre-marca-editar').val(data.brand.name);
+      $('#estado-marca-editar').val(data.brand.status);
     }
   });
 }

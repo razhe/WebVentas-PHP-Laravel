@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{csrf_token()}}">
+    <meta name="routeName" content="{{Route::currentRouteName()}}">
     <title>empresa | @yield('title')</title>
     @yield('CSS')
     <!--CSS-->
@@ -21,10 +23,13 @@
                     <img src="{{url('/static/images/logo.png')}}" alt="">
                 </div>
                 <div class="contenedor-busq-nav ">
-                    <div class="busqueda-box input-group">
-                        <input type="text" class="form-control" placeholder="Busca aquí...">
-                        <button class="btn-buscar-nav btn btn-outline-secondary" type="button" id=""><i class="bi bi-search"></i></button>
-                    </div>               
+                    <form class="form-buscar" action="{{url('/search')}}" method="post">
+                        @csrf
+                        <div class="busqueda-box input-group">
+                                <input type="text" class="form-control" placeholder="Busca aquí...">
+                                <button class="btn-buscar-nav btn btn-outline-secondary" type="button" id=""><i class="bi bi-search"></i></button>
+                        </div> 
+                    </form>              
                 </div>
                 <div class="contenedor-opt-usr">
                     <div class="contenedor-cuenta">
@@ -65,13 +70,15 @@
                 </div>
             </div>
             <div class="contenedor contenedor-btn-nav">
-                <button id="btn-barras-nav" class="btn-barras-nav">
+                <button id="btn-menu-barras" class="btn-menu-barras">
                     <i class="bi bi-list"></i>
                 </button>
-                <button id="btn-close-nav" class=" btn-close-nav">
-                    <i class="bi bi-x-lg"></i>
+                <button id="btn-menu-cerrar" class="btn-menu-cerrar">
+                    <i class="bi bi-x"></i>
                 </button>
             </div>
+
+
             <div id="contenedor-enlaces-nav" class="contenedor contenedor-enlaces-nav">
                 <div class="btn-categorias" id="btn-categorias">
                     <strong>Categorías</strong>
@@ -79,7 +86,7 @@
                 </div>
                 <div class="contenedor-enlaces-directos">
                     <a href="#">INICIO</a>
-                    <a href="#">TIENDA</a>
+                    <a href="{{url('/product-catalog')}}">TIENDA</a>
                     <a href="#">¿QUIENES SOMOS?</a>
                     <a href="#">CONTACTO</a>
                 </div>
@@ -87,109 +94,27 @@
 
             <div class="contenedor contenedor-grid">
                 <div class="grid" id="grid">
-                    <div class="categorias-box">
-                        <button class="btn-regresar"><i class="bi bi-arrow-left"></i> Atrás</button>
-                        <h3 class="subtitulo">Categorías</h3>
-                        <ul class="lista-enlaces">
-                            <li class="item-lista"><a href="#"  data-categoria="electronico" class="enlaces-lista">Electrónico<i class="bi bi-chevron-right"></i></a></li>
-                            <li class="item-lista"><a href="#" data-categoria="refrigeracion" class="enlaces-lista">Refrigeración<i class="bi bi-chevron-right"></i></a></li>
-                            <li class="item-lista"><a href="#" data-categoria="herramientas" class="enlaces-lista">Herramientas<i class="bi bi-chevron-right"></i></a></li>
-                            <li class="item-lista"><a href="#" data-categoria="materiales" class="enlaces-lista">Materiales<i class="bi bi-chevron-right"></i></a></li>
-                        </ul>
+                    <div class="categorias">
+                        <button class="btn-regresar"><i class="fas fa-arrow-left"></i> Regresar</button>
+                        <h3 class="subtitulo">Categorias</h3>
+                        @foreach ($categories as $category)
+                        <a href="#" data-categoria="{{$category->name}}">{{$category->name}} <i class="bi bi-caret-right-fill"></i></a>
+                        @endforeach
                     </div>
-                    <div class="subcategorias-box">
-                        <div class="subcategoria" data-categoria="electronico">
+    
+                    <div class="contenedor-subcategorias">
+                        <div class="subcategoria">
                             <div class="enlaces-subcategoria">
-                                <button class="btn-regresar"><i class="bi bi-arrow-left"></i> Atrás</button>
-                                <h3 class="subtitulo">Electrónico</h3>
-                                <ul class="lista-enlaces">
-                                    <li class="item-lista"><a href="#" class="enlaces-lista">Electrodomesticos</a></li>
-                                    <li class="item-lista"><a href="#" class="enlaces-lista">Herramientas</a></li>
-                                    <li class="item-lista"><a href="#" class="enlaces-lista">Iluminación</a></li>
-                                </ul>
-                            </div>
-                            <div class="banner-subcategoria">
-                                <div class="banner-box">
-                                    <img src="{{url('/static/images/default.jpg')}}" alt="">
-                                </div>
-                            </div>
-                            <div class="galeria-subcategoria">
-                                <div class="img-box"><img src="{{url('/static/images/default.jpg')}}" alt=""></div>
-                                <div class="img-box"><img src="{{url('/static/images/default.jpg')}}" alt=""></div>
-                                <div class="img-box"><img src="{{url('/static/images/default.jpg')}}" alt=""></div>
-                                <div class="img-box"><img src="{{url('/static/images/default.jpg')}}" alt=""></div>
-                            </div>
-                        </div>
-                        <div class="subcategoria" data-categoria="refrigeracion">
-                            <div class="enlaces-subcategoria">
-                                <button class="btn-regresar"><i class="bi bi-arrow-left"></i> Atrás</button>
-                                <h3 class="subtitulo">Refrigeración</h3>
-                                <ul class="lista-enlaces">
-                                    <li class="item-lista"><a href="#" class="enlaces-lista">Paneles</a></li>
-                                    <li class="item-lista"><a href="#" class="enlaces-lista">Coolers</a></li>
-                                    <li class="item-lista"><a href="#" class="enlaces-lista">Aislantes termicos</a></li>
-                                </ul>
-                            </div>
-                            <div class="banner-subcategoria">
-                                <div class="banner-box">
-                                    <img src="{{url('/static/images/default.jpg')}}" alt="">
-                                </div>
-                            </div>
-                            <div class="galeria-subcategoria">
-                                <div class="img-box"><img src="{{url('/static/images/default.jpg')}}" alt=""></div>
-                                <div class="img-box"><img src="{{url('/static/images/default.jpg')}}" alt=""></div>
-                                <div class="img-box"><img src="{{url('/static/images/default.jpg')}}" alt=""></div>
-                                <div class="img-box"><img src="{{url('/static/images/default.jpg')}}" alt=""></div>
-                            </div>
-                        </div>
-                        <div class="subcategoria" data-categoria="herramientas">
-                            <div class="enlaces-subcategoria">
-                                <button class="btn-regresar"><i class="bi bi-arrow-left"></i> Atrás</button>
-                                <h3 class="subtitulo">Herramientas</h3>
-                                <ul class="lista-enlaces">
-                                    <li class="item-lista"><a href="#" class="enlaces-lista">Sierras</a></li>
-                                    <li class="item-lista"><a href="#" class="enlaces-lista">Taladros</a></li>
-                                    <li class="item-lista"><a href="#" class="enlaces-lista">Martillos</a></li>
-                                </ul>
-                            </div>
-                            <div class="banner-subcategoria">
-                                <div class="banner-box">
-                                    <img src="{{url('/static/images/default.jpg')}}" alt="">
-                                </div>
-                            </div>
-                            <div class="galeria-subcategoria">
-                                <div class="img-box"><img src="{{url('/static/images/default.jpg')}}" alt=""></div>
-                                <div class="img-box"><img src="{{url('/static/images/default.jpg')}}" alt=""></div>
-                                <div class="img-box"><img src="{{url('/static/images/default.jpg')}}" alt=""></div>
-                                <div class="img-box"><img src="{{url('/static/images/default.jpg')}}" alt=""></div>
-                            </div>
-                        </div>
-                        <div class="subcategoria" data-categoria="materiales">
-                            <div class="enlaces-subcategoria">
-                                <button class="btn-regresar"><i class="bi bi-arrow-left"></i> Atrás</button>
-                                <h3 class="subtitulo">Materiales</h3>
-                                <ul class="lista-enlaces">
-                                    <li class="item-lista"><a href="#" class="enlaces-lista">Cemento</a></li>
-                                    <li class="item-lista"><a href="#" class="enlaces-lista">Hormigón</a></li>
-                                    <li class="item-lista"><a href="#" class="enlaces-lista">Grava</a></li>
-                                </ul>
-                            </div>
-                            <div class="banner-subcategoria">
-                                <div class="banner-box">
-                                    <img src="{{url('/static/images/default.jpg')}}" alt="">
-                                </div>
-                            </div>
-                            <div class="galeria-subcategoria">
-                                <div class="img-box"><img src="{{url('/static/images/default.jpg')}}" alt=""></div>
-                                <div class="img-box"><img src="{{url('/static/images/default.jpg')}}" alt=""></div>
-                                <div class="img-box"><img src="{{url('/static/images/default.jpg')}}" alt=""></div>
-                                <div class="img-box"><img src="{{url('/static/images/default.jpg')}}" alt=""></div>
+                                <button class="btn-regresar"><i class="fas fa-arrow-left"></i>Regresar</button>
+                                <h3 data-categoria="" id="subtitulo" class="subtitulo item-subcategoria"></h3>
+                                @foreach ($subcategories as $subcategory)
+                                <a data-categoria="{{$subcategory -> category_name}}" class="item-subcategoria" href="{{url('/product-catalog/find/'.$subcategory -> name)}}">{{$subcategory -> name}}</a>
+                                @endforeach 
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </nav>
     
         @yield('content')

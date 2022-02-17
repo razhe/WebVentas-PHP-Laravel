@@ -18,7 +18,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="modal-form" class="register__form needs-validation" action="{{url('admin/categories/add')}}" method="post" novalidate>
+                    <form id="modal-form" class="register__form needs-validation" enctype="multipart/form-data" action="{{url('admin/categories/add')}}" method="post" novalidate>
                         @csrf
                         <!--Nombre-->
                         <div class="input__container mb-2">
@@ -35,9 +35,14 @@
                             <label for="status">Seleccione un estado:</label>
                             <select class="form-select" aria-label="Default select example" name="status">
                                 <option selected disabled>Estado...</option>
-                                <option value="1">Activo</option>
-                                <option value="2">Suspendido</option>
+                                <option value="1">Público</option>
+                                <option value="2">Borrador</option>
                             </select>
+                        </div>
+                        <!--banner-->
+                        <div class="mb-2">
+                            <label for="banner" class="form-label">Imagen:</label>
+                            <input class="form-control" type="file" name="banner" id="image" accept="image/*">
                         </div>
                         <br>
                         <div class="d-flex justify-content-between">
@@ -58,7 +63,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="modal-form" class="register__form needs-validation" action="{{url('admin/categories/edit')}}" method="post" novalidate>
+                    <form id="modal-form" class="register__form needs-validation" enctype="multipart/form-data" action="{{url('admin/categories/edit')}}" method="post" novalidate>
                         @csrf
                         <input id="id-categoria-editar" type="hidden" name="id" class="form-control">
                         <!--Nombre-->
@@ -76,9 +81,14 @@
                             <label for="status">Seleccione un estado:</label>
                             <select id="estado-categoria-editar" class="form-select" aria-label="Default select example" name="status">
                                 <option selected disabled>Estado...</option>
-                                <option value="1">Activo</option>
-                                <option value="2">Suspendido</option>
+                                <option value="1">Público</option>
+                                <option value="2">Borrador</option>
                             </select>
+                        </div>
+                        <!--Banner-->
+                        <div class="mb-2">
+                            <label for="banner" class="form-label">Imagen:</label>
+                            <input class="form-control" type="file" name="banner" id="image" accept="image/*">
                         </div>
                         <br>
                         <div class="d-flex justify-content-between">
@@ -167,6 +177,7 @@
                                     <th>ID</th>
                                     <th>Nombre</th>
                                     <th>Estado</th>
+                                    <th>Banner</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -179,18 +190,19 @@
                                             @case(1)
                                                 <td>
                                                     <div class="box-status-active">
-                                                        <p>Activo</p>
+                                                        <p>Público</p>
                                                     </div>
                                                 </td>
                                                 @break
                                             @case(2)
                                                 <td>
                                                     <div class="box-status-suspended">
-                                                        <p>Suspendido</p>
+                                                        <p>Borrador</p>
                                                     </div>
                                                 </td>
                                                 @break
                                         @endswitch
+                                        <td><img src="{{asset($category -> banner)}}" alt="" class="img-fluid" style="max-width: 90px; max-height: 60px"></td>
                                         <td>
                                             <div class="box-btn-acciones">
                                                 <button onclick="editarCategoria({{ $category -> id }})" id="btn-editar" class="btn btn-edit" data-bs-toggle="modal" data-bs-target="#editForm" type="submit"><i class="bi bi-pen-fill"></i></button>
@@ -210,6 +222,7 @@
                                     <th>ID</th>
                                     <th>Nombre</th>
                                     <th>Estado</th>
+                                    <th>Banner</th>
                                     <th>Acciones</th>
                                 </tr>
                             </tfoot>

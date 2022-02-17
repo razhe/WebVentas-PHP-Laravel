@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Brand;
 use Validator, Str, File;
+//Paquete intervention images
+use Intervention\Image\Facades\Image;
 class BrandController extends Controller
 {
     public function __construct(){
@@ -35,10 +37,19 @@ class BrandController extends Controller
         if ($validator -> fails()) {
             return back() -> withErrors($validator)->with('MsgResponse','Se ha producido un error al intentar guardar la marca')->with( 'typealert', 'danger');
         }else {
+            
+
             $file        = $request->file('image');
             $path        = 'img/brands/';
             $file_name   = time().'-'.$file->getClientOriginalName();
-            $upload_file = $file -> move($path, $file_name);
+            //$file -> move($path, $file_name);
+            //mover la imagen con el paquete intervention image
+            $upload_file = $path.$file_name;
+            Image::make($file)
+                ->resize(300, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                }) 
+                -> save($upload_file);
 
             $brand = new Brand;
             $brand -> name   = e($request['name']);
@@ -52,7 +63,7 @@ class BrandController extends Controller
     }
     public function getFindBrand($id)
     {
-        $brand = Brand::findOrFail($id)->where('brands.status','<>','3') -> orderby('id', 'asc') ->get();
+        $brand = Brand::where('id',$id)->where('brands.status','<>','3') -> first();
         $brandData = ['brand' => $brand];
         return response($brandData);
     }
@@ -61,12 +72,12 @@ class BrandController extends Controller
         $rules = [
             'name' => 'required',
             'status' => 'required',
-            //'image' => 'image',//se puede poner gift tambien
+            'image' => 'image',//se puede poner gift tambien
         ];
         $messages = [
             'name.required'   => 'Se requiere el nombre de la marca.',
             'status.required' => 'Se requiere asignar un estado a la marca.',
-            //'image.image'     => 'Solo se pueden subir imagenes.',
+            'image.image'     => 'Solo se pueden subir imagenes.',
         ];
 
         $validator = Validator::make($request->all(),$rules, $messages);
@@ -81,7 +92,13 @@ class BrandController extends Controller
                 $file        = $request->file('image');
                 $path        = 'img/brands/';
                 $file_name   = time().'-'.$file->getClientOriginalName();
-                $upload_file = $file -> move($path, $file_name);
+                $upload_file = $path. $file_name;
+                //mover la imagen con el paquete intervention image
+                Image::make($file)
+                ->resize(300, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                }) 
+                -> save($upload_file);
 
                 File::delete($brand -> image);
                 $brand -> image  = $path.$file_name;

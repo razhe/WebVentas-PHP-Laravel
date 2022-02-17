@@ -32,8 +32,8 @@
                     <div class="input__container mb-2">
                         <label for="status">Seleccione un estado:</label>
                         <select id="" class="form-select category-select" aria-label="Default select example" name="status">
-                            <option value="1">Activo</option>
-                            <option value="2">Suspendido</option>
+                            <option value="1">Público</option>
+                            <option value="2">Borrador</option>
                         </select>
                     </div>                  
                     <!--Imagen-->
@@ -77,8 +77,8 @@
                     <div class="input__container mb-2">
                         <label for="status">Seleccione un estado:</label>
                         <select id="estado-marca-editar" class="form-select category-select" aria-label="Default select example" name="status">
-                            <option value="1">Activo</option>
-                            <option value="2">Suspendido</option>
+                            <option value="1">Público</option>
+                            <option value="2">Borrador</option>
                         </select>
                     </div>                  
                     <!--Imagen-->
@@ -187,20 +187,20 @@
                                     @case(1)
                                         <td>
                                             <div class="box-status-active">
-                                                <p>Activo</p>
+                                                <p>Público</p>
                                             </div>
                                         </td>
                                         @break
                                     @case(2)
                                         <td>
                                             <div class="box-status-suspended">
-                                                <p>Suspendido</p>
+                                                <p>Borrador</p>
                                             </div>
                                         </td>
                                         @break
                                 @endswitch
                                 <td>
-                                    <img src="{{asset($brand -> image)}}" alt="{{$brand -> name}}" class="img-fluid" style="max-width: 60px; max-height: 30px">
+                                    <img src="{{asset($brand -> image)}}" alt="{{$brand -> name}}" class="img-fluid" style="max-width: 90px; max-height: 60px">
                                 </td>
                                 <td>
                                     <div class="box-btn-acciones">

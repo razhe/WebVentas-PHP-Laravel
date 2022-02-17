@@ -85,8 +85,8 @@
                         <div class="input__container mb-2">
                             <label for="status">Seleccione un estado:</label>
                             <select id="" class="form-select category-select" aria-label="Default select example" name="status">
-                                <option value="1">Activo</option>
-                                <option value="2">Suspendido</option>
+                                <option value="1">Público</option>
+                                <option value="2">Borrador</option>
                             </select>
                         </div>
                         <!--Subcategoria-->
@@ -215,8 +215,8 @@
                         <div class="input__container mb-2">
                             <label for="status">Seleccione un estado:</label>
                             <select id="estado-producto-editar" class="form-select category-select" aria-label="Default select example" name="status">
-                                <option value="1">Activo</option>
-                                <option value="2">Suspendido</option>
+                                <option value="1">Público</option>
+                                <option value="2">Borrador</option>
                             </select>
                         </div>
                         <!--Subcategoria-->
@@ -393,10 +393,10 @@
                                             </td>
                                             @break
                                     @endswitch
-                                     <td>{{$product-> image1}}</td>
-                                     <td>{{$product-> image2}}</td>
-                                     <td>{{$product-> image3}}</td>
-                                     <td>{{$product-> image4}}</td>
+                                     <td><img src="{{asset($product-> image1)}}" alt="" class="img-fluid" style="max-width: 60px; max-height: 30px"></td>
+                                     <td><img src="{{asset($product-> image2)}}" alt="" class="img-fluid" style="max-width: 60px; max-height: 30px"></td>
+                                     <td><img src="{{asset($product-> image3)}}" alt="" class="img-fluid" style="max-width: 60px; max-height: 30px"></td>
+                                     <td><img src="{{asset($product-> image4)}}" alt="" class="img-fluid" style="max-width: 60px; max-height: 30px"></td>
                                      <td>{{$product-> certificate}}</td>
 
                                      <td class="">

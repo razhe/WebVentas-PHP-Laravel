@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Validator, File, DB;
+//Paquete intervention images
+use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
 {
@@ -39,10 +41,10 @@ class ProductController extends Controller
             'status'   => 'required|numeric',
             'id_subcategory'   => 'required|numeric',
             'description'      => 'required',
-            'image1'      => 'required',
-            'image2'      => 'required',
-            'image3'      => 'required',
-            'image4'      => 'required',
+            'image1'      => 'required|image',
+            'image2'      => 'required|image',
+            'image3'      => 'required|image',
+            'image4'      => 'required|image',
             'certificate' => 'required',
         ];
         $messages =
@@ -65,6 +67,10 @@ class ProductController extends Controller
             'image2.required'  => 'Se necesita la segunda imagen secundaria para esta subcategoría.',
             'image3.required'  => 'Se necesita la tercera imagen secundaria para esta subcategoría.',
             'image4.required'  => 'Se necesita la cuarta imagen secundaria para esta subcategoría.',
+            'image1.image'  => 'El archivo adjuntado en la imagen uno, no es una imagen.',
+            'image2.image'  => 'El archivo adjuntado en la imagen dos, no es una imagen.',
+            'image3.image'  => 'El archivo adjuntado en la imagen uno, tres es una imagen.',
+            'image4.image'  => 'El archivo adjuntado en la imagen uno, cuatro es una imagen.',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -87,6 +93,37 @@ class ProductController extends Controller
             $file_img2        = time().'-'.$fileImg2->getClientOriginalName();
             $file_img3        = time().'-'.$fileImg3->getClientOriginalName();
             $file_img4        = time().'-'.$fileImg4->getClientOriginalName();
+
+            $upload_file1 = ($pathImg. $file_img1);
+            $upload_file2 = ($pathImg. $file_img2);
+            $upload_file3 = ($pathImg. $file_img3);
+            $upload_file4 = ($pathImg. $file_img4);
+
+            $fileDoc -> move($pathDocs, $file_certificate);
+            //mover la imagen con el paquete intervention image
+            Image::make($fileImg1)
+            -> resize(400, null, function ($constraint) {
+                $constraint->aspectRatio();
+            }) 
+            -> save($upload_file1);
+
+            Image::make($fileImg2)
+            -> resize(400, null, function ($constraint) {
+                $constraint->aspectRatio();
+            }) 
+            -> save($upload_file2);
+
+            Image::make($fileImg3)
+            -> resize(400, null, function ($constraint) {
+                $constraint->aspectRatio();
+            }) 
+            -> save($upload_file3);
+
+            Image::make($fileImg4)
+            -> resize(400, null, function ($constraint) {
+                $constraint->aspectRatio();
+            }) 
+            -> save($upload_file4);
             
             $product = new Product;
 
@@ -110,11 +147,6 @@ class ProductController extends Controller
             $product->id_subcategory = e($request['id_subcategory']);
             if ($product -> save()):
                 //Moviendose la carpeta
-                $fileDoc    -> move($pathDocs, $file_certificate);
-                $fileImg1   -> move($pathImg, $file_img1);
-                $fileImg2   -> move($pathImg, $file_img2);
-                $fileImg3   -> move($pathImg, $file_img3);
-                $fileImg4   -> move($pathImg, $file_img4);
                 return back() -> withErrors($validator)->with('MsgResponse','¡Producto guardada con Éxito!')->with( 'typealert', 'success');
             endif;
         endif;
@@ -131,6 +163,10 @@ class ProductController extends Controller
             'status'   => 'required|numeric',
             'id_subcategory'   => 'required|numeric',
             'description'      => 'required',
+            'image1'      => 'image',
+            'image2'      => 'image',
+            'image3'      => 'image',
+            'image4'      => 'image',
         ];
         $messages =
         [
@@ -147,11 +183,15 @@ class ProductController extends Controller
             'description.required'    => 'El precio debe contener caracteres numéricos.',
             'stock.required'          => 'Se requiere del stock del producto.',
             'stock.numeric'           => 'El stock debe contener SOLO caracteres numéricos.',
+            'image1.image'  => 'El archivo adjuntado en la imagen uno, no es una imagen.',
+            'image2.image'  => 'El archivo adjuntado en la imagen dos, no es una imagen.',
+            'image3.image'  => 'El archivo adjuntado en la imagen uno, tres es una imagen.',
+            'image4.image'  => 'El archivo adjuntado en la imagen uno, cuatro es una imagen.',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator -> fails()):
-            return back() -> withErrors($validator)->with('MsgResponse','Se ha producido un error al intentar guardar una subcategoría')->with( 'typealert', 'danger');
+            return back() -> withErrors($validator)->with('MsgResponse','Se ha producido un error al intentar guardar este producto')->with( 'typealert', 'danger');
         else:
             //Ruta
             $pathImg     = 'img/products/';
@@ -185,7 +225,8 @@ class ProductController extends Controller
                 $product -> image1  = $pathDocs.$file_certificate;
                 //Moviendo a la carpeta
                 $fileDoc -> move($pathDocs, $file_certificate);
-            }elseif ($request->hasFile('image1')) {
+            }
+            if ($request->hasFile('image1')) {
                 //peticion
                 $fileImg1    = $request->file('image1');
                 //nombre
@@ -193,9 +234,16 @@ class ProductController extends Controller
                 //Eliminacion e insercin
                 File::delete($product -> image1);
                 $product -> image1  = $pathImg.$file_img1;
-                //Moviendo a la carpeta
-                $fileImg1 -> move($pathImg, $file_img1);
-            }elseif ($request->hasFile('image2')) {
+                //Creacion del archivo con el nombre y ruta
+                $upload_file1 = ($pathImg. $file_img1);
+                //mover la imagen con el paquete intervention image
+                Image::make($fileImg1)
+                -> resize(400, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                }) 
+                -> save($upload_file1);
+            }
+            if ($request->hasFile('image2')) {
                 //peticion
                 $fileImg2    = $request->file('image2');
                 //nombre
@@ -203,9 +251,16 @@ class ProductController extends Controller
                 //Eliminacion e insercin
                 File::delete($product -> image2);
                 $product -> image2  = $pathImg.$file_img2;
-                //Moviendo a la carpeta
-                $fileImg2 -> move($pathImg, $file_img2);
-            }elseif ($request->hasFile('image3')) {
+                //Creacion del archivo con el nombre y ruta
+                $upload_file2 = ($pathImg. $file_img2);
+                //mover la imagen con el paquete intervention image
+                Image::make($fileImg2)
+                -> resize(400, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                }) 
+                -> save($upload_file2);
+            }
+            if ($request->hasFile('image3')) {
                 //peticion
                 $fileImg3    = $request->file('image3');
                 //nombre
@@ -213,9 +268,16 @@ class ProductController extends Controller
                 //Eliminacion e insercin
                 File::delete($product -> image3);
                 $product -> image3  = $pathImg.$file_img3;
-                //Moviendo a la carpeta
-                $fileImg3 -> move($pathImg, $file_img3);
-            }elseif ($request->hasFile('image4')) {
+                //Creacion del archivo con el nombre y ruta
+                $upload_file3 = ($pathImg. $file_img3);
+                //mover la imagen con el paquete intervention image
+                Image::make($fileImg3)
+                -> resize(400, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                }) 
+                -> save($upload_file3);
+            }
+            if ($request->hasFile('image4')) {
                 //peticion
                 $fileImg4    = $request->file('image4');
                 //nombre
@@ -223,13 +285,19 @@ class ProductController extends Controller
                 //Eliminacion e insercin
                 File::delete($product -> image4);
                 $product -> image4  = $pathImg.$file_img4;
-                //Moviendo a la carpeta
-                $fileImg4 -> move($pathImg, $file_img4);
+                //Creacion del archivo con el nombre y ruta
+                $upload_file4 = ($pathImg. $file_img4);
+                //mover la imagen con el paquete intervention image
+                Image::make($fileImg4)
+                -> resize(400, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                }) 
+                -> save($upload_file4);
             }
 
             if ($product -> save()):
                 //Moviendose la carpeta
-                return back() -> withErrors($validator)->with('MsgResponse','¡Producto guardada con Éxito!')->with( 'typealert', 'success');
+                return back() -> withErrors($validator)->with('MsgResponse','¡Producto guardado con Éxito!')->with( 'typealert', 'success');
             endif;
         endif;   
     }
