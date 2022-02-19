@@ -7,6 +7,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductCatalogController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\UserProfileController;
+use App\Http\Controllers\LayoutController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,7 +19,8 @@ use App\Http\Controllers\User\UserProfileController;
 |
 */
 
-//DESARROLLO
+//layout
+Route::get('/layout/categories', [LayoutController::class, 'getCategories']) -> name('layout');
 //Home
 Route::get('/', [HomeController::class, 'getHome']) -> name('home');
 //perfil usuario

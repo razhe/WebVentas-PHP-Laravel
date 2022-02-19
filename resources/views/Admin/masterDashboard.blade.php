@@ -134,6 +134,27 @@
                     </div>
                 </li>
                 <li>
+                    <a class="nav-link px-3 sidebar-link" data-bs-toggle="collapse" href="#customize">
+                        <span class="me-2"><i class="bi bi-eye"></i></span>
+                        <span>Personalización</span>
+                        <span class="ms-auto">
+                        <span class="right-icon">
+                            <i class="bi bi-chevron-down"></i>
+                        </span>
+                        </span>
+                    </a>
+                    <div class="collapse" id="customize">
+                        <ul class="navbar-nav ps-3">
+                            <li>
+                                <a href="{{url('admin/banner')}}" class="nav-link px-3">
+                                    <span class="me-2"><i class="bi bi-columns-gap"></i></span>
+                                    <span>Banner</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
                     <a href="{{url('admin/sales')}}" class="nav-link px-3">
                         <span class="me-2"><i class="bi bi-cash-coin"></i></span>
                         <span>Ventas</span>

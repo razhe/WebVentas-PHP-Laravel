@@ -300,17 +300,17 @@
                                                 @case(1)
                                                     <td>
                                                         <div class="box-status-active">
-                                                            <p>Activo</p>
+                                                            <i class="bi bi-person-check-fill"></i><strong>Activo</strong>
                                                         </div>
                                                     </td>
                                                     @break
                                                 @case(2)
                                                     <td>
                                                         <div class="box-status-suspended">
-                                                            <p>Suspendido</p>
+                                                            <i class="bi bi-person-dash-fill"></i><strong>Suspendido</strong>
                                                         </div>
                                                     </td>
-                                                    @break
+                                                @break
                                             @endswitch
                                             @switch($user -> id_tasks)
                                                 @case(1)

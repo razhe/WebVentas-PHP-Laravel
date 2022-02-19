@@ -3,23 +3,26 @@
 @section('CSS')
     <link rel="stylesheet" href="{{url('static/css/home.css')}}">
     <link rel="stylesheet" href="{{url('static/libs/Glider/glider.css')}}">
-    <!--JS-->
-        <!--JQuery-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 
 @section('title', 'Home')
 
 @section ('content')
     <main class="main-home">
-        <section class="seccion-categorias-banner row">
+        <!--Botón para ir arriba-->
+        <div id="container-btn-up" class="container-btn-up">
+            <button id="btn-up" class="btn-up">
+                <i class="bi bi-chevron-up"></i>
+            </button>
+        </div>
+        <section class="seccion-categorias-banner row m-0 g-0">
             <div class="contenido-primario-banner col-lg-6 p-1">
                 <div class="banner-categoria-item">
                     <div class="img-categoria-item"><img src="{{asset('img/banner/herramientas-default.jpg')}}" alt=""></div>
                     <div class="contenido-categoria-item">
                         <div class="box-contenido-categoria">
-                            <h3>Titulo</h3>
-                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam est provident aliquid expedita?</p>
+                            <h3>{{$categories[0]['name']}}</h3>
+                            <p>{{$categories[0]['description']}}</p>
                             <p>234 productos</p>
                             <a href="">Comprar Ahora</a>
                         </div>
@@ -27,13 +30,13 @@
                 </div>
             </div>
             <div class="contenido-secundario-banner col-lg-6">
-                <div class="row">
+                <div class="box-contenido-secundario row m-0">
                     <div class="banner-categoria-item col-lg-6 col-md-6 p-1">
                         <div class="img-categoria-item"><img src="{{asset('img/banner/herramientas-default.jpg')}}" alt=""></div>
                         <div class="contenido-categoria-item">
                             <div class="box-contenido-categoria">
-                                <h3>Titulo</h3>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam est provident aliquid expedita?</p>
+                                <h3>{{$categories[1]['name']}}</h3>
+                                <p>{{$categories[1]['description']}}</p>
                                 <p>234 productos</p>
                                 <a href="">Comprar Ahora</a>
                             </div>
@@ -43,8 +46,8 @@
                         <div class="img-categoria-item"><img src="{{asset('img/banner/herramientas-default.jpg')}}" alt=""></div>
                         <div class="contenido-categoria-item">
                             <div class="box-contenido-categoria">
-                                <h3>Titulo</h3>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam est provident aliquid expedita?</p>
+                                <h3>{{$categories[2]['name']}}</h3>
+                                <p>{{$categories[2]['description']}}</p>
                                 <p>234 productos</p>
                                 <a href="">Comprar Ahora</a>
                             </div>
@@ -54,8 +57,8 @@
                         <div class="img-categoria-item"><img src="{{asset('img/banner/herramientas-default.jpg')}}" alt=""></div>
                         <div class="contenido-categoria-item">
                             <div class="box-contenido-categoria">
-                                <h3>Titulo</h3>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam est provident aliquid expedita?</p>
+                                <h3>{{$categories[3]['name']}}</h3>
+                                <p>{{$categories[3]['description']}}</p>
                                 <p>234 productos</p>
                                 <a href="">Comprar Ahora</a>
                             </div>
@@ -65,8 +68,8 @@
                         <div class="img-categoria-item"><img src="{{asset('img/banner/herramientas-default.jpg')}}" alt=""></div>
                         <div class="contenido-categoria-item">
                             <div class="box-contenido-categoria">
-                                <h3>Titulo</h3>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam est provident aliquid expedita?</p>
+                                <h3>{{$categories[4]['name']}}</h3>
+                                <p>{{$categories[4]['description']}}</p>
                                 <p>234 productos</p>
                                 <a href="">Comprar Ahora</a>
                             </div>
@@ -180,7 +183,6 @@
                 </div>
             </div>
         </section>
-        
         <section id="services">
             <div class="servicios">
                 <div class="">
@@ -190,7 +192,7 @@
                     </div>
                 </div>
                 <div class="contenedor-servicios">
-                    <div class="row box-servicios">
+                    <div class="row box-servicios m-0">
                         <div class="servicios-item col-lg-4 col-sm-6 p-4">
                             <div class="icon-box">
                                 <i class="bi bi-alarm"></i>

@@ -34,6 +34,7 @@ class CategoryController extends Controller
             'name'   => 'required',
             'status' => 'required',
             'banner' => 'required|image',
+            'description' => 'required'
         ];
         $messages =
         [
@@ -41,6 +42,7 @@ class CategoryController extends Controller
             'status.required' => 'Se requiere de un estado para la categoría.',
             'banner.required' => 'Se requiere de una imagen para la categoría.',
             'banner.image'    => 'El archivo seleccionado no es una imagen.',
+            'description.required' => 'Se requiere de una descripción para la categoría',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -62,6 +64,7 @@ class CategoryController extends Controller
 
             $category->name   = e($request['name']);
             $category->status = e($request['status']);
+            $category-> description= e($request['description']);
             $category->banner = $path.$file_name;
             if ($category -> save()):
                 return back() -> withErrors($validator)->with('MsgResponse','¡Categoría guardada con Éxito!')->with( 'typealert', 'success');
@@ -89,12 +92,14 @@ class CategoryController extends Controller
             'name'   => 'required',
             'status' => 'required',
             'banner' => 'image',
+            'description' => 'required',
         ];
         $messages =
         [
             'name.required'   => 'Se requiere de un nombre para la categoría.',
             'status.required' => 'Se requiere de un estado para la categoría.',
             'banner.image'    => 'El archivo seleccionado no es una imagen.',
+            'description.required' => 'Se requiere de una descripción para la categoría',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -105,6 +110,7 @@ class CategoryController extends Controller
 
             $category->name   = e($request['name']);
             $category->status = e($request['status']);
+            $category->description= e($request['description']);
 
             if ($request->hasFile('banner')) {
                 $file        = $request->file('banner');

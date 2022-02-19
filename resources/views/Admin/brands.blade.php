@@ -187,14 +187,14 @@
                                     @case(1)
                                         <td>
                                             <div class="box-status-active">
-                                                <p>Público</p>
+                                                <i class="bi bi-eye-fill"></i><strong>Público</strong>
                                             </div>
                                         </td>
                                         @break
                                     @case(2)
                                         <td>
                                             <div class="box-status-suspended">
-                                                <p>Borrador</p>
+                                                <i class="bi bi-eye-slash-fill"></i><strong>Borrador</strong>
                                             </div>
                                         </td>
                                         @break

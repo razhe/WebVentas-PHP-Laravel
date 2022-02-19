@@ -15,10 +15,14 @@
         <link rel="stylesheet" href="{{ url('/static/css/layout.css') }}">
         <!--CSS Bootstrap Icons-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.7.2/font/bootstrap-icons.min.css" integrity="sha512-1fPmaHba3v4A7PaUsComSM4TBsrrRGs+/fv0vrzafQ+Rw+siILTiJa0NtFfvGeyY5E182SDTaF5PqP+XOHgJag==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!--JS-->
+        <!--JQuery-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
-    <nav class="menu" id="menu">
-            <div class="contenedor seccion-superior-nav">
+    <header>
+        <nav class="menu" id="menu">
+            <div class="contenedor seccion-superior-nav" id="seccion-superior-nav">
                 <div class="contenedor-logo-nav">
                     <img src="{{url('/static/images/logo.png')}}" alt="">
                 </div>
@@ -32,43 +36,13 @@
                     </form>              
                 </div>
                 <div class="contenedor-opt-usr">
-                    <div class="contenedor-cuenta">
-                        <li class="nav-item dropdown">
-                            @if (Auth::guest())
-                                <a class="nav-link dropdown-toggle dropdown-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="bi bi-person-circle"></i>
-                                    Cuenta
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="{{url('/login')}}">Iniciar sesión</a></li>
-                                    <li><a class="dropdown-item" href="{{url('/register')}}">Registrarse</a></li>
-                                </ul>
-                                @else
-                                    <a class="nav-link dropdown-toggle dropdown-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="bi bi-person-circle"></i>
-                                        {{Auth::user() -> name}}
-                                    </a>
-                                    @if (Auth::user() -> id_tasks == 2)
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <li><a class="dropdown-item" href="{{url('/profile')}}">Perfil <i class="bi bi-gear"></i></a></li>
-                                            <li><a class="dropdown-item" href="{{url('/admin')}}">Dashboard <i class="bi bi-speedometer2"></i></a></li>
-                                            <li><a class="dropdown-item" href="{{url('/logout')}}">Salir <i class="bi bi-box-arrow-right"></i></a></li>
-                                        </ul>
-                                    @endif
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item" href="{{url('/profile')}}">Perfil <i class="bi bi-gear"></i></a></li>
-                                        <li><a class="dropdown-item" href="{{url('/logout')}}">Salir <i class="bi bi-box-arrow-right"></i></a></li>
-                                    </ul>
-                                @endif                          
-                            
-                        </li>
-                    </div>
                     <div class="contenedor-carrito">
-                        <div class=""><a href="#"><i class="bi bi-bag"></i></a></div>
+                        <div class=""><a href="{{url('/cart')}}"><i class="bi bi-cart3"></i></a></div>
                         <div class=""><div class="contador-carrito">0</div></div>
                     </div>
                 </div>
             </div>
+            
             <div class="contenedor contenedor-btn-nav">
                 <button id="btn-menu-barras" class="btn-menu-barras">
                     <i class="bi bi-list"></i>
@@ -77,29 +51,52 @@
                     <i class="bi bi-x"></i>
                 </button>
             </div>
-
-
             <div id="contenedor-enlaces-nav" class="contenedor contenedor-enlaces-nav">
                 <div class="btn-categorias" id="btn-categorias">
                     <strong>Categorías</strong>
                     <i class="bi bi-chevron-down"></i>
                 </div>
                 <div class="contenedor-enlaces-directos">
-                    <a href="#">INICIO</a>
-                    <a href="{{url('/product-catalog')}}">TIENDA</a>
-                    <a href="#">¿QUIENES SOMOS?</a>
-                    <a href="#">CONTACTO</a>
+                    <a class="direct__links" href="{{url('/')}}">INICIO</a>
+                    <a class="direct__links" href="{{url('/product-catalog')}}">TIENDA</a>
+                    <a class="direct__links" href="#">CONTACTO</a>
+                    <div class="content__user" id="content-user">
+                        <li class="user__list">
+                            @if (Auth::guest())
+                                <button class="user__opt" id ="user-opt">CUENTA <i class="bi bi-chevron-down"></i></button>
+                                <ul class = "drop__list" id="drop-list">
+                                    <li><a class = "user__link" href="#">Iniciar sesión</a></li>
+                                    <li><a class = "user__link" href="#">Registrarse</a></li>
+                                </ul>
+                            @else
+                                @if(Auth::user() -> id_tasks == 2)
+                                    <button class="user__opt" id ="user-opt">{{Auth::user() -> name}} <i class="bi bi-chevron-down"></i></button>
+                                    <ul class = "drop__list" id="drop-list">
+                                        <li><a class = "user__link" href="{{url('/profile')}}">Mi perfil</a></li>
+                                        <li><a class = "user__link" href="{{url('/admin')}}">Panel de control</a></li>
+                                        <li><a class = "user__link" href="{{url('/logout')}}">Cerrar Sesión</a></li>
+                                    </ul>
+                                @else
+                                    <button class="user__opt" id ="user-opt">{{Auth::user() -> name}} <i class="bi bi-chevron-down"></i></button>
+                                    <ul class = "drop__list" id="drop-list">
+                                        <li><a class = "user__link" href="{{url('/profile')}}">Mi perfil</a></li>
+                                        <li><a class = "user__link" href="{{url('/logout')}}">Cerrar Sesión</a></li>
+                                    </ul>
+                                @endif
+                            @endif
+                        </li>
+                    </div>
                 </div>
             </div>
-
+            
             <div class="contenedor contenedor-grid">
                 <div class="grid" id="grid">
                     <div class="categorias">
                         <button class="btn-regresar"><i class="fas fa-arrow-left"></i> Regresar</button>
-                        <h3 class="subtitulo">Categorias</h3>
+                        <h3 class="subtitulo">Categorias</h3>                    
                         @foreach ($categories as $category)
                         <a href="#" data-categoria="{{$category->name}}">{{$category->name}} <i class="bi bi-caret-right-fill"></i></a>
-                        @endforeach
+                        @endforeach  
                     </div>
     
                     <div class="contenedor-subcategorias">
@@ -116,6 +113,7 @@
                 </div>
             </div>
         </nav>
+    </header>
     
         @yield('content')
 

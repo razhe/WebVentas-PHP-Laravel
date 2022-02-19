@@ -1,3 +1,16 @@
+//Btn scroll up
+window.addEventListener('scroll', function () {
+	let btnUp = document.getElementById('container-btn-up');
+	btnUp.classList.toggle('active-btn-up', window.scrollY > 200);
+});
+//Scroll up
+document.getElementById('btn-up').addEventListener('click', function(){
+	let currentScroll = document.documentElement.scrollTop;
+	if (currentScroll > 0) {
+		window.scrollTo(0,0);
+	}
+});
+
 window.addEventListener('load', function(){
 	new Glider(document.querySelector('.carrousel-novedades'), {
 		slidesToShow: 1,

@@ -39,6 +39,11 @@
                                 <option value="2">Borrador</option>
                             </select>
                         </div>
+                        <!--Descripción-->
+                        <div class="input__container mb-2">
+                            <label for="description">Descripción:</label>
+                            <textarea name="description" class="form-control" id="" rows="3" style="resize: none"></textarea>
+                        </div>
                         <!--banner-->
                         <div class="mb-2">
                             <label for="banner" class="form-label">Imagen:</label>
@@ -84,6 +89,11 @@
                                 <option value="1">Público</option>
                                 <option value="2">Borrador</option>
                             </select>
+                        </div>
+                        <!--Descripción-->
+                        <div class="input__container mb-2">
+                            <label for="description">Descripción:</label>
+                            <textarea name="description" class="form-control" id="" rows="3" style="resize: none"></textarea>
                         </div>
                         <!--Banner-->
                         <div class="mb-2">
@@ -177,6 +187,8 @@
                                     <th>ID</th>
                                     <th>Nombre</th>
                                     <th>Estado</th>
+                                    <th>On Display</th>
+                                    <th>Descripción</th>
                                     <th>Banner</th>
                                     <th>Acciones</th>
                                 </tr>
@@ -190,18 +202,35 @@
                                             @case(1)
                                                 <td>
                                                     <div class="box-status-active">
-                                                        <p>Público</p>
+                                                        <i class="bi bi-eye-fill"></i><strong>Público</strong>
                                                     </div>
                                                 </td>
                                                 @break
                                             @case(2)
                                                 <td>
                                                     <div class="box-status-suspended">
-                                                        <p>Borrador</p>
+                                                        <i class="bi bi-eye-slash-fill"></i><strong>Borrador</strong>
                                                     </div>
                                                 </td>
                                                 @break
                                         @endswitch
+                                        @switch($category-> on_display)
+                                            @case('on')
+                                                <td>
+                                                    <div class="box-status-active">
+                                                        <i class="bi bi-toggle-on"></i><span> On</span>
+                                                    </div>
+                                                </td>
+                                                @break
+                                            @case('off')
+                                                <td>
+                                                    <div class="box-status-suspended">
+                                                        <i class="bi bi-toggle-off"></i><span> Off</span>
+                                                    </div>
+                                                </td>
+                                                @break
+                                        @endswitch
+                                        <td>{{$category -> description}}</td>
                                         <td><img src="{{asset($category -> banner)}}" alt="" class="img-fluid" style="max-width: 90px; max-height: 60px"></td>
                                         <td>
                                             <div class="box-btn-acciones">
@@ -222,6 +251,8 @@
                                     <th>ID</th>
                                     <th>Nombre</th>
                                     <th>Estado</th>
+                                    <th>On Display</th>
+                                    <th>Descripción</th>
                                     <th>Banner</th>
                                     <th>Acciones</th>
                                 </tr>

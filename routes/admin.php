@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\CustomizeController;
+
 
 Route::prefix('/admin')->group(function(){
     Route::get('/', [DashboardController::class, 'getDashboard']);
@@ -47,6 +49,10 @@ Route::prefix('/admin')->group(function(){
     Route::get('/brands/edit/{id}',[BrandController::class, 'getFindBrand']);
     Route::post('/brands/edit',[BrandController::class, 'postEditBrand']);
     Route::post('/brands/delete/{id}',[BrandController::class, 'postDeleteBrand']);
+
+    //Customización
+    route::get('/banner',[CustomizeController::class, 'getBannerCustomize']);
+    route::post('/banner/change-banner',[CustomizeController::class, 'postChangeBanner']);
 });
 
 

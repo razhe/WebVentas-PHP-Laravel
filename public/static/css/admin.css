@@ -36,11 +36,12 @@ button {
 .sidebar-link[aria-expanded="true"] .right-icon {
   transform: rotate(180deg);
 }
-
+main{
+  background-color: #efefef
+}
 .container-extend{
   width: 100%;
   min-height: 100vh;
-  background-color: var(--grey);
   position: relative;
 }
 .container-welcome{
@@ -90,27 +91,24 @@ button {
   padding: 5px;
 }
 .box-status-active{
-  max-height: 30px;
-  max-width: 75px;
-  background-color: #b0f2c2;
-  border-radius: 10px;
-  text-align: center;
   color: #1fac45;
-  padding: 3px;
-  line-height: 24px;
-  width: 90%;
+  width: 60%;
   font-size: .9rem;
+  display: flex;
+  align-items: center;
+}
+.box-status-active i,
+.box-status-suspended i{
+  font-size: 1rem;
+  font-weight: 800;
+  margin-right: 5px;
 }
 .box-status-suspended{
+  width: 60%;
   font-size: .9rem;
-  max-height: 30px;
-  max-width: 105px;
-  background-color: #ffb6af;
-  border-radius: 10px;
-  text-align: center;
-  color: #c74f45;
-  padding: 3px;
-  line-height: 24px;
+  display: flex;
+  align-items: center;
+  color: #cc594f;
 }
 /*estilos para la tabla*/
 table th {
@@ -128,6 +126,50 @@ table>tbody>tr>td {
 .btn-edit{
   background-color: #ffb641;
 }
+/*==============*/
+/*Banner*/
+/*==============*/
+
+.contenedores-banner{
+  max-width: 1000px;
+  width: 100%;
+  margin: 20px auto 0 auto;
+  padding: 10px;
+}
+.contenedor-banner{
+  background-color: var(--light);
+  margin-bottom: 30px;
+  border-radius: 4px;
+}
+.opciones-banner{
+  display: flex;
+  padding: 20px 15px;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.opciones-banner .titulo-banner h3{
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: rgba(0, 0, 0, 0.4);
+}
+.opciones-banner form{
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+.box-banner {
+  padding-bottom: 20px !important;
+}
+.box-banner img{
+  max-width: 300px;
+  width: 100%;
+}
+/*==============*/
+/*Banner*/
+/*==============*/
 @media (min-width: 992px) {
   body {
     overflow: auto !important;

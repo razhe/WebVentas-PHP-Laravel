@@ -17,10 +17,14 @@ class UserStatus
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()->status != "2"):
+        if(Auth::guest()):
             return $next($request);
         else:
-            return redirect('/logout');
+            if(Auth::user()->status != "2"):
+                return $next($request);
+            else:
+                return redirect('/logout');
+            endif;
         endif;
     }
 }

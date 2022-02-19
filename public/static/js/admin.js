@@ -231,5 +231,18 @@ function filtrarSubcategoriasEdit(){
   });
 }
 
+/*==============*/
+/*Banner*/
+/*==============*/
+let btnChangeBanner= document.getElementsByClassName('btn-banner-change');
+let categoriasBanner = document.getElementsByClassName('category-select-banner');
+for (let i = 0; i < categoriasBanner.length; i++) {
+  categoriasBanner[i].addEventListener('change', function() {
+    btnChangeBanner[i].disabled = false;
+  })
+}
 
+/*==============*/
+/*Banner*/
+/*==============*/
 

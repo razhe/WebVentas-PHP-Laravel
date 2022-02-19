@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\DB; //Trabajar con la base de datos (para prcedim
 use App\Models\Category;
 class ProductCatalogController extends Controller
 {
+    public function __Construct(){
+        $this-> middleware('user.status');
+    }
     public function getProducts()
     {
         $categories = Category::where('status','1') -> orderBy('name', 'ASC')-> get();

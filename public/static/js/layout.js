@@ -1,12 +1,12 @@
 //======================
 //Código del sitio
 //======================
-let base = location.protocol+'//'+location.host;
-    route = document.getElementsByName('routeName')[0].getAttribute('content');
-
-document.addEventListener('DOMContentLoaded', function(){
+$(document).ready(function(){
 
 });
+
+let base = location.protocol+'//'+location.host;
+    route = document.getElementsByName('routeName')[0].getAttribute('content');
 //======================
 //Código de la plantilla
 //======================
@@ -15,8 +15,37 @@ const btnDepartamentos = document.getElementById('btn-categorias'),
 	  grid = document.getElementById('grid'),
 	  contenedorEnlacesNav = document.querySelector('#menu .contenedor-enlaces-nav'),
 	  contenedorSubCategorias = document.querySelector('#grid .contenedor-subcategorias'),
-	  esDispositivoMovil = () => window.innerWidth <= 800;
+	  esDispositivoMovil = () => window.innerWidth <= 800,
 
+	  userBtnOptions = document.getElementById('user-opt'),
+	  userListOptions = document.getElementById('drop-list');
+
+//Scroll	  
+window.addEventListener('scroll', function () {
+	let menu = document.getElementById('seccion-superior-nav');
+	menu.classList.toggle('navbar-sticky', window.scrollY > 200);
+});
+/*user*/
+userBtnOptions.addEventListener('mouseover', () => {
+	if(!esDispositivoMovil()){
+		userListOptions.classList.add('activo');
+	}
+});
+
+userListOptions.addEventListener('mouseleave', () => {
+	if(!esDispositivoMovil()){
+		userListOptions.classList.remove('activo');
+	}
+});
+
+userBtnOptions.addEventListener('click', () => {
+	if(esDispositivoMovil()){
+		userListOptions.classList.toggle('activo-movil');
+		userBtnOptions.classList.toggle('activo-movil');
+	}
+});
+
+/*user*/
 btnDepartamentos.addEventListener('mouseover', () => {
 	if(!esDispositivoMovil()){
 		grid.classList.add('activo');
