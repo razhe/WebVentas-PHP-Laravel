@@ -65,8 +65,8 @@
                             @if (Auth::guest())
                                 <button class="user__opt" id ="user-opt">CUENTA <i class="bi bi-chevron-down"></i></button>
                                 <ul class = "drop__list" id="drop-list">
-                                    <li><a class = "user__link" href="#">Iniciar sesión</a></li>
-                                    <li><a class = "user__link" href="#">Registrarse</a></li>
+                                    <li><a class = "user__link" href="{{url('/login')}}">Iniciar sesión</a></li>
+                                    <li><a class = "user__link" href="{{url('/register')}}">Registrarse</a></li>
                                 </ul>
                             @else
                                 @if(Auth::user() -> id_tasks == 2)

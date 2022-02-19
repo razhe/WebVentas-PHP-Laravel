@@ -2,7 +2,7 @@
 @extends('Admin.masterDashboard')
 
 @section('CSS')
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" type="text/css" href="{{url('static\libs\DataTables\datatables.min.css')}}"/>
 @endsection
 
 @section('title', 'Productos')
@@ -268,29 +268,51 @@
 @endsection
 
 @section('JS')
-    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
+    <script type="text/javascript" src="{{url('\static\libs\DataTables\datatables.min.js')}}"></script>
     <script>
         $(document).ready(function() {
             $('#categories-table').DataTable({
                 language: {
-                "lengthMenu": "Mostrar _MENU_ registros",
-                "zeroRecords": "No se encontraron resultados",
-                "info": "Registros del _START_ al _END_ de un total de _TOTAL_. ",
-                "infoEmpty": "Registros del 0 al 0 de un total de 0. ",
-                "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-                "sSearch": "Buscar:",
-                "oPaginate": {
-                    "sFirst": "Primero",
-                    "sLast":"Último",
-                    "sNext":"Siguiente",
-                    "sPrevious": "Anterior"
-			     },
-			     "sProcessing":"Procesando...",
-            },
-            //para usar los botones
-            responsive: "true",
+                    "lengthMenu": "Mostrar _MENU_ registros",
+                    "zeroRecords": "No se encontraron resultados",
+                    "info": "Registros del _START_ al _END_ de un total de _TOTAL_. ",
+                    "infoEmpty": "Registros del 0 al 0 de un total de 0. ",
+                    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sSearch": "Buscar:",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast":"Último",
+                        "sNext":"Siguiente",
+                        "sPrevious": "Anterior"
+                     },
+                     "sProcessing":"Procesando...",
+                },
+                //para usar los botones
+                responsive: true,
+                fixedHeader: true,
+                dom: 'Bfrtilp',
+                buttons:[
+                    {
+                        extend:     'excelHtml5',
+                        text:       '<i class="bi bi-file-earmark-excel"></i>',
+                        tittleAttr: 'Exportar a PDF',
+                        className : 'btn btn-success'
+                    },
+                    {
+                        extend:     'pdfHtml5',
+                        text:       '<i class="bi bi-file-earmark-pdf"></i>',
+                        tittleAttr: 'Exportar a Excel',
+                        className : 'btn btn-danger'
+                    },
+                    {
+                        extend:     'print',
+                        text:       '<i class="bi bi-printer"></i>',
+                        tittleAttr: 'Imprimir',
+                        className : 'btn btn-secondary'
+                    },
+                ]
             });
         } );
-    </script>
+        
+        </script>
 @endsection
