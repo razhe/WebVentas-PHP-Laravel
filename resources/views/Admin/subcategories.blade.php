@@ -89,6 +89,16 @@
                                     <input type="text" name="name" class="form-control" required>
                                 </div>
                             </div>
+                            <!--slug-->
+                            <div class="input__container mb-2">
+                                <label for="slug">Slug:</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="bi bi-tag"></i>
+                                    </span>
+                                    <input type="text" name="slug" placeholder="nombre-separado-por-guiones" class="form-control" required>
+                                </div>
+                            </div>
                             <!--Estado-->
                             <div class="input__container mb-2">
                                 <label for="status">Seleccione un estado:</label>
@@ -137,6 +147,16 @@
                                     <input id="nombre-subcategoria-editar" type="text" name="name" class="form-control" required>
                                 </div>
                             </div>
+                            <!--slug-->
+                            <div class="input__container mb-2">
+                                <label for="slug">Slug:</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="bi bi-tag"></i>
+                                    </span>
+                                    <input type="text" id="slug-subcategoria-editar" name="slug" placeholder="nombre-separado-por-guiones" class="form-control" required>
+                                </div>
+                            </div>
                             <!--Estado-->
                             <div class="input__container mb-2">
                                 <label for="status">Seleccione un estado:</label>
@@ -182,6 +202,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Nombre subcategoría</th>
+                                    <th>Slug</th>
                                     <th>Estado</th>
                                     <th>Categoría padre</th>
                                     <th>Acciones</th>
@@ -192,6 +213,7 @@
                                     <tr>
                                         <td>{{$subcategory -> id}}</td>
                                         <td>{{$subcategory -> name}}</td>
+                                        <td>{{$subcategory -> slug}}</td>
                                         @switch($subcategory-> status)
                                             @case(1)
                                                 <td>
@@ -226,6 +248,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Nombre subcategoría</th>
+                                    <th>Slug</th>
                                     <th>Estado</th>
                                     <th>Categoría padre</th>
                                     <th>Acciones</th>
@@ -263,27 +286,6 @@
                 //para usar los botones
                 responsive: true,
                 fixedHeader: true,
-                dom: 'Bfrtilp',
-                buttons:[
-                    {
-                        extend:     'excelHtml5',
-                        text:       '<i class="bi bi-file-earmark-excel"></i>',
-                        tittleAttr: 'Exportar a PDF',
-                        className : 'btn btn-success'
-                    },
-                    {
-                        extend:     'pdfHtml5',
-                        text:       '<i class="bi bi-file-earmark-pdf"></i>',
-                        tittleAttr: 'Exportar a Excel',
-                        className : 'btn btn-danger'
-                    },
-                    {
-                        extend:     'print',
-                        text:       '<i class="bi bi-printer"></i>',
-                        tittleAttr: 'Imprimir',
-                        className : 'btn btn-secondary'
-                    },
-                ]
             });
             traerCategorias();
         } );

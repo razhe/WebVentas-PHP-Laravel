@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Empresa | @yield('title')</title>
+    <meta name="csrf-token" content="{{csrf_token()}}">
+    <title>{{Config::get('configuracion-global.name')}} | @yield('title')</title>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="routeName" content="{{ Route::currentRouteName() }}">
@@ -135,8 +136,8 @@
                 </li>
                 <li>
                     <a class="nav-link px-3 sidebar-link" data-bs-toggle="collapse" href="#customize">
-                        <span class="me-2"><i class="bi bi-eye"></i></span>
-                        <span>Personalización</span>
+                        <span class="me-2"><i class="bi bi-gear"></i></span>
+                        <span>Configuración</span>
                         <span class="ms-auto">
                         <span class="right-icon">
                             <i class="bi bi-chevron-down"></i>
@@ -145,6 +146,12 @@
                     </a>
                     <div class="collapse" id="customize">
                         <ul class="navbar-nav ps-3">
+                            <li>
+                                <a href="{{url('admin/web-parameters/config')}}" class="nav-link px-3">
+                                    <span class="me-2"><i class="bi bi-globe2"></i></i></span>
+                                    <span>Página Web</span>
+                                </a>
+                            </li>
                             <li>
                                 <a href="{{url('admin/banner')}}" class="nav-link px-3">
                                     <span class="me-2"><i class="bi bi-columns-gap"></i></span>
@@ -167,7 +174,7 @@
         </div>
     </div>
     <!-- sidebar offcanvas -->
-    <main class="mt-5 pt-3">
+    <main class="mt-5">
         @yield('content')
     </main>
     <!--JS Admin-->

@@ -22,7 +22,7 @@
 /*Btn up*/
 .container-btn-up.active-btn-up{
     transform: translateX(0%);
-}
+}   
 .container-btn-up{
     position: fixed;
     z-index: 900;
@@ -52,20 +52,33 @@
     transform: scale(1.15);
 }
 /*Carruseles*/
+.seccion-novedades,
+.seccion-ofertas{
+    max-width: 1200px;
+    margin: 0 auto;
+}
 .contenedor-carrousel{
     max-width: 1100px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 50px;
+    margin-right: 50px;
     margin-bottom: 30px;
     margin-top: 30px;
 }
 .carousel_box{
-    display: flex;
+    position: relative;
     align-items: center;
     justify-content: space-between;
 }
 .carousel__lista {
 	overflow: hidden;
+}
+.carousel_box .carousel__siguiente{
+    left: 100%;
+    top: 30%;
+}
+.carousel_box .carousel__anterior{
+    right: 100%;
+    top: 30%;
 }
 .carousel_box .carousel__siguiente,
 .carousel_box .carousel__anterior{
@@ -76,6 +89,7 @@
     background: none;
     opacity: 20%;
     transition: .3s;
+    position: absolute;
 }
 .carousel_box .carousel__siguiente i,
 .carousel_box .carousel__anterior i{
@@ -143,12 +157,13 @@
 }
 /*Banner*/
 
-/*novedades*/
+/*item producto*/
 .item-producto {
     background-color: #fff;
     max-width: 280px;
     border-radius:2px;
     margin: 0 10px 0 10px;
+    position: relative;
 }
 .item-producto .producto-imagen img{
     width: 100%;
@@ -161,6 +176,50 @@
 .item-producto .producto-imagen {
     position: relative;
     overflow: hidden;
+}
+.tag-producto{
+    height: 30px;
+    width: 70px;
+    text-align: center;
+    line-height: 28px;
+    position: absolute;
+    top: 25px;
+    left: -8px;
+    z-index: 1000;
+    border-radius: 0 2px 2px 0px;
+}
+.tag-producto span{
+    font-size: .73rem;
+    font-weight: 600;
+    letter-spacing: .7px;
+}
+
+.tag-producto.tag-producto-novedad{
+    background-color: #3c6692;
+    color: #fff;
+}
+.tag-producto.tag-producto-novedad::before{
+    content: "";
+	display: block;
+	background: transparent;
+	border-left: 8px solid transparent;
+	border-top: 8px solid #174372;
+    top: 30px;
+	position: absolute;
+}
+
+.tag-producto.tag-producto-oferta{
+    background-color: #f54949;
+    color: #fff;
+}
+.tag-producto.tag-producto-oferta::before{
+    content: "";
+	display: block;
+	background: transparent;
+	border-left: 8px solid transparent;
+	border-top: 8px solid #b11313;
+    top: 30px;
+	position: absolute;
 }
 
 .item-producto .producto-imagen .social-icons {

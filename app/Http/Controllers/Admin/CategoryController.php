@@ -107,11 +107,15 @@ class CategoryController extends Controller
             return back() -> withErrors($validator)->with('MsgResponse','Se ha producido un error al intentar actualizar esta categoría')->with( 'typealert', 'danger');
         else:
             $category = Category::findOrFail($request['id']);
-
-            $category->name   = e($request['name']);
-            $category->status = e($request['status']);
-            $category->description= e($request['description']);
-
+            if ($request['name'] != $category->name) {
+                $category->name = $request['name'];
+            }
+            if ($request['status'] != $category->status) {
+                $category->status = $request['status'];
+            }
+            if ($request['description'] != $category->description) {
+                $category->description = $request['description'];
+            }
             if ($request->hasFile('banner')) {
                 $file        = $request->file('banner');
                 $path        = 'img/categories/';

@@ -108,13 +108,24 @@ class UserController extends Controller
         else:
             $user = User::findOrFail($request['id']);
             //"e" aplica un encode a los datos que enviamos para evitar que hagan inyecciones por scripts, o vulnerabilidades en general.
-            $user-> name      = e($request['name']);
-            $user-> last_name = e($request['last_name']);
-            $user-> email     = e($request['email']);
-            $user-> phone     = e($request['phone']);
-            $user-> status    = e($request['status']);
-            $user-> id_tasks  = e($request['id_tasks']);
-
+            if ($request['name'] != $user->name) {
+                $user->name = $request['name'];
+            }
+            if ($request['last_name'] != $user->last_name) {
+                $user->last_name = $request['last_name'];
+            }
+            if ($request['email'] != $user->email) {
+                $user->email = $request['email'];
+            }
+            if ($request['phone'] != $user->phone) {
+                $user->phone = $request['phone'];
+            }
+            if ($request['status'] != $user->status) {
+                $user->status = $request['status'];
+            }
+            if ($request['id_tasks'] != $user->id_tasks) {
+                $user->id_tasks = $request['id_tasks'];
+            }
             if($user -> save()):
                 return back() -> withErrors($validator)-> with('MsgResponse', '¡El usuario se ha modificado exitosamente!')->with('typealert', 'success');
             endif;

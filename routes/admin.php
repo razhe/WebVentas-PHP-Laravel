@@ -6,7 +6,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\BrandController;
-use App\Http\Controllers\Admin\CustomizeController;
+use App\Http\Controllers\Admin\SettingsController;
 
 
 Route::prefix('/admin')->group(function(){
@@ -51,8 +51,11 @@ Route::prefix('/admin')->group(function(){
     Route::post('/brands/delete/{id}',[BrandController::class, 'postDeleteBrand']);
 
     //Customización
-    route::get('/banner',[CustomizeController::class, 'getBannerCustomize']);
-    route::post('/banner/change-banner',[CustomizeController::class, 'postChangeBanner']);
+    route::get('/banner',[SettingsController::class, 'getBannerCustomize']);
+    route::post('/banner/change-banner',[SettingsController::class, 'postChangeBanner']);
+
+    route::get('/web-parameters/config',[SettingsController::class, 'getWebCustomize']);
+    route::post('/web-parameters/global-config/save',[SettingsController::class, 'postGlobalConfigSave']);
 });
 
 

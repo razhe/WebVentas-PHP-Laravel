@@ -81,6 +81,16 @@
                                 <input placeholder="Escribe las dos primeras iniciales de la marca y nombre del producto." type="text" name="sku" class="form-control" required>
                             </div>
                         </div>
+                        <!--slug-->
+                        <div class="input__container mb-2">
+                            <label for="slug">Slug:</label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="bi bi-tag"></i>
+                                </span>
+                                <input type="text" id="slug-producto-agregar" name="slug" placeholder="nombre-separado-por-guiones" class="form-control" required>
+                            </div>
+                        </div>
                         <!--estado-->
                         <div class="input__container mb-2">
                             <label for="status">Seleccione un estado:</label>
@@ -209,6 +219,16 @@
                                     <i class="bi bi-upc"></i>
                                 </span>
                                 <input id="sku-producto-editar" placeholder="Escribe las dos primeras iniciales de la marca y nombre del producto." type="text" name="sku" class="form-control" required>
+                            </div>
+                        </div>
+                        <!--slug-->
+                        <div class="input__container mb-2">
+                            <label for="slug">Slug:</label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="bi bi-tag"></i>
+                                </span>
+                                <input type="text" id="slug-producto-editar" name="slug" placeholder="nombre-separado-por-guiones" class="form-control" required>
                             </div>
                         </div>
                         <!--estado-->
@@ -350,6 +370,7 @@
                                     <th>descripción</th>
                                     <th>Stock</th>
                                     <th>Sku</th>
+                                    <th>Slug</th>
                                     <th>Marca</th>
                                     <th>Subcategoría</th>
                                     <th>Estado</th>
@@ -375,6 +396,7 @@
                                      <td>{{$product-> description}}</td>
                                      <td>{{$product-> stock}}</td>
                                      <td>{{$product-> sku}}</td>
+                                     <td>{{$product-> slug}}</td>
                                      <td>{{$product-> brand_name}}</td>
                                      <td>{{$product-> subcategory_name}}</td>
                                      @switch($product-> status)
@@ -420,6 +442,7 @@
                                     <th>descripción</th>
                                     <th>Stock</th>
                                     <th>Sku</th>
+                                    <th>Slug</th>
                                     <th>Marca</th>
                                     <th>Subcategoría</th>
                                     <th>Estado</th>

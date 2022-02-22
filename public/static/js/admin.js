@@ -1,3 +1,14 @@
+//======================
+//Código del sitio
+//======================
+let csfr_token = document.getElementsByName('csrf-token')[0].getAttribute('content');
+	
+$.ajaxSetup({
+	headers: {
+		'X-CSRF-TOKEN': csfr_token
+	}
+});
+
 //chart.js
 const charts = document.querySelectorAll(".chart");
 
@@ -100,7 +111,6 @@ function traerSubcategorias() {
       }
       document.getElementById('select-subcategory-add').innerHTML = html;
       document.getElementById('select-subcategory-edit').innerHTML = html;
-      
     }
   });
 }
@@ -114,7 +124,7 @@ function editarCategoria(id) {
       $('#id-categoria-editar').val(data.id);
       $('#nombre-categoria-editar').val(data.name);
       $('#estado-categoria-editar').val(data.status);
-      
+      $('#descripcion-categoria-editar').val(data.description);
     }
   });
 }
@@ -146,6 +156,7 @@ function editarSubCategoria(id) {
       $('#nombre-subcategoria-editar').val(data.name);
       $('#estado-subcategoria-editar').val(data.status);
       $('#select-category-edit').val(data.id_category);
+      $('#slug-subcategoria-editar').val(data.slug);
     }
   });
 }
@@ -164,6 +175,7 @@ function EditarProducto(id) {
       //$('#area-description-edit').val(data.description);
       $('#stock-producto-editar').val(data.stock);
       $('#sku-producto-editar').val(data.sku);
+      $('#slug-producto-editar').val(data.slug);
       $('#select-brands-edit').val(data.id_brand);
       $('#select-subcategory-edit').val(data.id_subcategory);
       $('#estado-producto-editar').val(data.status);

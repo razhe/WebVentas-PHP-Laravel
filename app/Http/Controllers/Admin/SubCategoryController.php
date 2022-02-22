@@ -59,6 +59,7 @@ class SubCategoryController extends Controller
         $rules = 
         [
             'name'        => 'required',
+            'slug'        => 'required|unique:subcategories,slug',
             'status'      => 'required',
             'id_category' => 'required',
         ];
@@ -67,6 +68,8 @@ class SubCategoryController extends Controller
             'name.required'        => 'Se requiere de un nombre para la Subcategoría.',
             'status.required'      => 'Se requiere de un estado para la Subcategoría.',
             'id_category.required' => 'Se requiere de una categoría padre para la Subcategoría.',
+            'slug.required'        => 'Se requiere del slug para la Subcategoría.',
+            'slug.unique'         => 'El slug de la subcategoría debe ser único.',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -78,6 +81,7 @@ class SubCategoryController extends Controller
             $subcategory->name        = e($request['name']);
             $subcategory->status      = e($request['status']);
             $subcategory->id_category = e($request['id_category']);
+            $subcategory->slug       = $request['slug'];
             if ($subcategory -> save()):
                 return back() -> withErrors($validator)->with('MsgResponse','¡Subcategoría guardada con Éxito!')->with( 'typealert', 'success');
             endif;
@@ -93,6 +97,7 @@ class SubCategoryController extends Controller
         $rules = 
         [
             'name'        => 'required',
+            'slug'        => 'required',
             'status'      => 'required',
             'id_category' => 'required'
         ];
@@ -101,6 +106,7 @@ class SubCategoryController extends Controller
             'name.required'        => 'Se requiere de un nombre para la Subcategoría.',
             'status.required'      => 'Se requiere de un estado para la Subcategoría.',
             'id_category.required' => 'Se requiere de una categoría padre para la Subcategoría.',
+            'slug.required'        => 'Se requiere del slug para la Subcategoría.',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -109,9 +115,18 @@ class SubCategoryController extends Controller
         else:
             $subcategory = Subcategory::findOrFail($request['id']);
 
-            $subcategory->name        = e($request['name']);
-            $subcategory->status      = e($request['status']);
-            $subcategory->id_category = e($request['id_category']);
+            if ($request['name'] != $subcategory->name) {
+                $subcategory->name = $request['name'];
+            }
+            if ($request['status'] != $subcategory->status) {
+                $subcategory->status = $request['status'];
+            }
+            if ($request['id_category'] != $subcategory->id_category) {
+                $subcategory->id_category = $request['id_category'];
+            }
+            if ($request['slug'] != $subcategory->slug) {
+                $subcategory->slug = $request['slug'];
+            }
             if ($subcategory -> save()):
                 return back() -> withErrors($validator)->with('MsgResponse','¡Subcategoría guardada con Éxito!')->with( 'typealert', 'success');
             endif;

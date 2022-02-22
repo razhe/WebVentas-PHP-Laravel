@@ -6,15 +6,18 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 //Modelo categorias
 use App\Models\Category;
-use Validator;
+use Validator, File, Config;
 
-class CustomizeController extends Controller
+class SettingsController extends Controller
 {
     public function __construct(){
         $this-> middleware('auth');
         $this-> middleware('admincheck');
         $this-> middleware('user.status');
     }
+    /*==============*/
+    /*Banner*/
+    /*==============*/
     public function getBannerCustomize(){
         $categories = Category::where('status','<','2') -> orderby('id','ASC') -> get();
         $data = [
@@ -51,11 +54,40 @@ class CustomizeController extends Controller
 
         
     }
+    /*==============*/
+    /*Web Config*/
+    /*==============*/
+    public function getWebCustomize()
+    {
+        return view('Admin.web-parameters');
+    }
+    public function postGlobalConfigSave(Request $request)
+    {
+        if(!file_exists(config_path().'/configuracion-global.php')):
+            fopen(config_path().'/configuracion-global.php', 'w');
+        endif;
+        $file =  fopen(config_path().'/configuracion-global.php', 'w');
+        //$content = '<?php return'.[];
+        fwrite($file,'<?php '.PHP_EOL);
+        fwrite($file,'return ['.PHP_EOL);
+        foreach ($request -> except(['_token']) as $key => $value):
+            if(is_null($value)):
+                $value = null;
+            endif;
+            if($key == 'logo'):
+                $file_image   = $request->file('logo');
+                $path        = 'static/images/';
+                $file_name   = time().'-'.$file_image->getClientOriginalName();
+                $logo_actual = Config('configuracion-global.logo');
+                File::delete($logo_actual);
+                fwrite($file,"'".$key."' =>"."'" .$path.$file_name ."',".PHP_EOL);
+                $file_image -> move($path, $file_name);
+            else:
+                fwrite($file,"'".$key."' =>"."'".$value."',".PHP_EOL);
+            endif;
+        endforeach; 
+        fwrite($file,'];'.PHP_EOL);
+        fclose($file);
+        return back() -> with('MsgResponse','Se han actualizado las configuraciones globales exitosamente.')->with( 'typealert', 'success'); 
+    }
 }
-/*==============*/
-/*Banner*/
-/*==============*/
-
-/*==============*/
-/*Banner*/
-/*==============*/

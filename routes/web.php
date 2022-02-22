@@ -7,7 +7,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductCatalogController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\UserProfileController;
-use App\Http\Controllers\LayoutController;
+use App\Http\Controllers\MainController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,8 +19,10 @@ use App\Http\Controllers\LayoutController;
 |
 */
 
-//layout
-Route::get('/layout/categories', [LayoutController::class, 'getCategories']) -> name('layout');
+//main
+
+//Route::get('/load/products/content/{section}', [MainController::class, 'getContentLoadProducts']) -> name('home');
+
 //Home
 Route::get('/', [HomeController::class, 'getHome']) -> name('home');
 //perfil usuario
@@ -42,7 +44,7 @@ Route::get('/logout', [AuthController::class, 'getLogout']) -> name('logout');
 Route::get('/register', [AuthController::class, 'getRegister']) -> name('register');
 Route::post('/register', [AuthController::class, 'postRegister']);
 //Detalles del producto
-Route::get('/details-product', [DetailProductController::class, 'getDetailProduct']);
+Route::get('/details-product', [DetailProductController::class, 'getDetailProduct']) -> name('details-product');
 
 //Carrito
 Route::get('/cart', [CartController::class, 'getCart']);

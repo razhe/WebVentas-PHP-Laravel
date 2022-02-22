@@ -38,6 +38,7 @@ class ProductController extends Controller
             'id_brand' => 'required|numeric',
             'stock'    => 'required|numeric',
             'sku'      => 'required',
+            'slug'      => 'required|unique:products,slug',
             'status'   => 'required|numeric',
             'id_subcategory'   => 'required|numeric',
             'description'      => 'required',
@@ -54,6 +55,8 @@ class ProductController extends Controller
             'status.numeric'          => 'Error al intentar ingresar una subcategoría.',
             'id_subcategory.required' => 'Se requiere de una categoría padre para la Subcategoría.',
             'sku.required'            => 'Se requiere del SKU del producto.',
+            'slug.required'            => 'Se requiere del Slug del producto.',
+            'slug.unique'            => 'Se requiere que el Slug del producto sea único.',
             'id_subcategory.numeric'  => 'Error al intentar ingresar una subcategoría',
             'id_brand.required'       => 'Se requiere un certificado para el producto.',
             'id_brand.numeric'        => 'Se requiere un certificado para el producto.',
@@ -102,25 +105,25 @@ class ProductController extends Controller
             $fileDoc -> move($pathDocs, $file_certificate);
             //mover la imagen con el paquete intervention image
             Image::make($fileImg1)
-            -> resize(400, null, function ($constraint) {
+            -> resize(650, null, function ($constraint) {
                 $constraint->aspectRatio();
             }) 
             -> save($upload_file1);
 
             Image::make($fileImg2)
-            -> resize(400, null, function ($constraint) {
+            -> resize(650, null, function ($constraint) {
                 $constraint->aspectRatio();
             }) 
             -> save($upload_file2);
 
             Image::make($fileImg3)
-            -> resize(400, null, function ($constraint) {
+            -> resize(650, null, function ($constraint) {
                 $constraint->aspectRatio();
             }) 
             -> save($upload_file3);
 
             Image::make($fileImg4)
-            -> resize(400, null, function ($constraint) {
+            -> resize(650, null, function ($constraint) {
                 $constraint->aspectRatio();
             }) 
             -> save($upload_file4);
@@ -134,9 +137,10 @@ class ProductController extends Controller
             }else {
                 $product->discount       = e($request['discount']);
             }
-            $product->description    = e($request['description']);
+            $product->description    = $request['description'];
             $product->stock          = e($request['stock']);
             $product->sku            = e($request['sku'].time());
+            $product->slug            = e($request['slug']);
             $product->status         = e($request['status']);
             $product->image1         = $pathImg.$file_img1;
             $product->image2         = $pathImg.$file_img2;
@@ -160,6 +164,7 @@ class ProductController extends Controller
             'id_brand' => 'required|numeric',
             'stock'    => 'required|numeric',
             'sku'      => 'required',
+            'slug'      => 'required',
             'status'   => 'required|numeric',
             'id_subcategory'   => 'required|numeric',
             'description'      => 'required',
@@ -175,6 +180,7 @@ class ProductController extends Controller
             'status.numeric'          => 'Error al intentar ingresar una subcategoría.',
             'id_subcategory.required' => 'Se requiere de una categoría padre para la Subcategoría.',
             'sku.required'            => 'Se requiere del SKU del producto.',
+            'slug.required'            => 'Se requiere del Slug del producto.',
             'id_subcategory.numeric'  => 'Error al intentar ingresar una subcategoría',
             'id_brand.required'       => 'Se requiere un certificado para el producto.',
             'id_brand.numeric'        => 'Se requiere un certificado para el producto.',
@@ -198,23 +204,39 @@ class ProductController extends Controller
             $pathDocs    = 'docs/products/';
             
             $product = Product::findOrFail($request['id']);
-
-            $product->name           = e($request['name']);
-            $product->price          = e($request['price']);
+            if ($request['name'] != $product->name) {
+                $product->name = e($request['name']);
+            }
+            if ($request['price'] != $product->price) {
+                $product->price = e($request['price']);
+            }
+            
             if ($request['discount'] == '') {
                 $product->discount = e(0);
             }else {
-                $product->discount       = e($request['discount']);
+                $product->discount = e($request['discount']);
             }
-            $product->description    = e($request['description']);
-            $product->stock          = e($request['stock']);
-            if (!$request['sku'] == $product->sku) {
+            if ($request['description'] != $product->description) {
+                $product->description = e($request['description']);
+            }
+            if ($request['stock'] != $product->stock) {
+                $product->stock = e($request['stock']);
+            }
+            if ($request['sku'] != $product->sku) {
                 $product->sku = e($request['sku'].time());
             }
-            $product->status         = e($request['status']);
-            $product->id_brand       = e($request['id_brand']);
-            $product->id_subcategory = e($request['id_subcategory']);
-
+            if ($request['slug'] != $product->slug) {
+                $product->slug = $request['slug'];
+            }
+            if ($request['status'] != $product->status) {
+                $product->status = e($request['status']);
+            }
+            if ($request['id_brand'] != $product->id_brand) {
+                $product->id_brand = e($request['id_brand']);
+            }
+            if ($request['id_subcategory'] != $product->id_subcategory) {
+                $product->id_subcategory = e($request['id_subcategory']);
+            }
             if ($request->hasFile('certificate')) {
                 //peticion
                 $fileDoc     = $request->file('certificate');
@@ -238,7 +260,7 @@ class ProductController extends Controller
                 $upload_file1 = ($pathImg. $file_img1);
                 //mover la imagen con el paquete intervention image
                 Image::make($fileImg1)
-                -> resize(400, null, function ($constraint) {
+                -> resize(650, null, function ($constraint) {
                     $constraint->aspectRatio();
                 }) 
                 -> save($upload_file1);
@@ -255,7 +277,7 @@ class ProductController extends Controller
                 $upload_file2 = ($pathImg. $file_img2);
                 //mover la imagen con el paquete intervention image
                 Image::make($fileImg2)
-                -> resize(400, null, function ($constraint) {
+                -> resize(650, null, function ($constraint) {
                     $constraint->aspectRatio();
                 }) 
                 -> save($upload_file2);
@@ -272,7 +294,7 @@ class ProductController extends Controller
                 $upload_file3 = ($pathImg. $file_img3);
                 //mover la imagen con el paquete intervention image
                 Image::make($fileImg3)
-                -> resize(400, null, function ($constraint) {
+                -> resize(650, null, function ($constraint) {
                     $constraint->aspectRatio();
                 }) 
                 -> save($upload_file3);
@@ -289,7 +311,7 @@ class ProductController extends Controller
                 $upload_file4 = ($pathImg. $file_img4);
                 //mover la imagen con el paquete intervention image
                 Image::make($fileImg4)
-                -> resize(400, null, function ($constraint) {
+                -> resize(650, null, function ($constraint) {
                     $constraint->aspectRatio();
                 }) 
                 -> save($upload_file4);

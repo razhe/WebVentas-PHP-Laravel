@@ -33,7 +33,7 @@
                                     <div>
                                         <p>Nombre producto</p>
                                         <small>precio: <span>$9000</span></small><br>
-                                        <a href="#">eliminar</a>
+                                        <a href="#">remover</a>
                                     </div>
                                 </div>
                             </td>
@@ -47,7 +47,7 @@
                                     <div>
                                         <p>Nombre producto</p>
                                         <small>precio: <span>$9000</span></small><br>
-                                        <a href="#">eliminar</a>
+                                        <a href="#">remover</a>
                                     </div>
                                 </div>
                             </td>

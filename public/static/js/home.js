@@ -1,3 +1,41 @@
+//======================
+//Código del sitio
+//======================
+$(document).ready(function(){
+	//load_products(route);
+});
+
+let route = document.getElementsByName('routeName')[0].getAttribute('content'),
+	csfr_token = document.getElementsByName('csrf-token')[0].getAttribute('content');
+
+/*
+$.ajaxSetup({
+	headers: {
+		'X-CSRF-TOKEN': csfr_token
+	}
+});
+
+function load_products(section){
+	$.ajax({
+		url:'load/products/content/'+ section,
+		method:'get',
+		data:{},
+		success:function(data){
+			//Novedades
+			htmlNews = "";
+			for (let i = 0; i < data.config.quant_news; i++) {
+				htmlNews += ``;
+				data.products[i];
+			}
+			//Ofertas
+		},
+		error:function(error){
+			console.error(error);
+		}
+	});
+}
+*/
+
 //Btn scroll up
 window.addEventListener('scroll', function () {
 	let btnUp = document.getElementById('container-btn-up');
@@ -39,13 +77,13 @@ window.addEventListener('load', function(){
 			}
 		]
 	});
-	new Glider(document.querySelector('.carrousel-mas-vendidos'), {
+	new Glider(document.querySelector('.carrousel-ofertas'), {
 		slidesToShow: 1,
 		slidesToScroll: 1,
-		dots: '.indicadores-mas-vendido',
+		dots: '.indicadores-ofertas',
 		arrows: {
-			prev: '.anterior-mas-vendido',
-			next: '.siguente-mas-vendido'
+			prev: '.anterior-oferta',
+			next: '.siguente-oferta'
 		},
 		responsive: [
 			{

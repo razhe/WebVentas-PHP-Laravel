@@ -1,13 +1,4 @@
 //======================
-//Código del sitio
-//======================
-$(document).ready(function(){
-
-});
-
-let base = location.protocol+'//'+location.host;
-    route = document.getElementsByName('routeName')[0].getAttribute('content');
-//======================
 //Código de la plantilla
 //======================
 const btnDepartamentos = document.getElementById('btn-categorias'),

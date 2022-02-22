@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB; //Trabajar con la base de datos (para prcedimientos almacenados)
-use App\Models\Category;
 class HomeController extends Controller
 {
     public function __Construct(){
@@ -12,12 +11,14 @@ class HomeController extends Controller
     }
     public function getHome()
     {
-        $categories = Category::where('status','1') -> orderBy('name', 'ASC')-> get();
+        $categories = DB::select('CALL select_subcategories_join_categories_products()');
         $subcategories = DB::select('CALL select_subcategories_public()');
+        $products = DB::select('CALL select_products_home()');
         $data = 
         [
             'categories' => $categories,
-            'subcategories' => $subcategories
+            'subcategories' => $subcategories,
+            'products' => $products,
         ];
         //dd($data);
         return view('home', $data);

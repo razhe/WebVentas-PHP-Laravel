@@ -1,0 +1,44 @@
+.container__globalconfig{
+    background-color: #fff;
+    margin-top: 30px;
+    padding: 1px 10px 20px 10px;
+}
+.global__config{
+    width: 100%;
+    max-width: 1200px;
+    margin: 30px auto 40px auto;
+}
+.global__config .title__section{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+    background-color: rgba(0, 0, 0, .8);
+    color: #fff;
+    padding: 10px 10px;
+    margin-top: 60px;
+    margin-bottom: 25px;
+}
+.global__config .title__section h3{
+    font-size: 1.1rem;
+    margin: 0;
+}
+.global__config .fila-config{
+    margin: 13px 0 !important;
+}
+.btn-globalconfig-box{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.contenedor-logo{
+    display: flex;
+    align-items: center;
+}
+.contenedor-logo .img-logo{
+    width: 100px;
+}
+.fila-config{
+    display: flex;
+    align-items: center;
+}

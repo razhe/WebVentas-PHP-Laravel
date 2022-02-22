@@ -21,9 +21,9 @@
                     <div class="img-categoria-item"><img src="{{asset('img/banner/herramientas-default.jpg')}}" alt=""></div>
                     <div class="contenido-categoria-item">
                         <div class="box-contenido-categoria">
-                            <h3>{{$categories[0]['name']}}</h3>
-                            <p>{{$categories[0]['description']}}</p>
-                            <p>234 productos</p>
+                            <h3>{{$categories[0] -> name}}</h3>
+                            <p>{{$categories[0] -> description}}</p>
+                            <p>{{$categories[0] -> count_products}} productos</p>
                             <a href="">Comprar Ahora</a>
                         </div>
                     </div>
@@ -35,9 +35,9 @@
                         <div class="img-categoria-item"><img src="{{asset('img/banner/herramientas-default.jpg')}}" alt=""></div>
                         <div class="contenido-categoria-item">
                             <div class="box-contenido-categoria">
-                                <h3>{{$categories[1]['name']}}</h3>
-                                <p>{{$categories[1]['description']}}</p>
-                                <p>234 productos</p>
+                                <h3>{{$categories[1] -> name}}</h3>
+                                <p>{{$categories[1] -> description}}</p>
+                                <p>{{$categories[1] -> count_products}} productos</p>
                                 <a href="">Comprar Ahora</a>
                             </div>
                         </div>
@@ -46,9 +46,9 @@
                         <div class="img-categoria-item"><img src="{{asset('img/banner/herramientas-default.jpg')}}" alt=""></div>
                         <div class="contenido-categoria-item">
                             <div class="box-contenido-categoria">
-                                <h3>{{$categories[2]['name']}}</h3>
-                                <p>{{$categories[2]['description']}}</p>
-                                <p>234 productos</p>
+                                <h3>{{$categories[2] -> name}}</h3>
+                                <p>{{$categories[2] -> description}}</p>
+                                <p>{{$categories[2] -> count_products}} productos</p>
                                 <a href="">Comprar Ahora</a>
                             </div>
                         </div>
@@ -57,9 +57,9 @@
                         <div class="img-categoria-item"><img src="{{asset('img/banner/herramientas-default.jpg')}}" alt=""></div>
                         <div class="contenido-categoria-item">
                             <div class="box-contenido-categoria">
-                                <h3>{{$categories[3]['name']}}</h3>
-                                <p>{{$categories[3]['description']}}</p>
-                                <p>234 productos</p>
+                                <h3>{{$categories[3] -> name}}</h3>
+                                <p>{{$categories[3] -> description}}</p>
+                                <p>{{$categories[3] -> count_products}} productos</p>
                                 <a href="">Comprar Ahora</a>
                             </div>
                         </div>
@@ -68,9 +68,9 @@
                         <div class="img-categoria-item"><img src="{{asset('img/banner/herramientas-default.jpg')}}" alt=""></div>
                         <div class="contenido-categoria-item">
                             <div class="box-contenido-categoria">
-                                <h3>{{$categories[4]['name']}}</h3>
-                                <p>{{$categories[4]['description']}}</p>
-                                <p>234 productos</p>
+                                <h3>{{$categories[4] -> name}}</h3>
+                                <p>{{$categories[4] -> description}}</p>
+                                <p>{{$categories[4] -> count_products}} productos</p>
                                 <a href="">Comprar Ahora</a>
                             </div>
                         </div>
@@ -91,87 +91,31 @@
                             <i class="bi bi-arrow-left-circle-fill"></i>
                         </button>
                         <div class="carousel__lista carrousel-novedades">
-                            <div class="item-producto">
-                                <div class="producto-imagen">
-                                    <img src="{{asset('static/images/default.jpg')}}" alt="">
-                                    <div class="social-icons">
-                                        <a href="{{url('/details-product')}}"><i class="bi bi-eye"></i></a>
-                                        <a href="#"><i class="bi bi-bag"></i></a>
-                                    </div>
-                                </div>
-                                <div class="p-2">
-                                    <h5 class="title-sm mt-1 mb-0">Zapatos</h5>
-                                    <div class="detalle-item-producto">
-                                        <small class="">Nike</small>
-                                        <small class="">$20000</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item-producto">
-                                <div class="producto-imagen">
-                                    <img src="{{asset('static/images/default.jpg')}}" alt="">
-                                    <div class="social-icons">
-                                        <a href="{{url('/details-product')}}"><i class="bi bi-eye"></i></a>
-                                        <a href="#"><i class="bi bi-bag"></i></a>
-                                    </div>
-                                </div>
-                                <div class="p-2">
-                                    <h5 class="title-sm mt-1 mb-0">Zapatos</h5>
-                                    <div class="detalle-item-producto">
-                                        <small class="">Nike</small>
-                                        <small class="">$20000</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item-producto">
-                                <div class="producto-imagen">
-                                    <img src="{{asset('static/images/default.jpg')}}" alt="">
-                                    <div class="social-icons">
-                                        <a href="{{url('/details-product')}}"><i class="bi bi-eye"></i></a>
-                                        <a href="#"><i class="bi bi-bag"></i></a>
-                                    </div>
-                                </div>
-                                <div class="p-2">
-                                    <h5 class="title-sm mt-1 mb-0">Zapatos</h5>
-                                    <div class="detalle-item-producto">
-                                        <small class="">Nike</small>
-                                        <small class="">$20000</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item-producto">
-                                <div class="producto-imagen">
-                                    <img src="{{asset('static/images/default.jpg')}}" alt="">
-                                    <div class="social-icons">
-                                        <a href="{{url('/details-product')}}"><i class="bi bi-eye"></i></a>
-                                        <a href="#"><i class="bi bi-bag"></i></a>
-                                    </div>
-                                </div>
-                                <div class="p-2">
-                                    <h5 class="title-sm mt-1 mb-0">Zapatos</h5>
-                                    <div class="detalle-item-producto">
-                                        <small class="">Nike</small>
-                                        <small class="">$20000</small>
-                                    </div>
-                                </div>
-                            </div>
-            
-                            <div class="item-producto">
-                                <div class="producto-imagen">
-                                    <img src="{{asset('static/images/default.jpg')}}" alt="">
-                                    <div class="social-icons">
-                                        <a href="{{url('/details-product')}}"><i class="bi bi-eye"></i></a>
-                                        <a href="#"><i class="bi bi-bag"></i></a>
-                                    </div>
-                                </div>
-                                <div class="p-2">
-                                    <h5 class="title-sm mt-1 mb-0">Zapatos</h5>
-                                    <div class="detalle-item-producto">
-                                        <small class="">Nike</small>
-                                        <small class="">$20000</small>
-                                    </div>
-                                </div>
-                            </div>
+                            @for ($i = 0; $i < sizeOf($products); $i++)
+                                @if ($products[$i] -> discount == 0)
+                                    @if ($i <= Config::get('configuracion-global.quant_news'))
+                                        <div class="item-producto">
+                                            <div class="tag-producto tag-producto-novedad">
+                                                <span>NUEVO</span>
+                                            </div>
+                                            <div class="producto-imagen">                 
+                                                <img src="{{asset($products[$i] -> image1)}}" alt="">
+                                                <div class="social-icons">
+                                                    <a href="{{url('/details-product?product='.$products[$i] -> slug)}}"><i class="bi bi-eye"></i></a>
+                                                    <a href="#"><i class="bi bi-bag"></i></a>
+                                                </div>
+                                            </div>
+                                            <div class="p-2">
+                                                <h5 class="title-sm mt-1 mb-0">{{$products[$i] -> name}}</h5>
+                                                <div class="detalle-item-producto">
+                                                    <small class="">{{$products[$i] -> brand_name}}</small>
+                                                    <small class="">{{Config::get('configuracion-global.currency') . $products[$i] -> price}}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endif
+                            @endfor
                         </div>
         
                         <button aria-label="Siguiente" class="carousel__siguiente siguente-novedades">
@@ -226,107 +170,51 @@
             </div>
         </section>
 
-        <section class="seccion-mas-vendidos">
+        <section class="seccion-ofertas">
             <div class="contenedor-carrousel">
                 <div class="col-12 section-intro">
-                    <h1>Más vendidos</h1>
+                    <h1>Ofertas</h1>
                     <div class="hline"></div>
                 </div>
                 <div class="carousel">
                     <div class="carousel_box">
-                        <button aria-label="Anterior" class="carousel__anterior anterior-mas-vendido">
+                        <button aria-label="Anterior" class="carousel__anterior anterior-oferta">
                             <i class="bi bi-arrow-left-circle-fill"></i>
                         </button>
-                        <div class="carousel__lista carrousel-mas-vendidos">
-                            <div class="item-producto">
-                                <div class="producto-imagen">
-                                    <img src="{{asset('static/images/default.jpg')}}" alt="">
-                                    <div class="social-icons">
-                                        <a href="{{url('/details-product')}}"><i class="bi bi-eye"></i></a>
-                                        <a href="#"><i class="bi bi-bag"></i></a>
-                                    </div>
-                                </div>
-                                <div class="p-2">
-                                    <h5 class="title-sm mt-1 mb-0">Zapatos</h5>
-                                    <div class="detalle-item-producto">
-                                        <small class="">Nike</small>
-                                        <small class="">$20000</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item-producto">
-                                <div class="producto-imagen">
-                                    <img src="{{asset('static/images/default.jpg')}}" alt="">
-                                    <div class="social-icons">
-                                        <a href="{{url('/details-product')}}"><i class="bi bi-eye"></i></a>
-                                        <a href="#"><i class="bi bi-bag"></i></a>
-                                    </div>
-                                </div>
-                                <div class="p-2">
-                                    <h5 class="title-sm mt-1 mb-0">Zapatos</h5>
-                                    <div class="detalle-item-producto">
-                                        <small class="">Nike</small>
-                                        <small class="">$20000</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item-producto">
-                                <div class="producto-imagen">
-                                    <img src="{{asset('static/images/default.jpg')}}" alt="">
-                                    <div class="social-icons">
-                                        <a href="{{url('/details-product')}}"><i class="bi bi-eye"></i></a>
-                                        <a href="#"><i class="bi bi-bag"></i></a>
-                                    </div>
-                                </div>
-                                <div class="p-2">
-                                    <h5 class="title-sm mt-1 mb-0">Zapatos</h5>
-                                    <div class="detalle-item-producto">
-                                        <small class="">Nike</small>
-                                        <small class="">$20000</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item-producto">
-                                <div class="producto-imagen">
-                                    <img src="{{asset('static/images/default.jpg')}}" alt="">
-                                    <div class="social-icons">
-                                        <a href="{{url('/details-product')}}"><i class="bi bi-eye"></i></a>
-                                        <a href="#"><i class="bi bi-bag"></i></a>
-                                    </div>
-                                </div>
-                                <div class="p-2">
-                                    <h5 class="title-sm mt-1 mb-0">Zapatos</h5>
-                                    <div class="detalle-item-producto">
-                                        <small class="">Nike</small>
-                                        <small class="">$20000</small>
-                                    </div>
-                                </div>
-                            </div>
-            
-                            <div class="item-producto">
-                                <div class="producto-imagen">
-                                    <img src="{{asset('static/images/default.jpg')}}" alt="">
-                                    <div class="social-icons">
-                                        <a href="{{url('/details-product')}}"><i class="bi bi-eye"></i></a>
-                                        <a href="#"><i class="bi bi-bag"></i></a>
-                                    </div>
-                                </div>
-                                <div class="p-2">
-                                    <h5 class="title-sm mt-1 mb-0">Zapatos</h5>
-                                    <div class="detalle-item-producto">
-                                        <small class="">Nike</small>
-                                        <small class="">$20000</small>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="carousel__lista carrousel-ofertas">
+                            @for ($i = 0; $i < sizeOf($products); $i++)
+                                @if ($products[$i] -> discount != 0)
+                                    @if ($i <= Config::get('configuracion-global.quant_news'))
+                                        <div class="item-producto">
+                                            <div class="tag-producto tag-producto-oferta">
+                                                <span>{{$products[$i] -> discount}}%</span>
+                                            </div>
+                                            <div class="producto-imagen">
+                                                <img src="{{asset($products[$i] -> image1)}}" alt="">
+                                                <div class="social-icons">
+                                                    <a href="{{url('/details-product?product='.$products[$i] -> slug)}}"><i class="bi bi-eye"></i></a>
+                                                    <a href="#"><i class="bi bi-bag"></i></a>
+                                                </div>
+                                            </div>
+                                            <div class="p-2">
+                                                <h5 class="title-sm mt-1 mb-0">{{$products[$i] -> name}}</h5>
+                                                <div class="detalle-item-producto">
+                                                    <small class="">{{$products[$i] -> brand_name}}</small>
+                                                    <small class="">{{Config::get('configuracion-global.currency') . $products[$i] -> price}}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endif
+                            @endfor
                         </div>
         
-                        <button aria-label="Siguiente" class="carousel__siguiente siguente-mas-vendido">
+                        <button aria-label="Siguiente" class="carousel__siguiente siguente-oferta">
                             <i class="bi bi-arrow-right-circle-fill"></i>
                         </button>
                     </div>
         
-                    <div role="tablist" class="carousel__indicadores indicadores-mas-vendido"></div>
+                    <div role="tablist" class="carousel__indicadores indicadores-ofertas"></div>
                 </div>
             </div>
         </section>

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{csrf_token()}}">
     <meta name="routeName" content="{{Route::currentRouteName()}}">
-    <title>empresa | @yield('title')</title>
+    <title>{{Config::get('configuracion-global.name')}} | @yield('title')</title>
     @yield('CSS')
     <!--CSS-->
         <!--CSS Bootstrap-->
@@ -151,9 +151,9 @@
                  <div class="col-md-2">
                     <h5 class="title-sm">Contact</h5>
                     <div class="footer-links">
-                       <p class="">1649 Norman Street, Los Angeles, 9001</p>
-                       <p class="">8(800)316-06-42</p>
-                       <p class="">hello@yourdomain.com</p>
+                       <p class="">{{Config::get('configuracion-global.address')}}</p>
+                       <p class="">{{Config::get('configuracion-global.contact_phone')}}</p>
+                       <p class="">{{Config::get('configuracion-global.contact_email')}}</p>
                     </div>
                  </div>
               </div>

@@ -42,7 +42,7 @@
                         <!--Descripción-->
                         <div class="input__container mb-2">
                             <label for="description">Descripción:</label>
-                            <textarea name="description" class="form-control" id="" rows="3" style="resize: none"></textarea>
+                            <textarea name="description" class="form-control" id="descripcion-categoria-agregar" rows="3" style="resize: none"></textarea>
                         </div>
                         <!--banner-->
                         <div class="mb-2">
@@ -93,7 +93,7 @@
                         <!--Descripción-->
                         <div class="input__container mb-2">
                             <label for="description">Descripción:</label>
-                            <textarea name="description" class="form-control" id="" rows="3" style="resize: none"></textarea>
+                            <textarea name="description" class="form-control" id="descripcion-categoria-editar" rows="3" style="resize: none"></textarea>
                         </div>
                         <!--Banner-->
                         <div class="mb-2">
@@ -290,27 +290,6 @@
                 //para usar los botones
                 responsive: true,
                 fixedHeader: true,
-                dom: 'Bfrtilp',
-                buttons:[
-                    {
-                        extend:     'excelHtml5',
-                        text:       '<i class="bi bi-file-earmark-excel"></i>',
-                        tittleAttr: 'Exportar a PDF',
-                        className : 'btn btn-success'
-                    },
-                    {
-                        extend:     'pdfHtml5',
-                        text:       '<i class="bi bi-file-earmark-pdf"></i>',
-                        tittleAttr: 'Exportar a Excel',
-                        className : 'btn btn-danger'
-                    },
-                    {
-                        extend:     'print',
-                        text:       '<i class="bi bi-printer"></i>',
-                        tittleAttr: 'Imprimir',
-                        className : 'btn btn-secondary'
-                    },
-                ]
             });
         } );
         

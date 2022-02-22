@@ -85,9 +85,12 @@ class BrandController extends Controller
             return back() -> withErrors($validator)->with('MsgResponse','Se ha producido un error al intentar guardar la marca')->with( 'typealert', 'danger');
         }else {
             $brand = Brand::findOrFail($request['id']);
-
-            $brand -> name   = e($request['name']);
-            $brand -> status = e($request['status']);
+            if ($request['name'] != $brand->name) {
+                $brand->name = $request['name'];
+            }
+            if ($request['status'] != $brand->status) {
+                $brand->status = $request['status'];
+            }
             if ($request->hasFile('image')) {
                 $file        = $request->file('image');
                 $path        = 'img/brands/';
