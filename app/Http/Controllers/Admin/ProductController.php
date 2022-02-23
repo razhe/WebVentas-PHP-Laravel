@@ -46,7 +46,6 @@ class ProductController extends Controller
             'image2'      => 'required|image',
             'image3'      => 'required|image',
             'image4'      => 'required|image',
-            'certificate' => 'required',
         ];
         $messages =
         [
@@ -64,16 +63,15 @@ class ProductController extends Controller
             'price.numeric'           => 'El precio debe contener caracteres numéricos.',
             'description.required'    => 'El precio debe contener caracteres numéricos.',
             'stock.required'          => 'Se requiere del stock del producto.',
-            'certificate.required'    => ' El certificado es requerido',
             'stock.numeric'           => 'El stock debe contener SOLO caracteres numéricos.',
             'image1.required'  => 'Se necesita la primera imagen secundaria para esta subcategoría.',
             'image2.required'  => 'Se necesita la segunda imagen secundaria para esta subcategoría.',
             'image3.required'  => 'Se necesita la tercera imagen secundaria para esta subcategoría.',
             'image4.required'  => 'Se necesita la cuarta imagen secundaria para esta subcategoría.',
-            'image1.image'  => 'El archivo adjuntado en la imagen uno, no es una imagen.',
-            'image2.image'  => 'El archivo adjuntado en la imagen dos, no es una imagen.',
-            'image3.image'  => 'El archivo adjuntado en la imagen uno, tres es una imagen.',
-            'image4.image'  => 'El archivo adjuntado en la imagen uno, cuatro es una imagen.',
+            'image1.image'  => 'El archivo adjunto en la imagen uno, no es una imagen.',
+            'image2.image'  => 'El archivo adjunto en la imagen dos, no es una imagen.',
+            'image3.image'  => 'El archivo adjunto en la imagen uno, tres es una imagen.',
+            'image4.image'  => 'El archivo adjunto en la imagen uno, cuatro es una imagen.',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -217,7 +215,7 @@ class ProductController extends Controller
                 $product->discount = e($request['discount']);
             }
             if ($request['description'] != $product->description) {
-                $product->description = e($request['description']);
+                $product->description = $request['description'];
             }
             if ($request['stock'] != $product->stock) {
                 $product->stock = e($request['stock']);
@@ -244,7 +242,7 @@ class ProductController extends Controller
                 $file_certificate   = time().'-'.$fileDoc->getClientOriginalName();
                 //Eliminacion e insercin
                 File::delete($product -> certificate);
-                $product -> image1  = $pathDocs.$file_certificate;
+                $product -> certificate  = $pathDocs.$file_certificate;
                 //Moviendo a la carpeta
                 $fileDoc -> move($pathDocs, $file_certificate);
             }

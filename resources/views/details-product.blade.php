@@ -21,31 +21,31 @@
                 <div class = "product-imgs">
                     <div class = "img-display">
                         <div class = "img-showcase">
-                            <img src = "{{asset('static/images/default.jpg')}}" alt = "shoe image">
-                            <img src = "{{asset('static/images/default.jpg')}}" alt = "shoe image">
-                            <img src = "{{asset('static/images/default.jpg')}}" alt = "shoe image">
-                            <img src = "{{asset('static/images/default.jpg')}}" alt = "shoe image">
+                            <img src = "{{asset($product[0] -> image1)}}" alt = "shoe image">
+                            <img src = "{{asset($product[0] -> image2)}}" alt = "shoe image">
+                            <img src = "{{asset($product[0] -> image3)}}" alt = "shoe image">
+                            <img src = "{{asset($product[0] -> image4)}}" alt = "shoe image">
                         </div>
                     </div>
                     <div class = "img-select">
                         <div class = "img-item">
                             <a href = "#" data-id = "1">
-                            <img src = "{{asset('static/images/default.jpg')}}" alt = "shoe image">
+                            <img src = "{{asset($product[0] -> image1)}}" alt = "shoe image">
                             </a>
                         </div>
                         <div class = "img-item">
                             <a href = "#" data-id = "2">
-                            <img src = "{{asset('static/images/default.jpg')}}" alt = "shoe image">
+                            <img src = "{{asset($product[0] -> image2)}}" alt = "shoe image">
                             </a>
                         </div>
                         <div class = "img-item">
                             <a href = "#" data-id = "3">
-                            <img src = "{{asset('static/images/default.jpg')}}" alt = "shoe image">
+                            <img src = "{{asset($product[0] -> image3)}}" alt = "shoe image">
                             </a>
                         </div>
                         <div class = "img-item">
                             <a href = "#" data-id = "4">
-                            <img src = "{{asset('static/images/default.jpg')}}" alt = "shoe image">
+                            <img src = "{{asset($product[0] -> image4)}}" alt = "shoe image">
                             </a>
                         </div>
                     </div>
@@ -53,26 +53,33 @@
             </section>
             <section class="product-content col-lg-6">
                 <div class="cotainer-content">
-                    <h2 class = "product-title">Titulo Producto</h2>
-                    <span class="product-status">Disponible</span>
-
+                    <h2 class = "product-title">{{$product[0] -> name}}</h2>
+                    @if ($product[0] -> stock == 0)
+                        <span class="product-status status-outofstock">Agotado</span>
+                    @else
+                        <span class="product-status status-instock">Disponible</span>
+                    @endif
                     <div class = "product-price">
-                        <p class = "last-price">Precio anterior: <span>$257.00</span></p>
-                        <p class = "new-price">Nuevo precio: <span>$249.00 (5%)</span></p>
+                        @if ($product[0] -> discount != 0)
+                            <p class = "last-price">Precio anterior: <span>{{Config::get('configuracion-global.currency').$product[0] -> price}}</span></p>
+                            <p class = "new-price">Nuevo precio: <span>{{Config::get('configuracion-global.currency').$product[0]->price - round((($product[0] -> discount * $product[0] -> price) / 100)/100)}}</span></p>
+                        @else
+                            <p class = "new-price">Precio: <span>{{Config::get('configuracion-global.currency').$product[0]->price}}</span></p>
+                        @endif
                     </div>
 
                     <div class = "product-detail">
                         <h2>Acerca del producto: </h2>
                         <ul>
-                            <li><i class="bi bi-check-circle-fill"></i>SKU: <span>Black</span></li>
-                            <li><i class="bi bi-check-circle-fill"></i>Marca: <span>Black</span></li>
-                            <li><i class="bi bi-check-circle-fill"></i>Categoría: <span>in stock</span></li>
-                            <li><i class="bi bi-check-circle-fill"></i>Stock: <span>Shoes</span></li>
+                            <li><i class="bi bi-check-circle-fill"></i>SKU: <span>{{$product[0]->sku}}</span></li>
+                            <li><i class="bi bi-check-circle-fill"></i>Marca: <span>{{$product[0]->brand_name}}</span></li>
+                            <li><i class="bi bi-check-circle-fill"></i>Subcategoría: <span>{{$product[0]->subcategory_name}}</span></li>
+                            <li><i class="bi bi-check-circle-fill"></i>Stock: <span>{{$product[0]->stock}}</span></li>
                         </ul>
                     </div>
 
                     <div class = "purchase-info">
-                        <input type = "number" min = "1" value = "1">
+                        <input type = "number" min = "1" max="{{$product[0]->stock}}" value = "1">
                         <a href="{{url('/cart')}}">
                             <button type = "button" class = "btn"> Añadir al carrito <i class = "fas fa-shopping-cart"></i> </button>
                         </a>              
@@ -89,12 +96,18 @@
                     </div>
                     <div class="tabs__body">
                         <div class="tabs__content active">
-                            <h2 class="tabs__title">Titulo producto...</h2>
-                            <p class="tabs__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis ea, laudantium nam tenetur, vitae non quis obcaecati voluptates, pariatur iste tempora sunt maxime id tempore? Unde laboriosam accusantium est ipsum.</p>
+                            <h2 class="tabs__title">{{$product[0] -> name}}</h2>
+                            <p class="tabs__text">{!! $product[0] -> description !!}</p>
                         </div>
                         <div class="tabs__content">
-                            <h2 class="tabs__title">Titulo certificado...</h2>
-                            <p class="tabs__text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur facere animi totam, distinctio, nam veritatis alias odio sunt, doloribus dolor provident temporibus maxime atque? Voluptatem blanditiis similique delectus recusandae quod?</p>
+                            @if ($product[0] -> certificate == null)
+                                <h2 class="tabs__title">El producto {{$product[0] -> name}}, no posee con un certificado.</h2>
+                            @else
+                                <center>
+                                    <iframe src="{{url($product[0] -> certificate)}}"></iframe>
+                                </center>
+                            @endif
+                            
                         </div>
                     </div>
                 </div>

@@ -93,10 +93,16 @@ img{
     font-size: 0.9rem;
     display: inline-block;
     margin-bottom: 0.5rem;
-    background: #256eff;
     color: #fff;
     padding: 0 0.3rem;
 }
+.product-status.status-instock{
+    background: #256eff;
+}
+.product-status.status-outofstock{
+    background: #f64749;
+}
+
 .product-price{
     margin: 1rem 0;
     font-size: 1rem;
@@ -225,5 +231,10 @@ img{
 }
 .tabs__text{
     font: .95rem;
+}
+.tabs__content iframe{
+    margin: 20px 0;
+    width: 90%;
+    height: 100vh;
 }
 /*tabs*/
