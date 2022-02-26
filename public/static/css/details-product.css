@@ -118,6 +118,10 @@ img{
 .new-price span{
     color: #256eff;
 }
+.form__add_toCart{
+    display: flex;
+    align-items: baseline;
+}
 .product-detail h2{
     text-transform: capitalize;
     color: #12263a;

@@ -21,7 +21,7 @@ use App\Http\Controllers\MainController;
 
 //main
 
-//Route::get('/load/products/content/{section}', [MainController::class, 'getContentLoadProducts']) -> name('home');
+//Route::get('/load/products/content/{section}', [MainController::class, 'getContentLoadProducts']) -> name();
 
 //Home
 Route::get('/', [HomeController::class, 'getHome']) -> name('home');
@@ -48,5 +48,8 @@ Route::get('/details-product', [DetailProductController::class, 'getDetailProduc
 
 //Carrito
 Route::get('/cart', [CartController::class, 'getCart']);
+Route::get('/cart/add', [CartController::class, 'postAddToCart']);
+Route::get('/cart/list', [CartController::class, 'getListCart']);
+Route::get('/cart/update', [CartController::class, 'getCartUpdate']);
 //catalogo productos
 Route::get('/product-catalog', [ProductCatalogController::class, 'getProducts']);

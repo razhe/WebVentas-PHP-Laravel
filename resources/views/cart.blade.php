@@ -21,55 +21,23 @@
             <section class="cart-section">
                 <div class="cart-container-table">
                     <table>
-                        <tr>
-                            <th>Producto</th>
-                            <th>Cantidad</th>
-                            <th>Subtotal</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="cart-info">
-                                    <img src="{{asset('static/images/default.jpg')}}" alt="">
-                                    <div>
-                                        <p>Nombre producto</p>
-                                        <small>precio: <span>$9000</span></small><br>
-                                        <a href="#">remover</a>
-                                    </div>
-                                </div>
-                            </td>
-                            <td><input type="number" name="" id="" value="1" min="1" max=""></td>
-                            <td>$9990</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="cart-info">
-                                    <img src="{{asset('static/images/default.jpg')}}" alt="">
-                                    <div>
-                                        <p>Nombre producto</p>
-                                        <small>precio: <span>$9000</span></small><br>
-                                        <a href="#">remover</a>
-                                    </div>
-                                </div>
-                            </td>
-                            <td><input type="number" name="" id="" value="1" min="1" max=""></td>
-                            <td>$9990</td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Subtotal</th>
+                            </tr> 
+                        </thead>
+                        <tbody id="box-rows-carrito">
+                            <!--Encode js...-->
+                        </tbody>    
                     </table>
                 </div>
                 <div class="cart-total-container">
                     <table>
-                        <tr>
-                            <td>Subtotal</td>
-                            <td>$19010</td>
-                        </tr>
-                        <tr>
-                            <td>IVA</td>
-                            <td>$730</td>
-                        </tr>
-                        <tr>
-                            <td>Total</td>
-                            <td>$19740</td>
-                        </tr>
+                        <tbody id="box-rows-totalCarrito">
+                            
+                        </tbody>
                     </table>
                 </div>
             </section>
@@ -78,5 +46,5 @@
 @endsection
 
 @section('JS')
-    
+    <script src="{{url('static/js/cart.js')}}"></script>
 @endsection

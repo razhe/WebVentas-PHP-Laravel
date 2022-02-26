@@ -254,6 +254,24 @@
     margin-left: 4px;
     margin-right: 4px;
 }
+.item-producto .producto-imagen .social-icons button {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    font-size: 24px;
+    color: #fff;
+    border-radius: 8px;
+    background: none;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+.item-producto .producto-imagen .social-icons button:hover {
+    background-color: #fff;
+    color: #F2994A;
+}
 
 .item-producto .producto-imagen .social-icons a:hover {
     background-color: #fff;

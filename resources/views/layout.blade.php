@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{csrf_token()}}">
+    <meta name="currency" content="{{Config::get('configuracion-global.currency')}}">
     <meta name="routeName" content="{{Route::currentRouteName()}}">
     <title>{{Config::get('configuracion-global.name')}} | @yield('title')</title>
     @yield('CSS')
@@ -27,11 +28,11 @@
                     <img src="{{url('/static/images/logo.png')}}" alt="">
                 </div>
                 <div class="contenedor-busq-nav ">
-                    <form class="form-buscar" action="{{url('/search')}}" method="post">
+                    <form class="form-buscar" action="{{url('/product-catalog')}}" method="get">
                         @csrf
                         <div class="busqueda-box input-group">
-                                <input type="text" class="form-control" placeholder="Busca aquí...">
-                                <button class="btn-buscar-nav btn btn-outline-secondary" type="button" id=""><i class="bi bi-search"></i></button>
+                            <input type="text" name="item" class="form-control" placeholder="Busca aquí...">
+                            <button class="btn-buscar-nav btn btn-outline-secondary" type="submit" id=""><i class="bi bi-search"></i></button>
                         </div> 
                     </form>              
                 </div>

@@ -79,10 +79,12 @@
                     </div>
 
                     <div class = "purchase-info">
-                        <input type = "number" min = "1" max="{{$product[0]->stock}}" value = "1">
-                        <a href="{{url('/cart')}}">
-                            <button type = "button" class = "btn"> Añadir al carrito <i class = "fas fa-shopping-cart"></i> </button>
-                        </a>              
+                        <form class="form__add_toCart" action="{{url('/cart/add')}}" method="get">
+                            <input type="hidden" name="product" value="{{$product[0]->slug}}">
+                            <input type="hidden" name="selected" value="{{$product[0]->id}}">
+                            <input name="quant" type = "number" min = "1" max="{{$product[0]->stock}}" value = "1">
+                            <button type = "submit" class = "btn"> Añadir al carrito <i class = "fas fa-shopping-cart"></i> </button>
+                        </form>              
                     </div>
                     
                 </div>
