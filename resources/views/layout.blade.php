@@ -16,9 +16,12 @@
         <link rel="stylesheet" href="{{ url('/static/css/layout.css') }}">
         <!--CSS Bootstrap Icons-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.7.2/font/bootstrap-icons.min.css" integrity="sha512-1fPmaHba3v4A7PaUsComSM4TBsrrRGs+/fv0vrzafQ+Rw+siILTiJa0NtFfvGeyY5E182SDTaF5PqP+XOHgJag==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <!--PACE-->
+        
     <!--JS-->
         <!--JQuery-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </head>
 <body>
     <header>
@@ -28,7 +31,7 @@
                     <img src="{{url('/static/images/logo.png')}}" alt="">
                 </div>
                 <div class="contenedor-busq-nav ">
-                    <form class="form-buscar" action="{{url('/product-catalog')}}" method="get">
+                    <form class="form-buscar" action="{{url('/product-catalog/search')}}" method="post">
                         @csrf
                         <div class="busqueda-box input-group">
                             <input type="text" name="item" class="form-control" placeholder="Busca aquí...">
@@ -106,7 +109,7 @@
                                 <button class="btn-regresar"><i class="fas fa-arrow-left"></i>Regresar</button>
                                 <h3 data-categoria="" id="subtitulo" class="subtitulo item-subcategoria"></h3>
                                 @foreach ($subcategories as $subcategory)
-                                <a data-categoria="{{$subcategory -> category_name}}" class="item-subcategoria" href="{{url('/product-catalog/find/'.$subcategory -> name)}}">{{$subcategory -> name}}</a>
+                                <a data-categoria="{{$subcategory -> category_name}}" class="item-subcategoria" href="{{url('/product-catalog/find?subcat='.$subcategory -> slug)}}">{{$subcategory -> name}}</a>
                                 @endforeach 
                             </div>
                         </div>
@@ -115,7 +118,6 @@
             </div>
         </nav>
     </header>
-    
         @yield('content')
 
     <footer>

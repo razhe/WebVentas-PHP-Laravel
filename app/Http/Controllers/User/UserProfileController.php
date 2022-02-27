@@ -16,7 +16,7 @@ class UserProfileController extends Controller
     }
     public function getProfile()
     {
-        $categories = Category::where('status','1') -> orderBy('name', 'ASC')-> get();
+        $categories = Category::where('categories.status', '=', '1') -> orderBy('on_display', 'DESC') -> get(['name']);
         $subcategories = DB::select('CALL select_subcategories_public()');
         $data = 
         [

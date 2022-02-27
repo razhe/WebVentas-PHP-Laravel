@@ -7,9 +7,9 @@ const btnDepartamentos = document.getElementById('btn-categorias'),
 	  contenedorEnlacesNav = document.querySelector('#menu .contenedor-enlaces-nav'),
 	  contenedorSubCategorias = document.querySelector('#grid .contenedor-subcategorias'),
 	  esDispositivoMovil = () => window.innerWidth <= 800,
-
 	  userBtnOptions = document.getElementById('user-opt'),
-	  userListOptions = document.getElementById('drop-list');
+	  userListOptions = document.getElementById('drop-list'),
+	  base = location.protocol+'//'+location.host;
 
 //Scroll	  
 window.addEventListener('scroll', function () {
@@ -127,3 +127,5 @@ btnCerrarMenu.addEventListener('click', (e)=> {
 	});
 	document.querySelector('body').style.overflow = 'visible';
 });
+
+//loader

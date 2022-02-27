@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB; //Trabajar con la base de datos (para prcedimientos almacenados)
 use App\Models\Product;
+use App\Models\Category;
 use Session, Config;
 
 class CartController extends Controller
@@ -14,7 +15,7 @@ class CartController extends Controller
     }
     public function getCart()
     {
-        $categories = DB::select('CALL select_subcategories_join_categories_products()');
+        $categories = Category::where('categories.status', '=', '1') -> orderBy('on_display', 'DESC') -> get(['name']);
         $subcategories = DB::select('CALL select_subcategories_public()');
         $data = 
         [
