@@ -7,7 +7,7 @@ return [
 'address' =>'Av. example, #123',
 'quant_news' =>'8',
 'quant_oferts' =>'8',
-'products_per_page' =>'1',
+'products_per_page' =>'10',
 'currency' =>'$',
 'iva' =>'21',
 ];

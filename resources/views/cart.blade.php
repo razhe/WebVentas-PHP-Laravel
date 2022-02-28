@@ -33,12 +33,15 @@
                         </tbody>    
                     </table>
                 </div>
-                <div class="cart-total-container">
+                <div class="cart-total-container" id="cart-total-container">
                     <table>
                         <tbody id="box-rows-totalCarrito">
                             
                         </tbody>
                     </table>
+                </div>
+                <div class="btn-go-CheckOut" id="btn-go-CheckOut">
+
                 </div>
             </section>
         </div>

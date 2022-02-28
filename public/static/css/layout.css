@@ -363,7 +363,55 @@ header{
 }
 /*nuevo*/
 /*Loader*/
+@keyframes page-load {
+    from {
+        width:0%;
+        background-color: #ffc422;
+    }
+    to {
+        width:50%;
+        background-color: #c0392b;
+    }   
+}
+@keyframes page-loaded {
+    from {
+        width:50%;
+        background-color: #ffc422;
+    }
+    to {
+        width:100%;
+        background-color: #c0392b;
+        visibility: hidden;
+    }
+    
+}
+.page-loading::before {
+    content:" ";
+    display:block;
+    position:fixed;
+    z-index:10000;
+    height:2px;
+    width:0%;
+    top:0;
+    left:0;
+    background-color:#06D;
+    animation: page-load both ease-in-out .3s;
+    box-shadow:0 2px 2px rgba(0,0,0,.2);
+}
 
+.page-loaded::before {
+    content:" ";
+    display:block;
+    position:fixed;
+    z-index:10000;
+    height:2px;
+    width:0%;
+    top:0;
+    left:0;
+    background-color:#06D;
+    animation: page-loaded both ease-in-out .35s;
+    box-shadow:0 2px 2px rgba(0,0,0,.2);
+}
 
 /* ------------------------- */
 /* Mediaqueies */

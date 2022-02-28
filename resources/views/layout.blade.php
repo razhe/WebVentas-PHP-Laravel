@@ -16,8 +16,6 @@
         <link rel="stylesheet" href="{{ url('/static/css/layout.css') }}">
         <!--CSS Bootstrap Icons-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.7.2/font/bootstrap-icons.min.css" integrity="sha512-1fPmaHba3v4A7PaUsComSM4TBsrrRGs+/fv0vrzafQ+Rw+siILTiJa0NtFfvGeyY5E182SDTaF5PqP+XOHgJag==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <!--PACE-->
-        
     <!--JS-->
         <!--JQuery-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -31,10 +29,9 @@
                     <img src="{{url('/static/images/logo.png')}}" alt="">
                 </div>
                 <div class="contenedor-busq-nav ">
-                    <form class="form-buscar" action="{{url('/product-catalog/search')}}" method="post">
-                        @csrf
+                    <form class="form-buscar" action="{{url('/product-catalog')}}" method="get">
                         <div class="busqueda-box input-group">
-                            <input type="text" name="item" class="form-control" placeholder="Busca aquí...">
+                            <input type="text" name="search" class="form-control" placeholder="Busca aquí...">
                             <button class="btn-buscar-nav btn btn-outline-secondary" type="submit" id=""><i class="bi bi-search"></i></button>
                         </div> 
                     </form>              
@@ -118,6 +115,7 @@
             </div>
         </nav>
     </header>
+    <div class="progress-bar" id="progress-bar"></div>
         @yield('content')
 
     <footer>

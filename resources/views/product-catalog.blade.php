@@ -74,51 +74,17 @@
                                 <div class="filtro-marca filtro-box">
                                     <div class="titulo-secciones-filtro"><h3>Marca</h3><i class="bi bi-chevron-down"></i></div>
                                     <div class="contenido-filtro">
-                                        <div class="check-item">
-                                            <div class="texto-item">
-                                                <input type="checkbox" name="marca" id="">
-                                                <span>Nombre marca</span>
+                                        @foreach ($brands as $brand)
+                                            <div class="check-item">
+                                                <div class="texto-item">
+                                                    <input type="checkbox" name="marca" id="">
+                                                    <span>{{$brand -> name}}</span>
+                                                </div>
+                                                <div class="cantidad-item">
+                                                    <p>({{$brand -> count_prods}})</p>
+                                                </div>
                                             </div>
-                                            <div class="cantidad-item">
-                                                <p>(8)</p>
-                                            </div>
-                                        </div>
-                                        <div class="check-item">
-                                            <div class="texto-item">
-                                                <input type="checkbox" name="marca" id="">
-                                                <span>Nombre marca</span>
-                                            </div>
-                                            <div class="cantidad-item">
-                                                <p>(8)</p>
-                                            </div>
-                                        </div>
-                                        <div class="check-item">
-                                            <div class="texto-item">
-                                                <input type="checkbox" name="marca" id="">
-                                                <span>Nombre marca</span>
-                                            </div>
-                                            <div class="cantidad-item">
-                                                <p>(8)</p>
-                                            </div>
-                                        </div>
-                                        <div class="check-item">
-                                            <div class="texto-item">
-                                                <input type="checkbox" name="marca" id="">
-                                                <span>Nombre marca</span>
-                                            </div>
-                                            <div class="cantidad-item">
-                                                <p>(8)</p>
-                                            </div>
-                                        </div>
-                                        <div class="check-item">
-                                            <div class="texto-item">
-                                                <input type="checkbox" name="marca" id="">
-                                                <span>Nombre marca</span>
-                                            </div>
-                                            <div class="cantidad-item">
-                                                <p>(8)</p>
-                                            </div>
-                                        </div>
+                                        @endforeach
                                     </div>                          
                                 </div>
                             </div>

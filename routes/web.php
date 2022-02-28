@@ -53,4 +53,3 @@ Route::get('/cart/list', [CartController::class, 'getListCart']);
 Route::get('/cart/update', [CartController::class, 'getCartUpdate']);
 //catalogo productos
 Route::get('/product-catalog', [ProductCatalogController::class, 'getProducts']);
-Route::post('/product-catalog/search', [ProductCatalogController::class, 'postSearchItem']);

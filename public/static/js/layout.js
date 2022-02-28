@@ -129,3 +129,12 @@ btnCerrarMenu.addEventListener('click', (e)=> {
 });
 
 //loader
+window.addEventListener("beforeunload",function(e){
+    document.getElementById('progress-bar').classList.remove("page-loaded");
+    document.getElementById('progress-bar').classList.add("page-loading");
+}, false);
+
+window.addEventListener("load",function(e){
+    document.getElementById('progress-bar').classList.add("page-loaded");
+});
+
