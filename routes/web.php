@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DetailProductController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\ProductCatalogController;
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\MainController;
@@ -52,4 +52,6 @@ Route::get('/cart/add', [CartController::class, 'postAddToCart']);
 Route::get('/cart/list', [CartController::class, 'getListCart']);
 Route::get('/cart/update', [CartController::class, 'getCartUpdate']);
 //catalogo productos
-Route::get('/product-catalog', [ProductCatalogController::class, 'getProducts']);
+Route::get('/products', [ProductsController::class, 'getProducts']);
+Route::get('/products/{subcategory}', [ProductsController::class, 'getProductsBySubcat']);
+Route::post('/product/search/', [ProductsController::class, 'postSearchProducts']);

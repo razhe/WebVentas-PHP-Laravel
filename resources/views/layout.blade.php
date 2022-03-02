@@ -29,7 +29,8 @@
                     <img src="{{url('/static/images/logo.png')}}" alt="">
                 </div>
                 <div class="contenedor-busq-nav ">
-                    <form class="form-buscar" action="{{url('/product-catalog')}}" method="get">
+                    <form class="form-buscar" action="{{url('/product/search/')}}" method="post">
+                        @csrf
                         <div class="busqueda-box input-group">
                             <input type="text" name="search" class="form-control" placeholder="Busca aquí...">
                             <button class="btn-buscar-nav btn btn-outline-secondary" type="submit" id=""><i class="bi bi-search"></i></button>
@@ -59,7 +60,7 @@
                 </div>
                 <div class="contenedor-enlaces-directos">
                     <a class="direct__links" href="{{url('/')}}">INICIO</a>
-                    <a class="direct__links" href="{{url('/product-catalog')}}">TIENDA</a>
+                    <a class="direct__links" href="{{url('/products')}}">TIENDA</a>
                     <a class="direct__links" href="#">CONTACTO</a>
                     <div class="content__user" id="content-user">
                         <li class="user__list">
@@ -106,7 +107,7 @@
                                 <button class="btn-regresar"><i class="fas fa-arrow-left"></i>Regresar</button>
                                 <h3 data-categoria="" id="subtitulo" class="subtitulo item-subcategoria"></h3>
                                 @foreach ($subcategories as $subcategory)
-                                <a data-categoria="{{$subcategory -> category_name}}" class="item-subcategoria" href="{{url('/product-catalog/find?subcat='.$subcategory -> slug)}}">{{$subcategory -> name}}</a>
+                                <a data-categoria="{{$subcategory -> category_name}}" class="item-subcategoria" href="{{url('/products'.'/'.$subcategory -> slug)}}">{{$subcategory -> name}}</a>
                                 @endforeach 
                             </div>
                         </div>

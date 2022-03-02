@@ -10,3 +10,7 @@ for (let i = 0; i < tituloAcordeon.length; i++) {
        this.classList.toggle('activo'); 
     });
 }
+
+//Filtros
+
+//Ordenar por

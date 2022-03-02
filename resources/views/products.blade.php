@@ -1,6 +1,6 @@
 @extends('layout')
 @section('CSS')
-    <link rel="stylesheet" href="{{url('static/css/product-catalog.css')}}">
+    <link rel="stylesheet" href="{{url('static/css/products.css')}}">
 @endsection
 @section('title', 'Catálogo')
 
@@ -19,12 +19,15 @@
             <div class="seccion__superior">
                 <button class="btn-mostrar-filtros" id="mostrar-filtros"><i class="bi bi-layout-sidebar-inset"></i></button>
                 <span>Mostrando 9 productos</span>
-                <select name="sort-by" id="">
-                    <option value="nombre-asc">Nombre, A a Z</option>
-                    <option value="nombre-desc">Nombre, Z a A</option>
-                    <option value="precio-asc">Precio, bajo a alto</option>
-                    <option value="precio-desc">Precio, alto a bajo</option>
-                </select>
+                <form action="{{url('/product-catalog')}}" method="get">
+                    <select name="sort-by" id="sort-by" onchange="this.form.submit();">
+                        <option selected disabled value="">Orden por defecto</option>
+                        <option value="nombre-asc">Nombre, A a Z</option>
+                        <option value="nombre-desc">Nombre, Z a A</option>
+                        <option value="precio-asc">Precio, bajo a alto</option>
+                        <option value="precio-desc">Precio, alto a bajo</option>
+                    </select>
+                </form>
             </div>
             <div class="row contenedor-catalogo m-0">
                 <div class="seccion__izquierda col-lg-3 col-md-3" id="seccion-izquierda">
@@ -125,5 +128,18 @@
 @endsection
 
 @section('JS')
-    <script src="{{url('static/js/product-catalog.js')}}"></script>
+    <script src="{{url('static/js/products.js')}}"></script>
+    <script>
+        $('#sort-by').change(function(){
+            //let sort = $('#sort-by').val();
+            //let url = document.getElementsByName('currentRoute')[0].getAttribute('content');
+
+            //newUrl = url.split('&', + 1).pop();
+            //var page = url.substring(url.lastIndexOf('/') + 1);
+            //console.log(newUrl);
+            //var page = url.substring(url.lastIndexOf('&') + 1);
+            //console.log(page + '&sort-by=' + sort);
+            //window.location= newUrl + '&sort=' + sort;
+        });
+    </script>
 @endsection
