@@ -4,6 +4,7 @@ $(document).ready(function(){
 let csfr_token = document.getElementsByName('csrf-token')[0].getAttribute('content'),
     currency = document.getElementsByName('currency')[0].getAttribute('content'),
     inpt_cart = document.getElementsByClassName('inpt_cart_quant');
+    removeBtnCart = document.getElementsByClassName('btn-remove-item');
 
 
 
@@ -18,11 +19,11 @@ function listarCarrito() {
         method:'GET',
         data:{},
         success:function(data) {
-            let boxCarrito = document.getElementById('box-rows-carrito');
-            let htmlCarrito = "";
-            let boxTotalCarrito = document.getElementById('box-rows-totalCarrito');
-            let htmlTotalCarrito = "";
-            let btnCheckOut = document.getElementById('btn-go-CheckOut');
+            let boxCarrito = document.getElementById('box-rows-carrito'),
+                htmlCarrito = "",
+                boxTotalCarrito = document.getElementById('box-rows-totalCarrito'),
+                htmlTotalCarrito = "",
+                btnCheckOut = document.getElementById('btn-go-CheckOut');
             if(data.carrito == null){
                 htmlCarrito += `
                 <tr>
@@ -43,7 +44,7 @@ function listarCarrito() {
                                 <div>
                                     <p>${data.carrito[i].nombre}</p>
                                     <small>precio: <span>${currency+data.carrito[i].precio}</span></small><br>
-                                    <a href="#">remover</a>
+                                    <button class="btn-remove-item" data-parent="${data.carrito[i].id}">remover</button>
                                 </div>
                             </div>
                         </td>
@@ -72,7 +73,6 @@ function listarCarrito() {
                             <button class="btn btn-success">Proceder al pago</button>
                         </a>
                 `;
-
                 boxCarrito.innerHTML = htmlCarrito;
                 boxTotalCarrito.innerHTML = htmlTotalCarrito;
             }
@@ -101,7 +101,31 @@ $(document).ajaxSuccess(function() {
             
         });
     }
+    //remove
+    for (let i = 0; i < removeBtnCart.length; i++) {
+        removeBtnCart[i].addEventListener('click', (event)=>{
+            let code = removeBtnCart[i].dataset.parent;
+            $.ajax({
+                url:'cart/remove?&codigo=' + code,
+                method:'GET',
+                data:{},
+                success:function(data){
+                    listarCarrito();
+                    location.reload();
+                },
+                error:function(error){
+                    console.error(error);
+                }
+            });
+            
+        });
+    }
 });
+
+    
+
+
+
     
 
 /* 

@@ -15,21 +15,27 @@
                     </ul>
                 </div>
             </section>
+            @if (!empty($subcategory_slug))
+            <form action="{{url('/products/filter?subcategory='.$subcategory_slug)}}" method="post">
+                @csrf
+            @else
+            <form action="{{url('/products/filter')}}" method="post">
+                @csrf
+            @endif
             
-            <div class="seccion__superior">
-                <button class="btn-mostrar-filtros" id="mostrar-filtros"><i class="bi bi-layout-sidebar-inset"></i></button>
-                <span>Mostrando 9 productos</span>
-                <form action="{{url('/product-catalog')}}" method="get">
-                    <select name="sort-by" id="sort-by" onchange="this.form.submit();">
-                        <option selected disabled value="">Orden por defecto</option>
-                        <option value="nombre-asc">Nombre, A a Z</option>
-                        <option value="nombre-desc">Nombre, Z a A</option>
-                        <option value="precio-asc">Precio, bajo a alto</option>
-                        <option value="precio-desc">Precio, alto a bajo</option>
-                    </select>
-                </form>
-            </div>
             <div class="row contenedor-catalogo m-0">
+                <div class="seccion__superior">
+                    <button type="button" class="btn-mostrar-filtros" id="mostrar-filtros"><i class="bi bi-layout-sidebar-inset"></i></button>
+                    <span>Se han encontrado {{count($products)}} productos.</span>
+                    
+                        <select name="sort-by" id="sort-by" onchange="this.form.submit();">
+                            <option disabled selected value="">Orden por defecto</option>
+                            <option value="name-asc" @if(!empty($_GET['sort-by']) && $_GET['sort-by'] == 'name-asc') selected @endif>Nombre, A a Z</option>
+                            <option value="name-desc" @if(!empty($_GET['sort-by']) && $_GET['sort-by'] == 'name-desc') selected @endif>Nombre, Z a A</option>
+                            <option value="price-asc" @if(!empty($_GET['sort-by']) && $_GET['sort-by'] == 'price-asc') selected @endif>Precio, bajo a alto</option>
+                            <option value="price-desc" @if(!empty($_GET['sort-by']) && $_GET['sort-by'] == 'price-desc') selected @endif>Precio, alto a bajo</option>
+                        </select>
+                </div>
                 <div class="seccion__izquierda col-lg-3 col-md-3" id="seccion-izquierda">
                     <div class="contenedor-items-izq">
                         <div class="box-filtros">
@@ -66,21 +72,29 @@
                                     <div class="precio-item contenido-filtro">
                                         <div class="field">
                                             <span>Min</span>
-                                            <input type="number" class="input-min" value="2500">
+                                            <input type="number" name="min-price" class="input-min" @if(!empty($_GET['min-price'])) value="{{$_GET['min-price']}}" @endif>
                                         </div>
                                         <div class="field">
                                             <span>Max</span>
-                                            <input type="number" class="input-max" value="7500">
+                                            <input type="number" name="max-price" class="max-price" @if(!empty($_GET['max-price'])) value="{{$_GET['max-price']}}" @endif>
+                                        </div>
+                                        <div class="">
+                                            <button type="submit"><i class="bi bi-funnel"></i></button>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="filtro-marca filtro-box">
                                     <div class="titulo-secciones-filtro"><h3>Marca</h3><i class="bi bi-chevron-down"></i></div>
                                     <div class="contenido-filtro">
+                                        @if (!empty($_GET['brand']))
+                                            @php
+                                                $filter_brands=explode(',',$_GET['brand']);
+                                            @endphp
+                                        @endif
                                         @foreach ($brands as $brand)
                                             <div class="check-item">
                                                 <div class="texto-item">
-                                                    <input type="checkbox" name="marca" id="">
+                                                    <input type="checkbox" @if(!empty($filter_brands) && in_array($brand->name, $filter_brands)) checked @endif name="brand[]" onchange="this.form.submit();" value="{{$brand -> name}}">
                                                     <span>{{$brand -> name}}</span>
                                                 </div>
                                                 <div class="cantidad-item">
@@ -91,6 +105,7 @@
                                     </div>                          
                                 </div>
                             </div>
+            </form>
                         </div>
                     </div>
                 </div>

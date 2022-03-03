@@ -109,8 +109,10 @@ class CartController extends Controller
     public function getTotalCart(){
         $arregloCarrito = session('carrito');
         $totalNeto = 0;
+        $cantidadTotal = 0;
         for ($i=0; $i < sizeof($arregloCarrito); $i++) {
             $totalNeto += $arregloCarrito[$i]['subtotal'];
+            $cantidadTotal++;
         }
         $iva = $totalNeto * (Config('configuracion-global.iva') / 100);
         $total = $totalNeto + $iva;
@@ -118,8 +120,27 @@ class CartController extends Controller
             'total_neto' => $totalNeto,
             'iva' => $iva,
             'total' => $total,
+            'cantidadProductos'=> $cantidadTotal,
         ];
+        
         session(['totalCarrito' => $arreglo]);
+    }
+    public function getCartRemove(Request $request)
+    {
+        $carrito = session('carrito');
+        $encontro = false;
+        $numero = 0;
+        for ($i=0; $i < sizeof($carrito); $i++) { //For para encontrar el producto en el carrito
+            if($carrito[$i]['id'] == $request['codigo']){
+                $encontro = true;
+                $numero = $i;
+            }
+        }
+        if ($encontro == true) {//Encontro el producto
+            unset($carrito[$numero]);         
+        }
+        session(['carrito' => $carrito]);
+        $this -> getTotalCart();
     }
 
     public function getListCart()
@@ -132,3 +153,4 @@ class CartController extends Controller
         return response($data);
     }
 }
+

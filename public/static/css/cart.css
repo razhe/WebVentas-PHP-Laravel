@@ -75,11 +75,14 @@
     height: 80px;
     margin-right: 10px;
 }
-.cart-container-table table td a{
+.cart-container-table table td button{
     color: #f79138;
     text-transform: capitalize;
     font-size: .75rem;
     letter-spacing: 1px;
+    outline: none;
+    background: none;
+    border: none;
 }
 .cart-container-table table td input{
     width: 40px;

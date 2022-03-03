@@ -40,7 +40,12 @@
                 <div class="contenedor-opt-usr">
                     <div class="contenedor-carrito">
                         <div class=""><a href="{{url('/cart')}}"><i class="bi bi-cart3"></i></a></div>
-                        <div class=""><div class="contador-carrito">0</div></div>
+                        @if (Session::has('totalCarrito'))
+                            <div class=""><div class="contador-carrito">{{session('totalCarrito.0.cantidadProductos')}}</div></div>
+                        @else
+                            <div class=""><div class="contador-carrito">0</div></div>
+                        @endif
+                        
                     </div>
                 </div>
             </div>
@@ -107,7 +112,7 @@
                                 <button class="btn-regresar"><i class="fas fa-arrow-left"></i>Regresar</button>
                                 <h3 data-categoria="" id="subtitulo" class="subtitulo item-subcategoria"></h3>
                                 @foreach ($subcategories as $subcategory)
-                                <a data-categoria="{{$subcategory -> category_name}}" class="item-subcategoria" href="{{url('/products'.'/'.$subcategory -> slug)}}">{{$subcategory -> name}}</a>
+                                <a data-categoria="{{$subcategory -> category_name}}" class="item-subcategoria" href="{{url('/products?subcategory='.$subcategory -> slug)}}">{{$subcategory -> name}}</a>
                                 @endforeach 
                             </div>
                         </div>

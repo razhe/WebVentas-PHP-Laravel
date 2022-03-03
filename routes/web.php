@@ -51,7 +51,13 @@ Route::get('/cart', [CartController::class, 'getCart']);
 Route::get('/cart/add', [CartController::class, 'postAddToCart']);
 Route::get('/cart/list', [CartController::class, 'getListCart']);
 Route::get('/cart/update', [CartController::class, 'getCartUpdate']);
+Route::get('/cart/remove', [CartController::class, 'getCartRemove']);
 //catalogo productos
-Route::get('/products', [ProductsController::class, 'getProducts']);
-Route::get('/products/{subcategory}', [ProductsController::class, 'getProductsBySubcat']);
-Route::post('/product/search/', [ProductsController::class, 'postSearchProducts']);
+Route::get('/products', [ProductsController::class, 'getProducts']) -> name('products');
+Route::get('/products/{subcategory}', [ProductsController::class, 'getProductsBySubcat']) -> name('products.subcategory');
+Route::post('/product/search/', [ProductsController::class, 'postSearchProducts']) -> name('products.search');
+Route::post('/products/filter', [ProductsController::class, 'postShopFilter']) -> name('products.filter');
+
+//Route::post('/products/{subcategory}', [ProductsController::class, 'postSubcategory']) -> name('');
+
+//Route::post('/products/filter/{subcategory}', [ProductsController::class, 'postShopFilter']) -> name('products.filter');
