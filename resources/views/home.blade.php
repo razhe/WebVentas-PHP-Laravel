@@ -187,7 +187,7 @@
                                     @if ($i <= Config::get('configuracion-global.quant_news'))
                                         <div class="item-producto">
                                             <div class="tag-producto tag-producto-oferta">
-                                                <span>{{$products[$i] -> discount}}%</span>
+                                                <span>-{{$products[$i] -> discount}}%</span>
                                             </div>
                                             <div class="producto-imagen">
                                                 <img src="{{asset($products[$i] -> image1)}}" alt="">

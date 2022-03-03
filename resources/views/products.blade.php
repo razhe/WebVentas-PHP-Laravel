@@ -113,22 +113,44 @@
                     <div class="row contenedor-productos g-0">  
                         @foreach ($products as $product)
                             <div class="box-producto col-lg-3 col-md-4 col-sm-6 p-2">
-                                <div class="item-producto">
-                                    <div class="imagen-producto">
-                                        <img src="{{asset($product -> image1)}}" alt="">
-                                        <div class="acciones-producto">
-                                            <a href="{{url('/details-product?product='.$product -> slug. '&selected=' .Hash::make($product -> id))}}"><i class="bi bi-eye"></i></a>
-                                            <a href="{{url('/cart/add?product='.$product -> slug.'&selected='.$product -> id. '&quant=1')}}"><i class="bi bi-bag"></i></a>
+                                @if ($product -> discount != 0)
+                                    <div class="item-producto">
+                                        <div class="tag-producto tag-producto-oferta">
+                                            <span>-{{$product -> discount}}%</span>
+                                        </div>
+                                        <div class="imagen-producto">
+                                            <img src="{{asset($product -> image1)}}" alt="">
+                                            <div class="acciones-producto">
+                                                <a href="{{url('/details-product?product='.$product -> slug. '&selected=' .Hash::make($product -> id))}}"><i class="bi bi-eye"></i></a>
+                                                <a href="{{url('/cart/add?product='.$product -> slug.'&selected='.$product -> id. '&quant=1')}}"><i class="bi bi-bag"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="info-producto p-1">
+                                            <h5 class="titulo-producto">{{$product -> name}}</h5>
+                                            <div class="detalle-item-producto">
+                                                <small class="">{{$product -> brand_name}}</small>
+                                                <small class="">{{Config::get('configuracion-global.currency').$product -> price}}</small>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="info-producto p-1">
-                                        <h5 class="titulo-producto">{{$product -> name}}</h5>
-                                        <div class="detalle-item-producto">
-                                            <small class="">{{$product -> brand_name}}</small>
-                                            <small class="">{{Config::get('configuracion-global.currency').$product -> price}}</small>
+                                @else
+                                    <div class="item-producto">
+                                        <div class="imagen-producto">
+                                            <img src="{{asset($product -> image1)}}" alt="">
+                                            <div class="acciones-producto">
+                                                <a href="{{url('/details-product?product='.$product -> slug. '&selected=' .Hash::make($product -> id))}}"><i class="bi bi-eye"></i></a>
+                                                <a href="{{url('/cart/add?product='.$product -> slug.'&selected='.$product -> id. '&quant=1')}}"><i class="bi bi-bag"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="info-producto p-1">
+                                            <h5 class="titulo-producto">{{$product -> name}}</h5>
+                                            <div class="detalle-item-producto">
+                                                <small class="">{{$product -> brand_name}}</small>
+                                                <small class="">{{Config::get('configuracion-global.currency').$product -> price}}</small>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endif
                             </div> 
                         @endforeach 
                     </div>
@@ -144,17 +166,4 @@
 
 @section('JS')
     <script src="{{url('static/js/products.js')}}"></script>
-    <script>
-        $('#sort-by').change(function(){
-            //let sort = $('#sort-by').val();
-            //let url = document.getElementsByName('currentRoute')[0].getAttribute('content');
-
-            //newUrl = url.split('&', + 1).pop();
-            //var page = url.substring(url.lastIndexOf('/') + 1);
-            //console.log(newUrl);
-            //var page = url.substring(url.lastIndexOf('&') + 1);
-            //console.log(page + '&sort-by=' + sort);
-            //window.location= newUrl + '&sort=' + sort;
-        });
-    </script>
 @endsection

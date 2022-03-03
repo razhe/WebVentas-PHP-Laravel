@@ -185,11 +185,58 @@ input[type="number"]::-webkit-inner-spin-button {
 .item-producto{
     margin: auto;
     background-color: #fff;
+    position: relative;
 }
 .item-producto .imagen-producto{
     position: relative;
     overflow: hidden;
 }
+
+.tag-producto{
+    height: 30px;
+    width: 70px;
+    text-align: center;
+    line-height: 28px;
+    position: absolute;
+    top: 25px;
+    left: -8px;
+    z-index: 1;
+    border-radius: 0 2px 2px 0px;
+}
+.tag-producto span{
+    font-size: .73rem;
+    font-weight: 600;
+    letter-spacing: .7px;
+}
+
+.tag-producto.tag-producto-novedad{
+    background-color: #3c6692;
+    color: #fff;
+}
+.tag-producto.tag-producto-novedad::before{
+    content: "";
+	display: block;
+	background: transparent;
+	border-left: 8px solid transparent;
+	border-top: 8px solid #174372;
+    top: 30px;
+	position: absolute;
+}
+
+.tag-producto.tag-producto-oferta{
+    background-color: #f54949;
+    color: #fff;
+}
+.tag-producto.tag-producto-oferta::before{
+    content: "";
+	display: block;
+	background: transparent;
+	border-left: 8px solid transparent;
+	border-top: 8px solid #b11313;
+    top: 30px;
+	position: absolute;
+}
+
 .item-producto .imagen-producto img{
     width: 100%;
     object-fit: cover;
