@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddFieldForeignKeyAddressToUsers extends Migration
+class AddSoftDeletesToAddress extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class AddFieldForeignKeyAddressToUsers extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_address')->nullable(true);;
-            $table->foreign('id_address')-> references('id')->on('address')->onUpdate('cascade')->onDelete('cascade');
+        Schema::table('address', function (Blueprint $table) {
+            $table -> softDeletes();
         });
     }
 
@@ -26,8 +25,8 @@ class AddFieldForeignKeyAddressToUsers extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
+        Schema::table('address', function (Blueprint $table) {
+            $table -> dropSoftDeletes();
         });
     }
 }

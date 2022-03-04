@@ -47,7 +47,7 @@
             </div>
             <div class="contenido-perfil">
                 <div id="box-perfil-principal" class="box-perfil-principal box-contenido activo">
-                    <h4>¡Hola: nombre!</h4>
+                    <h4>¡Hola: {{Auth::user()-> name}}!</h4>
                     <form class="register__form needs-validation" action="{{url('/profile/update-profile')}}" method="post" novalidate>
                         @csrf
                         <input type="hidden" name="codigo_usuario" value="{{Auth::user()-> id}}">
@@ -136,24 +136,30 @@
                 <div id="box-direcciones-listar" class="box-direcciones box-contenido">
                     <button type="button" id="btn-agregar-direccion" class="btn btn-primary">Agregar direccion</button>
                     <p>Solo se puede tener un máximo de 2 direcciones registradas.</p>
-                    <div class="item-direccion">
-                        <div class="titulo-item-direccion"><span>Titulo</span><i class="bi bi-chevron-down"></i></div>
-                        <div class="contenido-direccion">
-                            <p>Dirección: <input type="text" name=""></p>
-                            <p>Edificio recidencial: <input type="text" name=""></p>
-                            <p>Región: <input type="text" name=""></p>
-                            <p>Comuna: <input type="text" name=""></p>
+                    @foreach ($direcciones as $direccion)
+                        <div class="item-direccion">
+                            <div class="titulo-item-direccion"><span>{{$direccion -> address}}</span><i class="bi bi-chevron-down"></i></div>
+                            <div class="contenido-direccion">
+                                <p>Dirección: <span>{{$direccion -> address}}</span></p>
+                                <p>Edificio recidencial: <span>{{$direccion -> residency}}</span></p>
+                                <p>Región: <span>{{$direccion -> comuna_name}}</span></p>
+                                <p>Comuna: <span>{{$direccion -> region_name}}</span></p>
 
-                            <div class="opciones-direccion">
-                                <a href="#">Remover</a>
-                                <a href="#">Guardar</a>
-                            </div>
-                        </div>                                
-                    </div>
+                                <div class="opciones-direccion">
+                                    <form action="{{url('/profile/delete-address')}}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="address" value="{{$direccion -> id}}">
+                                        <button type="submit">Remover</button>
+                                    </form>
+                                </div>
+                            </div>                                
+                        </div>
+                    @endforeach
+                    
                 </div>
                 <div id="box-direcciones-agregar" class="box-direcciones box-contenido">
                     <button type="button" id="volver-listar-direcciones" class="btn btn-primary">Volver</button>
-                    <form class="register__form needs-validation" action="{{url('/profile/update-profile')}}" method="post" novalidate>
+                    <form class="register__form needs-validation" action="{{url('/profile/create-address')}}" method="post" novalidate>
                         @csrf
                         <input type="hidden" name="codigo_usuario" value="{{Auth::user()-> id}}">
                          <!--direccion-->
@@ -163,16 +169,16 @@
                                 <span class="input-group-text" id="basic-addon1">
                                     <i class="bi bi-compass"></i>
                                 </span>
-                                <input type="text" placeholder="Ej. Número, pasaje, calle/avenida" value="" name="direccion" class="form-control" required>
+                                <input type="text" placeholder="Ej. Número, pasaje, calle/avenida" value="" name="address" class="form-control" required>
                             </div>
                         </div>
                         <div class="form-group mt-1">
                             <label for="inputState">Recidencia:</label>
-                            <select id="inputState" name="recidencia" class="form-control form-select" aria-label="Default select example">
+                            <select id="inputState" name="residency" class="form-control form-select" aria-label="Default select example">
                                 <option selected disabled>Seleccione:</option>
-                                <option value="1">Casa</option>
-                                <option value="2">Departamento</option>
-                                <option value="3">Recinto empresarial</option>
+                                <option value="8976">Casa</option>
+                                <option value="4932">Departamento</option>
+                                <option value="3456">Recinto empresarial</option>
                             </select>
                         </div>
                         
@@ -193,6 +199,7 @@
                             </div>
                         </div>
                         <span>*Por el momento los envíos solo están disponibles para la región metropolitana.</span>
+                        <button type="submit" class="btn btn-success">Guardar</button>
                     </form>
                 </div>
             </div>

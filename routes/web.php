@@ -32,6 +32,9 @@ Route::post('/profile/update-password', [UserProfileController::class, 'postUpda
 
 Route::get('/profile/regiones', [UserProfileController::class, 'getRegiones']) -> name('profile');
 Route::post('/profile/comunas/{id}', [UserProfileController::class, 'getComunas']);
+Route::post('/profile/create-address', [UserProfileController::class, 'postSaveAddress']);
+Route::post('/profile/delete-address', [UserProfileController::class, 'postRemoveAddress']);
+
 
 //Router auth
 Route::get('/login', [AuthController::class, 'getLogin']) -> name('login'); 
