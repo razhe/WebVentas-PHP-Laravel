@@ -38,6 +38,12 @@
                 <div class="item-navegacion">
                     <button id="pefil-contraseña" class="boton-seccion-perfil"><i class="bi bi-shield-lock"></i><span>Contraseña</span></button>
                 </div>
+                <div class="item-navegacion">
+                    <button id="pefil-direcciones" class="boton-seccion-perfil"><i class="bi bi-signpost-split"></i><span>Direcciones</span></button>
+                </div>
+                <div class="item-navegacion">
+                    <button id="pefil-compras" class="boton-seccion-perfil"><i class="bi bi-clipboard-check"></i><span>Mis compras</span></button>
+                </div>
             </div>
             <div class="contenido-perfil">
                 <div id="box-perfil-principal" class="box-perfil-principal box-contenido activo">
@@ -87,18 +93,6 @@
                                 <input type="email" value="{{Auth::user() -> email}}" name="email" class="form-control" disabled>
                             </div>
                         </div>
-                        
-                        <!--direccion-->
-                        <div class="input__container mt-1">
-                            <label for="address">Dirección:</label>
-                            <div class="input-group">
-                                <span class="input-group-text" id="basic-addon1">
-                                    <i class="bi bi-signpost"></i>
-                                </span>
-                                <input type="text" value="{{Auth::user() -> address}}" name="address" class="form-control">
-                            </div>
-                        </div>
-                        <input type="submit" name="editar" value="Actualizar Perfil" class="btn btn-success mt-3">
                     </form>
                 </div>
                 <div id="box-contraseña" class="box-contraseña box-contenido">
@@ -136,6 +130,69 @@
                             </div>
                         </div>
                         <input type="submit" name="actualizar_contraseña" value="Actualizar contraseña" class="btn btn-success mt-4">
+                    </form>
+                </div>
+
+                <div id="box-direcciones-listar" class="box-direcciones box-contenido">
+                    <button type="button" id="btn-agregar-direccion" class="btn btn-primary">Agregar direccion</button>
+                    <p>Solo se puede tener un máximo de 2 direcciones registradas.</p>
+                    <div class="item-direccion">
+                        <div class="titulo-item-direccion"><span>Titulo</span><i class="bi bi-chevron-down"></i></div>
+                        <div class="contenido-direccion">
+                            <p>Dirección: <input type="text" name=""></p>
+                            <p>Edificio recidencial: <input type="text" name=""></p>
+                            <p>Región: <input type="text" name=""></p>
+                            <p>Comuna: <input type="text" name=""></p>
+
+                            <div class="opciones-direccion">
+                                <a href="#">Remover</a>
+                                <a href="#">Guardar</a>
+                            </div>
+                        </div>                                
+                    </div>
+                </div>
+                <div id="box-direcciones-agregar" class="box-direcciones box-contenido">
+                    <button type="button" id="volver-listar-direcciones" class="btn btn-primary">Volver</button>
+                    <form class="register__form needs-validation" action="{{url('/profile/update-profile')}}" method="post" novalidate>
+                        @csrf
+                        <input type="hidden" name="codigo_usuario" value="{{Auth::user()-> id}}">
+                         <!--direccion-->
+                         <div class="input__container mt-1">
+                            <label for="phone">Dirección:</label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="bi bi-compass"></i>
+                                </span>
+                                <input type="text" placeholder="Ej. Número, pasaje, calle/avenida" value="" name="direccion" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group mt-1">
+                            <label for="inputState">Recidencia:</label>
+                            <select id="inputState" name="recidencia" class="form-control form-select" aria-label="Default select example">
+                                <option selected disabled>Seleccione:</option>
+                                <option value="1">Casa</option>
+                                <option value="2">Departamento</option>
+                                <option value="3">Recinto empresarial</option>
+                            </select>
+                        </div>
+                        
+                        <div class="row m-0 g-0">
+                            <!--region-->
+                            <div class="form-group col-lg-6 col-md-6 mt-1">
+                                <label for="inputState">Región:</label>
+                                <select id="select-region" name="region" class="form-control form-select" aria-label="Default select example">
+                                    <option value="region-metropolitana" selected>Region Metropolitana</option>
+                                </select>
+                            </div>
+                            <!--comuna-->
+                            <div class="form-group col-lg-6 col-md-6 mt-1">
+                                <label for="inputState">Comuna:</label>
+                                <select id="select-comuna" name="comuna" class="form-control form-select" aria-label="Default select example">
+                                    <option selected disabled>Seleccione una región:</option>
+                                </select>
+                            </div>
+                        </div>
+                        <span>*Por el momento los envíos solo están disponibles para la región metropolitana.</span>
                     </form>
                 </div>
             </div>

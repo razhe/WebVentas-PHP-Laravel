@@ -58,7 +58,42 @@
 .navegacion-perfil .item-navegacion:hover{
     border-left: 3px solid #fff;
 }
-
+/*lista de direcciones*/
+.item-direccion{
+    margin-top: 20px;
+}
+.item-direccion .titulo-item-direccion{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+    background-color: #e2e2e2;
+    align-items: center;
+    border-radius: 4px;
+    height: 45px;
+    cursor: pointer;
+}
+.item-direccion .titulo-item-direccion h3{
+    font-size: 1.1rem;
+}
+.item-direccion .titulo-item-direccion i{
+    transition: .3s all ease-in-out;
+}
+.item-direccion .contenido-direccion{
+    background-color: #eeeeee;
+    height: 0;
+    overflow: hidden;
+    border-radius: 0 0 4px 4px;
+    transition: .2s all ease-in-out;
+}
+.titulo-item-direccion.activo{
+    border-radius: 4px 4px 0 0;
+}
+.titulo-item-direccion.activo ~ .contenido-direccion{
+    height: 210px;
+}
+.titulo-item-direccion.activo i{
+    transform: rotate(180deg);
+}
 @media(max-width: 600px){
     .navegacion-perfil{
         left: 0;

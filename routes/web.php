@@ -29,6 +29,10 @@ Route::get('/', [HomeController::class, 'getHome']) -> name('home');
 Route::get('/profile', [UserProfileController::class, 'getProfile']) -> name('profile');
 Route::post('/profile/update-profile', [UserProfileController::class, 'postUpdateProfile']) -> name('profile');
 Route::post('/profile/update-password', [UserProfileController::class, 'postUpdatePassword']) -> name('profile');
+
+Route::get('/profile/regiones', [UserProfileController::class, 'getRegiones']) -> name('profile');
+Route::post('/profile/comunas/{id}', [UserProfileController::class, 'getComunas']);
+
 //Router auth
 Route::get('/login', [AuthController::class, 'getLogin']) -> name('login'); 
 Route::get('/recover', [AuthController::class, 'getRecover']) -> name('recover');

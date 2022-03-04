@@ -33,7 +33,7 @@
                         @csrf
                         <div class="busqueda-box input-group">
                             <input type="text" name="search" class="form-control" placeholder="Busca aquí...">
-                            <button class="btn-buscar-nav btn btn-outline-secondary" type="submit" id=""><i class="bi bi-search"></i></button>
+                            <button class="btn-buscar-nav btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
                         </div> 
                     </form>              
                 </div>

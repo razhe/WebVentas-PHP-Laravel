@@ -8,6 +8,8 @@ use App\Models\User;
 use Validator, Hash, Auth;
 use Illuminate\Support\Facades\DB; //Trabajar con la base de datos (para prcedimientos almacenados)
 use App\Models\Category;
+use App\Models\Region;
+use App\Models\Comuna;
 
 class UserProfileController extends Controller
 {
@@ -51,7 +53,6 @@ class UserProfileController extends Controller
                 $user-> name      = e($request['name']);
                 $user-> last_name = e($request['last_name']);
                 $user-> phone     = e($request['phone']);
-                $user-> address   = e($request['address']);
                 if ($user -> save()):
                     return back()-> withErrors($validator)-> with('MsgResponse', '¡Usuario actualizado!')->with('typealert', 'success');
                 endif;
@@ -91,5 +92,15 @@ class UserProfileController extends Controller
                 return back()->with('MsgResponse','Su contraseña actual es incorrecta.')->with( 'typealert', 'danger');
             endif;
         endif;
+    }
+    public function getRegiones()
+    {
+        $region = Region::all();
+        return response($region);
+    }
+    public function getComunas($id)
+    {
+        $comunas = Comuna::where('id_region',$id) -> get();
+        return response($comunas);
     }
 }
