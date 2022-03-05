@@ -50,4 +50,5 @@
 
 @section('JS')
     <script src="{{url('static/js/cart.js')}}"></script>
+    <script>var urlCheckout = "{{url('/checkout/customer-information')}}";</script>
 @endsection

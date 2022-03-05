@@ -69,7 +69,7 @@ function listarCarrito() {
                 `;
                 btnCheckOut.innerHTML = 
                 `       
-                        <a href="#">
+                        <a href="${urlCheckout}">
                             <button class="btn btn-success">Proceder al pago</button>
                         </a>
                 `;

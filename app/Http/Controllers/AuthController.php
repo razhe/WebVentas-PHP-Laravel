@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 //Peticiones desde el http
 use Illuminate\Http\Request;
 //Validacion de laravel, hash y auth
-use Validator, Hash, Auth, Mail, Str;
+use Validator, Hash, Auth, Mail, Str, Session;
 //Modelo de usuario
 use \App\Models\User;
 //Envio de correos
@@ -47,7 +47,12 @@ class AuthController extends Controller
                 if(Auth::user()->status == 2):
                     return redirect('/logout');
                 else:
-                    return redirect('/'); 
+                    if (!empty($request['estance']) && $request['estance'] == 'checkout') {
+                        return redirect('/checkout/customer-information'); 
+                    }
+                    else{
+                        return redirect('/'); 
+                    }
                 endif;
             else:
                 return back()->with('MsgResponse','Correo electrónico o contraseña erronea')->with( 'typealert', 'danger');
@@ -104,11 +109,13 @@ class AuthController extends Controller
 
     public function getLogout(){
         $status = Auth::user() -> status;
+        if(Session::has('carrito')){
+            session()->forget('carrito');
+            session()->forget('totalCarrito');
+        }
         Auth::logout();
         if ($status == 2): 
             return redirect('/login')->with('MsgResponse', 'Esta cuenta está suspendida.')->with('typealert', 'warning');
-        else: 
-            # code...
         endif;
         
         return redirect('/');

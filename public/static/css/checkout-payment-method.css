@@ -1,0 +1,30 @@
+/*seccion facturacion*/
+.label_radio_documento{
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    width: 100%;
+}
+.titulo_boleta, .titulo_factura{
+    width: 100%;
+    background-color: #dddddd;
+    border: 1px solid #b1b1b1;
+    height: 60px;
+    border-radius: 2px;
+    text-align: center;
+    line-height: 60px;
+    color: #fff;
+}
+.contenido_factura, .contenido_boleta{
+    height: 0;
+    overflow: hidden;
+    transition: all .3s ease-in-out;
+}
+.titulo_boleta.activo ~ .contenido_boleta{
+    height: 160px;
+    padding-top: 20px;
+}
+.titulo_factura.activo ~ .contenido_factura{
+    height: 160px;
+    padding-top: 20px;
+}

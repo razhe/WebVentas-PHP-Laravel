@@ -67,5 +67,7 @@ class Kernel extends HttpKernel
         'admincheck' => \App\Http\Middleware\AdminCheck::class,
         //validacion del estado de usuario
         'user.status' => \App\Http\Middleware\UserStatus::class,
+        //validacion del carrito con productos
+        'cart.count' => \App\Http\Middleware\has_products_in_cart::class,
     ];
 }

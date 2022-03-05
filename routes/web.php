@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\CheckoutController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -65,6 +66,6 @@ Route::get('/products/{subcategory}', [ProductsController::class, 'getProductsBy
 Route::post('/product/search/', [ProductsController::class, 'postSearchProducts']) -> name('products.search');
 Route::post('/products/filter', [ProductsController::class, 'postShopFilter']) -> name('products.filter');
 
-//Route::post('/products/{subcategory}', [ProductsController::class, 'postSubcategory']) -> name('');
-
-//Route::post('/products/filter/{subcategory}', [ProductsController::class, 'postShopFilter']) -> name('products.filter');
+//checkout
+Route::get('/checkout/customer-information', [CheckoutController::class, 'getCustomerInfo']) -> name('checkout.customer');
+Route::get('/checkout/payment-method', [CheckoutController::class, 'getPaymentMethod']) -> name('checkout.customer');
