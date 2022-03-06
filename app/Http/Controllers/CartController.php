@@ -27,6 +27,7 @@ class CartController extends Controller
     public function postAddToCart(Request $request)
     {
         $producto = Product::where('slug', $request['product']) ->get(['id','name','price','discount', 'stock', 'image1']);
+        //dd($request);
         //$request->session()->forget('carrito');
         if(Session::has('carrito')):
             $arreglo = session('carrito');
@@ -46,7 +47,7 @@ class CartController extends Controller
                 }           
             } else {//No lo encontró
                 if($producto[0] -> stock > 0){
-                    if ($request['quant'] < $producto[0] -> stock && $request['quant'] > 0) {
+                    if ($request['quant'] <= $producto[0] -> stock && $request['quant'] > 0) {
                         $nuevoArreglo = [
                             'id'     => $producto[0] -> id,
                             'nombre' => $producto[0] -> name,
@@ -67,7 +68,7 @@ class CartController extends Controller
             return redirect('cart');
         else:
             if($producto[0] -> stock > 0){
-                if ($request['quant'] < $producto[0] -> stock && $request['quant'] > 0) {
+                if ($request['quant'] <= $producto[0] -> stock && $request['quant'] > 0) {
                     $arreglo[] = [
                         'id'     => $producto[0] -> id,
                         'nombre' => $producto[0] -> name,

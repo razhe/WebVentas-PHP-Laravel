@@ -87,5 +87,5 @@
 @endsection
 
 @section('JS')
-    
+    <script src="{{url('static/js/payment-method.js')}}"></script>
 @endsection

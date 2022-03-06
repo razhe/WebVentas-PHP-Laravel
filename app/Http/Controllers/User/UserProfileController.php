@@ -141,7 +141,6 @@ class UserProfileController extends Controller
                             break;
                     }
                     $direccion ->id_comuna = e($request['comuna']);
-                    $direccion ->residency = e($request['residency']);
                     $direccion ->id_user = Auth::id();
                     if($direccion -> save()):
                         return back()->with('MsgResponse','Se ha agregado exitosamente una dirección')->with( 'typealert', 'success');
