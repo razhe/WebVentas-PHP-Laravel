@@ -70,6 +70,9 @@ class CheckoutController extends Controller
         if ($validator -> fails()):
             return back() -> withErrors($validator)->with('MsgResponse','')->with( 'typealert', 'danger');
         else:
+            if (Session::has('user_checkout')) {
+                session()->forget('user_checkout');//por seguridad reiniciar la variable
+            }
             $arreglo[]=[
                 'name' => $request['name'],
                 'last_name' => $request['last_name'],
@@ -93,12 +96,16 @@ class CheckoutController extends Controller
         ];
         $messages=
         [
-            'direccion.required'      => 'Debe poner su nombre.',
+            'direccion.required'      => 'Debe seleccionar una dirección.',
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator -> fails()):
             return back() -> withErrors($validator)->with('MsgResponse','')->with( 'typealert', 'danger');
         else:
+            if (Session::has('guest_checkout')) {
+                session()->forget('guest_checkout');//por seguridad reiniciar la variable
+            }
+
             $veficacionDireccion = Address::where('id', $request['direccion'])
                                         ->where('id_user', Auth::user() -> id) -> get();
             if (!empty($veficacionDireccion)) {
@@ -114,5 +121,38 @@ class CheckoutController extends Controller
             }
 
         endif;
+    }
+    public function postCheckoutPaymentMethod(Request $request)
+    {
+        if (Session::has('payment-billing')) {
+            session()->forget('payment-billing');
+        }
+
+        if ($request['tipo_documento'] == 'boleta') {
+            $arreglo[]=[
+                'tipo_doc' => $request['tipo_documento'],
+                'tipo_pago' => $request['tipo_pago'],
+                'rut' => $request['rut'],
+            ];
+            session(['payment-billing' => $arreglo]);
+        }
+        if ($request['tipo_documento'] == 'factura') {
+            $arreglo[]=[
+                'tipo_doc' => $request['tipo_documento'],
+                'tipo_pago' => $request['tipo_pago'],
+                'razon_social' => $request['razon_social'],
+                'rut' => $request['rut'],
+                'giro' => $request['giro'],
+                'ciudad' => $request['ciudad'],
+                'comuna' => $request['comuna'],
+                'direccion' => $request['direccion'],
+                'telefono' => $request['telefono'],
+            ];
+            session(['payment-billing' => $arreglo]);
+        }
+        $data = [
+            'facturacion' => session('payment-billing'),
+        ];
+        //return \response($data); redireccinar a resumen y pago
     }
 }

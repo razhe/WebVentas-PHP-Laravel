@@ -72,3 +72,5 @@ Route::get('/checkout/payment-method', [CheckoutController::class, 'getPaymentMe
 
 Route::post('/checkout/save-guest-data', [CheckoutController::class, 'postSaveGuest']);
 Route::post('/checkout/save-user-data', [CheckoutController::class, 'postSaveUser']);
+
+Route::post('/checkout/save-payment-method', [CheckoutController::class, 'postCheckoutPaymentMethod']);

@@ -39,8 +39,8 @@
                         <h4>Elija una forma de pago</h4>
                     </div>
                     <div class="contenido_formas_pago">
-                       <input type="radio" name="" id="">
-                       <span>WebPay</span>
+                        <input type="radio" name="payment-method" value="webpay">
+                        <span>WebPay</span>
                     </div>
                 </div>
             </div>
@@ -52,35 +52,34 @@
                 <div class="box-documento-emitir">
                     <div class="titulo_boleta" id="titulo-boleta">
                         <label for="radio_boleta" class="label_radio_documento">
-                            <input type="radio" id="radio_boleta" class="radio-tipo-documento" name="tipo_documento">
+                            <input type="radio" id="radio_boleta" class="radio-tipo-documento" name="tipo_documento" value="boleta">
                             <div class="radio__radio"> </div>
-                             boleta
+                            boleta
                         </label>
                     </div>
                     <div class="contenido_boleta">
-                        <input type="text">
-                        <input type="password">
-                        <button>Ingresar</button>
+                        <label for="run">Rut:</label>
+                        <input type="text" name="rut_boleta" id="rut-boleta" placeholder="ingrese su rut">
                     </div>
                 </div>
                 <div class="titulo_factura" id="titulo-factura">
                     <label for="radio_factura" class="label_radio_documento">
-                        <input type="radio" id="radio_factura" class="radio-tipo-documento" name="tipo_documento">
+                        <input type="radio" id="radio_factura" class="radio-tipo-documento" name="tipo_documento" value="factura">
                         <div class="radio__radio"> </div>
-                         factura
+                        factura
                     </label>
                 </div>
                 <div class="contenido_factura">
-                    <span>Este método no te permitirá guardar</span>
-                    <input type="text" placeholder="Nombre">
-                    <input type="text" placeholder="apellido">
-                    <input type="text" placeholder="Teléfono">
-                    <input type="text" placeholder="Email">
-                    <span>formulario de direccion bla bla...</span>
-                    <button>Ingresar</button>
+                    <input type="text" name="razon_social" id="razon-social" placeholder="razon social:">
+                    <input type="text" name="rut_factura" id="rut-factura" placeholder="Rut:">
+                    <input type="text" name="giro" id="giro" placeholder="Giro:">
+                    <input type="text" name="ciudad" id="ciudad" placeholder="Ciudad:">
+                    <input type="text" name="comuna" id="comuna" placeholder="Comuna:">
+                    <input type="text" name="direccion" id="direccion" placeholder="Direccion:">
+                    <input type="text" name="telefono" id="telefono" placeholder="teléfono:">
                 </div>
             </div>
-            <button>siguiente</button>
+            <button class="btn btn-success" id="btn-go-summary-payment">siguiente</button>
         </div>
     </div>
 </section>
