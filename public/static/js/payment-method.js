@@ -48,10 +48,8 @@ btnGoSummPay.addEventListener('click', function(){
                         tipo_pago: selectedPayment,
                         rut: rut.value,
                     },
-                    success: function(data) {   
-                    },
-                    error: function(error){
-            
+                    success: function(data) { 
+                        window.location.replace(data);
                     } 
                 });
             }
@@ -105,11 +103,9 @@ btnGoSummPay.addEventListener('click', function(){
                         direccion: direccion.value,
                         telefono: telefono.value,
                     },
-                    success: function(data) {  
-                    },
-                    error: function(error){
-            
-                    } 
+                    success: function(data) {
+                        window.location.replace(data);
+                    }
                 });
             }
         }

@@ -40,6 +40,11 @@ class CheckoutController extends Controller
     {
         return view('checkout.payment-method');
     }
+    public function getSummaryPayment()
+    {
+        return view('checkout.summary-payment');
+    }
+
     public function postSaveGuest(Request $request)
     {
         $rules = 
@@ -153,6 +158,7 @@ class CheckoutController extends Controller
         $data = [
             'facturacion' => session('payment-billing'),
         ];
-        //return \response($data); redireccinar a resumen y pago
+        $nextRequest = url('/checkout/summary-payment');
+        return response($nextRequest);
     }
 }
