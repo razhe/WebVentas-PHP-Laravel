@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\TransbankController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -75,3 +76,6 @@ Route::post('/checkout/save-guest-data', [CheckoutController::class, 'postSaveGu
 Route::post('/checkout/save-user-data', [CheckoutController::class, 'postSaveUser']);
 
 Route::post('/checkout/save-payment-method', [CheckoutController::class, 'postCheckoutPaymentMethod']);
+
+//transbank
+Route::post('/transbank/iniciar-compra', [TransbankController::class, 'postIniciarCompra']);

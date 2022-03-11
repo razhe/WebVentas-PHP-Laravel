@@ -61,7 +61,11 @@
                 </tr>
             </table>
         </div>
-        <a href="#"><button class="btn btn-primary">Completar pedido</button></a>
+        <form action="{{url('/transbank/iniciar-compra')}}" method="post">
+            @csrf
+            <button type="submit" class="btn btn-primary">Completar pedido</button>
+        </form>
+        
     </div>
 </section>
 @endsection
