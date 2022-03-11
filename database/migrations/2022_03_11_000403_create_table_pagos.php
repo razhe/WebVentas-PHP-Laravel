@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('pagos', function (Blueprint $table) {
+        Schema::create('pagos', function (Blueprint $table) {
             $table -> id();
             $table -> string('modo_pago');
             $table -> string('estado_pago');
+            $table -> string('token', 500);
         });
     }
 

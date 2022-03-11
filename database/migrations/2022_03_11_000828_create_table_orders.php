@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('orders', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table -> id();
             $table -> integer('total_neto');
             $table -> integer('iva');
             $table -> integer('total');
             $table -> date('fecha');
-            $table->unsignedBigInteger('id_user');
+            $table->unsignedBigInteger('id_user') -> nullable(true);
             $table->foreign('id_user')-> references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('id_boleta') -> nullable(true);
             $table->foreign('id_boleta')-> references('id')->on('boletas')->onUpdate('cascade')->onDelete('cascade');
