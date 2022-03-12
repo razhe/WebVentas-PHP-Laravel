@@ -19,6 +19,8 @@ class CreateTableAddress extends Migration
             $table->string('residency');
             $table->unsignedBigInteger('id_comuna');
             $table->foreign('id_comuna')-> references('id')->on('comuna')->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')-> references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

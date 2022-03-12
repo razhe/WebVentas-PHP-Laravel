@@ -159,7 +159,8 @@
                                     <input type="hidden" name="direccion" value="{{$address[0] -> id}}">
                                     <div class="opciones_usuario_logueado">
                                     </div>
-                                @else
+                                @endif
+                                @if (count($address) > 1)
                                     <label for="radio_boleta" class="label_radio_documento">
                                         <input type="radio" id="radio_direccion1" class="" name="direccion" value="{{$address[0] -> id}}">
                                         <div class="radio__radio">Direccion 1: 
@@ -172,6 +173,9 @@
                                             <p>{{$address[1] -> address .'('.$address[1] -> residency .')' .', '.$address[1] -> comuna_name .', '.$address[1] -> region_name .'.'}}</p>
                                         </div>
                                     </label>
+                                @endif
+                                @if (count($address) == 0)
+                                    <a href="{{url('/profile')}}">registrar direcciones</a>
                                 @endif
                             </form>
                             <a href="{{url('/profile')}}">Modificar</a>

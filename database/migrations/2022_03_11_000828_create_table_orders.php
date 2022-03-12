@@ -19,6 +19,8 @@ return new class extends Migration
             $table -> integer('iva');
             $table -> integer('total');
             $table -> date('fecha');
+            $table -> string('id_session');
+            $table -> integer('status') -> comment('1. Pendiente - 2. Completado');
             $table->unsignedBigInteger('id_user') -> nullable(true);
             $table->foreign('id_user')-> references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('id_boleta') -> nullable(true);
