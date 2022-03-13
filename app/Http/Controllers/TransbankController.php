@@ -53,7 +53,6 @@ class TransbankController extends Controller
         $pago = new Pago;
         $boleta = new Boleta;
         $factura = new Factura;
-        $orderHasProducts = new Order_has_products;
 
         //Pago
         $pago -> modo_pago = 'Pending';
@@ -61,6 +60,8 @@ class TransbankController extends Controller
         $pago -> token = $response[0]['token'];
         $pago -> save();
 
+        //Orden
+        $orden -> id_pago = $pago -> id;
         //Boleta o factura
         if (Session::has('payment-billing')) {
             if (session('payment-billing.0.tipo_doc') == 'boleta') {
@@ -79,6 +80,8 @@ class TransbankController extends Controller
                     $boleta -> address = session('guest_checkout.0.address').' ('.session('guest_checkout.0.residency').'), '.session('guest_checkout.0.comuna').'.';
                 }
                 $boleta->save();
+                //Order
+                $orden -> id_boleta = $boleta -> id;
             }
             if (session('payment-billing.0.tipo_doc') == 'factura') {
                 //factura
@@ -96,12 +99,15 @@ class TransbankController extends Controller
                     $factura -> cliente = session('guest_checkout.0.name').' '.session('guest_checkout.0.last_name');
                 }
                 $factura -> save();
+                //Order
+                $orden -> id_factura = $factura -> id;
             }
         }
         //Order Has Products
         if (Session::has('carrito')) {
             $arreglo = session('carrito');
             for ($i=0; $i < sizeof($arreglo); $i++) {
+                $orderHasProducts = new Order_has_products;
                 $orderHasProducts -> quantity = $arreglo[$i]['cantidad'];
                 $orderHasProducts -> price = $arreglo[$i]['precio'];
                 $orderHasProducts -> total_price = $arreglo[$i]['subtotal'];
@@ -111,6 +117,8 @@ class TransbankController extends Controller
                 $orderHasProducts -> save();
             }
         }
+        //Orden
+        $orden -> save();
         $arregloPagoPediente[] = [
             'token' => $pago -> token,
             'id_pago' => $pago -> id,

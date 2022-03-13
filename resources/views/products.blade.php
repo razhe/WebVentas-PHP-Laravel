@@ -49,21 +49,17 @@
                                     <div class="contenido-filtro">
                                         <div class="check-item">
                                             <div class="texto-item">
-                                                <input type="checkbox" name="ofertas" id="">
+                                                <input type="radio" name="special[]" id="" value="ofertas" @if(!empty($_GET['special'])) @if($_GET['special'] == 'ofertas') checked @endif @endif onchange="this.form.submit();">
                                                 <span>Ofertas</span>
                                             </div>
-                                            <div class="cantidad-item">
-                                                <p>(8)</p>
-                                            </div>
+                                            
                                         </div>
                                         <div class="check-item">
                                             <div class="texto-item">
-                                                <input type="checkbox" name="nuevos" id="">
-                                                <span>Nuevo</span>
+                                                <input type="radio" name="special[]" value="mas-vendido" id="" @if(!empty($_GET['special'])) @if($_GET['special'] == 'mas-vendido') checked @endif @endif onchange="this.form.submit();">
+                                                <span>Mas vendido</span>
                                             </div>
-                                            <div class="cantidad-item">
-                                                <p>(8)</p>
-                                            </div>
+                                            
                                         </div>
                                     </div>                                
                                 </div>

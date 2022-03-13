@@ -82,7 +82,7 @@
         <section class="seccion-novedades">
             <div class="contenedor-carrousel">
                 <div class="col-12 section-intro">
-                    <h1>Novedades</h1>
+                    <h1>Más vendidos</h1>
                     <div class="hline"></div>
                 </div>
                 <div class="carousel">
@@ -92,11 +92,11 @@
                         </button>
                         <div class="carousel__lista carrousel-novedades">
                             @for ($i = 0; $i < sizeOf($products); $i++)
-                                @if ($products[$i] -> discount == 0)
-                                    @if ($i <= Config::get('configuracion-global.quant_news'))
+                                @if (in_array($products[$i] -> id, $diccionario))
+                                    @if ($i <= Config::get('configuracion-global.quant_best_sellers_home'))
                                         <div class="item-producto">
                                             <div class="tag-producto tag-producto-novedad">
-                                                <span>NUEVO</span>
+                                                <span>Más vendido</span>
                                             </div>
                                             <div class="producto-imagen">                 
                                                 <img src="{{asset($products[$i] -> image1)}}" alt="">
@@ -184,7 +184,7 @@
                         <div class="carousel__lista carrousel-ofertas">
                             @for ($i = 0; $i < sizeOf($products); $i++)
                                 @if ($products[$i] -> discount != 0)
-                                    @if ($i <= Config::get('configuracion-global.quant_news'))
+                                    @if ($i <= Config::get('configuracion-global.quant_oferts_home'))
                                         <div class="item-producto">
                                             <div class="tag-producto tag-producto-oferta">
                                                 <span>-{{$products[$i] -> discount}}%</span>

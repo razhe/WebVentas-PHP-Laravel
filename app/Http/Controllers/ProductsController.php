@@ -49,6 +49,19 @@ class ProductsController extends Controller
             $brands_ids = Brand::select('id')-> whereIn('name',$names)->pluck('id')->toArray();
             $products= $products-> whereIn('id_brand',$brands_ids);
         }
+        if (!empty($_GET['special'])) {
+            if ($_GET['special'] == 'mas-vendido') {
+                $productsBestSellers = DB::select('CALL select_best_sellers(?)', array(Config::get('configuracion-global.quant_best_sellers_catalog')));
+                $diccionario = array();
+                for ($i=0; $i < sizeof($productsBestSellers); $i++) { 
+                    array_push($diccionario, $productsBestSellers[$i] -> id_product);
+                }
+                $products = $products -> whereIn('products.id',$diccionario);
+            }
+            if ($_GET['special'] == 'ofertas') {
+                $products= $products-> where('discount','<>','0');
+            }
+        }
         if(!empty($_GET['sort-by'])){
             $sort = ($_GET['sort-by']);
             if ($sort == 'name-asc') {
@@ -134,6 +147,13 @@ class ProductsController extends Controller
         if (!empty($_GET['subcategory'])) {
             $subcategoryUrl ='&subcategory='.$_GET['subcategory'];
         }
+        //special filter
+        $specialUrl = '';
+        if (!empty($data['special'])) {
+            foreach($data['special'] as $special){
+                $specialUrl = '&special='.$special;
+            }
+        }
         //Brand filter
         $brandUrl = '';
 
@@ -163,7 +183,7 @@ class ProductsController extends Controller
         }
         $rangePriceUrl = $minPriceRangeUrl.$maxPriceRangeUrl;
 
-        return redirect()->route('products',$subcategoryUrl.$brandUrl.$sortByUrl.$rangePriceUrl);
+        return redirect()->route('products',$subcategoryUrl.$brandUrl.$sortByUrl.$rangePriceUrl.$specialUrl);
 
     }
 }

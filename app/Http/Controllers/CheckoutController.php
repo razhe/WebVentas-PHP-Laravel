@@ -60,15 +60,20 @@ class CheckoutController extends Controller
                 $pago -> estado_pago = $response -> status;
 
                 $pago -> save();
+
+                $carrito = session('carrito');
+                $totalCarrito = session('carrito');
+
                 $data = [
-                    $response
+                    'carrito' => $carrito,
+                    'totalCarrito' => $totalCarrito,
                 ];
                 session()->forget('pagoPendiente');
                 if(Session::has('carrito')){
                     session()->forget('carrito');
                     session()->forget('totalCarrito');
                 }
-                return view('checkout.purchase-detail');
+                return view('checkout.purchase-detail', $data);
             else:
                 return redirect('/');
             endif;

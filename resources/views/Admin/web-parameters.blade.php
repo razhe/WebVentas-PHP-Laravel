@@ -83,13 +83,13 @@
                             </div>
                         </div>
                         <div class="title__section">
-                            <h3>Parámetros de Home</h3>
+                            <h3>Categorías especiales - Home</h3>
                         </div>
                         <div class="fila-config row m-0 g-0">
-                            <div class="col-lg-4"><span>Cantidad productos <strong>(Novedades)</strong>:</span></div>
+                            <div class="col-lg-4"><span>Cantidad productos <strong>(Mas vendidos)</strong>:</span></div>
                             <div class="form-group col-lg-6">
-                                <select id="" class="form-select category-select" aria-label="Default select example" name="quant_news">
-                                    @switch(Config::get('configuracion-global.quant_news'))
+                                <select id="" class="form-select category-select" aria-label="Default select example" name="quant_best_sellers_home">
+                                    @switch(Config::get('configuracion-global.quant_best_sellers_home'))
                                         @case(4)
                                             <option selected value="4">Mostrar cuatro productos</option>
                                             <option value="8">Mostrar ocho productos</option>
@@ -125,8 +125,8 @@
                         <div class="fila-config row m-0 g-0">
                             <div class="col-lg-4"><span>Cantidad productos <strong>(Ofertas)</strong>:</span></div>
                             <div class="form-group col-lg-6">
-                                <select id="" class="form-select category-select" aria-label="Default select example" name="quant_oferts">                               
-                                    @switch(Config::get('configuracion-global.quant_oferts'))
+                                <select id="" class="form-select category-select" aria-label="Default select example" name="quant_oferts_home">                               
+                                    @switch(Config::get('configuracion-global.quant_oferts_home'))
                                     @case(4)
                                         <option selected value="4">Mostrar cuatro productos</option>
                                         <option value="8">Mostrar ocho productos</option>
@@ -157,6 +157,21 @@
                                         
                                 @endswitch
                                 </select>
+                            </div>
+                        </div>
+                        <div class="title__section">
+                            <h3>Categorías especiales - catalogo produtos</h3>
+                        </div>
+                        <div class="fila-config row m-0 g-0">
+                            <div class="col-lg-4"><span>Cantidad productos <strong>(Mas vendidos)</strong>:</span></div>
+                            <div class="form-group col-lg-6">
+                                <input type="text" value="{{Config::get('configuracion-global.quant_best_sellers_catalog')}}" name="quant_best_sellers_catalog" class="form-control" id="" placeholder="Ej. 20">
+                            </div>
+                        </div>
+                        <div class="fila-config row m-0 g-0">
+                            <div class="col-lg-4"><span>Cantidad productos <strong>(OFertas)</strong>:</span></div>
+                            <div class="form-group col-lg-6">
+                                <input type="text" value="{{Config::get('configuracion-global.quant_oferts_catalog')}}" name="quant_oferts_catalog" class="form-control" id="" placeholder="Ej. 20">
                             </div>
                         </div>
                         <div class="title__section">
