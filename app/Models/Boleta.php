@@ -9,4 +9,5 @@ class Boleta extends Model
 {
     use HasFactory;
     protected $table = 'boletas';
+    public $timestamps = false;
 }

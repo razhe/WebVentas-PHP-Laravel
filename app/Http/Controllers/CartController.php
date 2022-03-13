@@ -42,7 +42,7 @@ class CartController extends Controller
             if ($encontro == true) {//Encontro el producto
                 if (($arreglo[$numero]['cantidad'] + $request['quant']) < $arreglo[$numero]['stock']) {
                     $arreglo[$numero]['cantidad'] = $arreglo[$numero]['cantidad'] + $request['quant'];
-                    $arreglo[$numero]['subtotal'] = $arreglo[$numero]['cantidad'] * $arreglo[$numero]['precio'];
+                    $arreglo[$numero]['subtotal'] = round($arreglo[$numero]['cantidad'] * $arreglo[$numero]['precio']);
                     session(['carrito' => $arreglo]);    
                 }           
             } else {//No lo encontró
@@ -56,7 +56,7 @@ class CartController extends Controller
                             'imagen' => $producto[0] -> image1,
                             'stock' => $producto[0] -> stock,
                             'cantidad' => $request['quant'],
-                            'subtotal' => $request['quant'] * $producto[0] -> price,
+                            'subtotal' => round($request['quant'] * $producto[0] -> price),
 
                         ];
                         array_push($arreglo, $nuevoArreglo);
@@ -77,7 +77,7 @@ class CartController extends Controller
                         'imagen' => $producto[0] -> image1,
                         'stock' => $producto[0] -> stock,
                         'cantidad' => $request['quant'],
-                        'subtotal' => $request['quant'] * $producto[0] -> price,
+                        'subtotal' => round($request['quant'] * $producto[0] -> price),
                     ];
                     session(['carrito' => $arreglo]);
                     $this -> getTotalCart();
@@ -100,7 +100,7 @@ class CartController extends Controller
         if ($encontro == true) {//Encontro el producto
             if (($request['cantidad']) <= $arregloCarrito[$numero]['stock'] && ($request['cantidad']) > 0) {
                 $arregloCarrito[$numero]['cantidad'] = $request['cantidad'];
-                $arregloCarrito[$numero]['subtotal'] = $arregloCarrito[$numero]['cantidad'] * $arregloCarrito[$numero]['precio'];
+                $arregloCarrito[$numero]['subtotal'] = round($arregloCarrito[$numero]['cantidad'] * $arregloCarrito[$numero]['precio']);
                 session(['carrito' => $arregloCarrito]);
                 $this -> getTotalCart();    
             }           
@@ -115,7 +115,7 @@ class CartController extends Controller
             $totalNeto += $arregloCarrito[$i]['subtotal'];
             $cantidadTotal++;
         }
-        $iva = $totalNeto * (Config('configuracion-global.iva') / 100);
+        $iva = round($totalNeto * (Config('configuracion-global.iva') / 100));
         $total = $totalNeto + $iva;
         $arreglo[] = [
             'total_neto' => $totalNeto,
@@ -137,11 +137,15 @@ class CartController extends Controller
                 $numero = $i;
             }
         }
-        if ($encontro == true) {//Encontro el producto
-            unset($carrito[$numero]);         
+        if (sizeof($carrito) == 0) {
+            session()->forget('carrito');
+        } else {
+            if ($encontro == true) {//Encontro el producto
+                unset($carrito[$numero]);         
+            }
+            session(['carrito' => $carrito]);
+            $this -> getTotalCart();
         }
-        session(['carrito' => $carrito]);
-        $this -> getTotalCart();
     }
 
     public function getListCart()

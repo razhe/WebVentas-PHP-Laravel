@@ -9,4 +9,5 @@ class Factura extends Model
 {
     use HasFactory;
     protected $table = 'facturas';
+    public $timestamps = false;
 }

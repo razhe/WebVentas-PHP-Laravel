@@ -10,4 +10,5 @@ class Pago extends Model
     use HasFactory;
     protected $table = 'pagos';
     protected $hidden = 'token';
+    public $timestamps = false;
 }

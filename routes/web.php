@@ -71,6 +71,7 @@ Route::post('/products/filter', [ProductsController::class, 'postShopFilter']) -
 Route::get('/checkout/customer-information', [CheckoutController::class, 'getCustomerInfo']);
 Route::get('/checkout/payment-method', [CheckoutController::class, 'getPaymentMethod']);
 Route::get('/checkout/summary-payment', [CheckoutController::class, 'getSummaryPayment']);
+Route::get('/checkout/purchase-detail', [CheckoutController::class, 'getPurchaseDetail']);
 
 Route::post('/checkout/save-guest-data', [CheckoutController::class, 'postSaveGuest']);
 Route::post('/checkout/save-user-data', [CheckoutController::class, 'postSaveUser']);

@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB; //Trabajar con la base de datos (para prcedimientos almacenados)
 use Auth,Validator,Session ;
 use App\Models\Address;
+use App\Models\Pago;
+//Transbank
+use Transbank\Webpay\WebpayPlus;
+use Transbank\Webpay\WebpayPlus\Transaction;
 
 class CheckoutController extends Controller
 {
@@ -44,7 +48,34 @@ class CheckoutController extends Controller
     {
         return view('checkout.summary-payment');
     }
+    public function getPurchaseDetail(Request $request)
+    {
+        if (Session::has('pagoPendiente')) {
+            if($request['token_ws']):
+                $pago = Pago::where('id', session('pagoPendiente.0.id_pago'))
+                            -> where('token', session('pagoPendiente.0.token'))
+                            -> first();
+                $response = (new Transaction)->commit($request['token_ws']);
+                $pago -> modo_pago = $this->validatePaymentType($response -> paymentTypeCode);
+                $pago -> estado_pago = $response -> status;
 
+                $pago -> save();
+                $data = [
+                    $response
+                ];
+                session()->forget('pagoPendiente');
+                if(Session::has('carrito')){
+                    session()->forget('carrito');
+                    session()->forget('totalCarrito');
+                }
+                return view('checkout.purchase-detail');
+            else:
+                return redirect('/');
+            endif;
+        }else{
+            return redirect('/');
+        }
+    }
     public function postSaveGuest(Request $request)
     {
         $rules = 
@@ -160,5 +191,31 @@ class CheckoutController extends Controller
         ];
         $nextRequest = url('/checkout/summary-payment');
         return response($nextRequest);
+    }
+
+    public function validatePaymentType($valor){ // Valida el medio de pago
+        switch ($valor) {
+            case 'VN':
+                return 'Crédito, pago en 1 cuota';
+                break;
+            case 'S2':
+                return 'Crédito, pago en 2 cuotas iguales sin interés';
+                break;
+            case 'SI':
+                return 'Crédito, pago en 3 cuotas iguales sin interés';
+                break;
+            case 'NC':
+                return 'Crédito, pago entre 2 y 12 cuotas iguales sin interés';
+                break;
+            case 'VC':
+                return 'Crédito, pago entre 2 y 48, interes a elección, pago diferido entre 1 a 3 meses a elección';
+                break;
+            case 'VD':
+                return 'Contado, tarjeta de débito Redcompra';
+                break;
+            case 'VP':
+                return 'Contado, tarjeta de débito Redcompra (venta prepago)';
+                break;
+        }
     }
 }
