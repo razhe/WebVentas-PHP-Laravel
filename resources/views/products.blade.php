@@ -117,7 +117,7 @@
                                         <div class="imagen-producto">
                                             <img src="{{asset($product -> image1)}}" alt="">
                                             <div class="acciones-producto">
-                                                <a href="{{url('/details-product?product='.$product -> slug. '&selected=' .Hash::make($product -> id))}}"><i class="bi bi-eye"></i></a>
+                                                <a href="{{url('/details-product?product='.$product -> slug)}}"><i class="bi bi-eye"></i></a>
                                                 <a href="{{url('/cart/add?product='.$product -> slug.'&selected='.$product -> id. '&quant=1')}}"><i class="bi bi-bag"></i></a>
                                             </div>
                                         </div>
@@ -134,7 +134,7 @@
                                         <div class="imagen-producto">
                                             <img src="{{asset($product -> image1)}}" alt="">
                                             <div class="acciones-producto">
-                                                <a href="{{url('/details-product?product='.$product -> slug. '&selected=' .Hash::make($product -> id))}}"><i class="bi bi-eye"></i></a>
+                                                <a href="{{url('/details-product?product='.$product -> slug)}}"><i class="bi bi-eye"></i></a>
                                                 <a href="{{url('/cart/add?product='.$product -> slug.'&selected='.$product -> id. '&quant=1')}}"><i class="bi bi-bag"></i></a>
                                             </div>
                                         </div>

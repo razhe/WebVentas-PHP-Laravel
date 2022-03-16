@@ -101,7 +101,7 @@
                                             <div class="producto-imagen">                 
                                                 <img src="{{asset($products[$i] -> image1)}}" alt="">
                                                 <div class="social-icons">
-                                                    <a href="{{url('/details-product?product='.$products[$i] -> slug .'&selected='.Hash::make($products[$i] -> id))}}"><i class="bi bi-eye"></i></a>
+                                                    <a href="{{url('/details-product?product='.$products[$i] -> slug)}}"><i class="bi bi-eye"></i></a>
                                                     <a href="{{url('/cart/add?product='.$products[$i] -> slug .'&selected='.$products[$i] -> id.'&quant=1')}}"><i class="bi bi-bag"></i></a>
                                                 </div>
                                             </div>
@@ -192,7 +192,7 @@
                                             <div class="producto-imagen">
                                                 <img src="{{asset($products[$i] -> image1)}}" alt="">
                                                 <div class="social-icons">
-                                                    <a href="{{url('/details-product?product='.$products[$i] -> slug .'&selected='.$products[$i] -> id)}}"><i class="bi bi-eye"></i></a>
+                                                    <a href="{{url('/details-product?product='.$products[$i] -> slug)}}"><i class="bi bi-eye"></i></a>
                                                     <a href="{{url('/cart/add?product='.$products[$i] -> slug .'&selected='.$products[$i] -> id.'&quant=1')}}"><i class="bi bi-bag"></i></a>
                                                 </div>
                                             </div>
