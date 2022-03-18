@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB; //Trabajar con la base de datos (para prcedim
 use Auth,Validator,Session ;
 use App\Models\Address;
 use App\Models\Pago;
+use Illuminate\Support\Facades\Crypt;
 //Transbank
 use Transbank\Webpay\WebpayPlus;
 use Transbank\Webpay\WebpayPlus\Transaction;
@@ -146,12 +147,17 @@ class CheckoutController extends Controller
             if (Session::has('guest_checkout')) {
                 session()->forget('guest_checkout');//por seguridad reiniciar la variable
             }
-
-            $veficacionDireccion = Address::where('id', $request['direccion'])
+            try{
+                $decrypted_address = Crypt::decryptString($request['direccion']);
+            }catch(\Exception $exception){
+                return view('errors.request-denied');
+            }
+            
+            $veficacionDireccion = Address::where('id', $decrypted_address)
                                         ->where('id_user', Auth::user() -> id) -> get();
             if (!empty($veficacionDireccion)) {
                 $preferences[]=[
-                    'direccion_id' => $request['direccion'],
+                    'direccion_id' => $decrypted_address,
                 ];
                 session(['user_checkout' => $preferences]);
                 if (Session::has('user_checkout')) {

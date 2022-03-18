@@ -47,16 +47,21 @@
                                 <div class="filtro-especial filtro-box">
                                     <div class="titulo-secciones-filtro"><h3>Especial</h3><i class="bi bi-chevron-down"></i></div>
                                     <div class="contenido-filtro">
+                                        @if (!empty($_GET['special']))
+                                            @php
+                                                $filter_special=explode(',',$_GET['special']);
+                                            @endphp
+                                        @endif
                                         <div class="check-item">
                                             <div class="texto-item">
-                                                <input type="radio" name="special[]" id="" value="ofertas" @if(!empty($_GET['special'])) @if($_GET['special'] == 'ofertas') checked @endif @endif onchange="this.form.submit();">
+                                                <input type="checkbox" name="special[]" id="" value="ofertas" @if(!empty($filter_special) && in_array('ofertas', $filter_special)) checked @endif onchange="this.form.submit();">
                                                 <span>Ofertas</span>
                                             </div>
                                             
                                         </div>
                                         <div class="check-item">
                                             <div class="texto-item">
-                                                <input type="radio" name="special[]" value="mas-vendido" id="" @if(!empty($_GET['special'])) @if($_GET['special'] == 'mas-vendido') checked @endif @endif onchange="this.form.submit();">
+                                                <input type="checkbox" name="special[]" value="mas-vendido" id="" @if(!empty($filter_special) && in_array('mas-vendido', $filter_special)) checked @endif  onchange="this.form.submit();">
                                                 <span>Mas vendido</span>
                                             </div>
                                             
@@ -117,8 +122,8 @@
                                         <div class="imagen-producto">
                                             <img src="{{asset($product -> image1)}}" alt="">
                                             <div class="acciones-producto">
-                                                <a href="{{url('/details-product?product='.$product -> slug)}}"><i class="bi bi-eye"></i></a>
-                                                <a href="{{url('/cart/add?product='.$product -> slug.'&selected='.$product -> id. '&quant=1')}}"><i class="bi bi-bag"></i></a>
+                                                <a href="{{url('/details-product?s='.Crypt::encryptString($product -> slug))}}"><i class="bi bi-eye"></i></a>
+                                                <a href="{{url('/cart/add?p='.Crypt::encryptString($product -> id).'&quant=1')}}"><i class="bi bi-bag"></i></a>
                                             </div>
                                         </div>
                                         <div class="info-producto p-1">
@@ -134,8 +139,8 @@
                                         <div class="imagen-producto">
                                             <img src="{{asset($product -> image1)}}" alt="">
                                             <div class="acciones-producto">
-                                                <a href="{{url('/details-product?product='.$product -> slug)}}"><i class="bi bi-eye"></i></a>
-                                                <a href="{{url('/cart/add?product='.$product -> slug.'&selected='.$product -> id. '&quant=1')}}"><i class="bi bi-bag"></i></a>
+                                                <a href="{{url('/details-product?s='.Crypt::encryptString($product -> slug))}}"><i class="bi bi-eye"></i></a>
+                                                <a href="{{url('/cart/add?p='.Crypt::encryptString($product -> id).'&quant=1')}}"><i class="bi bi-bag"></i></a>
                                             </div>
                                         </div>
                                         <div class="info-producto p-1">

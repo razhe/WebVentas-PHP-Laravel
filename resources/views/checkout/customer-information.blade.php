@@ -81,7 +81,7 @@
                                         <input type="password" name="password" class="form-control" required>
                                     </div>
                                 </div>
-                                <input type="hidden" name="estance" value="checkout">
+                                <input type="hidden" name="estance" value="{{Crypy::encryptString('checkout')}}">
                                 <input type="submit" name="loguearse" id="" class="btn btn-success">
                             </form>
                         </div>
@@ -100,7 +100,7 @@
                                 <input type="text" placeholder="apellido" name="last_name">
                                 <input type="text" placeholder="Teléfono" name="phone">
                                 <input type="text" placeholder="Email" name="email">
-                                    <!--direccion-->
+                                <!--direccion-->
                                 <div class="input__container mt-1">
                                     <label for="address">Dirección:</label>
                                     <div class="input-group">
@@ -156,19 +156,19 @@
                                 @csrf
                                 @if (count($address) == 1)
                                     <p>Dirección: {{$address[0] -> address .'('.$address[0] -> residency .')' .', '.$address[0] -> comuna_name .', '.$address[0] -> region_name .'.'}}</p>
-                                    <input type="hidden" name="direccion" value="{{$address[0] -> id}}">
+                                    <input type="hidden" name="direccion" value="{{Crypt::encryptString($address[0] -> id)}}">
                                     <div class="opciones_usuario_logueado">
                                     </div>
                                 @endif
                                 @if (count($address) > 1)
                                     <label for="radio_boleta" class="label_radio_documento">
-                                        <input type="radio" id="radio_direccion1" class="" name="direccion" value="{{$address[0] -> id}}">
+                                        <input type="radio" id="radio_direccion1" class="" name="direccion" value="{{Crypt::encryptString($address[0] -> id)}}">
                                         <div class="radio__radio">Direccion 1: 
                                             <p>{{$address[0] -> address .'('.$address[0] -> residency .')' .', '.$address[0] -> comuna_name .', '.$address[0] -> region_name .'.'}}</p>
                                         </div>
                                     </label>
                                     <label for="radio_boleta" class="label_radio_documento">
-                                        <input type="radio" id="radio_direccion2" class="" name="direccion" value="{{$address[1] -> id}}">
+                                        <input type="radio" id="radio_direccion2" class="" name="direccion" value="{{Crypt::encryptString($address[1] -> id)}}">
                                         <div class="radio__radio"> Direccion 2:
                                             <p>{{$address[1] -> address .'('.$address[1] -> residency .')' .', '.$address[1] -> comuna_name .', '.$address[1] -> region_name .'.'}}</p>
                                         </div>

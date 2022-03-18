@@ -50,7 +50,6 @@
                     <h4>¡Hola: {{Auth::user()-> name}}!</h4>
                     <form class="register__form needs-validation" action="{{url('/profile/update-profile')}}" method="post" novalidate>
                         @csrf
-                        <input type="hidden" name="codigo_usuario" value="{{Auth::user()-> id}}">
                         <!--Nombre-->
                         <div class="2-columns-row row mt-1">
                             <div class="input__container col-md-6">
@@ -93,6 +92,7 @@
                                 <input type="email" value="{{Auth::user() -> email}}" name="email" class="form-control" disabled>
                             </div>
                         </div>
+                        <button type="submit" class="btn btn-success mt-3">Guardar</button>
                     </form>
                 </div>
                 <div id="box-contraseña" class="box-contraseña box-contenido">
@@ -148,7 +148,7 @@
                                 <div class="opciones-direccion">
                                     <form action="{{url('/profile/delete-address')}}" method="post">
                                         @csrf
-                                        <input type="hidden" name="address" value="{{$direccion -> id}}">
+                                        <input type="hidden" name="address" value="{{Crypt::encryptString($direccion -> id)}}">
                                         <button type="submit">Remover</button>
                                     </form>
                                 </div>
@@ -161,7 +161,6 @@
                     <button type="button" id="volver-listar-direcciones" class="btn btn-primary">Volver</button>
                     <form class="register__form needs-validation" action="{{url('/profile/create-address')}}" method="post" novalidate>
                         @csrf
-                        <input type="hidden" name="codigo_usuario" value="{{Auth::user()-> id}}">
                          <!--direccion-->
                          <div class="input__container mt-1">
                             <label for="phone">Dirección:</label>

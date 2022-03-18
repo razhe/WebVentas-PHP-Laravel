@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Validator, Hash, Auth;
 use Illuminate\Support\Facades\DB; //Trabajar con la base de datos (para prcedimientos almacenados)
+use Illuminate\Support\Facades\Crypt;
 use App\Models\Category;
 use App\Models\Region;
 use App\Models\Comuna;
@@ -53,16 +54,12 @@ class UserProfileController extends Controller
         if ($validator -> fails()):
             return back() -> withErrors($validator)->with('MsgResponse','')->with( 'typealert', 'danger');
         else:
-            if(Auth::user()->id != $request['codigo_usuario']):
-                return back() -> withErrors($validator)->with('MsgResponse','Solicitud denegada.')->with( 'typealert', 'danger');
-            else:
-                $user = User::where('id', $request['codigo_usuario']) -> first();
-                $user-> name      = e($request['name']);
-                $user-> last_name = e($request['last_name']);
-                $user-> phone     = e($request['phone']);
-                if ($user -> save()):
-                    return back()-> withErrors($validator)-> with('MsgResponse', '¡Usuario actualizado!')->with('typealert', 'success');
-                endif;
+            $user = User::where('id', Auth::user()->id) -> first();
+            $user-> name      = e($request['name']);
+            $user-> last_name = e($request['last_name']);
+            $user-> phone     = e($request['phone']);
+            if ($user -> save()):
+                return back()-> withErrors($validator)-> with('MsgResponse', '¡Usuario actualizado!')->with('typealert', 'success');
             endif;
         endif;
     }
@@ -99,6 +96,7 @@ class UserProfileController extends Controller
             endif;
         endif;
     }
+
     public function postSaveAddress(Request $request)
     {
         $rules = 
@@ -155,7 +153,13 @@ class UserProfileController extends Controller
     }
     public function postRemoveAddress(Request $request)
     {
-        $direccion = Address::findOrFail($request['address']);
+        try{
+            $decrypted_id = Crypt::decryptString($request['address']);
+        }catch(\Exception $exception){
+            return view('errors.request-denied');
+        }
+        
+        $direccion = Address::findOrFail($decrypted_id);
         if($direccion->delete()){
             return back()->with('MsgResponse','Dirección eliminada exitosamente')->with( 'typealert', 'success');
         }

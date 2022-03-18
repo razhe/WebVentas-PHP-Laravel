@@ -151,7 +151,11 @@ class ProductsController extends Controller
         $specialUrl = '';
         if (!empty($data['special'])) {
             foreach($data['special'] as $special){
-                $specialUrl = '&special='.$special;
+                if (empty($specialUrl)) {
+                    $specialUrl .= '&special='.$special;
+                }else{
+                    $specialUrl .= ','.$special;
+                }
             }
         }
         //Brand filter

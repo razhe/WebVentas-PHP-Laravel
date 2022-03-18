@@ -10,7 +10,7 @@ use Validator, Hash, Auth, Mail, Str, Session;
 use \App\Models\User;
 //Envio de correos
 use App\Mail\UserSendRecover;
-
+use Illuminate\Support\Facades\Crypt;
 class AuthController extends Controller
 {
     public function __construct(){
@@ -47,7 +47,8 @@ class AuthController extends Controller
                 if(Auth::user()->status == 2):
                     return redirect('/logout');
                 else:
-                    if (!empty($request['estance']) && $request['estance'] == 'checkout') {
+                    $decrypted_estance = Crypt::decryptString($request['estance']);
+                    if (!empty($decrypted_estance) && $decrypted_estance == 'checkout') {
                         return redirect('/checkout/customer-information'); 
                     }
                     else{

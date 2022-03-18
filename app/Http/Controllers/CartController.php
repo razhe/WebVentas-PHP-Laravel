@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB; //Trabajar con la base de datos (para prcedim
 use App\Models\Product;
 use App\Models\Category;
 use Session, Config;
+use Illuminate\Support\Facades\Crypt;
 
 class CartController extends Controller
 {
@@ -26,21 +27,24 @@ class CartController extends Controller
     }
     public function postAddToCart(Request $request)
     {
-        $producto = Product::where('slug', $request['product']) ->get(['id','name','price','discount', 'stock', 'image1']);
-        //dd($request);
-        //$request->session()->forget('carrito');
+        try{
+            $decrypted_id = Crypt::decryptString($request['p']);
+        }catch(\Exception $exception){
+            return view('errors.request-denied');
+        }
+        $producto = Product::where('id', $decrypted_id) ->get(['id','name','price','discount', 'stock', 'image1']);
         if(Session::has('carrito')):
             $arreglo = session('carrito');
             $encontro = false;
             $numero = 0;
             for ($i=0; $i < sizeof($arreglo); $i++) { //For para encontrar el producto en el carrito
-                if($arreglo[$i]['id'] == $request['selected']){
+                if(Crypt::decryptString($arreglo[$i]['id']) == $decrypted_id){
                     $encontro=true;
                     $numero=$i;
                 }
             }
             if ($encontro == true) {//Encontro el producto
-                if (($arreglo[$numero]['cantidad'] + $request['quant']) < $arreglo[$numero]['stock']) {
+                if (($arreglo[$numero]['cantidad'] + $request['quant']) <= $arreglo[$numero]['stock']) {
                     $arreglo[$numero]['cantidad'] = $arreglo[$numero]['cantidad'] + $request['quant'];
                     $arreglo[$numero]['subtotal'] = round($arreglo[$numero]['cantidad'] * $arreglo[$numero]['precio']);
                     session(['carrito' => $arreglo]);    
@@ -49,7 +53,7 @@ class CartController extends Controller
                 if($producto[0] -> stock > 0){
                     if ($request['quant'] <= $producto[0] -> stock && $request['quant'] > 0) {
                         $nuevoArreglo = [
-                            'id'     => $producto[0] -> id,
+                            'id'     => Crypt::encryptString($producto[0] -> id),
                             'nombre' => $producto[0] -> name,
                             'precio'    => $producto[0] -> price,
                             'descuento' => $producto[0] -> discount,
@@ -70,7 +74,7 @@ class CartController extends Controller
             if($producto[0] -> stock > 0){
                 if ($request['quant'] <= $producto[0] -> stock && $request['quant'] > 0) {
                     $arreglo[] = [
-                        'id'     => $producto[0] -> id,
+                        'id'     => Crypt::encryptString($producto[0] -> id),
                         'nombre' => $producto[0] -> name,
                         'precio'    => $producto[0] -> price,
                         'descuento' => $producto[0] -> discount,
@@ -91,8 +95,13 @@ class CartController extends Controller
         $arregloCarrito = session('carrito');
         $encontro = false;
         $numero = 0;
+        try{
+            $decrypted_id = Crypt::decryptString($request['codigo']);
+        }catch(\Exception $exception){
+            return view('errors.request-denied');
+        }
         for ($i=0; $i < sizeof($arregloCarrito); $i++) { //For para encontrar el producto en el carrito
-            if($arregloCarrito[$i]['id'] == $request['codigo']){
+            if(Crypt::decryptString($arregloCarrito[$i]['id']) == $decrypted_id){
                 $encontro = true;
                 $numero = $i;
             }
@@ -131,8 +140,14 @@ class CartController extends Controller
         $carrito = session('carrito');
         $encontro = false;
         $numero = 0;
+        
+        try{
+            $decrypted_id = Crypt::decryptString($request['codigo']);
+        }catch(\Exception $exception){
+            return view('errors.request-denied');
+        }
         for ($i=0; $i < sizeof($carrito); $i++) { //For para encontrar el producto en el carrito
-            if($carrito[$i]['id'] == $request['codigo']){
+            if(Crypt::decryptString($carrito[$i]['id']) == $decrypted_id){
                 $encontro = true;
                 $numero = $i;
             }

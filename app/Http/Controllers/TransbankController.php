@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
 //Transbank
 use Transbank\Webpay\WebpayPlus;
 use Transbank\Webpay\WebpayPlus\Transaction;
@@ -112,7 +113,7 @@ class TransbankController extends Controller
                 $orderHasProducts -> price = $arreglo[$i]['precio'];
                 $orderHasProducts -> total_price = $arreglo[$i]['subtotal'];
                 $orderHasProducts -> product_name = $arreglo[$i]['nombre'];
-                $orderHasProducts -> id_product = $arreglo[$i]['id'];
+                $orderHasProducts -> id_product = Crypt::decryptString($arreglo[$i]['id']);
                 $orderHasProducts -> id_order = $orden -> id;
                 $orderHasProducts -> save();
             }

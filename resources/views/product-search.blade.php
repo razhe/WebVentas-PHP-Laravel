@@ -29,8 +29,8 @@
                                     <div class="imagen-producto">
                                         <img src="{{asset($product -> image1)}}" alt="">
                                         <div class="acciones-producto">
-                                            <a href="{{url('/details-product?product='.$product -> slug. '&selected=' .Hash::make($product -> id))}}"><i class="bi bi-eye"></i></a>
-                                            <a href="{{url('/cart/add?product='.$product -> slug.'&selected='.$product -> id. '&quant=1')}}"><i class="bi bi-bag"></i></a>
+                                            <a href="{{url('/details-product?s='.Crypt::encryptString($product -> slug))}}"><i class="bi bi-eye"></i></a>
+                                            <a href="{{url('/cart/add?p='.Crypt::encryptString($product -> id).'&quant=1')}}"><i class="bi bi-bag"></i></a>
                                         </div>
                                     </div>
                                     <div class="info-producto p-1">
@@ -56,17 +56,4 @@
 
 @section('JS')
     <script src="{{url('static/js/products.js')}}"></script>
-    <script>
-        $('#sort-by').change(function(){
-            //let sort = $('#sort-by').val();
-            //let url = document.getElementsByName('currentRoute')[0].getAttribute('content');
-
-            //newUrl = url.split('&', + 1).pop();
-            //var page = url.substring(url.lastIndexOf('/') + 1);
-            //console.log(newUrl);
-            //var page = url.substring(url.lastIndexOf('&') + 1);
-            //console.log(page + '&sort-by=' + sort);
-            //window.location= newUrl + '&sort=' + sort;
-        });
-    </script>
 @endsection
