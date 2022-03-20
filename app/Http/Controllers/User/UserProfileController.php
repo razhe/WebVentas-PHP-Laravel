@@ -12,6 +12,7 @@ use App\Models\Category;
 use App\Models\Region;
 use App\Models\Comuna;
 use App\Models\Address;
+use App\Models\Order;
 
 class UserProfileController extends Controller
 {
@@ -27,11 +28,13 @@ class UserProfileController extends Controller
                         ->join('comuna','comuna.id', '=', 'address.id_comuna')
                         ->join('region', 'region.id', '=', 'comuna.id_region')
                         ->where('address.id_user',Auth::id()) -> get();
+        $ordenes = Order::where('id_user', Auth::user() -> id) -> paginate(4);
         $data = 
         [
             'categories' => $categories,
             'subcategories' => $subcategories,
             'direcciones' => $direcciones,
+            'ordenes' => $ordenes,
         ];
         return view('User.profile', $data);
     }

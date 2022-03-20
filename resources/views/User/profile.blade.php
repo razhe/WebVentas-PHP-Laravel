@@ -46,7 +46,7 @@
                 </div>
             </div>
             <div class="contenido-perfil">
-                <div id="box-perfil-principal" class="box-perfil-principal box-contenido activo">
+                <div id="box-perfil-principal" class="box-perfil-principal box-contenido">
                     <h4>¡Hola: {{Auth::user()-> name}}!</h4>
                     <form class="register__form needs-validation" action="{{url('/profile/update-profile')}}" method="post" novalidate>
                         @csrf
@@ -200,6 +200,44 @@
                         <span>*Por el momento los envíos solo están disponibles para la región metropolitana.</span>
                         <button type="submit" class="btn btn-success">Guardar</button>
                     </form>
+                </div>
+                <div id="box-listar-compras" class="box-direcciones box-contenido">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Orden</th>
+                                <th>Total neto</th>
+                                <th>IVA</th>
+                                <th>Total</th>
+                                <th>Estado</th>
+                                <th>Emisión</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($ordenes as $orden)
+                                <tr>
+                                    <td>{{$orden -> order_number}}</td>
+                                    <td>{{$orden -> total_neto}}</td>
+                                    <td>{{$orden -> iva}}</td>
+                                    <td>{{$orden -> total}}</td>
+                                    @switch($orden -> status)
+                                        @case(1)
+                                        <td>Pago pendiente</td>
+                                            @break
+                                        @case(2)
+                                        <td>Pagada</td>
+                                            @break
+                                    @endswitch
+                                    @if (!empty($orden -> id_boleta))
+                                        <td>Boleta</td>
+                                    @else
+                                        <td>Factura</td>
+                                    @endif
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    {{$ordenes -> links()}}
                 </div>
             </div>
         </div>

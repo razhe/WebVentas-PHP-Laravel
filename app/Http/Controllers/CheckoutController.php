@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB; //Trabajar con la base de datos (para prcedim
 use Auth,Validator,Session ;
 use App\Models\Address;
 use App\Models\Pago;
+use App\Models\Order;
 use Illuminate\Support\Facades\Crypt;
 //Transbank
 use Transbank\Webpay\WebpayPlus;
@@ -60,7 +61,11 @@ class CheckoutController extends Controller
                 $pago -> modo_pago = $this->validatePaymentType($response -> paymentTypeCode);
                 $pago -> estado_pago = $response -> status;
 
-                $pago -> save();
+                if($pago -> save()){
+                    $orden = Order::where('id', session('pagoPendiente.0.id_orden')) -> first();
+                    $orden -> status = 2;
+                    $orden -> save();
+                }
 
                 $carrito = session('carrito');
                 $totalCarrito = session('carrito');

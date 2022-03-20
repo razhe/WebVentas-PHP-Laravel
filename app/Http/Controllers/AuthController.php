@@ -47,9 +47,12 @@ class AuthController extends Controller
                 if(Auth::user()->status == 2):
                     return redirect('/logout');
                 else:
-                    $decrypted_estance = Crypt::decryptString($request['estance']);
-                    if (!empty($decrypted_estance) && $decrypted_estance == 'checkout') {
-                        return redirect('/checkout/customer-information'); 
+                    
+                    if (!empty($request['estance'])){ 
+                        $decrypted_estance = Crypt::decryptString($request['estance']);
+                        if($decrypted_estance == 'checkout') {
+                            return redirect('/checkout/customer-information'); 
+                        }
                     }
                     else{
                         return redirect('/'); 

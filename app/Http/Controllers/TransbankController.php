@@ -62,6 +62,7 @@ class TransbankController extends Controller
         $pago -> save();
 
         //Orden
+        $orden -> order_number = strval(rand(0,9999)).strval($orden->id). strval(rand(0,9999));
         $orden -> id_pago = $pago -> id;
         //Boleta o factura
         if (Session::has('payment-billing')) {
@@ -123,6 +124,7 @@ class TransbankController extends Controller
         $arregloPagoPediente[] = [
             'token' => $pago -> token,
             'id_pago' => $pago -> id,
+            'id_orden'=> $orden -> id,
         ];
         session(['pagoPendiente' => $arregloPagoPediente]);
 

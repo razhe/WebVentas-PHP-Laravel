@@ -1,7 +1,11 @@
 $(document).ready(function(){
     //obtener_region();//provisional, descomentar en caso de actualizar envios
     traerComunasRegMet();//provisional, eliminar en caso de actualizar envios
+    getCurrentSection();
 });
+
+
+
 const btnPerfilPrincipal = document.getElementById('pefil-principal'),
     btnCambiarContraseña = document.getElementById('pefil-contraseña'),
     btnPerfilDirecciones = document.getElementById('pefil-direcciones'),
@@ -9,7 +13,8 @@ const btnPerfilPrincipal = document.getElementById('pefil-principal'),
     boxDireccionesListar = document.getElementById('box-direcciones-listar'),
     tituloDirecciones = document.getElementsByClassName('titulo-item-direccion'),
     btnAgregarDireccion = document.getElementById('btn-agregar-direccion'),
-    btnVolverListar = document.getElementById('volver-listar-direcciones');
+    btnVolverListar = document.getElementById('volver-listar-direcciones'),
+    btnListarCompras = document.getElementById('pefil-compras');
 
 btnAgregarDireccion.addEventListener('click', function() {
     boxDireccionesListar.classList.remove('activo');
@@ -26,6 +31,31 @@ for (let i = 0; i < tituloDirecciones.length; i++) {
     });
 }
 
+function saveCurrentSection(id) {
+    if (typeof(Storage) != 'undefined') {
+        if (sessionStorage.getItem('current_section') != undefined) {
+
+            sessionStorage.removeItem('current_section');
+            sessionStorage.setItem('current_section', id);
+        }else{
+            sessionStorage.setItem('current_section', id);
+        }
+    }
+}
+function getCurrentSection(){
+    if (sessionStorage.getItem('current_section') != undefined){
+        let boxPrincipal = document.getElementById(sessionStorage.getItem('current_section'));
+        for (let i = 0; i < cajasContenido.length; i++) {
+            cajasContenido[i].classList.remove('activo');
+        }
+        boxPrincipal.classList.add('activo');
+    }else{
+        let boxPrincipal = document.getElementById('box-perfil-principal');
+        boxPrincipal.classList.add('activo');
+    }
+    
+}
+
 let cajasContenido = document.getElementsByClassName('box-contenido');
 
 btnPerfilPrincipal.addEventListener('click', function(){
@@ -33,6 +63,7 @@ btnPerfilPrincipal.addEventListener('click', function(){
     for (let i = 0; i < cajasContenido.length; i++) {
         cajasContenido[i].classList.remove('activo');
     }
+    saveCurrentSection('box-perfil-principal');
     boxPrincipal.classList.add('activo');
 });
 btnCambiarContraseña.addEventListener('click', function(){
@@ -40,6 +71,7 @@ btnCambiarContraseña.addEventListener('click', function(){
     for (let i = 0; i < cajasContenido.length; i++) {
         cajasContenido[i].classList.remove('activo');
     }
+    saveCurrentSection('box-contraseña');
     boxPrincipal.classList.add('activo');
 });
 
@@ -48,6 +80,16 @@ btnPerfilDirecciones.addEventListener('click', function(){
     for (let i = 0; i < cajasContenido.length; i++) {
         cajasContenido[i].classList.remove('activo');
     }
+    saveCurrentSection('box-direcciones-listar');
+    boxPrincipal.classList.add('activo');
+});
+
+btnListarCompras.addEventListener('click', function(){
+    let boxPrincipal = document.getElementById('box-listar-compras');
+    for (let i = 0; i < cajasContenido.length; i++) {
+        cajasContenido[i].classList.remove('activo');
+    }
+    saveCurrentSection('box-listar-compras');
     boxPrincipal.classList.add('activo');
 });
 
