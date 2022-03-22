@@ -145,15 +145,4 @@ class TransbankController extends Controller
         ];
         return $array;
     }
-
-    public function validateTransbankPurchase($token){ // Valida si la compra fue exitosa
-        $response = (new Transaction)->commit($token);
-        $authorization = false;
-        if ($response->status == 'AUTHORIZED' and $response -> responseCode == 0) {
-            $authorization = true;
-            return $authorization;
-        }else{
-            return $authorization;
-        }
-    }
 }

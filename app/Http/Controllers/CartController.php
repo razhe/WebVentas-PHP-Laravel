@@ -146,14 +146,16 @@ class CartController extends Controller
         }catch(\Exception $exception){
             return view('errors.request-denied');
         }
+
         for ($i=0; $i < sizeof($carrito); $i++) { //For para encontrar el producto en el carrito
             if(Crypt::decryptString($carrito[$i]['id']) == $decrypted_id){
                 $encontro = true;
                 $numero = $i;
             }
         }
-        if (sizeof($carrito) == 0) {
+        if (empty($carrito)) {
             session()->forget('carrito');
+            session()->forget('totalCarrito');
         } else {
             if ($encontro == true) {//Encontro el producto
                 unset($carrito[$numero]);         

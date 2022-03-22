@@ -58,28 +58,31 @@ class CheckoutController extends Controller
                             -> where('token', session('pagoPendiente.0.token'))
                             -> first();
                 $response = (new Transaction)->commit($request['token_ws']);
-                $pago -> modo_pago = $this->validatePaymentType($response -> paymentTypeCode);
-                $pago -> estado_pago = $response -> status;
+                if ($response->status == 'AUTHORIZED' and $response -> responseCode == 0) {
+                    $pago -> modo_pago = $this->validatePaymentType($response -> paymentTypeCode);
+                    $pago -> estado_pago = $response -> status;
 
-                if($pago -> save()){
-                    $orden = Order::where('id', session('pagoPendiente.0.id_orden')) -> first();
-                    $orden -> status = 2;
-                    $orden -> save();
+                    if($pago -> save()){
+                        $orden = Order::where('id', session('pagoPendiente.0.id_orden')) -> first();
+                        $orden -> status = 2;
+                    }
+                    $carrito = session('carrito');
+                    $totalCarrito = session('totalCarrito');
+
+                    $data = [
+                        'productos' => $carrito,
+                        'totales' => $totalCarrito,
+                    ];
+                    //dd($data);
+                    session()->forget('pagoPendiente');
+                    if(Session::has('carrito')){
+                        session()->forget('carrito');
+                        session()->forget('totalCarrito');
+                    }
+                    return view('checkout.purchase-detail', $data);
+                }else{
+
                 }
-
-                $carrito = session('carrito');
-                $totalCarrito = session('carrito');
-
-                $data = [
-                    'carrito' => $carrito,
-                    'totalCarrito' => $totalCarrito,
-                ];
-                session()->forget('pagoPendiente');
-                if(Session::has('carrito')){
-                    session()->forget('carrito');
-                    session()->forget('totalCarrito');
-                }
-                return view('checkout.purchase-detail', $data);
             else:
                 return redirect('/');
             endif;
