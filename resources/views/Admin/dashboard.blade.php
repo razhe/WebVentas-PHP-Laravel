@@ -19,35 +19,87 @@
                 <div class="card rounded-0">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-lg-3 col-md-6 d-flex stat my-3">
-                                <div class="mx-auto">
-                                    <h6 class="text-muted">Ingresos mensuales</h6>
-                                    <h3 class="font-weight-bold">$50000</h3>
-                                    <h6 class="text-success"><i class="bi bi-arrow-up-circle-fill"></i> 50.50%</h6>
+                            @if (count($metricasVentas) > 1)
+                                <div class="col-lg-3 col-md-6 d-flex stat my-3">
+                                    <div class="mx-auto">
+                                        <h6 class="text-muted">Contraste ingresos (Men)</h6>
+                                        <h3 class="font-weight-bold">{{Config::get('configuracion-global.currency'). ' ' . $metricasVentas[0] -> total_mes}}</h3>     
+                                        @if (round((($metricasVentas[0] -> total_mes - $metricasVentas[1] -> total_mes) / $metricasVentas[1] -> total_mes) * 100) > 0)
+                                            <h6 class="text-success"><i class="bi bi-arrow-up-circle-fill"></i> {{round((($metricasVentas[0] -> total_mes - $metricasVentas[1] -> total_mes) / $metricasVentas[1] -> total_mes) * 100)}} %</h6>
+                                        @else
+                                            <h6 class="text-danger"><i class="bi bi-arrow-down-circle-fill"></i> {{round((($metricasVentas[0] -> total_mes - $metricasVentas[1] -> total_mes) / $metricasVentas[1] -> total_mes) * 100)}} %</h6>
+                                        @endif
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 d-flex stat my-3">
-                                <div class="mx-auto">
-                                    <h6 class="text-muted">Productos activos</h6>
-                                    <h3 class="font-weight-bold">100</h3>
-                                    <h6 class="text-success"><i class="bi bi-arrow-up-circle-fill"></i> 25.50%</h6>
+                                <div class="col-lg-3 col-md-6 d-flex stat my-3">
+                                    <div class="mx-auto">
+                                        <h6 class="text-muted">Contraste ventas (Men)</h6>
+                                        <h3 class="font-weight-bold">{{$metricasVentas[0] -> ventas}}</h3>                                  
+                                        @if (round((($metricasVentas[0] -> ventas - $metricasVentas[1] -> ventas) / $metricasVentas[1] -> ventas) * 100) > 0)
+                                            <h6 class="text-success"><i class="bi bi-arrow-up-circle-fill"></i> {{round((($metricasVentas[0] -> ventas - $metricasVentas[1] -> ventas) / $metricasVentas[1] -> ventas) * 100)}} %</h6>
+                                        @else
+                                            <h6 class="text-danger"><i class="bi bi-arrow-down-circle-fill"></i> {{round((($metricasVentas[0] -> ventas - $metricasVentas[1] -> ventas) / $metricasVentas[1] -> ventas) * 100)}} %</h6>
+                                        @endif
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 d-flex stat my-3">
-                                <div class="mx-auto">
-                                    <h6 class="text-muted">No. de usuarios</h6>
-                                    <h3 class="font-weight-bold">2500</h3>
-                                    <h6 class="text-success"><i class="bi bi-arrow-up-circle-fill"></i> 75.50%</h6>
+                                <div class="col-lg-3 col-md-6 d-flex stat my-3">
+                                    <div class="mx-auto">
+                                        <h6 class="text-muted">Contraste productos vendidos (Men)</h6>
+                                        <h3 class="font-weight-bold">{{$metricasVentas[0] -> productos_vendidos}}</h3>
+                                        @if (round((($metricasVentas[0] -> productos_vendidos - $metricasVentas[1] -> productos_vendidos) / $metricasVentas[1] -> productos_vendidos) * 100) > 0)
+                                            <h6 class="text-success"><i class="bi bi-arrow-up-circle-fill"></i> {{round((($metricasVentas[0] -> productos_vendidos - $metricasVentas[1] -> productos_vendidos) / $metricasVentas[1] -> productos_vendidos) * 100)}} %</h6>
+                                        @else
+                                            <h6 class="text-danger"><i class="bi bi-arrow-down-circle-fill"></i> {{round((($metricasVentas[0] -> productos_vendidos - $metricasVentas[1] -> productos_vendidos) / $metricasVentas[1] -> productos_vendidos) * 100)}} %</h6>
+                                        @endif
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 d-flex my-3">
-                                <div class="mx-auto">
-                                    <h6 class="text-muted">Usuarios nuevos</h6>
-                                    <h3 class="font-weight-bold">500</h3>
-                                    <h6 class="text-success"><i class="bi bi-arrow-up-circle-fill"></i> 15.50%</h6>
+                            @else
+                                <div class="col-lg-3 col-md-6 d-flex stat my-3">
+                                    <div class="mx-auto">
+                                        <h6 class="text-muted">Contraste ingresos (Men)</h6>
+                                        <h3 class="font-weight-bold">{{Config::get('configuracion-global.currency'). ' ' .$metricasVentas[0] -> total_mes}}</h3>
+                                        <h6 class="text-secondary"><i class="bi bi-dash-circle-fill"></i> 0%</h6>
+                                    </div>
                                 </div>
-                            </div>
+                                <div class="col-lg-3 col-md-6 d-flex stat my-3">
+                                    <div class="mx-auto">
+                                        <h6 class="text-muted">Contraste ventas (Men)</h6>
+                                        <h3 class="font-weight-bold">{{$metricasVentas[0] -> ventas}}</h3>
+                                        <h6 class="text-secondary"><i class="bi bi-dash-circle-fill"></i> 0%</h6>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6 d-flex stat my-3">
+                                    <div class="mx-auto">
+                                        <h6 class="text-muted">Contraste productos vendidos (Men)</h6>
+                                        <h3 class="font-weight-bold">{{$metricasVentas[0] -> productos_vendidos}}</h3>
+                                        <h6 class="text-secondary"><i class="bi bi-dash-circle-fill"></i> 0%</h6>
+                                    </div>
+                                </div>
+                            @endif
+                            @if (count($metricasUsuarios) > 1)
+                                <div class="col-lg-3 col-md-6 d-flex my-3">
+                                    <div class="mx-auto">
+                                        <h6 class="text-muted">Usuarios nuevos (Men)</h6>
+                                        <h3 class="font-weight-bold">{{$metricasUsuarios[0] -> usuarios}}</h3>
+                                        @if (round((($metricasUsuarios[0] -> usuarios - $metricasUsuarios[1] -> usuarios) / $metricasUsuarios[1] -> usuarios) * 100) > 0)
+                                            <h6 class="text-success"><i class="bi bi-arrow-up-circle-fill"></i> {{round((($metricasUsuarios[0] -> usuarios - $metricasUsuarios[1] -> usuarios) / $metricasUsuarios[1] -> usuarios) * 100)}} %</h6>
+                                        @else
+                                            <h6 class="text-danger"><i class="bi bi-arrow-down-circle-fill"></i> {{round((($metricasUsuarios[0] -> usuarios - $metricasUsuarios[1] -> usuarios) / $metricasUsuarios[1] -> usuarios) * 100)}} %</h6>
+                                        @endif
+                                        
+                                    </div>
+                                </div>
+                            @else
+                                <div class="col-lg-3 col-md-6 d-flex my-3">
+                                    <div class="mx-auto">
+                                        <h6 class="text-muted">Usuarios nuevos (Men)</h6>
+                                        <h3 class="font-weight-bold">{{$metricasUsuarios[0] -> usuarios}}</h3>
+                                        <h6 class="text-secondary"><i class="bi bi-dash-circle-fill"></i>0%</h6>                                    
+                                    </div>
+                                </div>
+                            @endif
                         </div>
+                        <span>Contraste del ultimo y penultimo mes registrado.</span>
                     </div>
                 </div>
             </div>
