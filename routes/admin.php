@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Admin\SalesController;
 
 
 Route::prefix('/admin')->group(function(){
@@ -56,6 +57,9 @@ Route::prefix('/admin')->group(function(){
 
     route::get('/web-parameters/config',[SettingsController::class, 'getWebCustomize']);
     route::post('/web-parameters/global-config/save',[SettingsController::class, 'postGlobalConfigSave']);
+
+    //Ventas
+    route::get('/sales',[SalesController::class, 'getSales']);
 });
 
 

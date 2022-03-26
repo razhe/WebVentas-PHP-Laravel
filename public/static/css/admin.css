@@ -159,6 +159,33 @@ table>tbody>tr>td {
   max-width: 150px;
   top: -43.2px;
 }
+/*Ventas recientes*/
+.enlace-nueva-venta{
+  text-decoration: none;
+  color: #232F3E;
+}
+.enlace-nueva-venta:hover{
+  color: #232F3E;
+}
+.item-nueva-venta{
+  position: relative;
+}
+.status_venta{
+  position: absolute;
+  right: 0;
+  top: 20%;
+  padding: 2px 4px;
+  border-radius: 4px;
+  color: #fff;
+  font-size: .85rem;
+}
+.status_venta.status-nuevo{
+  background-color: #da3752;
+}
+.status_venta.status-abierto{
+  background-color: #b1b1b1;
+  color: rgb(0, 0, 0);
+}
 /*==============*/
 /*Banner*/
 /*==============*/

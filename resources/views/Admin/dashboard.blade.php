@@ -135,52 +135,25 @@
                     <h6 class="font-weight-bold mb-0">Ventas recientes</h6>
                 </div>
                 <div class="card-body pt-2">
-                    <div class="d-flex border-bottom py-2">
-                        <div class="d-flex mr-3">
-                            <h2 class="align-self-center mb-0"><i class="icon ion-md-pricetag"></i></h2>
-                        </div>
-                        <div class="align-self-center">
-                            <h6 class="d-inline-block mb-0">$250</h6>
-                            <small class="d-block text-muted">Curso diseño web</small>
-                        </div>
-                    </div>
-                    <div class="d-flex border-bottom py-2">
-                        <div class="d-flex mr-3">
-                            <h2 class="align-self-center mb-0"><i class="icon ion-md-pricetag"></i></h2>
-                        </div>
-                        <div class="align-self-center">
-                            <h6 class="d-inline-block mb-0">$250</h6>
-                            <small class="d-block text-muted">Curso diseño web</small>
-                        </div>
-                    </div>
-                    <div class="d-flex border-bottom py-2">
-                        <div class="d-flex mr-3">
-                            <h2 class="align-self-center mb-0"><i class="icon ion-md-pricetag"></i></h2>
-                        </div>
-                        <div class="align-self-center">
-                            <h6 class="d-inline-block mb-0">$250</h6>
-                            <small class="d-block text-muted">Curso diseño web</small>
-                        </div>
-                    </div>
-                    <div class="d-flex border-bottom py-2">
-                        <div class="d-flex mr-3">
-                            <h2 class="align-self-center mb-0"><i class="icon ion-md-pricetag"></i></h2>
-                        </div>
-                        <div class="align-self-center">
-                            <h6 class="d-inline-block mb-0">$250</h6>
-                            <small class="d-block text-muted">Curso diseño web</small>
-                        </div>
-                    </div>
-                    <div class="d-flex border-bottom py-2 mb-3">
-                        <div class="d-flex mr-3">
-                            <h2 class="align-self-center mb-0"><i class="icon ion-md-pricetag"></i></h2>
-                        </div>
-                        <div class="align-self-center">
-                            <h6 class="d-inline-block mb-0">$250</h6>
-                            <small class="d-block text-muted">Curso diseño web</small>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary w-100">Ver todas</button>
+                    @foreach ($ordenes as $orden)
+                        <a href="" class="enlace-nueva-venta">
+                            <div class="d-flex border-bottom py-2 item-nueva-venta">
+                                <div class="d-flex mr-3">
+                                    <h2 class="align-self-center mb-0"><i class="icon ion-md-pricetag"></i></h2>
+                                </div>
+                                <div class="align-self-center">
+                                    <h6 class="d-inline-block mb-0">{{Config::get('configuracion-global.currency').' '. $orden->total}}</h6>
+                                    <small class="d-block text-muted">Num. {{$orden -> order_number .' ~ '. $orden-> fecha}}</small>
+                                </div>
+                                @if ($orden -> opened == 0)
+                                    <div class="status_venta status-nuevo"><small>¡Nuevo!</small></div>
+                                @else
+                                    <div class="status_venta status-abierto"><small>Abierto</small></div>
+                                @endif
+                            </div>
+                        </a>
+                    @endforeach    
+                    <a href=""><button class="btn btn-primary w-100">Ver todas</button></a>
                 </div>
             </div>
         </div>
