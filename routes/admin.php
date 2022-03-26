@@ -60,6 +60,7 @@ Route::prefix('/admin')->group(function(){
 
     //Ventas
     route::get('/sales',[SalesController::class, 'getSales']);
+    route::get('/sale-detail',[SalesController::class, 'getSaleDetail']);
 });
 
 
