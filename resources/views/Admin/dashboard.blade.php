@@ -153,7 +153,7 @@
                             </div>
                         </a>
                     @endforeach    
-                    <a href=""><button class="btn btn-primary w-100">Ver todas</button></a>
+                    <a href="{{url('admin/sales')}}"><button class="btn btn-primary w-100">Ver todas</button></a>
                 </div>
             </div>
         </div>
