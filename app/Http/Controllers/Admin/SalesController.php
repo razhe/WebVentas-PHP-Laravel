@@ -9,6 +9,8 @@ use App\Models\Pago;
 use App\Models\Order_has_products;
 use Illuminate\Support\Facades\Crypt;
 
+use Validator;
+
 class SalesController extends Controller
 {
     public function __construct()
@@ -52,5 +54,26 @@ class SalesController extends Controller
         }
         
         return view('Admin.sale-detail', $data);
+    }
+    public function postChangeOrderStatus(Request $request)
+    {
+        if(!empty($request['cv']) && !empty($request['order_status'])){
+            try{
+                $decrypted_id = Crypt::decryptString($request['cv']);
+            }catch(\Exception $exception){
+                return view('errors.request-denied');
+            }
+            if($request['order_status'] == 1 || $request['order_status'] == 2 || $request['order_status'] == 3 || $request['order_status'] == 4){
+                $orden = Order::where('id',$decrypted_id) -> first();
+                $orden -> status = e($request['order_status']);
+
+                $orden -> save();
+                return back() ->with('MsgResponse','¡El estado de la orden ha sido guardada exitosamente!')->with( 'typealert', 'success');
+            }else{
+                return back() ->with('MsgResponse','Error en la petición.')->with( 'typealert', 'danger');
+            }
+        }else{
+            return back();
+        }
     }
 }

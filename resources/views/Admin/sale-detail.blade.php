@@ -8,6 +8,25 @@
 
 @section('content')
 <div class="container-extend">
+    <!--Validacion formulario-->
+    @if(Session::has('MsgResponse'))
+        <div class="container box-msgAuth-error">
+            <div class="alert alert-{{ Session::get('typealert') }}" style="display:none;">
+            {{Session::get('MsgResponse')}}
+            @if($errors -> any())
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            @endif
+            <script>
+                $('.alert').slideDown();
+                setTimeout(function() {$('.alert').slideUp();}, 8000);
+            </script>
+            </div>
+        </div>
+    @endif
     <div class=""><a href="{{url('admin/sales')}}"><button>Volver</button></a></div>
     <div class="row m-0">
         <div class="box-section-sales box-detalle col-lg-7 col-md-12">
@@ -62,42 +81,58 @@
                                             @case(1)
                                                 <td>
                                                     <div class="">
-                                                        <select id="" class="form-select brand-select" aria-label="Default select example" name="">
-                                                            <option value="" selected><small>Pendiente</small></option>
-                                                        </select>
+                                                        <form action="{{url('admin/sales/change-order-status')}}" method="post">
+                                                            @csrf
+                                                            <input type="hidden" name="cv" value="{{Crypt::encryptString($venta-> id)}}">
+                                                            <select id="" onchange="this.form.submit();"  name="order_status" class="form-select brand-select" aria-label="Default select example" name="">
+                                                                <option value="1" selected><small>Pendiente</small></option>
+                                                            </select>
+                                                        </form>
                                                     </div>
                                                 </td>
                                                 @break
                                             @case(2)
                                                 <td>
                                                     <div class="">
-                                                        <select id="" class="form-select brand-select" aria-label="Default select example" name="">
-                                                            <option value="" selected>Autorizado</option>
-                                                            <option value="">En despacho</option>
-                                                            <option value="" >Entregado</option>
-                                                        </select>
+                                                        <form action="{{url('admin/sales/change-order-status')}}" method="post">
+                                                            @csrf
+                                                            <input type="hidden" name="cv" value="{{Crypt::encryptString($venta-> id)}}">
+                                                            <select id="" onchange="this.form.submit();"  name="order_status" class="form-select brand-select" aria-label="Default select example" name="">
+                                                                <option value="2" selected>Autorizado</option>
+                                                                <option value="3">En despacho</option>
+                                                                <option value="4" >Entregado</option>
+                                                            </select>
+                                                        </form>
                                                     </div>
                                                 </td>
                                                 @break
                                             @case(3)
                                                 <td>
                                                     <div class="">
-                                                        <select id="" class="form-select brand-select" aria-label="Default select example" name="">
-                                                            <option value="">Autorizado</option>
-                                                            <option value="" selected >En despacho</option>
-                                                            <option value="" >Entregado</option>
-                                                        </select>
+                                                        <form action="{{url('admin/sales/change-order-status')}}" method="post">
+                                                            @csrf
+                                                            <input type="hidden" name="cv" value="{{Crypt::encryptString($venta-> id)}}">
+                                                            <select id="" onchange="this.form.submit();" name="order_status" class="form-select brand-select" aria-label="Default select example" name="">
+                                                                <option value="2">Autorizado</option>
+                                                                <option value="3" selected >En despacho</option>
+                                                                <option value="4" >Entregado</option>
+                                                            </select>
+                                                        </form>
                                                     </div>
                                                 </td>
                                                 @break
                                             @case(4)
                                                 <td>
                                                     <div class="">
-                                                        <select id="" class="form-select brand-select" aria-label="Default select example" name="">
-                                                            <option value="">Autorizado</option>
-                                                            <option value="">En despacho</option>
-                                                            <option value="" selected>Entregado</option>
-                                                        </select>
+                                                        <form action="{{url('admin/sales/change-order-status')}}" method="post">
+                                                            @csrf
+                                                            <input type="hidden" name="cv" value="{{Crypt::encryptString($venta-> id)}}">    
+                                                            <select id="" onchange="this.form.submit();" name="order_status" class="form-select brand-select" aria-label="Default select example" name="">
+                                                                <option value="2">Autorizado</option>
+                                                                <option value="3">En despacho</option>
+                                                                <option value="4" selected>Entregado</option>
+                                                            </select>
+                                                        </form>
                                                     </div>
                                                 </td>
                                                 @break
@@ -190,4 +225,5 @@
 @endsection
 
 @section('JS')
+<script src="{{url('static/js/sales.js')}}"></script>
 @endsection

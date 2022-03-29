@@ -110,10 +110,10 @@
                 <div class="card h-100">
                     <div class="card-header">
                         <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
-                        Area Chart Example
+                        Ventas efectuadas durante el año
                     </div>
                     <div class="card-body">
-                        <canvas class="chart" width="400" height="200"></canvas>
+                        <canvas class="chart" id="chart-sales-per-year" width="400" height="200"></canvas>
                     </div>
                 </div>
             </div>
@@ -121,10 +121,10 @@
                 <div class="card h-100">
                     <div class="card-header">
                         <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
-                        Area Chart Example
+                        Productos vendidos durante el año
                     </div>
                     <div class="card-body">
-                        <canvas class="chart" width="400" height="200"></canvas>
+                        <canvas class="chart" id="chart-sold-products" width="400" height="200"></canvas>
                     </div>
                 </div>
             </div>
@@ -157,4 +157,8 @@
                 </div>
             </div>
         </div>
+@endsection
+
+@section('JS')
+    <script src="{{url('static/js/dashboard.js')}}"></script>
 @endsection

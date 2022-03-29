@@ -11,7 +11,10 @@ use App\Http\Controllers\Admin\SalesController;
 
 
 Route::prefix('/admin')->group(function(){
+    //dashboard
     Route::get('/', [DashboardController::class, 'getDashboard']);
+    Route::get('/dashboard/sales-per-year/{year}',[DashboardController::class, 'getSalesPerYear']);
+    Route::get('/dashboard/products-sold/{year}',[DashboardController::class, 'getProductsSoldPerYear']);
     //Modulo usuarios
     Route::get('/users', [UserController::class, 'getUsers']);
     Route::post('/users/add', [UserController::class, 'postAddUser']);
@@ -61,6 +64,8 @@ Route::prefix('/admin')->group(function(){
     //Ventas
     route::get('/sales',[SalesController::class, 'getSales']);
     route::get('/sale-detail',[SalesController::class, 'getSaleDetail']);
+
+    route::post('/sales/change-order-status',[SalesController::class, 'postChangeOrderStatus']);
 });
 
 

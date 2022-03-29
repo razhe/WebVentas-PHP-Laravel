@@ -25,4 +25,15 @@ class DashboardController extends Controller
         ];
         return view('Admin.dashboard', $data);
     }
+    public function getSalesPerYear($year)
+    {
+        $data = DB::select('CALL select_sales_per_month(?)', array($year));
+        return response() ->json($data) ;
+        
+    }
+    public function getProductsSoldPerYear($year)
+    {
+        $data = DB::select('CALL select_products_sold(?)', array($year));
+        return response() ->json($data) ;
+    }
 }
