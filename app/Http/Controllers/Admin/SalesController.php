@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\Pago;
+use App\Models\Order_has_products;
 use Illuminate\Support\Facades\Crypt;
 
 class SalesController extends Controller
@@ -31,9 +33,21 @@ class SalesController extends Controller
             }catch(\Exception $exception){
                 return view('errors.request-denied');
             }
-            $venta = Order::where('id', $decrypted_id);
+            $actualizarVenta = Order::where('id', $decrypted_id) -> first();
+            if($actualizarVenta->opened == 0){
+                $actualizarVenta -> opened = true;
+                $actualizarVenta -> save();
+            }
+            
+            $venta = Order::where('id', $decrypted_id) -> get();
+            
+            $pago = Pago::where('id', $venta[0] -> id_pago) -> get();
+            $Order_has_products = Order_has_products::where('id', $venta[0] -> id) -> get();
+
             $data = [
-                'venta' => $venta
+                'ventas' => $venta,
+                'pagos' => $pago,
+                'Order_has_products' => $Order_has_products,
             ];
         }
         

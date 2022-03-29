@@ -186,6 +186,10 @@ table>tbody>tr>td {
   background-color: #b1b1b1;
   color: rgb(0, 0, 0);
 }
+/*Detalle ventas*/
+.box-section-sales{
+  margin-top: 50px;
+}
 /*==============*/
 /*Banner*/
 /*==============*/
