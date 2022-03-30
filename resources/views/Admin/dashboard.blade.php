@@ -136,7 +136,7 @@
                 </div>
                 <div class="card-body pt-2">
                     @foreach ($ordenes as $orden)
-                        <a href="" class="enlace-nueva-venta">
+                        <a href="{{url('admin/sale-detail?cv='.Crypt::encryptString($orden -> id))}}" class="enlace-nueva-venta">
                             <div class="d-flex border-bottom py-2 item-nueva-venta">
                                 <div class="d-flex mr-3">
                                     <h2 class="align-self-center mb-0"><i class="icon ion-md-pricetag"></i></h2>

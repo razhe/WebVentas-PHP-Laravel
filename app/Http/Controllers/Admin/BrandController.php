@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Brand;
-use Validator, Str, File;
+use Validator, Str, File, DB;
 //Paquete intervention images
 use Intervention\Image\Facades\Image;
 class BrandController extends Controller
@@ -17,7 +17,8 @@ class BrandController extends Controller
     }
     public function getBrands(){
         $brands = Brand::where('brands.status', '<>', '3') -> orderby('id', 'Asc')->get();
-        $dataBrands = ['brands' => $brands];
+        $metrics = DB::select('CALL select_metrics_brands()');
+        $dataBrands = ['brands' => $brands, 'metrics' => $metrics];
         return view('Admin.brands', $dataBrands); 
     }
     public function postAddBrand(Request $request){

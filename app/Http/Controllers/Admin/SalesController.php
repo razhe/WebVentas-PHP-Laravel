@@ -9,7 +9,7 @@ use App\Models\Pago;
 use App\Models\Order_has_products;
 use Illuminate\Support\Facades\Crypt;
 
-use Validator;
+use Validator, DB;
 
 class SalesController extends Controller
 {
@@ -22,8 +22,10 @@ class SalesController extends Controller
     public function getSales()
     {
         $ventas = Order::orderBy('fecha', 'DESC')->get();
+        $metrics = DB::select('CALL select_metrics_sales()');
         $data = [
-            'ventas' => $ventas
+            'ventas' => $ventas,
+            'metrics' => $metrics
         ];
         return view('Admin.sales', $data);
     }

@@ -17,7 +17,7 @@ class DashboardController extends Controller
     public function getDashboard(){
         $metricas_ventas = DB::select('CALL select_metrics_on_dashboard_ventas()');
         $metricas_usuarios = DB::select('CALL select_metrics_on_dashboard_usuarios()');
-        $order = Order::where('status', '2') -> orderBy('fecha', 'DESC') -> take(6) -> get(['total', 'opened', 'order_number', 'fecha']);
+        $order = Order::where('status', '2') -> orderBy('fecha', 'DESC') -> take(6) -> get(['id','total', 'opened', 'order_number', 'fecha']);
         $data = [
             'metricasVentas' => $metricas_ventas,
             'metricasUsuarios' => $metricas_usuarios,

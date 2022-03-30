@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 //Validator
-use Validator, Str, File;
+use Validator, Str, File, DB;
 //Modelo categorias
 use App\Models\Category;
 //Paquete intervention images
@@ -20,7 +20,8 @@ class CategoryController extends Controller
     }
     public function getCategories(){
         $categories = Category::where('categories.status', '<>', '3') -> orderBy('id', 'Asc')->get();
-        $categoriesData = ['categories' => $categories];
+        $metrics = DB::select('call select_metrics_categories()');
+        $categoriesData = ['categories' => $categories, 'metrics' => $metrics];
         return view('Admin.categories', $categoriesData);
     }
     public function getCategoriesNames(){

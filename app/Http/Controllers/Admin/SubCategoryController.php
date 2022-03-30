@@ -29,8 +29,10 @@ class SubCategoryController extends Controller
     }
     public function getSubcategories(){
         $subcategories = DB::select('CALL subcategories_join_categories()');
+        $metrics = DB::select('CALL select_metrics_subcategories()');
         $subcategoriesData = [
-            'subcategories' => $subcategories
+            'subcategories' => $subcategories,
+            'metrics' => $metrics,
         ];
         return view('Admin.subcategories', $subcategoriesData);      
     }

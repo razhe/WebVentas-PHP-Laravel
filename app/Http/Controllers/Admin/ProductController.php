@@ -18,8 +18,10 @@ class ProductController extends Controller
     }
     public function getProducts(){
         $products=DB::select('CALL select_products()');
+        $metrics=DB::select('CALL select_metrics_products()');
+        
         $productsArray=[
-            'products'=> $products
+            'products'=> $products,'metrics' => $metrics
         ];
 
         return view('Admin.products',$productsArray);

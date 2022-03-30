@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use Validator, Hash;
+use Validator, Hash, DB;
 
 class UserController extends Controller
 {
@@ -16,7 +16,8 @@ class UserController extends Controller
     }
     public function getUsers(){
         $users = User::where('users.status', '<>', '3') -> orderBy('id', 'Asc')->get();
-        $usersData = ['users' => $users];
+        $metrics = DB::select('call select_users_metrics()');
+        $usersData = ['users' => $users,'metrics' => $metrics];
         return view('Admin.users', $usersData);
     }
     public function postAddUser(Request $request){

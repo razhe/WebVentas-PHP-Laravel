@@ -295,32 +295,23 @@
                 <div class="card rounded-0">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-lg-3 col-md-6 d-flex stat my-3">
+                            <div class="col-lg-4 col-md-6 d-flex stat my-3">
                                 <div class="mx-auto">
-                                    <h6 class="text-muted">Ingresos mensuales</h6>
-                                    <h3 class="font-weight-bold">$50000</h3>
-                                    <h6 class="text-success"><i class="bi bi-arrow-up-circle-fill"></i> 50.50%</h6>
+                                    <h6 class="text-muted">Total de productos</h6>
+                                    <h3 class="font-weight-bold">@if(!empty($metrics[0] -> total_productos)) {{$metrics[0] -> total_productos}} @else 0 @endif</h3>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-6 d-flex stat my-3">
+                            <div class="col-lg-4 col-md-6 d-flex stat my-3">
                                 <div class="mx-auto">
-                                    <h6 class="text-muted">Productos activos</h6>
-                                    <h3 class="font-weight-bold">100</h3>
-                                    <h6 class="text-success"><i class="bi bi-arrow-up-circle-fill"></i> 25.50%</h6>
+                                    <h6 class="text-muted">Productos públicos</h6>
+                                    <h3 class="font-weight-bold">@if(!empty($metrics[0] -> activos)) {{$metrics[0] -> activos}} @else 0 @endif</h3>
+                                    
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-6 d-flex stat my-3">
+                            <div class="col-lg-4 col-md-6 d-flex stat my-3">
                                 <div class="mx-auto">
-                                    <h6 class="text-muted">No. de usuarios</h6>
-                                    <h3 class="font-weight-bold">2500</h3>
-                                    <h6 class="text-success"><i class="bi bi-arrow-up-circle-fill"></i> 75.50%</h6>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 d-flex my-3">
-                                <div class="mx-auto">
-                                    <h6 class="text-muted">Usuarios nuevos</h6>
-                                    <h3 class="font-weight-bold">500</h3>
-                                    <h6 class="text-success"><i class="bi bi-arrow-up-circle-fill"></i> 15.50%</h6>
+                                    <h6 class="text-muted">Productos borradores</h6>
+                                    <h3 class="font-weight-bold">@if(!empty($metrics[0] -> restringidos)) {{$metrics[0] -> restringidos}} @else 0 @endif</h3>
                                 </div>
                             </div>
                         </div>

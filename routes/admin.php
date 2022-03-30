@@ -36,6 +36,7 @@ Route::prefix('/admin')->group(function(){
     Route::post('/categories/edit',[CategoryController::class, 'postEditCategory']);
     Route::get('/categories/edit/{id}',[CategoryController::class, 'getFindCategory']);
     Route::post('/categories/delete/{id}',[CategoryController::class, 'postDeleteCategory']);
+    
     //Subcategoría
     Route::get('/subcategories/get',[SubCategoryController::class, 'getSubcategoriesNames']);
 
