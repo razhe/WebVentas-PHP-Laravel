@@ -9,7 +9,7 @@ use App\Models\Pago;
 use App\Models\Order_has_products;
 use Illuminate\Support\Facades\Crypt;
 
-use Validator, DB;
+use Validator, DB, Toastr;
 
 class SalesController extends Controller
 {
@@ -70,9 +70,11 @@ class SalesController extends Controller
                 $orden -> status = e($request['order_status']);
 
                 $orden -> save();
-                return back() ->with('MsgResponse','¡El estado de la orden ha sido guardada exitosamente!')->with( 'typealert', 'success');
+                Toastr::success('El estado de la orden se ha actualizado correctamente', '¡Todo Listo!');
+                return back();
             }else{
-                return back() ->with('MsgResponse','Error en la petición.')->with( 'typealert', 'danger');
+                Toastr::error('Petición denegada', '¡Oops...!');
+                return back();
             }
         }else{
             return back();

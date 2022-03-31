@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 //Modelo categorias
 use App\Models\Category;
-use Validator, File, Config;
+use Validator, File, Config, Toastr;
 
 class SettingsController extends Controller
 {
@@ -42,12 +42,14 @@ class SettingsController extends Controller
             $currentCategoryBanner = Category::findOrFail($request['current_category']);
             $newCategoryBanner = Category::findOrFail($request['new_category']);
             if($newCategoryBanner -> on_display == 'on'):
-                return back() -> with('MsgResponse','No se puede activar una categoría que ya está activa.')->with( 'typealert', 'danger');
+                Toastr::error('No se puede activar una categoría que ya está activa', '¡Oops...!');
+                return back();
             else:
                 $currentCategoryBanner -> on_display = 'off';
                 $newCategoryBanner     -> on_display = 'on';
                 if($currentCategoryBanner -> save() && $newCategoryBanner -> save()):
-                    return back() -> with('MsgResponse','¡Banner actualizado Exitosamente!')->with( 'typealert', 'success');
+                    Toastr::success('Ajustes actualizados correctamente', '¡Todo Listo!');
+                    return back();
                 endif;
             endif;
         endif;
@@ -88,6 +90,7 @@ class SettingsController extends Controller
         endforeach; 
         fwrite($file,'];'.PHP_EOL);
         fclose($file);
-        return back() -> with('MsgResponse','Se han actualizado las configuraciones globales exitosamente.')->with( 'typealert', 'success'); 
+        Toastr::success('Se han actualizado las configuraciones globales exitosamente', '¡Todo Listo!');
+        return back();
     }
 }

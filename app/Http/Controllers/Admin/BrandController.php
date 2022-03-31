@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Brand;
-use Validator, Str, File, DB;
+use Validator, Str, File, DB, Toastr;
 //Paquete intervention images
 use Intervention\Image\Facades\Image;
 class BrandController extends Controller
@@ -36,7 +36,7 @@ class BrandController extends Controller
 
         $validator = Validator::make($request->all(),$rules, $messages);
         if ($validator -> fails()) {
-            return back() -> withErrors($validator)->with('MsgResponse','Se ha producido un error al intentar guardar la marca')->with( 'typealert', 'danger');
+            return back() -> withErrors($validator)-> with('MsgResponse','Se ha producido un error al intentar guardar la marca')->with( 'typealert', 'danger');
         }else {
             
 
@@ -58,7 +58,8 @@ class BrandController extends Controller
             $brand -> image  = $path.$file_name;
 
             if ($brand -> save()) {
-                return back() -> withErrors($validator)->with('MsgResponse','¡Marca guardada con Éxito!')->with( 'typealert', 'success');
+                Toastr::success('Marca guardada con Éxito', '¡Todo Listo!');
+                return back();
             }
         }
     }
@@ -109,7 +110,8 @@ class BrandController extends Controller
             }
             
             if ($brand -> save()) {
-                return back() -> withErrors($validator)->with('MsgResponse','¡Marca modificada con Éxito!')->with( 'typealert', 'success');
+                Toastr::success('Marca modificada con Éxito', '¡Todo Listo!');
+                return back();
             }
         }
     }
@@ -118,7 +120,8 @@ class BrandController extends Controller
         $brand = Brand::findOrFail($id);
         $brand -> status = '3';
         if ($brand -> save()) {
-            return back() ->with('MsgResponse','¡Marca eliminada con Éxito!')->with( 'typealert', 'success');
+            Toastr::success('Marca eliminada con Éxito', '¡Todo Listo!');
+            return back();
         }
     }
     public function getBrandsNames()

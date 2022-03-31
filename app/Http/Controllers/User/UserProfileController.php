@@ -5,7 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use Validator, Hash, Auth;
+use Validator, Hash, Auth, Toastr;
 use Illuminate\Support\Facades\DB; //Trabajar con la base de datos (para prcedimientos almacenados)
 use Illuminate\Support\Facades\Crypt;
 use App\Models\Category;
@@ -62,7 +62,8 @@ class UserProfileController extends Controller
             $user-> last_name = e($request['last_name']);
             $user-> phone     = e($request['phone']);
             if ($user -> save()):
-                return back()-> withErrors($validator)-> with('MsgResponse', '¡Usuario actualizado!')->with('typealert', 'success');
+                Toastr::success('Usuario actualizado con Éxito', '¡Todo Listo!');
+                return back();
             endif;
         endif;
     }
@@ -92,10 +93,12 @@ class UserProfileController extends Controller
             if(Hash::check($request['apassword'], $user -> password)):
                 $user -> password = Hash::make($request['password']);
                 if($user -> save()):
-                    return back()->with('MsgResponse','Se ha actualizado su contraseña de manera exitosa.')->with( 'typealert', 'success');
+                    Toastr::success('Contraseña actualizada con Éxito', '¡Todo Listo!');
+                    return back();
                 endif;
             else:
-                return back()->with('MsgResponse','Su contraseña actual es incorrecta.')->with( 'typealert', 'danger');
+                Toastr::error('Su contraseña actual es incorrecta', '¡Oops...!');
+                return back();
             endif;
         endif;
     }
@@ -144,13 +147,16 @@ class UserProfileController extends Controller
                     $direccion ->id_comuna = e($request['comuna']);
                     $direccion ->id_user = Auth::id();
                     if($direccion -> save()):
-                        return back()->with('MsgResponse','Se ha agregado exitosamente una dirección')->with( 'typealert', 'success');
+                        Toastr::success('Se ha agregado exitosamente su dirección', '¡Todo Listo!');
+                        return back();
                     endif;
                 }else {
-                    return back()->with('MsgResponse','Campo comuna no disponible.')->with( 'typealert', 'danger');
+                    Toastr::error('Campo comuna no disponible', '¡Oops...!');
+                    return back();
                 }
             } else {
-                return back()->with('MsgResponse','Solo puede agregar un máximo de dos direcciones.')->with( 'typealert', 'danger');
+                Toastr::warning('Solo puede agregar un máximo de dos direcciones', '¡Atención!');
+                return back();
             }
         endif;
     }
@@ -164,7 +170,8 @@ class UserProfileController extends Controller
         
         $direccion = Address::findOrFail($decrypted_id);
         if($direccion->delete()){
-            return back()->with('MsgResponse','Dirección eliminada exitosamente')->with( 'typealert', 'success');
+            Toastr::success('Dirección eliminada exitosamente', '¡Todo Listo!');
+            return back();
         }
     }
     public function getRegiones()

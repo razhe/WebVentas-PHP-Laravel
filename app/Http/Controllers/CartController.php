@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB; //Trabajar con la base de datos (para prcedimientos almacenados)
 use App\Models\Product;
 use App\Models\Category;
-use Session, Config;
+use Session, Config, Toastr;
 use Illuminate\Support\Facades\Crypt;
 
 class CartController extends Controller
@@ -48,6 +48,9 @@ class CartController extends Controller
                     $arreglo[$numero]['cantidad'] = $arreglo[$numero]['cantidad'] + $request['quant'];
                     $arreglo[$numero]['subtotal'] = round($arreglo[$numero]['cantidad'] * $arreglo[$numero]['precio']);
                     session(['carrito' => $arreglo]);    
+                }else{
+                    Toastr::warning('La cantidad especificada excede el stock máximo', '¡Atención!');
+                    return back();
                 }           
             } else {//No lo encontró
                 if($producto[0] -> stock > 0){
@@ -65,7 +68,13 @@ class CartController extends Controller
                         ];
                         array_push($arreglo, $nuevoArreglo);
                         session(['carrito' => $arreglo]);
+                    }else{
+                        Toastr::error('La cantidad especificada no está disponible', '¡Oops...!');
+                        return back();
                     }
+                }else{
+                    Toastr::warning('La cantidad especificada excede el stock máximo', '¡Atención!');
+                    return back();
                 }
             }
             $this -> getTotalCart();
@@ -85,7 +94,13 @@ class CartController extends Controller
                     ];
                     session(['carrito' => $arreglo]);
                     $this -> getTotalCart();
+                }else{
+                    Toastr::error('La cantidad especificada no está disponible', '¡Oops...!');
+                    return back();
                 }
+            }else{
+                Toastr::warning('La cantidad especificada excede el stock máximo', '¡Atención!');
+                return back();
             }
             return redirect('cart');
         endif; 
@@ -112,7 +127,10 @@ class CartController extends Controller
                 $arregloCarrito[$numero]['subtotal'] = round($arregloCarrito[$numero]['cantidad'] * $arregloCarrito[$numero]['precio']);
                 session(['carrito' => $arregloCarrito]);
                 $this -> getTotalCart();    
-            }           
+            }else{
+                Toastr::error('La cantidad especificada no está disponible', '¡Oops...!');
+                return back();
+            }       
         }
     }
 

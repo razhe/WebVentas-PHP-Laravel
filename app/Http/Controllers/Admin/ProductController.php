@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
-use Validator, File, DB;
+use Validator, File, DB, Toastr, Crypt;
 //Paquete intervention images
 use Intervention\Image\Facades\Image;
 
@@ -31,7 +31,23 @@ class ProductController extends Controller
         $products = Product::findOrFail($id);
         return response()->json($products);   
     }
-
+    public function postRemoveProduct(Request $request)
+    {
+        if (!empty($request['id'])) {
+            try {
+                $decrypted_id = Crypt::decryptString($request['id']);
+            } catch(\Exception $exception){
+                return view('errors.request-denied');
+            }
+            $product = Product::findOrFail($decrypted_id);
+            $product -> status = '3';
+            if ($product -> save()) {
+                Toastr::success('Producto eliminado con Éxito', '¡Todo Listo!');
+                return back();
+            }
+        }
+        
+    }
     public function postAddProduct(Request $request){
         $rules = 
         [
@@ -150,8 +166,8 @@ class ProductController extends Controller
             $product->id_brand       = e($request['id_brand']);
             $product->id_subcategory = e($request['id_subcategory']);
             if ($product -> save()):
-                //Moviendose la carpeta
-                return back() -> withErrors($validator)->with('MsgResponse','¡Producto guardada con Éxito!')->with( 'typealert', 'success');
+                Toastr::success('Producto guardado con Éxito', '¡Todo Listo!');
+                return back();
             endif;
         endif;
     }
@@ -318,8 +334,8 @@ class ProductController extends Controller
             }
 
             if ($product -> save()):
-                //Moviendose la carpeta
-                return back() -> withErrors($validator)->with('MsgResponse','¡Producto guardado con Éxito!')->with( 'typealert', 'success');
+                Toastr::success('Producto modificado con Éxito', '¡Todo Listo!');
+                return back();
             endif;
         endif;   
     }

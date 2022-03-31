@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 //Validator
-use Validator, Str, File, DB;
+use Validator, Str, File, DB, Toastr;
 //Modelo categorias
 use App\Models\Category;
 //Paquete intervention images
@@ -68,10 +68,9 @@ class CategoryController extends Controller
             $category-> description= e($request['description']);
             $category->banner = $path.$file_name;
             if ($category -> save()):
-                return back() -> withErrors($validator)->with('MsgResponse','¡Categoría guardada con Éxito!')->with( 'typealert', 'success');
-            endif;
-                
-            
+                Toastr::success('Categoría guardada con Éxito', '¡Todo Listo!');
+                return back();
+            endif;       
         endif;
     }
     public function postDeleteCategory($id){
@@ -80,10 +79,12 @@ class CategoryController extends Controller
         $category->status = e(3);
 
         if ($category -> save()) {
-            return back() -> with('MsgResponse','¡Categoría eliminada Exitosamente!')->with( 'typealert', 'success');
+            Toastr::success('Categoría guardada con Éxito', '¡Todo Listo!');
+            return back();
         }
         else{
-            return back() -> with('MsgResponse','Se ha producido un error al intentar borrar esta categoría')->with( 'typealert', 'danger');
+            Toastr::error('Se ha producido un error al intentar eliminar esta categoría', '¡Oops...!');
+            return back();
         }
         
     }
@@ -134,7 +135,8 @@ class CategoryController extends Controller
                 $category -> banner  = $path.$file_name;
             }
             if ($category -> save()):
-                return back() -> withErrors($validator)->with('MsgResponse','¡Categoría guardada con Éxito!')->with( 'typealert', 'success');
+                Toastr::success('Categoría guardada con Éxito', '¡Todo Listo!');
+                return back();
             endif;
                 
             

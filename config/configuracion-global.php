@@ -12,5 +12,5 @@ return [
 'products_per_page' =>'10',
 'currency' =>'$',
 'iva' =>'21',
-'logo' =>'static/images/1647188954-bauker.png',
+'logo' =>'static/images/1648689912-google-search-central-logo.png',
 ];

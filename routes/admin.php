@@ -27,6 +27,7 @@ Route::prefix('/admin')->group(function(){
     Route::post('/products/add',[ProductController::class, 'postAddProduct']);
     Route::get('/products/edit/{id}',[ProductController::class, 'getFindProduct']);
     Route::post('/products/edit/',[ProductController::class, 'postEditProduct']);
+    Route::post('/products/delete',[ProductController::class, 'postRemoveProduct']);
     
     //Categorías
     Route::get('/categories',[CategoryController::class, 'getCategories']);

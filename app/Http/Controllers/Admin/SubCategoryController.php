@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Subcategory;
 
 use Illuminate\Support\Facades\DB; //Trabajar con la base de datos (para prcedimientos almacenados)
-use Validator, File;
+use Validator, File, Toastr;
 
 class SubCategoryController extends Controller
 {
@@ -50,10 +50,12 @@ class SubCategoryController extends Controller
         $subcategory->status = e(3);
 
         if ($subcategory -> save()) {
-            return back() -> with('MsgResponse','¡Subcategoría eliminada Exitosamente!')->with( 'typealert', 'success');
+            Toastr::success('Subcategoría eliminada con Éxito', '¡Todo Listo!');
+            return back();
         }
         else{
-            return back() -> with('MsgResponse','Se ha producido un error al intentar borrar esta subcategoría')->with( 'typealert', 'danger');
+            Toastr::error('Ha ocurrido un error al intentar eliminar esta subcategoría', '¡Oops...!');
+            return back();
         }
     }
     public function postAddSubcategory(Request $request)
@@ -85,7 +87,8 @@ class SubCategoryController extends Controller
             $subcategory->id_category = e($request['id_category']);
             $subcategory->slug       = $request['slug'];
             if ($subcategory -> save()):
-                return back() -> withErrors($validator)->with('MsgResponse','¡Subcategoría guardada con Éxito!')->with( 'typealert', 'success');
+                Toastr::success('Subcategoría guardada con Éxito', '¡Todo Listo!');
+                return back();
             endif;
         endif;
     }
@@ -130,7 +133,8 @@ class SubCategoryController extends Controller
                 $subcategory->slug = $request['slug'];
             }
             if ($subcategory -> save()):
-                return back() -> withErrors($validator)->with('MsgResponse','¡Subcategoría guardada con Éxito!')->with( 'typealert', 'success');
+                Toastr::success('Subcategoría modificada con Éxito', '¡Todo Listo!');
+                return back();
             endif;
         endif;
     }

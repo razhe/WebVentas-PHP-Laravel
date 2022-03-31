@@ -415,8 +415,9 @@
                                      <td class="">
                                         <div class="box-btn-acciones">
                                             <button class="btn btn-edit" onclick="EditarProducto({{$product -> id}})" data-bs-toggle="modal" data-bs-target="#modalProductEdit"><i class="bi bi-pen-fill"></i></button>
-                                            <form action="{{ url('admin/products/delete', $product-> id) }}" method="post">
+                                            <form action="{{ url('admin/products/delete') }}" method="post">
                                                 @csrf
+                                                <input class="form-control" type="hidden" name="id" value="{{ Crypt::encryptString($product -> id) }}">
                                                 <button type="submit" class="btn btn-delete"><i class="bi bi-trash2-fill"></i></button>
                                             </form>
                                         </div>

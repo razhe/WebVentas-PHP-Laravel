@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use Validator, Hash, DB;
+use Validator, Hash, DB, Toastr;
 
 class UserController extends Controller
 {
@@ -61,7 +61,8 @@ class UserController extends Controller
             $user-> id_tasks  = e($request['id_tasks']);
 
             if($user -> save()):
-                return back() -> withErrors($validator)-> with('MsgResponse', '¡El usuario se ha creado exitosamente!')->with('typealert', 'success');
+                Toastr::success('Usuario creado con Éxito', '¡Todo Listo!');
+                return back();
             endif;
         endif;
     }
@@ -71,10 +72,12 @@ class UserController extends Controller
         $user->status = e(3);
 
         if ($user -> save()) {
-            return back() -> with('MsgResponse','Usuario eliminado Exitosamente!')->with( 'typealert', 'success');
+            Toastr::success('Usuario eliminado con Éxito', '¡Todo Listo!');
+            return back();
         }
         else{
-            return back() -> with('MsgResponse','Se ha producido un error al intentar borrar este usuario')->with( 'typealert', 'danger');
+            Toastr::error('Ha ocurrido un error intentando eliminar este usuario', '¡Oops...!');
+            return back();
         }
     }
     public function getFindUser($id){
@@ -128,7 +131,8 @@ class UserController extends Controller
                 $user->id_tasks = $request['id_tasks'];
             }
             if($user -> save()):
-                return back() -> withErrors($validator)-> with('MsgResponse', '¡El usuario se ha modificado exitosamente!')->with('typealert', 'success');
+                Toastr::success('Usuario modificado con Éxito', '¡Todo Listo!');
+                return back();
             endif;
         endif;
     }
