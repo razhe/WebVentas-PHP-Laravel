@@ -227,7 +227,7 @@
                                             <div class="box-btn-acciones">
                                                 <button onclick="editarCategoria({{ $category -> id }})" id="btn-editar" class="btn btn-edit" data-bs-toggle="modal" data-bs-target="#editForm" type="submit"><i class="bi bi-pen-fill"></i></button>
                                             
-                                                <form action="{{ url('admin/categories/delete', $category -> id) }}" method="post">
+                                                <form action="{{ url('admin/categories/delete', $category -> id) }}" class="formulario-eliminar-categoria" method="post">
                                                     @csrf 
                                                     <button class="btn btn-delete" type="submit"><i class="bi bi-trash2-fill"></i></button>
                                                 </form>  
@@ -261,6 +261,24 @@
 @section('JS')
     <script type="text/javascript" src="{{url('\static\libs\DataTables\datatables.min.js')}}"></script>
     <script>
+        $('.formulario-eliminar-categoria').submit(function(event){
+            event.preventDefault();
+            Swal.fire({
+            title: '¿Estas seguro?',
+            text: "No podrás revertir los cambios.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Confirmar',
+            cancelButtonText: 'Cancelar',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                }
+            })
+        });
+    
         $(document).ready(function() {
             $('#categories-table').DataTable({
                 language: {

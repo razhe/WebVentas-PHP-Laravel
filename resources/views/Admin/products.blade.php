@@ -415,7 +415,7 @@
                                      <td class="">
                                         <div class="box-btn-acciones">
                                             <button class="btn btn-edit" onclick="EditarProducto({{$product -> id}})" data-bs-toggle="modal" data-bs-target="#modalProductEdit"><i class="bi bi-pen-fill"></i></button>
-                                            <form action="{{ url('admin/products/delete') }}" method="post">
+                                            <form action="{{ url('admin/products/delete') }}" id="formulario-eliminar-producto" method="post">
                                                 @csrf
                                                 <input class="form-control" type="hidden" name="id" value="{{ Crypt::encryptString($product -> id) }}">
                                                 <button type="submit" class="btn btn-delete"><i class="bi bi-trash2-fill"></i></button>
@@ -457,56 +457,75 @@
 
 @section('JS')
     <script type="text/javascript" src="{{url('\static\libs\DataTables\datatables.min.js')}}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{url('/static/libs/CKEDITOR/ckeditor.js')}}"></script>
     <script>
-    $(document).ready(function() {
-        $('#products-table').DataTable({
-            language: {
-                "lengthMenu": "Mostrar _MENU_ registros",
-                "zeroRecords": "No se encontraron resultados",
-                "info": "Registros del _START_ al _END_ de un total de _TOTAL_. ",
-                "infoEmpty": "Registros del 0 al 0 de un total de 0. ",
-                "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-                "sSearch": "Buscar:",
-                "oPaginate": {
-                    "sFirst": "Primero",
-                    "sLast":"Último",
-                    "sNext":"Siguiente",
-                    "sPrevious": "Anterior"
-                    },
-                    "sProcessing":"Procesando...",
-            },
-            //para usar los botones
-            responsive: true,
-            fixedHeader: true,
-            dom: 'Bfrtilp',
-            buttons:[
-                {
-                    extend:     'excelHtml5',
-                    text:       '<i class="bi bi-file-earmark-excel"></i>',
-                    tittleAttr: 'Exportar a PDF',
-                    className : 'btn btn-success'
-                },
-                {
-                    extend:     'pdfHtml5',
-                    text:       '<i class="bi bi-file-earmark-pdf"></i>',
-                    tittleAttr: 'Exportar a Excel',
-                    className : 'btn btn-danger'
-                },
-                {
-                    extend:     'print',
-                    text:       '<i class="bi bi-printer"></i>',
-                    tittleAttr: 'Imprimir',
-                    className : 'btn btn-secondary'
-                },
-            ]
+        $('#formulario-eliminar-producto').submit(function(event){
+            event.preventDefault();
+            Swal.fire({
+            title: '¿Estas seguro?',
+            text: "No podrás revertir los cambios.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Confirmar',
+            cancelButtonText: 'Cancelar',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                }
+            })
         });
-        CKEDITOR.replace('area-description-add');
-        CKEDITOR.replace('area-description-edit');
-        traerSubcategorias();
-        traerMarcas();
         
-    } ); 
+        $(document).ready(function() {
+            $('#products-table').DataTable({
+                language: {
+                    "lengthMenu": "Mostrar _MENU_ registros",
+                    "zeroRecords": "No se encontraron resultados",
+                    "info": "Registros del _START_ al _END_ de un total de _TOTAL_. ",
+                    "infoEmpty": "Registros del 0 al 0 de un total de 0. ",
+                    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sSearch": "Buscar:",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast":"Último",
+                        "sNext":"Siguiente",
+                        "sPrevious": "Anterior"
+                        },
+                        "sProcessing":"Procesando...",
+                },
+                //para usar los botones
+                //responsive: true,
+                fixedHeader: true,
+                dom: 'Bfrtilp',
+                buttons:[
+                    {
+                        extend:     'excelHtml5',
+                        text:       '<i class="bi bi-file-earmark-excel"></i>',
+                        tittleAttr: 'Exportar a PDF',
+                        className : 'btn btn-success'
+                    },
+                    {
+                        extend:     'pdfHtml5',
+                        text:       '<i class="bi bi-file-earmark-pdf"></i>',
+                        tittleAttr: 'Exportar a Excel',
+                        className : 'btn btn-danger'
+                    },
+                    {
+                        extend:     'print',
+                        text:       '<i class="bi bi-printer"></i>',
+                        tittleAttr: 'Imprimir',
+                        className : 'btn btn-secondary'
+                    },
+                ]
+            });
+            CKEDITOR.replace('area-description-add');
+            CKEDITOR.replace('area-description-edit');
+            traerSubcategorias();
+            traerMarcas();
+            
+        } ); 
     
     </script>
 @endsection

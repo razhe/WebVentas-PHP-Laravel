@@ -196,7 +196,7 @@
                                 <td>
                                     <div class="box-btn-acciones">
                                         <button class="btn btn-edit" onclick="EditarMarca({{$brand -> id}})" data-bs-toggle="modal" data-bs-target="#modalBrandEdit"><i class="bi bi-pen-fill"></i></button>
-                                        <form action="{{ url('admin/brands/delete', $brand -> id) }}" method="post" name="deleteBrand">
+                                        <form action="{{ url('admin/brands/delete', $brand -> id) }}" class="formulario-eliminar-marca" method="post" name="deleteBrand">
                                             @csrf
                                             <button type="submit" id="btn-delete" class="btn btn-delete"><i class="bi bi-trash2-fill"></i></button>
                                         </form>
@@ -226,7 +226,27 @@
 
 @section('JS')
     <script type="text/javascript" src="{{url('\static\libs\DataTables\datatables.min.js')}}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+    $('.formulario-eliminar-marca').submit(function(event){
+        event.preventDefault();
+        Swal.fire({
+        title: '¿Estas seguro?',
+        text: "No podrás revertir los cambios.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Confirmar',
+        cancelButtonText: 'Cancelar',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.submit();
+            }
+        })
+    });
+    
+
     $(document).ready(function() {
         $('#brands-table').DataTable({
             language: {
