@@ -34,8 +34,8 @@
                     <form class="form-buscar" action="{{url('/product/search/')}}" method="post">
                         @csrf
                         <div class="busqueda-box input-group">
-                            <input type="text" name="search" class="form-control" placeholder="Busca aquí...">
-                            <button class="btn-buscar-nav btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
+                            <input type="text" name="search" class="inpt-search-nav" placeholder="Busca aquí...">
+                            <button class="btn-buscar-nav" type="submit"><i class="bi bi-search"></i></button>
                         </div> 
                     </form>              
                 </div>
@@ -66,9 +66,9 @@
                         <i class="bi bi-chevron-down"></i>
                     </div>
                     <div class="contenedor-enlaces-directos">
-                        <a class="direct__links" href="{{url('/')}}">Inicio</a>
-                        <a class="direct__links" href="{{url('/products')}}">Tienda</a>
-                        <a class="direct__links" href="#">Contacto</a>
+                        <a class="direct__links hover-navbar" href="{{url('/')}}">Inicio</a>
+                        <a class="direct__links hover-navbar" href="{{url('/products')}}">Tienda</a>
+                        <a class="direct__links hover-navbar" href="#">Contacto</a>
                         <div class="content__user" id="content-user">
                             <li class="user__list">
                                 @if (Auth::guest())
