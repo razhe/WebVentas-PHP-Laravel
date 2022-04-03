@@ -13,7 +13,9 @@ const btnDepartamentos = document.getElementById('btn-categorias'),
 
 //Scroll	  
 window.addEventListener('scroll', function () {
-	let menu = document.getElementById('seccion-superior-nav');
+	let seccionSuperior = document.getElementById('seccion-superior-nav');
+	let menu = document.getElementById('menu');
+	seccionSuperior.classList.toggle('navbar-sticky', window.scrollY > 200);
 	menu.classList.toggle('navbar-sticky', window.scrollY > 200);
 });
 /*user*/

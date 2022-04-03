@@ -47,7 +47,6 @@
                         @else
                             <div class=""><div class="contador-carrito">0</div></div>
                         @endif
-                        
                     </div>
                 </div>
             </div>
@@ -60,44 +59,45 @@
                     <i class="bi bi-x"></i>
                 </button>
             </div>
-            <div id="contenedor-enlaces-nav" class="contenedor contenedor-enlaces-nav">
-                <div class="btn-categorias" id="btn-categorias">
-                    <strong>Categorías</strong>
-                    <i class="bi bi-chevron-down"></i>
-                </div>
-                <div class="contenedor-enlaces-directos">
-                    <a class="direct__links" href="{{url('/')}}">INICIO</a>
-                    <a class="direct__links" href="{{url('/products')}}">TIENDA</a>
-                    <a class="direct__links" href="#">CONTACTO</a>
-                    <div class="content__user" id="content-user">
-                        <li class="user__list">
-                            @if (Auth::guest())
-                                <button class="user__opt" id ="user-opt">CUENTA <i class="bi bi-chevron-down"></i></button>
-                                <ul class = "drop__list" id="drop-list">
-                                    <li><a class = "user__link" href="{{url('/login')}}">Iniciar sesión</a></li>
-                                    <li><a class = "user__link" href="{{url('/register')}}">Registrarse</a></li>
-                                </ul>
-                            @else
-                                @if(Auth::user() -> id_tasks == 2)
-                                    <button class="user__opt" id ="user-opt">{{Auth::user() -> name}} <i class="bi bi-chevron-down"></i></button>
+            <div class="seccion-inferior-nav">
+                <div id="contenedor-enlaces-nav" class="contenedor contenedor-enlaces-nav">
+                    <div class="btn-categorias" id="btn-categorias">
+                        <strong>Categorías</strong>
+                        <i class="bi bi-chevron-down"></i>
+                    </div>
+                    <div class="contenedor-enlaces-directos">
+                        <a class="direct__links" href="{{url('/')}}">Inicio</a>
+                        <a class="direct__links" href="{{url('/products')}}">Tienda</a>
+                        <a class="direct__links" href="#">Contacto</a>
+                        <div class="content__user" id="content-user">
+                            <li class="user__list">
+                                @if (Auth::guest())
+                                    <button class="user__opt" id ="user-opt">Cuenta <i class="bi bi-chevron-down"></i></button>
                                     <ul class = "drop__list" id="drop-list">
-                                        <li><a class = "user__link" href="{{url('/profile')}}">Mi perfil</a></li>
-                                        <li><a class = "user__link" href="{{url('/admin')}}">Panel de control</a></li>
-                                        <li><a class = "user__link" href="{{url('/logout')}}">Cerrar Sesión</a></li>
+                                        <li><a class = "user__link" href="{{url('/login')}}">Iniciar sesión</a></li>
+                                        <li><a class = "user__link" href="{{url('/register')}}">Registrarse</a></li>
                                     </ul>
                                 @else
-                                    <button class="user__opt" id ="user-opt">{{Auth::user() -> name}} <i class="bi bi-chevron-down"></i></button>
-                                    <ul class = "drop__list" id="drop-list">
-                                        <li><a class = "user__link" href="{{url('/profile')}}">Mi perfil</a></li>
-                                        <li><a class = "user__link" href="{{url('/logout')}}">Cerrar Sesión</a></li>
-                                    </ul>
+                                    @if(Auth::user() -> id_tasks == 2)
+                                        <button class="user__opt" id ="user-opt">{{Auth::user() -> name}} <i class="bi bi-chevron-down"></i></button>
+                                        <ul class = "drop__list" id="drop-list">
+                                            <li><a class = "user__link" href="{{url('/profile')}}">Mi perfil</a></li>
+                                            <li><a class = "user__link" href="{{url('/admin')}}">Panel de control</a></li>
+                                            <li><a class = "user__link" href="{{url('/logout')}}">Cerrar Sesión</a></li>
+                                        </ul>
+                                    @else
+                                        <button class="user__opt" id ="user-opt">{{Auth::user() -> name}} <i class="bi bi-chevron-down"></i></button>
+                                        <ul class = "drop__list" id="drop-list">
+                                            <li><a class = "user__link" href="{{url('/profile')}}">Mi perfil</a></li>
+                                            <li><a class = "user__link" href="{{url('/logout')}}">Cerrar Sesión</a></li>
+                                        </ul>
+                                    @endif
                                 @endif
-                            @endif
-                        </li>
+                            </li>
+                        </div>
                     </div>
                 </div>
             </div>
-            
             <div class="contenedor contenedor-grid">
                 <div class="grid" id="grid">
                     <div class="categorias">
