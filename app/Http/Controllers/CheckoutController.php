@@ -65,6 +65,7 @@ class CheckoutController extends Controller
                     if($pago -> save()){
                         $orden = Order::where('id', session('pagoPendiente.0.id_orden')) -> first();
                         $orden -> status = 2;
+                        $orden -> save();
                     }
                     $carrito = session('carrito');
                     $totalCarrito = session('totalCarrito');

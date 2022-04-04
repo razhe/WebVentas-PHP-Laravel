@@ -81,7 +81,7 @@
                                         <input type="password" name="password" class="form-control" required>
                                     </div>
                                 </div>
-                                <input type="hidden" name="estance" value="{{Crypy::encryptString('checkout')}}">
+                                <input type="hidden" name="estance" value="{{Crypt::encryptString('checkout')}}">
                                 <input type="submit" name="loguearse" id="" class="btn btn-success">
                             </form>
                         </div>
