@@ -55,17 +55,30 @@ class CartController extends Controller
             } else {//No lo encontró
                 if($producto[0] -> stock > 0){
                     if ($request['quant'] <= $producto[0] -> stock && $request['quant'] > 0) {
-                        $nuevoArreglo = [
-                            'id'     => Crypt::encryptString($producto[0] -> id),
-                            'nombre' => $producto[0] -> name,
-                            'precio'    => $producto[0] -> price,
-                            'descuento' => $producto[0] -> discount,
-                            'imagen' => $producto[0] -> image1,
-                            'stock' => $producto[0] -> stock,
-                            'cantidad' => $request['quant'],
-                            'subtotal' => round($request['quant'] * $producto[0] -> price),
-
-                        ];
+                        if ($producto[0] -> discount != 0) {
+                            $nuevoArreglo = [
+                                'id'     => Crypt::encryptString($producto[0] -> id),
+                                'nombre' => $producto[0] -> name,
+                                'precio'    => $producto[0] -> price - round((($producto[0] -> discount * $producto[0] -> price) / 100)),
+                                'descuento' => $producto[0] -> discount,
+                                'imagen' => $producto[0] -> image1,
+                                'stock' => $producto[0] -> stock,
+                                'cantidad' => $request['quant'],
+                                'subtotal' => round($request['quant'] * $producto[0] -> price - round((($producto[0] -> discount * $producto[0] -> price) / 100))),
+                            ];
+                        } else {
+                            $nuevoArreglo = [
+                                'id'     => Crypt::encryptString($producto[0] -> id),
+                                'nombre' => $producto[0] -> name,
+                                'precio'    => $producto[0] -> price,
+                                'descuento' => $producto[0] -> discount,
+                                'imagen' => $producto[0] -> image1,
+                                'stock' => $producto[0] -> stock,
+                                'cantidad' => $request['quant'],
+                                'subtotal' => round($request['quant'] * $producto[0] -> price),
+                            ];
+                        }
+            
                         array_push($arreglo, $nuevoArreglo);
                         session(['carrito' => $arreglo]);
                     }else{
@@ -82,16 +95,29 @@ class CartController extends Controller
         else:
             if($producto[0] -> stock > 0){
                 if ($request['quant'] <= $producto[0] -> stock && $request['quant'] > 0) {
-                    $arreglo[] = [
-                        'id'     => Crypt::encryptString($producto[0] -> id),
-                        'nombre' => $producto[0] -> name,
-                        'precio'    => $producto[0] -> price,
-                        'descuento' => $producto[0] -> discount,
-                        'imagen' => $producto[0] -> image1,
-                        'stock' => $producto[0] -> stock,
-                        'cantidad' => $request['quant'],
-                        'subtotal' => round($request['quant'] * $producto[0] -> price),
-                    ];
+                    if ($producto[0] -> discount != 0) {
+                        $arreglo[] = [
+                            'id'     => Crypt::encryptString($producto[0] -> id),
+                            'nombre' => $producto[0] -> name,
+                            'precio'    => $producto[0] -> price - round((($producto[0] -> discount * $producto[0] -> price) / 100)),
+                            'descuento' => $producto[0] -> discount,
+                            'imagen' => $producto[0] -> image1,
+                            'stock' => $producto[0] -> stock,
+                            'cantidad' => $request['quant'],
+                            'subtotal' => round($request['quant'] * $producto[0] -> price - round((($producto[0] -> discount * $producto[0] -> price) / 100))),
+                        ];
+                    } else {
+                        $arreglo[] = [
+                            'id'     => Crypt::encryptString($producto[0] -> id),
+                            'nombre' => $producto[0] -> name,
+                            'precio'    => $producto[0] -> price,
+                            'descuento' => $producto[0] -> discount,
+                            'imagen' => $producto[0] -> image1,
+                            'stock' => $producto[0] -> stock,
+                            'cantidad' => $request['quant'],
+                            'subtotal' => round($request['quant'] * $producto[0] -> price),
+                        ];
+                    }
                     session(['carrito' => $arreglo]);
                     $this -> getTotalCart();
                 }else{

@@ -32,7 +32,9 @@ ul,li{
 	--secondaryYellow: #FFC30F;
 	--primaryBlue: #1e202c;
 	--lightBlue: #252736;
-	--primaryBlueTransparent: #1b1e2c;
+
+	--primaryBackgroundColor: #fff;
+	--secundaryBackgroundColor: #f8f8f8;
 }
 .hover-navbar{
 	font-size: .9rem;
@@ -40,7 +42,7 @@ ul,li{
 	padding: 1px 10px;
 	margin: 0 10px;
 	color: #f1f1f1;
-	transition: .3s;
+	transition: .2s;
 	overflow: hidden;
 }
 .hover-navbar:before{
@@ -108,7 +110,7 @@ header{
 	transition: .3s all ease-in-out;
 }
 .menu.navbar-sticky{
-	background-color: var(--primaryBlueTransparent) !important;
+	background-color: var(--primaryBlue) !important;
 }
 .contenedor-logo-nav img{
     width: 100px;
@@ -133,7 +135,7 @@ header{
 	transition: .3s;
 }
 .inpt-search-nav:focus{
-	border-bottom: 2px solid #f1f1f1;
+	border-bottom: 2px solid var(--secundaryOrange);
 }
 .btn-buscar-nav{
 	position: absolute;

@@ -79,7 +79,7 @@
             </div>
         </section>
 
-        <section class="seccion-novedades">
+        <section class="seccion-mas-vendidos">
             <div class="contenedor-carrousel">
                 <div class="col-12 section-intro">
                     <h1>Más vendidos</h1>
@@ -200,7 +200,10 @@
                                                 <h5 class="title-sm mt-1 mb-0">{{$products[$i] -> name}}</h5>
                                                 <div class="detalle-item-producto">
                                                     <small class="">{{$products[$i] -> brand_name}}</small>
-                                                    <small class="">{{Config::get('configuracion-global.currency') . $products[$i] -> price}}</small>
+                                                    <div class="product-prices-box">
+                                                        <small class="old-price">{{Config::get('configuracion-global.currency') . $products[$i] -> price}}</small>
+                                                        <small class="">{{Config::get('configuracion-global.currency').$products[$i] -> price - round((($products[$i] -> discount * $products[$i] -> price) / 100))}}</small>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

@@ -1,16 +1,17 @@
+
 .main-home{
-    background-color: #f6f6f6;
+    background-color: var(--primaryBackgroundColor);
     padding-bottom: 50px;
 }
 .section-intro h1{
-    font-size: 2.2rem;
+    font-size: 2rem;
 }
 .section-intro{
     text-align: center;
     font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
-    color: #11245A;
+    color: #383838;
     margin: 50px 0 50px;
 }
 .section-intro .hline {
@@ -52,10 +53,10 @@
     transform: scale(1.15);
 }
 /*Carruseles*/
-.seccion-novedades,
+.seccion-mas-vendidos,
 .seccion-ofertas{
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 100px auto;
 }
 .contenedor-carrousel{
     max-width: 1100px;
@@ -283,10 +284,15 @@
 .item-producto:hover img {
     transform: translateY(-50px);
 }
+.old-price{
+    color: #bbbbbb;
+    text-decoration: line-through;
+    font-size: .8rem;
+}
 /*servicios*/
 .contenedor-servicios{
     width: 100%;
-    background-color: #fff;
+    background-color: var(--secundaryBackgroundColor);
     display: flex;
     justify-content: center;
     margin: 0 !important;

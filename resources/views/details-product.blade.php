@@ -62,7 +62,7 @@
                     <div class = "product-price">
                         @if ($product[0] -> discount != 0)
                             <p class = "last-price">Precio anterior: <span>{{Config::get('configuracion-global.currency').$product[0] -> price}}</span></p>
-                            <p class = "new-price">Nuevo precio: <span>{{Config::get('configuracion-global.currency').$product[0]->price - round((($product[0] -> discount * $product[0] -> price) / 100)/100)}}</span></p>
+                            <p class = "new-price">Nuevo precio: <span>{{Config::get('configuracion-global.currency').$product[0]->price - round((($product[0] -> discount * $product[0] -> price) / 100))}}</span></p>
                         @else
                             <p class = "new-price">Precio: <span>{{Config::get('configuracion-global.currency').$product[0]->price}}</span></p>
                         @endif
