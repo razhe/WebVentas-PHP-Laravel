@@ -165,6 +165,7 @@
     border-radius:2px;
     margin: 0 10px 0 10px;
     position: relative;
+    border: 2px solid #f6f6f691;
 }
 .item-producto .producto-imagen img{
     width: 100%;

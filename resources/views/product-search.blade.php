@@ -17,7 +17,7 @@
             </section>
             
             <div class="seccion__superior">
-                <button class="btn-mostrar-filtros" id="mostrar-filtros"><i class="bi bi-layout-sidebar-inset"></i></button>
+                <button class="btn-mostrar-filtros" id="mostrar-filtros"><i class="fa-solid fa-bars"></i></button>
                 <span>Mostrando 9 productos</span>
             </div>
             <div class="row contenedor-catalogo m-0">
@@ -29,8 +29,8 @@
                                     <div class="imagen-producto">
                                         <img src="{{asset($product -> image1)}}" alt="">
                                         <div class="acciones-producto">
-                                            <a href="{{url('/details-product?s='.Crypt::encryptString($product -> slug))}}"><i class="bi bi-eye"></i></a>
-                                            <a href="{{url('/cart/add?p='.Crypt::encryptString($product -> id).'&quant=1')}}"><i class="bi bi-bag"></i></a>
+                                            <a href="{{url('/details-product?s='.Crypt::encryptString($product -> slug))}}"><i class="fa-solid fa-eye"></i></a>
+                                            <a href="{{url('/cart/add?p='.Crypt::encryptString($product -> id).'&quant=1')}}"><i class="fa-solid fa-cart-arrow-down"></i></a>
                                         </div>
                                     </div>
                                     <div class="info-producto p-1">

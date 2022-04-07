@@ -12,7 +12,7 @@
         <!--Botón para ir arriba-->
         <div id="container-btn-up" class="container-btn-up">
             <button id="btn-up" class="btn-up">
-                <i class="bi bi-chevron-up"></i>
+                <i class="fa-solid fa-angle-up"></i>
             </button>
         </div>
         <section class="seccion-categorias-banner row m-0 g-0">
@@ -88,38 +88,64 @@
                 <div class="carousel">
                     <div class="carousel_box">
                         <button aria-label="Anterior" class="carousel__anterior anterior-novedades">
-                            <i class="bi bi-arrow-left-circle-fill"></i>
+                            <i class="fa-solid fa-circle-left"></i>
                         </button>
                         <div class="carousel__lista carrousel-novedades">
                             @for ($i = 0; $i < sizeOf($products); $i++)
                                 @if (in_array($products[$i] -> id, $diccionario))
                                     @if ($i <= Config::get('configuracion-global.quant_best_sellers_home'))
-                                        <div class="item-producto">
-                                            <div class="tag-producto tag-producto-novedad">
-                                                <span>Más vendido</span>
-                                            </div>
-                                            <div class="producto-imagen">                 
-                                                <img src="{{asset($products[$i] -> image1)}}" alt="">
-                                                <div class="social-icons">
-                                                    <a href="{{url('/details-product?s='.Crypt::encryptString($products[$i] -> slug))}}"><i class="bi bi-eye"></i></a>
-                                                    <a href="{{url('/cart/add?p='.Crypt::encryptString($products[$i] -> id).'&quant=1')}}"><i class="bi bi-bag"></i></a>
+                                        @if ($products[$i] -> discount != 0)
+                                            <div class="item-producto">
+                                                <div class="tag-producto tag-producto-novedad">
+                                                    <span>Más vendido</span>
+                                                </div>
+                                                <div class="producto-imagen">                 
+                                                    <img src="{{asset($products[$i] -> image1)}}" alt="">
+                                                    <div class="social-icons">
+                                                        <a href="{{url('/details-product?s='.Crypt::encryptString($products[$i] -> slug))}}"><i class="fa-solid fa-eye"></i></a>
+                                                        <a href="{{url('/cart/add?p='.Crypt::encryptString($products[$i] -> id).'&quant=1')}}"><i class="fa-solid fa-cart-arrow-down"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="p-2">
+                                                    <h5 class="title-sm mt-1 mb-0">{{$products[$i] -> name}}</h5>
+                                                    <div class="detalle-item-producto">
+                                                        <small class="">{{$products[$i] -> brand_name}}</small>
+                                                        <div class="product-prices-box">
+                                                            <small class="old-price">{{Config::get('configuracion-global.currency') . $products[$i] -> price}}</small>
+                                                            <small class="">{{Config::get('configuracion-global.currency').$products[$i] -> price - round((($products[$i] -> discount * $products[$i] -> price) / 100))}}</small>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="p-2">
-                                                <h5 class="title-sm mt-1 mb-0">{{$products[$i] -> name}}</h5>
-                                                <div class="detalle-item-producto">
-                                                    <small class="">{{$products[$i] -> brand_name}}</small>
-                                                    <small class="">{{Config::get('configuracion-global.currency') . $products[$i] -> price}}</small>
+                                        @else
+                                            <div class="item-producto">
+                                                <div class="tag-producto tag-producto-novedad">
+                                                    <span>Más vendido</span>
+                                                </div>
+                                                <div class="producto-imagen">                 
+                                                    <img src="{{asset($products[$i] -> image1)}}" alt="">
+                                                    <div class="social-icons">
+                                                        <a href="{{url('/details-product?s='.Crypt::encryptString($products[$i] -> slug))}}"><i class="fa-solid fa-eye"></i></a>
+                                                        <a href="{{url('/cart/add?p='.Crypt::encryptString($products[$i] -> id).'&quant=1')}}"><i class="fa-solid fa-cart-arrow-down"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="p-2">
+                                                    <h5 class="title-sm mt-1 mb-0">{{$products[$i] -> name}}</h5>
+                                                    <div class="detalle-item-producto">
+                                                        <small class="">{{$products[$i] -> brand_name}}</small>
+                                                        <small class="">{{Config::get('configuracion-global.currency') . $products[$i] -> price}}</small>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        @endif
+                                        
                                     @endif
                                 @endif
                             @endfor
                         </div>
         
                         <button aria-label="Siguiente" class="carousel__siguiente siguente-novedades">
-                            <i class="bi bi-arrow-right-circle-fill"></i>
+                            <i class="fa-solid fa-circle-right"></i>
                         </button>
                     </div>
         
@@ -139,7 +165,7 @@
                     <div class="row box-servicios m-0">
                         <div class="servicios-item col-lg-4 col-sm-6 p-4">
                             <div class="icon-box">
-                                <i class="bi bi-alarm"></i>
+                                <i class="fa-brands fa-github"></i>
                             </div>
                             <div class="text-box">
                                 <h4 class="title-sm mt-4">Lorem, ipsum.</h4>
@@ -149,7 +175,7 @@
                         </div>
                         <div class="servicios-item col-lg-4 col-sm-6 p-4">
                             <div class="icon-box">
-                                <i class="bi bi-archive"></i>
+                                <i class="fa-solid fa-box-archive"></i>
                             </div>
                             <div class="text-box">
                                 <h4 class="title-sm mt-4">Lorem, ipsum.</h4>
@@ -158,7 +184,7 @@
                         </div>
                         <div class="servicios-item col-lg-4 col-sm-6 p-4">
                             <div class="icon-box">
-                                <i class="bi bi-cash-coin"></i>
+                                <i class="fa-solid fa-sack-dollar"></i>
                             </div>
                             <div class="text-box">
                                 <h4 class="title-sm mt-4">Lorem, ipsum.</h4>
@@ -179,7 +205,7 @@
                 <div class="carousel">
                     <div class="carousel_box">
                         <button aria-label="Anterior" class="carousel__anterior anterior-oferta">
-                            <i class="bi bi-arrow-left-circle-fill"></i>
+                            <i class="fa-solid fa-circle-left"></i>
                         </button>
                         <div class="carousel__lista carrousel-ofertas">
                             @for ($i = 0; $i < sizeOf($products); $i++)
@@ -192,8 +218,8 @@
                                             <div class="producto-imagen">
                                                 <img src="{{asset($products[$i] -> image1)}}" alt="">
                                                 <div class="social-icons">
-                                                    <a href="{{url('/details-product?s='.Crypt::encryptString($products[$i] -> slug))}}"><i class="bi bi-eye"></i></a>
-                                                    <a href="{{url('/cart/add?p='.Crypt::encryptString($products[$i] -> id).'&quant=1')}}"><i class="bi bi-bag"></i></a>
+                                                    <a href="{{url('/details-product?s='.Crypt::encryptString($products[$i] -> slug))}}"><i class="fa-solid fa-eye"></i></a>
+                                                    <a href="{{url('/cart/add?p='.Crypt::encryptString($products[$i] -> id).'&quant=1')}}"><i class="fa-solid fa-cart-arrow-down"></i></a>
                                                 </div>
                                             </div>
                                             <div class="p-2">
@@ -213,7 +239,7 @@
                         </div>
         
                         <button aria-label="Siguiente" class="carousel__siguiente siguente-oferta">
-                            <i class="bi bi-arrow-right-circle-fill"></i>
+                            <i class="fa-solid fa-circle-right"></i>
                         </button>
                     </div>
         

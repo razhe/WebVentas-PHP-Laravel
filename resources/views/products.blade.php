@@ -25,7 +25,7 @@
             
             <div class="row contenedor-catalogo m-0">
                 <div class="seccion__superior">
-                    <button type="button" class="btn-mostrar-filtros" id="mostrar-filtros"><i class="bi bi-layout-sidebar-inset"></i></button>
+                    <button type="button" class="btn-mostrar-filtros" id="mostrar-filtros"><i class="fa-solid fa-bars"></i></button>
                     <span>Se han encontrado {{count($products)}} productos.</span>
                     
                         <select name="sort-by" id="sort-by" onchange="this.form.submit();">
@@ -45,7 +45,7 @@
                             </div>
                             <div class="lista-filtros">
                                 <div class="filtro-especial filtro-box">
-                                    <div class="titulo-secciones-filtro"><h3>Especial</h3><i class="bi bi-chevron-down"></i></div>
+                                    <div class="titulo-secciones-filtro"><h3>Especial</h3><i class="fa-solid fa-chevron-down"></i></div>
                                     <div class="contenido-filtro">
                                         @if (!empty($_GET['special']))
                                             @php
@@ -69,7 +69,7 @@
                                     </div>                                
                                 </div>
                                 <div class="filtro-precio filtro-box">
-                                    <div class="titulo-secciones-filtro"><h3>Precio</h3><i class="bi bi-chevron-down"></i></div>                                  
+                                    <div class="titulo-secciones-filtro"><h3>Precio</h3><i class="fa-solid fa-chevron-down"></i></div>                                  
                                     <div class="precio-item contenido-filtro">
                                         <div class="field">
                                             <span>Min</span>
@@ -80,12 +80,12 @@
                                             <input type="number" name="max-price" class="max-price" @if(!empty($_GET['max-price'])) value="{{$_GET['max-price']}}" @endif>
                                         </div>
                                         <div class="">
-                                            <button type="submit"><i class="bi bi-funnel"></i></button>
+                                            <button type="submit"><i class="fa-solid fa-filter"></i></button>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="filtro-marca filtro-box">
-                                    <div class="titulo-secciones-filtro"><h3>Marca</h3><i class="bi bi-chevron-down"></i></div>
+                                    <div class="titulo-secciones-filtro"><h3>Marca</h3><i class="fa-solid fa-chevron-down"></i></div>
                                     <div class="contenido-filtro">
                                         @if (!empty($_GET['brand']))
                                             @php
@@ -122,8 +122,8 @@
                                         <div class="imagen-producto">
                                             <img src="{{asset($product -> image1)}}" alt="">
                                             <div class="acciones-producto">
-                                                <a href="{{url('/details-product?s='.Crypt::encryptString($product -> slug))}}"><i class="bi bi-eye"></i></a>
-                                                <a href="{{url('/cart/add?p='.Crypt::encryptString($product -> id).'&quant=1')}}"><i class="bi bi-bag"></i></a>
+                                                <a href="{{url('/details-product?s='.Crypt::encryptString($product -> slug))}}"><i class="fa-solid fa-eye"></i></a>
+                                                <a href="{{url('/cart/add?p='.Crypt::encryptString($product -> id).'&quant=1')}}"><i class="fa-solid fa-cart-arrow-down"></i></a>
                                             </div>
                                         </div>
                                         <div class="info-producto p-1">
@@ -139,8 +139,8 @@
                                         <div class="imagen-producto">
                                             <img src="{{asset($product -> image1)}}" alt="">
                                             <div class="acciones-producto">
-                                                <a href="{{url('/details-product?s='.Crypt::encryptString($product -> slug))}}"><i class="bi bi-eye"></i></a>
-                                                <a href="{{url('/cart/add?p='.Crypt::encryptString($product -> id).'&quant=1')}}"><i class="bi bi-bag"></i></a>
+                                                <a href="{{url('/details-product?s='.Crypt::encryptString($product -> slug))}}"><i class="fa-solid fa-eye"></i></a>
+                                                <a href="{{url('/cart/add?p='.Crypt::encryptString($product -> id).'&quant=1')}}"><i class="fa-solid fa-cart-arrow-down"></i></a>
                                             </div>
                                         </div>
                                         <div class="info-producto p-1">

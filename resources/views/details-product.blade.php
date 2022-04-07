@@ -71,11 +71,11 @@
                     <div class = "product-detail">
                         <h2>Acerca del producto: </h2>
                         <ul>
-                            <li><i class="bi bi-check-circle-fill"></i>SKU: <span>{{$product[0]->sku}}</span></li>
-                            <li><i class="bi bi-check-circle-fill"></i>Marca: <span>{{$product[0]->brand_name}}</span></li>
-                            <li><i class="bi bi-check-circle-fill"></i>Subcategoría: <span>{{$product[0]->subcategory_name}}</span></li>
-                            <li><i class="bi bi-check-circle-fill"></i>Stock: <span>{{$product[0]->stock}}</span></li>
-                            <li><i class="bi bi-check-circle-fill"></i>IVA: <span>No incluye ({{Config::get('configuracion-global.iva')}}%)</span></li>
+                            <li><i class="fa-solid fa-circle-check"></i>SKU: <span>{{$product[0]->sku}}</span></li>
+                            <li><i class="fa-solid fa-circle-check"></i>Marca: <span>{{$product[0]->brand_name}}</span></li>
+                            <li><i class="fa-solid fa-circle-check"></i>Subcategoría: <span>{{$product[0]->subcategory_name}}</span></li>
+                            <li><i class="fa-solid fa-circle-check"></i>Stock: <span>{{$product[0]->stock}}</span></li>
+                            <li><i class="fa-solid fa-circle-check"></i>IVA: <span>No incluye ({{Config::get('configuracion-global.iva')}}%)</span></li>
                         </ul>
                     </div>
 

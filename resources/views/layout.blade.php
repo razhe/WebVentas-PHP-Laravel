@@ -19,6 +19,8 @@
         <!--CSS Toastr-->
         <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
     <!--JS-->
+        <!--JS FontAwesome-->
+        <script src="https://kit.fontawesome.com/b98e68faf3.js" crossorigin="anonymous"></script>
         <!--JQuery-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
@@ -35,13 +37,13 @@
                         @csrf
                         <div class="busqueda-box input-group">
                             <input type="text" name="search" class="inpt-search-nav" placeholder="Busca aquí...">
-                            <button class="btn-buscar-nav" type="submit"><i class="bi bi-search"></i></button>
+                            <button class="btn-buscar-nav" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div> 
                     </form>              
                 </div>
                 <div class="contenedor-opt-usr">
                     <div class="contenedor-carrito">
-                        <div class=""><a href="{{url('/cart')}}"><i class="bi bi-cart3"></i></a></div>
+                        <div class=""><a href="{{url('/cart')}}"><i class="fa-solid fa-bag-shopping"></i></a></div>
                         @if (Session::has('totalCarrito'))
                             <div class=""><div class="contador-carrito">{{session('totalCarrito.0.cantidadProductos')}}</div></div>
                         @else
@@ -53,17 +55,17 @@
             
             <div class="contenedor contenedor-btn-nav">
                 <button id="btn-menu-barras" class="btn-menu-barras">
-                    <i class="bi bi-list"></i>
+                    <i class="fa-solid fa-bars"></i>
                 </button>
                 <button id="btn-menu-cerrar" class="btn-menu-cerrar">
-                    <i class="bi bi-x"></i>
+                    <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
             <div class="seccion-inferior-nav">
                 <div id="contenedor-enlaces-nav" class="contenedor contenedor-enlaces-nav">
                     <div class="btn-categorias" id="btn-categorias">
                         <strong>Categorías</strong>
-                        <i class="bi bi-chevron-down"></i>
+                        <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="contenedor-enlaces-directos">
                         <a class="direct__links hover-navbar" href="{{url('/')}}">Inicio</a>
@@ -72,21 +74,21 @@
                         <div class="content__user" id="content-user">
                             <li class="user__list">
                                 @if (Auth::guest())
-                                    <button class="user__opt" id ="user-opt">Cuenta <i class="bi bi-chevron-down"></i></button>
+                                    <button class="user__opt" id ="user-opt">Cuenta <i class="fa-solid fa-chevron-down"></i></button>
                                     <ul class = "drop__list" id="drop-list">
                                         <li><a class = "user__link" href="{{url('/login')}}">Iniciar sesión</a></li>
                                         <li><a class = "user__link" href="{{url('/register')}}">Registrarse</a></li>
                                     </ul>
                                 @else
                                     @if(Auth::user() -> id_tasks == 2)
-                                        <button class="user__opt" id ="user-opt">{{Auth::user() -> name}} <i class="bi bi-chevron-down"></i></button>
+                                        <button class="user__opt" id ="user-opt">{{Auth::user() -> name}} <i class="fa-solid fa-chevron-down"></i></button>
                                         <ul class = "drop__list" id="drop-list">
                                             <li><a class = "user__link" href="{{url('/profile')}}">Mi perfil</a></li>
                                             <li><a class = "user__link" href="{{url('/admin')}}">Panel de control</a></li>
                                             <li><a class = "user__link" href="{{url('/logout')}}">Cerrar Sesión</a></li>
                                         </ul>
                                     @else
-                                        <button class="user__opt" id ="user-opt">{{Auth::user() -> name}} <i class="bi bi-chevron-down"></i></button>
+                                        <button class="user__opt" id ="user-opt">{{Auth::user() -> name}} <i class="fa-solid fa-chevron-down"></i></button>
                                         <ul class = "drop__list" id="drop-list">
                                             <li><a class = "user__link" href="{{url('/profile')}}">Mi perfil</a></li>
                                             <li><a class = "user__link" href="{{url('/logout')}}">Cerrar Sesión</a></li>
@@ -101,17 +103,17 @@
             <div class="contenedor contenedor-grid">
                 <div class="grid" id="grid">
                     <div class="categorias">
-                        <button class="btn-regresar"><i class="fas fa-arrow-left"></i> Regresar</button>
+                        <button class="btn-regresar"><i class="fa-solid fa-circle-left"></i> Regresar</button>
                         <h3 class="subtitulo">Categorias</h3>                    
                         @foreach ($categories as $category)
-                        <a href="#" data-categoria="{{$category->name}}">{{$category->name}} <i class="bi bi-caret-right-fill"></i></a>
+                        <a href="#" data-categoria="{{$category->name}}">{{$category->name}} <i class="fa-solid fa-chevron-right"></i></a>
                         @endforeach  
                     </div>
     
                     <div class="contenedor-subcategorias">
                         <div class="subcategoria">
                             <div class="enlaces-subcategoria">
-                                <button class="btn-regresar"><i class="fas fa-arrow-left"></i>Regresar</button>
+                                <button class="btn-regresar"><i class="fa-solid fa-circle-left"></i>Regresar</button>
                                 <h3 data-categoria="" id="subtitulo" class="subtitulo item-subcategoria"></h3>
                                 @foreach ($subcategories as $subcategory)
                                 <a data-categoria="{{$subcategory -> category_name}}" class="item-subcategoria" href="{{url('/products?subcategory='.$subcategory -> slug)}}">{{$subcategory -> name}}</a>
@@ -134,10 +136,10 @@
                     <h4 class="logo-text">Lissome</h4>
                     <p>Praesent vulputate neque nec sem fermentum porttitor. Mauris eget dolor convallis, trista, dignissim sapien. Duis vel felis dictu</p>
                     <div class="social-icons">
-                       <a href="#"><i class="bx bxl-facebook"></i></a>
-                       <a href="#"><i class="bx bxl-twitter"></i></a>
-                       <a href="#"><i class="bx bxl-instagram"></i></a>
-                       <a href="#"><i class="bx bxl-github"></i></a>
+                       <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                       <a href="#"><i class="fa-brands fa-twitter-square"></i></a>
+                       <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                       <a href="#"><i class="fa-brands fa-github"></i></a>
                     </div>
                  </div>
                  <div class="col-md-2">
