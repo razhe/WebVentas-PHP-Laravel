@@ -96,8 +96,8 @@
                                     @if ($i <= Config::get('configuracion-global.quant_best_sellers_home'))
                                         @if ($products[$i] -> discount != 0)
                                             <div class="item-producto">
-                                                <div class="tag-producto tag-producto-novedad">
-                                                    <span>Más vendido</span>
+                                                <div class="tag-producto">
+                                                    <span><i class="fa-brands fa-hotjar"></i></span>
                                                 </div>
                                                 <div class="producto-imagen">                 
                                                     <img src="{{asset($products[$i] -> image1)}}" alt="">
@@ -119,8 +119,8 @@
                                             </div>
                                         @else
                                             <div class="item-producto">
-                                                <div class="tag-producto tag-producto-novedad">
-                                                    <span>Más vendido</span>
+                                                <div class="tag-producto">
+                                                    <span><i class="fa-brands fa-hotjar"></i></span>
                                                 </div>
                                                 <div class="producto-imagen">                 
                                                     <img src="{{asset($products[$i] -> image1)}}" alt="">
@@ -212,7 +212,7 @@
                                 @if ($products[$i] -> discount != 0)
                                     @if ($i <= Config::get('configuracion-global.quant_oferts_home'))
                                         <div class="item-producto">
-                                            <div class="tag-producto tag-producto-oferta">
+                                            <div class="tag-producto">
                                                 <span>-{{$products[$i] -> discount}}%</span>
                                             </div>
                                             <div class="producto-imagen">

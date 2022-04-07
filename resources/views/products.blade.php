@@ -113,44 +113,49 @@
                 <div class="seccion__derecha col-lg-9 col-md-9 p-0">
                     <div class="row contenedor-productos g-0">  
                         @foreach ($products as $product)
-                            <div class="box-producto col-lg-3 col-md-4 col-sm-6 p-2">
+                            <div class="box-producto col-lg-4 col-md-6 col-sm-6 p-2">
                                 @if ($product -> discount != 0)
                                     <div class="item-producto">
-                                        <div class="tag-producto tag-producto-oferta">
+                                        <div class="tag-producto">
                                             <span>-{{$product -> discount}}%</span>
                                         </div>
-                                        <div class="imagen-producto">
+                                        <div class="producto-imagen">  
                                             <img src="{{asset($product -> image1)}}" alt="">
-                                            <div class="acciones-producto">
+                                            <div class="social-icons">
                                                 <a href="{{url('/details-product?s='.Crypt::encryptString($product -> slug))}}"><i class="fa-solid fa-eye"></i></a>
                                                 <a href="{{url('/cart/add?p='.Crypt::encryptString($product -> id).'&quant=1')}}"><i class="fa-solid fa-cart-arrow-down"></i></a>
                                             </div>
                                         </div>
-                                        <div class="info-producto p-1">
-                                            <h5 class="titulo-producto">{{$product -> name}}</h5>
+                                        <div class="p-2">
+                                            <h5 class="title-sm mt-1 mb-0">{{$product -> name}}</h5>
                                             <div class="detalle-item-producto">
                                                 <small class="">{{$product -> brand_name}}</small>
-                                                <small class="">{{Config::get('configuracion-global.currency').$product -> price}}</small>
+                                                <div class="product-prices-box">
+                                                    <small class="old-price">{{Config::get('configuracion-global.currency').$product -> price}}</small>
+                                                    <small class="">{{Config::get('configuracion-global.currency').$product -> price - round((($product -> discount * $product -> price) / 100))}}</small>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 @else
-                                    <div class="item-producto">
-                                        <div class="imagen-producto">
-                                            <img src="{{asset($product -> image1)}}" alt="">
-                                            <div class="acciones-producto">
-                                                <a href="{{url('/details-product?s='.Crypt::encryptString($product -> slug))}}"><i class="fa-solid fa-eye"></i></a>
-                                                <a href="{{url('/cart/add?p='.Crypt::encryptString($product -> id).'&quant=1')}}"><i class="fa-solid fa-cart-arrow-down"></i></a>
-                                            </div>
+                                <div class="item-producto">
+                                    <div class="producto-imagen">  
+                                        <img src="{{asset($product -> image1)}}" alt="">
+                                        <div class="social-icons">
+                                            <a href="{{url('/details-product?s='.Crypt::encryptString($product -> slug))}}"><i class="fa-solid fa-eye"></i></a>
+                                            <a href="{{url('/cart/add?p='.Crypt::encryptString($product -> id).'&quant=1')}}"><i class="fa-solid fa-cart-arrow-down"></i></a>
                                         </div>
-                                        <div class="info-producto p-1">
-                                            <h5 class="titulo-producto">{{$product -> name}}</h5>
-                                            <div class="detalle-item-producto">
-                                                <small class="">{{$product -> brand_name}}</small>
+                                    </div>
+                                    <div class="p-2">
+                                        <h5 class="title-sm mt-1 mb-0">{{$product -> name}}</h5>
+                                        <div class="detalle-item-producto">
+                                            <small class="">{{$product -> brand_name}}</small>
+                                            <div class="product-prices-box">
                                                 <small class="">{{Config::get('configuracion-global.currency').$product -> price}}</small>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
                                 @endif
                             </div> 
                         @endforeach 

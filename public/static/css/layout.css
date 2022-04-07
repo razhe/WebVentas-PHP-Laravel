@@ -53,8 +53,8 @@ ul,li{
 	left: -10px;
 	width: 7px;
 	height: 7px;
-	border-top: 2px solid var(--primaryOrange);
-	border-left: 2px solid var(--primaryOrange);
+	border-top: 2px solid var(--secundaryOrange);
+	border-left: 2px solid var(--secundaryOrange);
 	transition: .5s;
 }
 .hover-navbar:after{
@@ -65,8 +65,8 @@ ul,li{
 	right: -10px;
 	width: 7px;
 	height: 7px;
-	border-top: 2px solid var(--primaryOrange);
-	border-left: 2px solid var(--primaryOrange);
+	border-top: 2px solid var(--secundaryOrange);
+	border-left: 2px solid var(--secundaryOrange);
 	transition: .5s;
 }
 .hover-navbar:hover:before{
@@ -76,7 +76,7 @@ ul,li{
 	right: -2px;
 }
 .hover-navbar:hover{
-	color: var(--primaryOrange);
+	color: #f1f1f1;
 }
 
 /*
@@ -131,11 +131,7 @@ header{
 	outline: none;
 	height: 32px;
 	border-radius: 2px;
-	border-bottom: 2px solid transparent;
 	transition: .3s;
-}
-.inpt-search-nav:focus{
-	border-bottom: 2px solid var(--secundaryOrange);
 }
 .btn-buscar-nav{
 	position: absolute;
@@ -157,12 +153,11 @@ header{
 }
 .contenedor-cuenta .dropdown-item i{
     color: #000;
-    font-size: 1.2rem;
 }
 .contenedor-carrito i
 {
     color: #fff;
-    font-size: 1.45rem;
+    font-size: 1.4rem;
 }
 .contenedor-carrito{
     position: relative;
@@ -170,7 +165,7 @@ header{
 	justify-content: center;
 }
 .contador-carrito{
-	background-color: var(--primaryOrange);
+	background-color: var(--secundaryOrange);
 	height: 18px;
 	width: 18px;
 	line-height: 18px;
@@ -275,6 +270,7 @@ header{
     display: flex;
     justify-content: space-between;
     padding: 5px 10px;
+	transition: .2s;
 }
 .user__link:hover{
     color: #E47911;
