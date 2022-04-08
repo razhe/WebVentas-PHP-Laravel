@@ -1,5 +1,5 @@
 const btnfiltros = document.getElementById('mostrar-filtros'),
-      seccionIzquierda = document.getElementById('seccion-izquierda'),
+      seccionIzquierda = document.getElementById('contenedor-items-izq'),
       tituloAcordeon = document.getElementsByClassName('titulo-secciones-filtro');
 
 btnfiltros.addEventListener('click', (event)=>{

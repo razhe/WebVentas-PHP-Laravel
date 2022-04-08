@@ -37,7 +37,7 @@
                         </select>
                 </div>
                 <div class="seccion__izquierda col-lg-3 col-md-3" id="seccion-izquierda">
-                    <div class="contenedor-items-izq">
+                    <div class="contenedor-items-izq" id="contenedor-items-izq">
                         <div class="box-filtros">
                             <div class="titulo-filtro">
                                 <h2>Filtrar por</h2>
@@ -72,14 +72,14 @@
                                     <div class="titulo-secciones-filtro"><h3>Precio</h3><i class="fa-solid fa-chevron-down"></i></div>                                  
                                     <div class="precio-item contenido-filtro">
                                         <div class="field">
-                                            <span>Min</span>
+                                            <label for="min-price">Mínimo</label>
                                             <input type="number" name="min-price" class="input-min" @if(!empty($_GET['min-price'])) value="{{$_GET['min-price']}}" @endif>
                                         </div>
                                         <div class="field">
-                                            <span>Max</span>
+                                            <label for="max-price">Máximo</label>
                                             <input type="number" name="max-price" class="max-price" @if(!empty($_GET['max-price'])) value="{{$_GET['max-price']}}" @endif>
                                         </div>
-                                        <div class="">
+                                        <div class="filter-btn">
                                             <button type="submit"><i class="fa-solid fa-filter"></i></button>
                                         </div>
                                     </div>
