@@ -83,18 +83,20 @@
 }
 .carousel_box .carousel__siguiente,
 .carousel_box .carousel__anterior{
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 45px;
     border: none;
     outline: none;
-    background: none;
-    opacity: 20%;
+    background: rgba(0, 0, 0, 0.466);
+    opacity: 40%;
     transition: .3s;
     position: absolute;
+    border-radius: 2px;
 }
 .carousel_box .carousel__siguiente i,
 .carousel_box .carousel__anterior i{
-    font-size: 2rem;
+    line-height: 45px;
+    font-size: 1.35rem;
 }
 .carousel_box .carousel__siguiente:hover,
 .carousel_box .carousel__anterior:hover{
@@ -230,7 +232,11 @@
     margin-right: 4px;
     transition: .3s;
     background-color: var(--lightBlue);
+    box-shadow: 0px 0px 17px -6px rgba(0,0,0,0.3);
     color: #fff;
+}
+.item-producto .producto-imagen .social-icons a:hover{
+    opacity: 85%;
 }
 .item-producto:hover .producto-imagen .social-icons {
     bottom: 0;

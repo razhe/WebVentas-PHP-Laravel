@@ -88,7 +88,7 @@
                 <div class="carousel">
                     <div class="carousel_box">
                         <button aria-label="Anterior" class="carousel__anterior anterior-novedades">
-                            <i class="fa-solid fa-circle-left"></i>
+                            <i class="fa-solid fa-chevron-left"></i>
                         </button>
                         <div class="carousel__lista carrousel-novedades">
                             @for ($i = 0; $i < sizeOf($products); $i++)
@@ -145,7 +145,7 @@
                         </div>
         
                         <button aria-label="Siguiente" class="carousel__siguiente siguente-novedades">
-                            <i class="fa-solid fa-circle-right"></i>
+                            <i class="fa-solid fa-chevron-right"></i>
                         </button>
                     </div>
         
@@ -205,7 +205,7 @@
                 <div class="carousel">
                     <div class="carousel_box">
                         <button aria-label="Anterior" class="carousel__anterior anterior-oferta">
-                            <i class="fa-solid fa-circle-left"></i>
+                            <i class="fa-solid fa-chevron-left"></i>
                         </button>
                         <div class="carousel__lista carrousel-ofertas">
                             @for ($i = 0; $i < sizeOf($products); $i++)
@@ -239,7 +239,7 @@
                         </div>
         
                         <button aria-label="Siguiente" class="carousel__siguiente siguente-oferta">
-                            <i class="fa-solid fa-circle-right"></i>
+                            <i class="fa-solid fa-chevron-right"></i>
                         </button>
                     </div>
         

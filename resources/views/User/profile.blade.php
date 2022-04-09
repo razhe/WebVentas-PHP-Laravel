@@ -33,16 +33,16 @@
         <div class="contenedor-perfil">
             <div class="navegacion-perfil">
                 <div class="item-navegacion">
-                    <button id="pefil-principal" class="boton-seccion-perfil"><i class="bi bi-person-bounding-box"></i><span>Perfil</span></button>
+                    <button id="pefil-principal" class="boton-seccion-perfil"><i class="fa-solid fa-user-gear"></i><span>Perfil</span></button>
                 </div>
                 <div class="item-navegacion">
-                    <button id="pefil-contraseña" class="boton-seccion-perfil"><i class="bi bi-shield-lock"></i><span>Contraseña</span></button>
+                    <button id="pefil-contraseña" class="boton-seccion-perfil"><i class="fa-solid fa-lock"></i><span>Contraseña</span></button>
                 </div>
                 <div class="item-navegacion">
-                    <button id="pefil-direcciones" class="boton-seccion-perfil"><i class="bi bi-signpost-split"></i><span>Direcciones</span></button>
+                    <button id="pefil-direcciones" class="boton-seccion-perfil"><i class="fa-solid fa-map-location-dot"></i><span>Direcciones</span></button>
                 </div>
                 <div class="item-navegacion">
-                    <button id="pefil-compras" class="boton-seccion-perfil"><i class="bi bi-clipboard-check"></i><span>Mis compras</span></button>
+                    <button id="pefil-compras" class="boton-seccion-perfil"><i class="fa-solid fa-box-archive"></i><span>Historial</span></button>
                 </div>
             </div>
             <div class="contenido-perfil">
@@ -56,7 +56,7 @@
                                 <label for="name">Nombre:</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">
-                                        <i class="bi bi-person"></i>
+                                        <i class="fa-solid fa-user"></i>
                                     </span>
                                     <input type="text" value="{{Auth::user() -> name}}" name="name" class="form-control" required>
                                 </div>
@@ -66,7 +66,7 @@
                                 <label for="last_name">Apellido:</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">
-                                        <i class="bi bi-person-fill"></i>
+                                        <i class="fa-solid fa-user"></i>
                                     </span>
                                     <input type="text" value="{{Auth::user() -> last_name}}" name="last_name" class="form-control" required>
                                 </div>
@@ -74,10 +74,10 @@
                         </div>
                         <!--Telefono-->
                         <div class="input__container mt-1">
-                            <label for="phone">Numero telefónico:</label>
+                            <label for="phone">Número telefónico:</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1">
-                                    <i class="bi bi-telephone"></i>
+                                    <i class="fa-solid fa-phone"></i>
                                 </span>
                                 <input type="text" value="{{Auth::user() -> phone}}" name="phone" class="form-control" required>
                             </div>
@@ -87,12 +87,12 @@
                             <label for="email">Correo electrónico:</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1">
-                                    <i class="bi bi-envelope"></i>
+                                    <i class="fa-solid fa-envelope"></i>
                                 </span>
                                 <input type="email" value="{{Auth::user() -> email}}" name="email" class="form-control" disabled>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-success mt-3">Guardar</button>
+                        <button type="submit" class="btn-default-yellow mt-3">Actualizar datos</button>
                     </form>
                 </div>
                 <div id="box-contraseña" class="box-contraseña box-contenido">
@@ -104,7 +104,7 @@
                             <label for="apassword">Contraseña actual:</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1">
-                                    <i class="bi bi-key"></i>
+                                    <i class="fa-solid fa-lock"></i>
                                 </span>
                                 <input type="password" name="apassword" class="form-control" required>
                             </div>
@@ -114,7 +114,7 @@
                             <label for="password">Nueva contraseña:</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1">
-                                    <i class="bi bi-shield-lock"></i>
+                                    <i class="fa-solid fa-unlock"></i>
                                 </span>
                                 <input type="password" name="password" class="form-control" required>
                             </div>
@@ -124,21 +124,21 @@
                             <label for="cpassword">Confirme contraseña:</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1">
-                                    <i class="bi bi-shield-lock-fill"></i>
+                                    <i class="fa-solid fa-unlock"></i>
                                 </span>
                                 <input type="password" name="cpassword" class="form-control" required>
                             </div>
                         </div>
-                        <input type="submit" name="actualizar_contraseña" value="Actualizar contraseña" class="btn btn-success mt-4">
+                        <input type="submit" name="actualizar_contraseña" value="Actualizar contraseña" class="btn-default-yellow mt-4">
                     </form>
                 </div>
 
                 <div id="box-direcciones-listar" class="box-direcciones box-contenido">
-                    <button type="button" id="btn-agregar-direccion" class="btn btn-primary">Agregar direccion</button>
-                    <p>Solo se puede tener un máximo de 2 direcciones registradas.</p>
+                    <button type="button" id="btn-agregar-direccion" class="btn-default-yellow">Agregar direccion <i class="fa-solid fa-location-dot"></i></button>
+                    <p class="tag-min-advertencia">Solo se puede tener un máximo de 2 direcciones registradas.</p>
                     @foreach ($direcciones as $direccion)
                         <div class="item-direccion">
-                            <div class="titulo-item-direccion"><span>{{$direccion -> address}}</span><i class="bi bi-chevron-down"></i></div>
+                            <div class="titulo-item-direccion"><span>{{$direccion -> address}}</span><i class="fa-solid fa-chevron-down"></i></div>
                             <div class="contenido-direccion">
                                 <p>Dirección: <span>{{$direccion -> address}}</span></p>
                                 <p>Edificio recidencial: <span>{{$direccion -> residency}}</span></p>
@@ -149,7 +149,7 @@
                                     <form action="{{url('/profile/delete-address')}}" method="post">
                                         @csrf
                                         <input type="hidden" name="address" value="{{Crypt::encryptString($direccion -> id)}}">
-                                        <button type="submit">Remover</button>
+                                        <button type="submit" class="btn-default-red">Remover</button>
                                     </form>
                                 </div>
                             </div>                                
@@ -158,20 +158,20 @@
                     
                 </div>
                 <div id="box-direcciones-agregar" class="box-direcciones box-contenido">
-                    <button type="button" id="volver-listar-direcciones" class="btn btn-primary">Volver</button>
-                    <form class="register__form needs-validation" action="{{url('/profile/create-address')}}" method="post" novalidate>
+                    <button type="button" id="volver-listar-direcciones" class=""><i class="fa-solid fa-arrow-left-long"></i> Volver</button>
+                    <form class="needs-validation" action="{{url('/profile/create-address')}}" method="post" novalidate>
                         @csrf
                          <!--direccion-->
-                         <div class="input__container mt-1">
+                         <div class="input__container mt-1 p-1">
                             <label for="phone">Dirección:</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1">
-                                    <i class="bi bi-compass"></i>
+                                    <i class="fa-solid fa-location-dot"></i>
                                 </span>
                                 <input type="text" placeholder="Ej. Número, pasaje, calle/avenida" value="" name="address" class="form-control" required>
                             </div>
                         </div>
-                        <div class="form-group mt-1">
+                        <div class="form-group mt-1 p-1">
                             <label for="inputState">Recidencia:</label>
                             <select id="inputState" name="residency" class="form-control form-select" aria-label="Default select example">
                                 <option selected disabled>Seleccione:</option>
@@ -181,24 +181,24 @@
                             </select>
                         </div>
                         
-                        <div class="row m-0 g-0">
+                        <div class="row m-0 g-0 fila-locacion">
                             <!--region-->
-                            <div class="form-group col-lg-6 col-md-6 mt-1">
+                            <div class="region-field form-group col-lg-6 col-md-5 mt-1 p-1">
                                 <label for="inputState">Región:</label>
                                 <select id="select-region" name="region" class="form-control form-select" aria-label="Default select example">
                                     <option value="region-metropolitana" selected>Region Metropolitana</option>
                                 </select>
                             </div>
                             <!--comuna-->
-                            <div class="form-group col-lg-6 col-md-6 mt-1">
+                            <div class="comuna-field form-group col-lg-6 col-md-5 mt-1 p-1">
                                 <label for="inputState">Comuna:</label>
                                 <select id="select-comuna" name="comuna" class="form-control form-select" aria-label="Default select example">
                                     <option selected disabled>Seleccione una región:</option>
                                 </select>
                             </div>
                         </div>
-                        <span>*Por el momento los envíos solo están disponibles para la región metropolitana.</span>
-                        <button type="submit" class="btn btn-success">Guardar</button>
+                        <span class="tag-min-advertencia">*Por el momento los envíos solo están disponibles para la región metropolitana.</span>
+                        <button type="submit" class="btn-default-yellow" id="btn-guardar-direc">Guardar dirección</button>
                     </form>
                 </div>
                 <div id="box-listar-compras" class="box-direcciones box-contenido">
