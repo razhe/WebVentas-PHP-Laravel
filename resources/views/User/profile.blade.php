@@ -51,7 +51,7 @@
                     <form class="register__form needs-validation" action="{{url('/profile/update-profile')}}" method="post" novalidate>
                         @csrf
                         <!--Nombre-->
-                        <div class="2-columns-row row mt-1">
+                        <div class="2-columns-row row mt-4">
                             <div class="input__container col-md-6">
                                 <label for="name">Nombre:</label>
                                 <div class="input-group">
@@ -73,7 +73,7 @@
                             </div>
                         </div>
                         <!--Telefono-->
-                        <div class="input__container mt-1">
+                        <div class="input__container mt-4">
                             <label for="phone">Número telefónico:</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1">
@@ -83,7 +83,7 @@
                             </div>
                         </div>
                         <!--Email-->
-                        <div class="input__container mt-1">
+                        <div class="input__container mt-4">
                             <label for="email">Correo electrónico:</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="basic-addon1">
@@ -116,7 +116,7 @@
                                 <span class="input-group-text" id="basic-addon1">
                                     <i class="fa-solid fa-unlock"></i>
                                 </span>
-                                <input type="password" name="password" class="form-control" required>
+                                <input type="password" placeholder="" name="password" class="form-control" required>
                             </div>
                         </div>
                         <!--Contraseña 2-->
@@ -126,7 +126,7 @@
                                 <span class="input-group-text" id="basic-addon1">
                                     <i class="fa-solid fa-unlock"></i>
                                 </span>
-                                <input type="password" name="cpassword" class="form-control" required>
+                                <input type="password" placeholder="" name="cpassword" class="form-control" required>
                             </div>
                         </div>
                         <input type="submit" name="actualizar_contraseña" value="Actualizar contraseña" class="btn-default-yellow mt-4">
@@ -198,14 +198,16 @@
                             </div>
                         </div>
                         <span class="tag-min-advertencia">*Por el momento los envíos solo están disponibles para la región metropolitana.</span>
+                        <br>
                         <button type="submit" class="btn-default-yellow" id="btn-guardar-direc">Guardar dirección</button>
                     </form>
                 </div>
-                <div id="box-listar-compras" class="box-direcciones box-contenido">
-                    <table>
+                <div id="box-listar-compras" class="box-tabla-compras box-contenido">
+                    <table class="table-history">
                         <thead>
                             <tr>
                                 <th>Orden</th>
+                                <th>Fecha</th>
                                 <th>Total neto</th>
                                 <th>IVA</th>
                                 <th>Total</th>
@@ -217,15 +219,16 @@
                             @foreach ($ordenes as $orden)
                                 <tr>
                                     <td>{{$orden -> order_number}}</td>
-                                    <td>{{$orden -> total_neto}}</td>
-                                    <td>{{$orden -> iva}}</td>
-                                    <td>{{$orden -> total}}</td>
+                                    <td>{{$orden -> fecha}}</td>
+                                    <td>{{Config::get('configuracion-global.currency').$orden -> total_neto}}</td>
+                                    <td>{{Config::get('configuracion-global.currency').$orden -> iva}}</td>
+                                    <td>{{Config::get('configuracion-global.currency').$orden -> total}}</td>
                                     @switch($orden -> status)
                                         @case(1)
-                                        <td>Pago pendiente</td>
+                                        <td><span class="status status-pending">Pago pendiente</span></td>
                                             @break
                                         @case(2)
-                                        <td>Pagada</td>
+                                        <td><span class="status status-paid">Confirmada</span></td>
                                             @break
                                     @endswitch
                                     @if (!empty($orden -> id_boleta))
