@@ -88,7 +88,7 @@
     border: none;
     outline: none;
     background: rgba(0, 0, 0, 0.466);
-    opacity: 40%;
+    opacity: 15%;
     transition: .3s;
     position: absolute;
     border-radius: 2px;
@@ -100,7 +100,7 @@
 }
 .carousel_box .carousel__siguiente:hover,
 .carousel_box .carousel__anterior:hover{
-    opacity: 100%;
+    opacity: 70%;
 }
 
 .carousel__indicadores.glider-dot {
@@ -180,6 +180,10 @@
 .item-producto .producto-imagen {
     position: relative;
     overflow: hidden;
+}
+.item-producto h5{
+    font-size: 1rem;
+    color: #3f3f3f;
 }
 .tag-producto{
     height: 30px;

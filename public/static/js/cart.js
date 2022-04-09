@@ -20,19 +20,20 @@ function listarCarrito() {
         data:{},
         success:function(data) {
             let boxCarrito = document.getElementById('box-rows-carrito'),
+                boxNoContent = document.getElementById('container-no-cart-content'),
                 htmlCarrito = "",
                 boxTotalCarrito = document.getElementById('box-rows-totalCarrito'),
                 htmlTotalCarrito = "",
                 btnCheckOut = document.getElementById('btn-go-CheckOut');
-            if(data.carrito == null){
+            if(data.carrito == null || data.carrito.length == 0){
                 htmlCarrito += `
-                <tr>
+                
                     <div class="cart-nocontent-available">
-                        <h4>No hay nada agregado al carrito</h4> <i class="bi bi-bag-dash"></i>
+                        <h4>No hay nada agregado al carrito</h4> <i class="fa-solid fa-cart-shopping"></i>
                     </div>
-                </tr>
+                
                 `;
-                boxCarrito.innerHTML = htmlCarrito;
+                boxNoContent.innerHTML = htmlCarrito;
             }
             else{
                 for (let i = 0; i < data.carrito.length; i++) {
@@ -70,7 +71,7 @@ function listarCarrito() {
                 btnCheckOut.innerHTML = 
                 `       
                         <a href="${urlCheckout}">
-                            <button class="btn btn-success">Proceder al pago</button>
+                            <button class="btn-default-yellow">Proceder al pago <i class="fa-solid fa-right-long"></i></button>
                         </a>
                 `;
                 boxCarrito.innerHTML = htmlCarrito;
@@ -122,20 +123,3 @@ $(document).ajaxSuccess(function() {
     }
 });
 
-    
-
-
-
-    
-
-/* 
-$(document).on('change','.inpt_cart_quant',function(){
-    for (let i = 0; i < inpt_cart.length; i++) {
-        console.log(inpt_cart[i].value);
-    }
-});   
-
-inpt_cart[i].addEventListener('change', (event)=>{
-    console.log('cambio el input' + inpt_cart[i]);
-});
-*/

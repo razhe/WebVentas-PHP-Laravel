@@ -32,6 +32,9 @@
                             <!--Encode js...-->
                         </tbody>    
                     </table>
+                    <div class="" id="container-no-cart-content">
+                        
+                    </div>
                 </div>
                 <div class="cart-total-container" id="cart-total-container">
                     <table>

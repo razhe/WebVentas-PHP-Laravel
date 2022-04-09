@@ -665,6 +665,9 @@ Fin Navbar
 footer
 ================
 */
+footer{
+	border-top: 2px solid #f4f6fb;
+}
 .footer-top {
     padding-top: 40px;
     padding-bottom: 30px;

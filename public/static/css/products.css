@@ -23,6 +23,7 @@
 }
 .breadcrumbs .breadcrumbs__item{
     display: inline-block;
+    font-size: .9rem;
 }
 .breadcrumbs .breadcrumbs__item:not(:last-of-type)::after{
     content: '/';
@@ -233,6 +234,10 @@ input[type="number"]::-webkit-inner-spin-button {
     font-size: .73rem;
     font-weight: 600;
     letter-spacing: .7px;
+}
+.item-producto h5{
+    font-size: 1rem;
+    color: #3f3f3f;
 }
 
 .item-producto .producto-imagen .social-icons {
