@@ -62,29 +62,28 @@
                             <div class=""><span>1</span></div>
                             <h4>Poseo una cuenta</h4>
                         </div>
-                        <div class="contenido_usuario_visitante posee_cuenta">
-                            <form action="{{url('/login')}}" method="post" class="login__form needs-validation" novalidate>
-                                @csrf
-                                <!--Email-->    
-                                <div class="input__container">    
-                                    <div class="default-input-form">
-                                        <label for="email">Correo electrónico</label>
-                                        <input type="email" name="email" class="inpt-default-form" required>
-                                        <div class="underline"></div> 
+                        <div class="contenido_usuario posee_cuenta">
+                            <div class="box-form">
+                                <form action="{{url('/login')}}" method="post" class="login__form needs-validation" novalidate>
+                                    @csrf
+                                    <!--Email-->    
+                                    <div class="input__container">    
+                                        <div class="default-input-form">
+                                            <input type="email" name="email" placeholder="Correo" class="inpt-default-form" required>
+                                            <i class="fa-solid fa-envelope"></i>
+                                        </div>
                                     </div>
-                                </div>
-                                <!--Contraseña-->
-                                <div class="input__container">
-                                    
-                                    <div class="default-input-form">
-                                        <label for="email">Contraseña</label> 
-                                        <input type="password" name="password" class="inpt-default-form" required>
-                                        <div class="underline"></div> 
+                                    <!--Contraseña-->
+                                    <div class="input__container">                                   
+                                        <div class="default-input-form">
+                                            <input type="password" name="password" placeholder="Contraseña" class="inpt-default-form" required>
+                                            <i class="fa-solid fa-key"></i>
+                                        </div>
                                     </div>
-                                </div>
-                                <input type="hidden" name="estance" value="{{Crypt::encryptString('checkout')}}">
-                                <input type="submit" name="loguearse" id="" class="btn btn-success">
-                            </form>
+                                    <input type="hidden" name="estance" value="{{Crypt::encryptString('checkout')}}">
+                                    <button type="submit" name="loguearse" class="btn-default-yellow mt-3">Iniciar sesión </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -94,68 +93,88 @@
                             <div class=""><span>2</span></div>
                             <h4>No poseo cuenta</h4>
                         </div>
-                        <div class="contenido_usuario_visitante compra_rapida">
-                            <form action="{{url('/checkout/save-guest-data')}}" id="form-save-guest" method="post">
-                                @csrf
-                                <span>Si no desea volver a escribir sus datos en la página web puede <a href="{{url('/register')}}">registrarse</a>.</span>
-                                <input type="text" placeholder="Nombre" name="name">
-                                <input type="text" placeholder="apellido" name="last_name">
-                                <input type="text" placeholder="Teléfono" name="phone">
-                                <input type="text" placeholder="Email" name="email">
-                                <!--direccion-->
-                                <div class="input__container mt-1">
-                                    <label for="address">Dirección:</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <i class="bi bi-compass"></i>
-                                        </span>
-                                        <input type="text" placeholder="Ej. Número, pasaje, calle/avenida" value="" name="address" class="form-control" required>
+                        <div class="contenido_usuario compra_rapida">
+                            <div class="box-form">
+                                <form action="{{url('/checkout/save-guest-data')}}" id="form-save-guest" method="post">
+                                    @csrf
+                                    <span class="tag-min-advertencia">Si no desea volver a escribir sus datos en la página web puede <a href="{{url('/register')}}">registrarse</a>.</span>
+                                    <div class="row m-0 g-0">
+                                        <!--nombre-->    
+                                        <div class="input__container col-lg-6 col-md-6 p-1">    
+                                            <div class="default-input-form">
+                                                <input type="text" name="name" placeholder="Nombre" class="inpt-default-form" required>
+                                                <i class="fa-solid fa-user"></i>
+                                            </div>
+                                        </div>
+                                        <!--apellido-->    
+                                        <div class="input__container col-lg-6 col-md-6 p-1">    
+                                            <div class="default-input-form">
+                                                <input type="text" name="last_name" placeholder="Apellido" class="inpt-default-form" required>
+                                                <i class="fa-solid fa-user"></i>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group mt-1">
-                                    <label for="residency">Recidencia:</label>
-                                    <select id="inputState" name="residency" class="form-control form-select" aria-label="Default select example">
-                                        <option selected disabled>Seleccione:</option>
-                                        <option value="8976">Casa</option>
-                                        <option value="4932">Departamento</option>
-                                        <option value="3456">Recinto empresarial</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="row m-0 g-0">
-                                    <!--region-->
-                                    <div class="form-group col-lg-6 col-md-6 mt-1">
-                                        <label for="region">Región:</label>
-                                        <select id="select-region" name="region" class="form-control form-select" aria-label="Default select example">
-                                            <option value="region-metropolitana" selected>Region Metropolitana</option>
+                
+                                    <!--phone-->    
+                                    <div class="input__container p-1">    
+                                        <div class="default-input-form">
+                                            <input type="text" name="phone" placeholder="Teléfono" class="inpt-default-form" required>
+                                            <i class="fa-solid fa-mobile-screen"></i>
+                                        </div>
+                                    </div>
+                                    <!--Email-->    
+                                    <div class="input__container p-1">    
+                                        <div class="default-input-form">
+                                            <input type="email" name="email" placeholder="Correo" class="inpt-default-form" required>
+                                            <i class="fa-solid fa-envelope"></i>
+                                        </div>
+                                    </div>
+                                    <!--direccion-->    
+                                    <div class="input__container p-1">    
+                                        <div class="default-input-form">
+                                            <input type="text" name="address" placeholder="Dirección" class="inpt-default-form" required>
+                                            <i class="fa-solid fa-location-dot"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group mt-1 p-1">
+                                        <select id="inputState" name="residency" class="form-control form-select" aria-label="Default select example">
+                                            <option selected disabled>Residencia...</option>
+                                            <option value="8976">Casa</option>
+                                            <option value="4932">Departamento</option>
+                                            <option value="3456">Recinto empresarial</option>
                                         </select>
                                     </div>
-                                    <!--comuna-->
-                                    <div class="form-group col-lg-6 col-md-6 mt-1">
-                                        <label for="comuna">Comuna:</label>
-                                        <select id="select-comuna" name="comuna" class="form-control form-select" aria-label="Default select example">
-                                            <option selected disabled>Seleccione una región:</option>
-                                        </select>
+                                    
+                                    <div class="row m-0 g-0">
+                                        <!--region-->
+                                        <div class="form-group col-lg-6 col-md-6 mt-1 p-1">
+                                            <select id="select-region" name="region" class="form-control form-select" aria-label="Default select example">
+                                                <option value="region-metropolitana" selected>Region Metropolitana</option>
+                                            </select>
+                                        </div>
+                                        <!--comuna-->
+                                        <div class="form-group col-lg-6 col-md-6 mt-1 p-1">
+                                            <select id="select-comuna" name="comuna" class="form-control form-select" aria-label="Default select example">
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <span>*Por el momento los envíos solo están disponibles para la región metropolitana.</span>
-                            </form>
+                                    <span class="tag-min-advertencia mt-2">*Por el momento los envíos solo están disponibles para la región metropolitana.</span>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="container-btn-next">
-                    <button class="btn-default-yellow" id="btn-go-payment-guest">Siguiente</button>
+                    <button class="btn-default-yellow" id="btn-go-payment-guest">Siguiente <i class="fa-solid fa-arrow-right-long"></i></button>
                 </div>
                 
             </div>
             @else
                 <div class="box-contenido">
                     <div class="box-usuario-logueado">
-                        <div class="titulo_logueado">
-                            <h4>Su información</h4>
-                        </div>
                         <div class="contenido_usuario_logueado">
-                            <p>Nombre completo: {{Auth::user()-> name . ' ' .Auth::user()-> last_name}}</p>
+                            <p>Nombre: {{Auth::user()-> name . ' ' .Auth::user()-> last_name}}</p>
                             <p>Email: {{Auth::user()-> email}}</p>
                             <p>teléfono: {{Auth::user()-> phone}}</p>
                             <form action="{{url('/checkout/save-user-data')}}" id="form-save-user" method="post">
@@ -166,29 +185,40 @@
                                     <div class="opciones_usuario_logueado">
                                     </div>
                                 @endif
-                                @if (count($address) > 1)
-                                    <label for="radio_boleta" class="label_radio_documento">
-                                        <input type="radio" id="radio_direccion1" class="" name="direccion" value="{{Crypt::encryptString($address[0] -> id)}}">
-                                        <div class="radio__radio">Direccion 1: 
-                                            <p>{{$address[0] -> address .'('.$address[0] -> residency .')' .', '.$address[0] -> comuna_name .', '.$address[0] -> region_name .'.'}}</p>
-                                        </div>
-                                    </label>
-                                    <label for="radio_boleta" class="label_radio_documento">
-                                        <input type="radio" id="radio_direccion2" class="" name="direccion" value="{{Crypt::encryptString($address[1] -> id)}}">
-                                        <div class="radio__radio"> Direccion 2:
-                                            <p>{{$address[1] -> address .'('.$address[1] -> residency .')' .', '.$address[1] -> comuna_name .', '.$address[1] -> region_name .'.'}}</p>
-                                        </div>
-                                    </label>
+                                @if (count($address) > 1) 
+                                    <p><strong>¿Donde quieres que llevemos tu pedido?</strong></p>
+                                    <div class="box-direccion">
+                                        <label for="radio_direccion1" class="label_radio_documento">
+                                            <input type="radio" id="radio_direccion1" class="" name="direccion" value="{{Crypt::encryptString($address[0] -> id)}}">
+                                            <div class="radio__radio">
+                                                <div class="icon-selected"><i class="fa-solid fa-check"></i></div>
+                                                <p><strong>Dirección 1</strong></p>
+                                                <p>{{$address[0] -> address .'('.$address[0] -> residency .')' .', '.$address[0] -> comuna_name .', '.$address[0] -> region_name .'.'}}</p>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="box-direccion">
+                                        <label for="radio_direccion2" class="label_radio_documento">
+                                            <input type="radio" id="radio_direccion2" class="" name="direccion" value="{{Crypt::encryptString($address[1] -> id)}}">
+                                            <div class="radio__radio"> 
+                                                <div class="icon-selected"><i class="fa-solid fa-check"></i></div>
+                                                <p><strong>Dirección 2</strong></p>
+                                                <p>{{$address[1] -> address .'('.$address[1] -> residency .')' .', '.$address[1] -> comuna_name .', '.$address[1] -> region_name .'.'}}</p>
+                                            </div>
+                                        </label>
+                                    </div>
                                 @endif
                                 @if (count($address) == 0)
                                     <a href="{{url('/profile')}}">registrar direcciones</a>
                                 @endif
                             </form>
-                            <a href="{{url('/profile')}}">Modificar</a>
+                            <div class="editar-link">
+                                <a href="{{url('/profile')}}">Editar</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <button class="btn-next-step" id="btn-go-payment-user">Siguiente</button>
+                <button class="btn-default-yellow" id="btn-go-payment-user">Siguiente <i class="fa-solid fa-arrow-right-long"></i></button>
             @endif
         </div>
     </div>

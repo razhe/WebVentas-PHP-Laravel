@@ -22,7 +22,7 @@ function traerComunasRegMet() {
         data:{},
         success: function(data) {
             let html = ``;
-            html += `<option selected disabled>Seleccione:</option>`;
+            html += `<option selected disabled>Comuna...</option>`;
             for (let i = 0; i < data.length; i++) {
                 html += `
                     <option value="${data[i].id}">${data[i].name}</option>
