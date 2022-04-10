@@ -36,6 +36,7 @@ ul,li{
 	--primaryBackgroundColor: #fff;
 	--secundaryBackgroundColor: #f8f8f8;
 }
+
 .hover-navbar{
 	font-size: .9rem;
 	position: relative;

@@ -51,34 +51,35 @@
         <div class="box-checkout">
             <div class="box-title">
                 <h4>Datos del comprador</h4>
+                <div class="hline"></div>
             </div>
+            
             @if (Auth::guest())
+            <div class="container-opt-compras">
                 <div class="box-contenido">
                     <div class="box-usuario-visitante">
                         <div class="title_collapse">
+                            <div class=""><span>1</span></div>
                             <h4>Poseo una cuenta</h4>
                         </div>
                         <div class="contenido_usuario_visitante posee_cuenta">
                             <form action="{{url('/login')}}" method="post" class="login__form needs-validation" novalidate>
                                 @csrf
                                 <!--Email-->    
-                                <div class="input__container">
-                                    <label for="correo">Correo electrónico:</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <i class="bi bi-envelope"></i>
-                                        </span>
-                                        <input type="email" name="email" class="form-control" required>
+                                <div class="input__container">    
+                                    <div class="default-input-form">
+                                        <label for="email">Correo electrónico</label>
+                                        <input type="email" name="email" class="inpt-default-form" required>
+                                        <div class="underline"></div> 
                                     </div>
                                 </div>
                                 <!--Contraseña-->
                                 <div class="input__container">
-                                    <label for="contraseña">Contraseña:</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <i class="bi bi-shield-lock"></i>
-                                        </span>
-                                        <input type="password" name="password" class="form-control" required>
+                                    
+                                    <div class="default-input-form">
+                                        <label for="email">Contraseña</label> 
+                                        <input type="password" name="password" class="inpt-default-form" required>
+                                        <div class="underline"></div> 
                                     </div>
                                 </div>
                                 <input type="hidden" name="estance" value="{{Crypt::encryptString('checkout')}}">
@@ -90,7 +91,8 @@
                 <div class="box-contenido">
                     <div class="box-usuario-visitante">
                         <div class="title_collapse">
-                            <h4>Compra rápida</h4>
+                            <div class=""><span>2</span></div>
+                            <h4>No poseo cuenta</h4>
                         </div>
                         <div class="contenido_usuario_visitante compra_rapida">
                             <form action="{{url('/checkout/save-guest-data')}}" id="form-save-guest" method="post">
@@ -141,7 +143,11 @@
                         </div>
                     </div>
                 </div>
-                <button class="btn-next-step" id="btn-go-payment-guest">Siguiente</button>
+                <div class="container-btn-next">
+                    <button class="btn-default-yellow" id="btn-go-payment-guest">Siguiente</button>
+                </div>
+                
+            </div>
             @else
                 <div class="box-contenido">
                     <div class="box-usuario-logueado">
