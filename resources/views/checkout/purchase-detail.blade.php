@@ -7,26 +7,6 @@
 @endsection
 
 @section('content')
-<section class="step-wizard">
-    <ul class="step-wizard-list">
-        <li class="step-wizard-item">
-            <span class="progress-count">1</span>
-            <span class="progress-label">Datos del comprador</span>
-        </li>
-        <li class="step-wizard-item">
-            <span class="progress-count">2</span>
-            <span class="progress-label">Formas de pago</span>
-        </li>
-        <li class="step-wizard-item">
-            <span class="progress-count">3</span>
-            <span class="progress-label">Resumen y Pago</span>
-        </li>
-        <li class="step-wizard-item">
-            <span class="progress-count current-item">4</span>
-            <span class="progress-label">Detalle de compra</span>
-        </li>
-    </ul>
-</section>
 <!--Validacion formulario-->
 @if(Session::has('MsgResponse'))
 <div class="container box-msgAuth-error">

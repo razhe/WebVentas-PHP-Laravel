@@ -21,10 +21,6 @@
             <span class="progress-count">3</span>
             <span class="progress-label">Resumen y Pago</span>
         </li>
-        <li class="step-wizard-item">
-            <span class="progress-count">4</span>
-            <span class="progress-label">Detalle de compra</span>
-        </li>
     </ul>
 </section>
 <!--Validacion formulario-->

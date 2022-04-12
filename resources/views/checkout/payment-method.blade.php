@@ -21,10 +21,6 @@
             <span class="progress-count">3</span>
             <span class="progress-label">Resumen y Pago</span>
         </li>
-        <li class="step-wizard-item">
-            <span class="progress-count">4</span>
-            <span class="progress-label">Detalle de compra</span>
-        </li>
     </ul>
 </section>
 <section class="checkout-content">
@@ -43,7 +39,6 @@
                         <input type="radio" id="radio_webpay" class="" name="payment-method" value="webpay">
                         <div class="radio__radio">
                             <div class="icon-selected"><i class="fa-solid fa-check"></i></div>
-                            <p><strong>WebPay </strong></p>
                             <img src="{{asset('img/pagina/logo-webpay.png')}}" alt="">
                         </div>
                     </label>

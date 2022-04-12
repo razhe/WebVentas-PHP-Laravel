@@ -8,6 +8,11 @@ body {
     background-color: var(--primaryBackgroundColor);
     font-family: "Inter", sans-serif !important;
 }
+a{
+    text-decoration: none !important;
+    color: var(--secondaryYellow) !important;
+    font-weight: 700;
+}
 :root{
 	/*capas*/
 	--zIndexLayer1: 6000;

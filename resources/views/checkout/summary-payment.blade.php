@@ -21,50 +21,72 @@
             <span class="progress-count">3</span>
             <span class="progress-label">Resumen y Pago</span>
         </li>
-        <li class="step-wizard-item">
-            <span class="progress-count">4</span>
-            <span class="progress-label">Detalle de compra</span>
-        </li>
     </ul>
 </section>
 <section class="checkout-content">
-    <div class="summary__container">
-        <div class="box__productos">
+    <div class="row m-0 g-0 summary__container">
+        <div class="box-title">
             <h4>Productos seleccionados</h4>
-            <a href="{{url('/cart')}}">Editar carrito</a>
-            <table>
-                @foreach(Session::get('carrito') as $cart)
-                    <tr>
-                        <td><img src="{{asset($cart['imagen'])}}" alt="" srcset=""></td>
-                        <td>
-                            <p>{{$cart['nombre']}}</p>
-                            <p>Cantidad: {{$cart['cantidad']}}</p>
-                            <p>{{$cart['precio']}}</p>
-                        </td>
-                    </tr>
-                @endforeach
-            </table>
+            <div class="hline"></div>
         </div>
-        <div class="box__costos">
-            <table>
-                <tr>
-                    <td>Total Neto</td>
-                    <td>{{Config::get('configuracion-global.currency').' '.session('totalCarrito.0.total_neto')}}</td>
-                </tr>
-                <tr>
-                    <td>IVA</td>
-                    <td>{{Config::get('configuracion-global.currency').' '.session('totalCarrito.0.iva')}}</td>
-                </tr>
-                <tr>
-                    <td>Total</td>
-                    <td>{{Config::get('configuracion-global.currency').' '.session('totalCarrito.0.total')}}</td>
-                </tr>
-            </table>
+        <a href="{{url('/cart')}}">Editar carrito</a>
+        <div class="box__productos col-lg-7">
+            <!--carrito-->
+            <section class="cart-section">
+                <div class="cart-container-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Subtotal</th>
+                            </tr> 
+                        </thead>
+                        <tbody id="box-rows-carrito">
+                            @foreach(Session::get('carrito') as $cart)
+                                <tr>
+                                    <td>
+                                        <div class="cart-info">
+                                            <img src="{{asset($cart['imagen'])}}" alt="">
+                                            <div>
+                                                <p>{{$cart['nombre']}}</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>{{$cart['cantidad']}}</td>
+                                    
+                                    <td><p>{{Config::get('configuracion-global.currency').$cart['subtotal']}}</p></td>
+                                </tr>
+                            @endforeach
+                        </tbody>    
+                    </table>
+                    <div class="" id="container-no-cart-content">
+                        
+                    </div>
+                </div>
+            </section>
         </div>
-        <form action="{{url('/transbank/iniciar-compra')}}" method="post">
-            @csrf
-            <button type="submit" class="btn btn-primary">Completar pedido</button>
-        </form>
+        <div class="box__costos col-lg-4">
+            <div class="lista_costos">
+                <div class="total-neto item-costos">
+                    <h4>Total Neto</h4>
+                    <p>{{Config::get('configuracion-global.currency').' '.session('totalCarrito.0.total_neto')}}</p>
+                </div>
+                <div class="iva item-costos">
+                    <h4>IVA</h4>
+                    <p>{{Config::get('configuracion-global.currency').' '.session('totalCarrito.0.iva')}}</p>
+                </div>
+                <div class="total item-costos">
+                    <h4>Total</h4>
+                    <p>{{Config::get('configuracion-global.currency').' '.session('totalCarrito.0.total')}}</p>
+                </div>
+            </div>
+            <form action="{{url('/transbank/iniciar-compra')}}" method="post">
+                @csrf
+                <button type="submit" class="btn-default-yellow">Completar pedido</button>
+            </form>
+        </div>
+        
         
     </div>
 </section>

@@ -48,7 +48,11 @@ class CheckoutController extends Controller
     }
     public function getSummaryPayment()
     {
-        return view('checkout.summary-payment');
+        $arreglo = session('carrito');
+        $data = [
+            'productos' => $arreglo
+        ];
+        return view('checkout.summary-payment', $data);
     }
     public function getPurchaseDetail(Request $request)
     {

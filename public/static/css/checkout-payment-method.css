@@ -96,7 +96,7 @@
 
 .box-formas-pago .radio__radio{
     position: relative;
-    height: 60px;
+    height: 65px;
     border: 1px solid #c7c7c7;
     border-radius: 3px;
     transition: .2s;
@@ -104,14 +104,9 @@
     text-align: center;
     display: flex;
 }
-.box-formas-pago .radio__radio p{
-    margin-left: 40px;
-    font-size: .95rem;
-    margin-bottom: .5rem;
-    line-height: 55px;
-}
 .box-formas-pago .radio__radio img{
     width: 100%;
+    margin-left: 40px;
 }
 .box-formas-pago .radio__radio .icon-selected{
     position: absolute;
