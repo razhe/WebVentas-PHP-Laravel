@@ -98,15 +98,17 @@
                                         <!--nombre-->    
                                         <div class="input__container col-lg-6 col-md-6 p-1">    
                                             <div class="default-input-form">
-                                                <input type="text" name="name" placeholder="Nombre" class="inpt-default-form" required>
+                                                <input type="text" name="name" id="name_guest" placeholder="Nombre" class="inpt-default-form" required>
                                                 <i class="fa-solid fa-user"></i>
+                                                <div id="error_name" class="error_default_input"></div>
                                             </div>
                                         </div>
                                         <!--apellido-->    
                                         <div class="input__container col-lg-6 col-md-6 p-1">    
                                             <div class="default-input-form">
-                                                <input type="text" name="last_name" placeholder="Apellido" class="inpt-default-form" required>
+                                                <input type="text" name="last_name" id="last_name_guest"  placeholder="Apellido" class="inpt-default-form" required>
                                                 <i class="fa-solid fa-user"></i>
+                                                <div id="error_last_name" class="error_default_input"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -114,45 +116,52 @@
                                     <!--phone-->    
                                     <div class="input__container p-1">    
                                         <div class="default-input-form">
-                                            <input type="text" name="phone" placeholder="Teléfono" class="inpt-default-form" required>
+                                            <input type="text" name="phone" id="phone_guest"  placeholder="Teléfono" class="inpt-default-form" required>
                                             <i class="fa-solid fa-mobile-screen"></i>
+                                            <div id="error_phone" class="error_default_input"></div>
                                         </div>
                                     </div>
                                     <!--Email-->    
                                     <div class="input__container p-1">    
                                         <div class="default-input-form">
-                                            <input type="email" name="email" placeholder="Correo" class="inpt-default-form" required>
+                                            <input type="email" name="email" id="email_guest"  placeholder="Correo" class="inpt-default-form" required>
                                             <i class="fa-solid fa-envelope"></i>
+                                            <div id="error_email" class="error_default_input"></div>
                                         </div>
                                     </div>
                                     <!--direccion-->    
                                     <div class="input__container p-1">    
                                         <div class="default-input-form">
-                                            <input type="text" name="address" placeholder="Dirección" class="inpt-default-form" required>
+                                            <input type="text" name="address" id="address_guest"  placeholder="Dirección" class="inpt-default-form" required>
                                             <i class="fa-solid fa-location-dot"></i>
+                                            <div id="error_address" class="error_default_input"></div>
                                         </div>
                                     </div>
 
                                     <div class="form-group mt-1 p-1">
-                                        <select id="inputState" name="residency" class="form-control form-select" aria-label="Default select example">
-                                            <option selected disabled>Residencia...</option>
+                                        <select name="residency" id="residency_guest"  class="form-control form-select" aria-label="Default select example">
+                                            <option selected value="" disabled>Residencia...</option>
                                             <option value="8976">Casa</option>
                                             <option value="4932">Departamento</option>
                                             <option value="3456">Recinto empresarial</option>
                                         </select>
+                                        <div id="error_residency" class="error_default_input"></div>
                                     </div>
                                     
                                     <div class="row m-0 g-0">
                                         <!--region-->
                                         <div class="form-group col-lg-6 col-md-6 mt-1 p-1">
-                                            <select id="select-region" name="region" class="form-control form-select" aria-label="Default select example">
+                                            <select name="region" id="region_guest" class="form-control form-select" aria-label="Default select example">
                                                 <option value="region-metropolitana" selected>Region Metropolitana</option>
                                             </select>
+                                            <div id="error_region" class="error_default_input"></div>
                                         </div>
+            
                                         <!--comuna-->
                                         <div class="form-group col-lg-6 col-md-6 mt-1 p-1">
-                                            <select id="select-comuna" name="comuna" class="form-control form-select" aria-label="Default select example">
+                                            <select name="comuna" id="comuna_guest"  class="form-control form-select" aria-label="Default select example">
                                             </select>
+                                            <div id="error_comuna" class="error_default_input"></div>
                                         </div>
                                     </div>
                                     <span class="tag-min-advertencia mt-2">*Por el momento los envíos solo están disponibles para la región metropolitana.</span>

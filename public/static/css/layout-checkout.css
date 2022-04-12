@@ -11,7 +11,7 @@ body {
 a{
     text-decoration: none !important;
     color: var(--secondaryYellow) !important;
-    font-weight: 700;
+    font-weight: 600;
 }
 :root{
 	/*capas*/
@@ -68,6 +68,21 @@ a{
     margin: 5px 0;
 }
 
+.input-invalido{
+    border-color: var(--rojo) !important;
+    box-shadow: 1px 0px 8px -4px hsla(345, 100%, 50%, 0.42);
+}
+
+.input-valido{
+    border-color: var(--verde) !important;
+    box-shadow: 1px 0px 5px -4px rgba(0,212,156,0.42);
+}
+.error_default_input{
+    font-size: .9rem;
+    color: #464646;
+}
+
+/*Fin de estandar*/
 .step-wizard {
     width: 100%;
     max-width: 1150px;
