@@ -60,24 +60,26 @@
                         </div>
                         <div class="contenido_usuario posee_cuenta">
                             <div class="box-form">
-                                <form action="{{url('/login')}}" method="post" class="login__form needs-validation" novalidate>
+                                <form action="{{url('/login')}}" method="post" id="form-login-user" class="login__form needs-validation" novalidate>
                                     @csrf
                                     <!--Email-->    
                                     <div class="input__container">    
                                         <div class="default-input-form">
-                                            <input type="email" name="email" placeholder="Correo" class="inpt-default-form" required>
+                                            <input type="email" name="email" placeholder="Correo" id="email_user" class="inpt-default-form" required>
                                             <i class="fa-solid fa-envelope"></i>
+                                            <div id="error_email_user" class="error_default_input"></div>
                                         </div>
                                     </div>
                                     <!--Contraseña-->
                                     <div class="input__container">                                   
                                         <div class="default-input-form">
-                                            <input type="password" name="password" placeholder="Contraseña" class="inpt-default-form" required>
+                                            <input type="password" name="password" placeholder="Contraseña" id="password_user" class="inpt-default-form" required>
                                             <i class="fa-solid fa-key"></i>
+                                            <div id="error_password_user" class="error_default_input"></div>
                                         </div>
                                     </div>
                                     <input type="hidden" name="estance" value="{{Crypt::encryptString('checkout')}}">
-                                    <button type="submit" name="loguearse" class="btn-default-yellow mt-3">Iniciar sesión </button>
+                                    <button type="submit" name="loguearse" id="btn-login-user-payment" class="btn-default-yellow mt-3">Iniciar sesión </button>
                                 </form>
                             </div>
                         </div>

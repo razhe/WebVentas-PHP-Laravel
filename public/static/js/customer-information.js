@@ -6,7 +6,8 @@ $(document).ready(function(){
 });
 
 const btnGoPaymentGuest = document.getElementById('btn-go-payment-guest'),
-      btnGoPaymentUser = document.getElementById('btn-go-payment-user');
+      btnGoPaymentUser = document.getElementById('btn-go-payment-user'),
+      btnLoginPayment = document.getElementById('btn-login-user-payment');
 
 let csfr_token = document.getElementsByName('csrf-token')[0].getAttribute('content');
 $.ajaxSetup({
@@ -39,16 +40,17 @@ function traerComunasRegMet() {
 /*Validacion del formulario*/
 
 //Inputs
-const nombre = document.getElementById('name_guest'),
-    apellido = document.getElementById('last_name_guest'),
-    telefono = document.getElementById('phone_guest'),
-    email = document.getElementById('email_guest'),
-    direccion = document.getElementById('address_guest'),
-    residencia = document.getElementById('residency_guest'),
-    region = document.getElementById('region_guest'),
-    comuna = document.getElementById('comuna_guest');
 
 if (!!btnGoPaymentGuest) {//devuelve false si no esta, true si está
+    let nombre = document.getElementById('name_guest'),
+        apellido = document.getElementById('last_name_guest'),
+        telefono = document.getElementById('phone_guest'),
+        email = document.getElementById('email_guest'),
+        direccion = document.getElementById('address_guest'),
+        residencia = document.getElementById('residency_guest'),
+        region = document.getElementById('region_guest'),
+        comuna = document.getElementById('comuna_guest');
+
     btnGoPaymentGuest.addEventListener('click', function(){
         let errores = 0;
         //Nombre
@@ -161,6 +163,47 @@ if (!!btnGoPaymentGuest) {//devuelve false si no esta, true si está
 if (!!btnGoPaymentUser) {
     btnGoPaymentUser.addEventListener('click',function(){
         document.getElementById('form-save-user').submit();
+    })
+}
+
+if (!!btnLoginPayment) {
+    let email = document.getElementById('email_user'),
+    contraseña = document.getElementById('password_user');
+    btnLoginPayment.addEventListener('click', (event)=>{
+        event.preventDefault()
+        let errores = 0;
+        //email
+        const emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        if (email.value.trim() === '' || email.value.trim() == null) {
+            email.classList.remove('input-valido');
+            email.classList.add('input-invalido');
+            document.getElementById('error_email_user').innerHTML = '(*) El email es requerido';
+            errores++;
+        }else if (emailRegex.test(email.value) == false) {
+            email.classList.remove('input-valido');
+            email.classList.add('input-invalido');
+            document.getElementById('error_email_user').innerHTML = '(*) El email es invalido';
+            errores++;
+        }else{
+            document.getElementById('error_email_user').innerHTML = '';
+            email.classList.remove('input-invalido');
+            email.classList.add('input-valido');
+        }
+
+        //password
+        if (contraseña.value.trim() === '' || contraseña.value.trim() == null) {
+            contraseña.classList.remove('input-valido');
+            contraseña.classList.add('input-invalido');
+            document.getElementById('error_password_user').innerHTML = '(*) El nombre es requerido';
+            errores++;
+        }else{
+            contraseña.classList.remove('input-invalido');
+            contraseña.classList.add('input-valido');
+            document.getElementById('error_password_user').innerHTML = '';
+        }
+        if (errores == 0) {
+            document.getElementById('form-login-user').submit();
+        }
     })
 }
 
