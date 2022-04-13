@@ -61,8 +61,9 @@
                             <!--Rut-->    
                             <div class="input__container p-1">    
                                 <div class="default-input-form">
-                                    <input type="text" name="rut_boleta" id="rut-boleta" placeholder="Rut" class="inpt-default-form" required>
+                                    <input type="text" name="rut_boleta" id="rut-boleta" placeholder="Rut Ej. 11111111-1" class="inpt-default-form" required>
                                     <i class="fa-solid fa-user"></i>
+                                    <div id="error_rut_boleta" class="error_default_input"></div>
                                 </div>
                             </div>
                         </div>
@@ -82,13 +83,15 @@
                                 <div class="default-input-form">
                                     <input type="text" name="razon_social" id="razon-social"  placeholder="Razon social" class="inpt-default-form" required>
                                     <i class="fa-solid fa-building"></i>
+                                    <div id="error_razon_factura" class="error_default_input"></div>
                                 </div>
                             </div>
                             <!--Rut-->    
                             <div class="input__container col-lg-6 col-md-6 p-1">    
                                 <div class="default-input-form">
-                                    <input type="text" name="rut_factura" id="rut-factura"  placeholder="Rut empresa" class="inpt-default-form" required>
+                                    <input type="text" name="rut_factura" id="rut-factura"  placeholder="Rut empresa Ej. 11111111-1" class="inpt-default-form" required>
                                     <i class="fa-solid fa-user-tie"></i>
+                                    <div id="error_rut_factura" class="error_default_input"></div>
                                 </div>
                             </div>
                         </div>
@@ -98,6 +101,7 @@
                                 <div class="default-input-form">
                                     <input type="text" name="giro" id="giro"  placeholder="Giro" class="inpt-default-form" required>
                                     <i class="fa-solid fa-briefcase"></i>
+                                    <div id="error_giro_factura" class="error_default_input"></div>
                                 </div>
                             </div>
                             <!--Ciudad-->    
@@ -105,6 +109,7 @@
                                 <div class="default-input-form">
                                     <input type="text" name="ciudad" id="ciudad"  placeholder="Ciudad" class="inpt-default-form" required>
                                     <i class="fa-solid fa-city"></i>
+                                    <div id="error_ciudad_factura" class="error_default_input"></div>
                                 </div>
                             </div>
                         </div>
@@ -114,6 +119,7 @@
                                 <div class="default-input-form">
                                     <input type="text" name="comuna" id="comuna"  placeholder="Comuna" class="inpt-default-form" required>
                                     <i class="fa-solid fa-map"></i>
+                                    <div id="error_comuna_factura" class="error_default_input"></div>
                                 </div>
                             </div>
                             <!--Telefono-->    
@@ -121,6 +127,7 @@
                                 <div class="default-input-form">
                                     <input type="text" name="telefono" id="telefono"  placeholder="Teléfono" class="inpt-default-form" required>
                                     <i class="fa-solid fa-mobile-screen"></i>
+                                    <div id="error_telefono_factura" class="error_default_input"></div>
                                 </div>
                             </div>
                         </div>
@@ -129,6 +136,7 @@
                             <div class="default-input-form">
                                 <input type="text" name="direccion" id="direccion"  placeholder="Dirección" class="inpt-default-form" required>
                                 <i class="fa-solid fa-location-dot"></i>
+                                <div id="error_direccion_factura" class="error_default_input"></div>
                             </div>
                         </div>
                     </div>

@@ -105,7 +105,6 @@
     display: flex;
 }
 .box-formas-pago .radio__radio img{
-    width: 100%;
     margin-left: 40px;
 }
 .box-formas-pago .radio__radio .icon-selected{
