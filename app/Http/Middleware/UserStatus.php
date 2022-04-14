@@ -20,7 +20,7 @@ class UserStatus
         if(Auth::guest()):
             return $next($request);
         else:
-            if(Auth::user()->status != "2"):
+            if(Auth::user()->status < 2):
                 return $next($request);
             else:
                 return redirect('/logout');

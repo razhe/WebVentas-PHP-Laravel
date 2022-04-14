@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 //Peticiones desde el http
 use Illuminate\Http\Request;
 //Validacion de laravel, hash y auth
-use Validator, Hash, Auth, Mail, Str, Session;
+use Validator, Hash, Auth, Mail, Str, Session, Toastr;
 //Modelo de usuario
 use \App\Models\User;
 //Envio de correos
@@ -15,7 +15,7 @@ class AuthController extends Controller
 {
     public function __construct(){
         $this -> middleware('guest')->except(['getLogout']);
-        
+    
     }
 
     public function getLogin(){
@@ -106,7 +106,8 @@ class AuthController extends Controller
             $user-> id_tasks  = e(1);
 
             if($user -> save()):
-                return redirect('/login')->with('MsgResponse', '¡Usuario creado con éxito! Ya puedes iniciar sesión!')->with('typealert', 'success');
+                Toastr::success('Usuario creado correctamente', '¡Bienvenido!');
+                return redirect('/login');
             endif;
         endif;
     }
@@ -118,8 +119,9 @@ class AuthController extends Controller
             session()->forget('totalCarrito');
         }
         Auth::logout();
-        if ($status == 2): 
-            return redirect('/login')->with('MsgResponse', 'Esta cuenta está suspendida.')->with('typealert', 'warning');
+        if ($status > 1):
+            Toastr::error('Esta cuenta está suspendida.', 'Oops.. ha ocurrido algo inesperado'); 
+            return redirect('/login');
         endif;
         
         return redirect('/');
@@ -156,10 +158,12 @@ class AuthController extends Controller
                 if($userUpdate->save());
 
                 Mail::to($user->email)->send(new UserSendRecover($data));
-                return redirect('/reset?email='.$user->email)-> with('MsgResponse','Se ha enviado un correo electrónico con la solicitud.')->with( 'typealert', 'success');
+                Toastr::success('Se ha enviado un correo electrónico con la solicitud.', 'Confirmar');
+                return redirect('/reset?email='.$user->email);
                 //return view('Email.user_pass_recover', $data);
             else:
-                return back() -> withErrors($validator)->with('MsgResponse','No existe ninguna cuenta asociada a este correo.')->with( 'typealert', 'danger');
+                Toastr::error('No existe ninguna cuenta asociada a este correo.', 'Oops.. ha ocurrido algo inesperado');
+                return back();
             endif;
           
         endif;
@@ -192,7 +196,8 @@ class AuthController extends Controller
                 $user = User::where('email', $request['email']) -> first();
                 return redirect('/change-password')->with('email', $user->email);
             else:
-                return back() -> withErrors($validator)->with('MsgResponse','El correo electrónico o código de verificación son inválidos.')->with( 'typealert', 'danger');
+                Toastr::error('El correo electrónico o código de verificación son inválidos.', 'Oops.. ha ocurrido algo inesperado');
+                return back();
             endif;
         endif;
     }
@@ -233,7 +238,8 @@ class AuthController extends Controller
                 $user -> password_code = null;
                 if($user -> save()):
                     session()->forget('email');
-                    return redirect('/login')->with('MsgResponse', 'Contraseña actualizada éxitosamente')->with('typealert', 'success');
+                    Toastr::success('Contraseña actualizada éxitosamente.', '¡Todo listo!');
+                    return redirect('/login');
                 endif;
             endif;
             

@@ -10,35 +10,35 @@
                 <img class="logo__auth" src="{{ url('/static/images/logo.png') }}" alt="logo-empresa">
             </a>
         </div>
-        <form action="{{url('/change-password')}}" method="post" class="needs-validation" novalidate>
+        <form action="{{url('/change-password')}}" method="post">
             @csrf
             <!--Email-->    
-            <div class="input__container">
-                <div class="input-group">
-                    <input id="email" type="hidden" name="email" value="{{Session::get('email')}}" class="form-control" required>
+            <div class="input__container">    
+                <div class="default-input-form">
+                    <input type="hidden" name="email" placeholder="Correo" id="email" value="{{Session::get('email')}}" class="inpt-default-form" required>
+                    <i class="fa-solid fa-envelope"></i>
+                    <div id="error_email_user" class="error_default_input"></div>
                 </div>
             </div>
-            <!--contraseña-->    
-            <div class="input__container">
-                <label for="password">Nueva contraseña:</label>
-                <div class="input-group">
-                    <span class="input-group-text" id="basic-addon1">
-                        <i class="bi bi-lock"></i>
-                    </span>
-                    <input type="password" name="password" value="" class="form-control" required>
+
+            <!--Contraseña-->
+            <div class="input__container">                                   
+                <div class="default-input-form">
+                    <input type="password" name="password" placeholder="Nueva contraseña" id="password_change" class="inpt-default-form" required>
+                    <i class="fa-solid fa-key"></i>
+                    <div id="error_password_user" class="error_default_input"></div>
                 </div>
             </div>
-            <!--confirmacion contraseña-->    
-            <div class="input__container">
-                <label for="cpassword">Confirmación contraseña:</label>
-                <div class="input-group">
-                    <span class="input-group-text" id="basic-addon1">
-                        <i class="bi bi-lock"></i>
-                    </span>
-                    <input type="password" name="cpassword" value="" class="form-control" required>
+
+            <!--Confirmación Contraseña-->
+            <div class="input__container">                                   
+                <div class="default-input-form">
+                    <input type="password" name="cpassword" placeholder="Confirmación contraseña" id="cpassword_change" class="inpt-default-form" required>
+                    <i class="fa-solid fa-key"></i>
+                    <div id="error_password_user" class="error_default_input"></div>
                 </div>
             </div>
-            <input type="submit" name="loguearse" value="Cambiar contraseña" id="" class="btn btn-success">
+            <button type="submit" name="" id="" class="btn-default-yellow">Actualizar contraseña</button>
         </form>
         
         <!--Validacion formulario-->

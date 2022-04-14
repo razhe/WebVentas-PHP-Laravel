@@ -11,29 +11,25 @@
                 <img class="logo__auth" src="{{ url('/static/images/logo.png') }}" alt="logo-empresa">
             </a>
         </div>
-        <form action="{{url('/login')}}" method="post" class="login__form needs-validation" novalidate>
+        <form action="{{url('/login')}}" method="post" class="login__form">
             @csrf
             <!--Email-->    
-            <div class="input__container">
-                <label for="correo">Correo electrónico:</label>
-                <div class="input-group">
-                    <span class="input-group-text" id="basic-addon1">
-                        <i class="bi bi-envelope"></i>
-                    </span>
-                    <input type="email" name="email" class="form-control" required>
+            <div class="input__container">    
+                <div class="default-input-form">
+                    <input type="email" name="email" placeholder="Correo" id="email_login" class="inpt-default-form" required>
+                    <i class="fa-solid fa-envelope"></i>
+                    <div id="error_email_user" class="error_default_input"></div>
                 </div>
             </div>
             <!--Contraseña-->
-            <div class="input__container">
-                <label for="contraseña">Contraseña:</label>
-                <div class="input-group">
-                    <span class="input-group-text" id="basic-addon1">
-                        <i class="bi bi-shield-lock"></i>
-                    </span>
-                    <input type="password" name="password" class="form-control" required>
+            <div class="input__container">                                   
+                <div class="default-input-form">
+                    <input type="password" name="password" placeholder="Contraseña" id="password_login" class="inpt-default-form" required>
+                    <i class="fa-solid fa-key"></i>
+                    <div id="error_password_user" class="error_default_input"></div>
                 </div>
             </div>
-            <input type="submit" name="loguearse" id="" class="btn btn-success">
+            <button type="submit" name="loguearse" id="" class="btn-default-yellow">Iniciar sesión</button>
         </form>
         
         <!--Validacion formulario-->

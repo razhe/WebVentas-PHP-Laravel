@@ -10,7 +10,7 @@
                 <img class="logo__auth" src="{{ url('/static/images/logo.png') }}" alt="logo-empresa">
             </a>
         </div>
-        <form action="{{url('/reset')}}" method="post" class="needs-validation" novalidate>
+        <form action="{{url('/reset')}}" method="post" class="" >
             @csrf
             <!--Email-->    
             <div class="input__container">
@@ -19,16 +19,14 @@
                 </div>
             </div>
             <!--Codigo-->    
-            <div class="input__container">
-                <label for="password_code">Código de recuperación:</label>
-                <div class="input-group">
-                    <span class="input-group-text" id="basic-addon1">
-                        <i class="bi bi-key"></i>
-                    </span>
-                    <input type="number" name="password_code" value="" class="form-control" required>
+            <div class="input__container">    
+                <div class="default-input-form">
+                    <input type="text" name="password_code" placeholder="Código de recuperación" id="email_login" class="inpt-default-form" required>
+                    <i class="fa-solid fa-envelope"></i>
+                    <div id="error_email_user" class="error_default_input"></div>
                 </div>
             </div>
-            <input type="submit" name="loguearse" value="Enviar Código" id="" class="btn btn-success">
+            <button type="submit" name="" id="" class="btn-default-yellow">Validar código</button>
         </form>
         
         <!--Validacion formulario-->
