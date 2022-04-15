@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB; //Trabajar con la base de datos (para prcedimientos almacenados)
-use Auth,Validator,Session ;
+use Auth,Validator,Session,Toastr;
 use App\Models\Address;
 use App\Models\Pago;
 use App\Models\Order;
@@ -191,15 +191,14 @@ class CheckoutController extends Controller
         if ($request['tipo_documento'] == 'boleta') {
             $arreglo[]=[
                 'tipo_doc' => $request['tipo_documento'],
-                'tipo_pago' => $request['tipo_pago'],
+                'medio_pago' => $request['medio_pago'],
                 'rut' => $request['rut'],
             ];
             session(['payment-billing' => $arreglo]);
-        }
-        if ($request['tipo_documento'] == 'factura') {
+        }elseif ($request['tipo_documento'] == 'factura') {
             $arreglo[]=[
                 'tipo_doc' => $request['tipo_documento'],
-                'tipo_pago' => $request['tipo_pago'],
+                'medio_pago' => $request['medio_pago'],
                 'razon_social' => $request['razon_social'],
                 'rut' => $request['rut'],
                 'giro' => $request['giro'],
@@ -209,6 +208,9 @@ class CheckoutController extends Controller
                 'telefono' => $request['telefono'],
             ];
             session(['payment-billing' => $arreglo]);
+        }else{
+            Toastr::error('Error con el documento de facturación.', 'Oops...');
+            return back();
         }
         $data = [
             'facturacion' => session('payment-billing'),

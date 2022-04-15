@@ -59,14 +59,14 @@ $.ajaxSetup({
 });
 
 btnGoSummPay.addEventListener('click', function(){
-    let radios = document.getElementsByName('payment-method');
+    //let radios = document.getElementsByName('payment-method');
+    let radio = document.getElementById('radio_webpay');
     let selectedPayment = '';
-    for (let radio of radios)
-    {
-        if (radio.checked) {
-            selectedPayment = radio.value;
-        }
+
+    if (radio.checked) {
+        selectedPayment = radio.value;
     }
+
     if (selectedPayment != '') {
         if (radioBoleta.checked) {
             let rut = document.getElementById('rut-boleta');
@@ -87,6 +87,11 @@ btnGoSummPay.addEventListener('click', function(){
                 rut.classList.add('input-valido');
                 document.getElementById('error_rut_boleta').innerHTML = '';
             }
+            
+            if (selectedPayment !== 'WebPay') {
+                toastr["error"]("Medio de pago no aceptado.", "Oops... ha ocurrido algo inesperado.");
+                errores++;
+            }
 
             if (errores == 0) {
                 $.ajax({
@@ -94,7 +99,7 @@ btnGoSummPay.addEventListener('click', function(){
                     method: 'POST',
                     data:{
                         tipo_documento: 'boleta',
-                        tipo_pago: selectedPayment,
+                        medio_pago: selectedPayment,
                         rut: rut.value,
                     },
                     success: function(data) { 
@@ -198,7 +203,7 @@ btnGoSummPay.addEventListener('click', function(){
                     method: 'POST',
                     data:{
                         tipo_documento: 'factura',
-                        tipo_pago: selectedPayment,
+                        medio_pago: selectedPayment,
                         razon_social: razonSocial.value,
                         rut: rut.value,
                         giro: giro.value,

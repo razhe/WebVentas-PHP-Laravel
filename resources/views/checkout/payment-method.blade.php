@@ -36,7 +36,7 @@
                         <h4>Elija una forma de pago</h4>
                     </div>
                     <label for="radio_webpay" class="label_radio_documento">
-                        <input type="radio" id="radio_webpay" class="" name="payment-method" value="webpay">
+                        <input type="radio" id="radio_webpay" class="" name="payment-method" value="WebPay">
                         <div class="radio__radio">
                             <div class="icon-selected"><i class="fa-solid fa-check"></i></div>
                             <img src="{{asset('img/pagina/logo-webpay.png')}}" alt="">

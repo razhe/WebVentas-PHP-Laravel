@@ -56,11 +56,13 @@ class TransbankController extends Controller
         $factura = new Factura;
 
         //Pago
-        $pago -> modo_pago = 'Pending';
-        $pago -> estado_pago = 'Pending';
-        $pago -> token = $response[0]['token'];
-        $pago -> save();
-
+        if (Session::has('payment-billing')) {
+            $pago -> modo_pago = 'Pending';
+            $pago -> medio_pago = session('payment-billing.0.medio_pago');
+            $pago -> estado_pago = 'Pending';
+            $pago -> token = $response[0]['token'];
+            $pago -> save();
+        }
         //Orden
         $orden -> order_number = strval(rand(0,9999)).strval($orden->id). strval(rand(0,9999));
         $orden -> id_pago = $pago -> id;
