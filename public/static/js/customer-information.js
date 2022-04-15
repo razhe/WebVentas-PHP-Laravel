@@ -49,7 +49,8 @@ if (!!btnGoPaymentGuest) {//devuelve false si no esta, true si está
         direccion = document.getElementById('address_guest'),
         residencia = document.getElementById('residency_guest'),
         region = document.getElementById('region_guest'),
-        comuna = document.getElementById('comuna_guest');
+        comuna = document.getElementById('comuna_guest'),
+        selectPhoneCode = document.getElementById('select_phone_register');
 
     btnGoPaymentGuest.addEventListener('click', function(){
         let errores = 0;
@@ -79,19 +80,33 @@ if (!!btnGoPaymentGuest) {//devuelve false si no esta, true si está
         if (telefono.value.trim() === '' || telefono.value.trim() == null) {
             telefono.classList.remove('input-valido');
             telefono.classList.add('input-invalido');
-            document.getElementById('error_phone').innerHTML = '(*) El teléfono es requerido';
+            document.getElementById('error_phone').innerHTML = '(*) El teléfono es requerido.';
             errores++;
-        }
-        else if (isNaN(telefono.value) == true) {
+        }else if (isNaN(telefono.value) == true || telefono.value < 0) {
             telefono.classList.remove('input-valido');
             telefono.classList.add('input-invalido');
-            document.getElementById('error_phone').innerHTML = '(*) El teléfono debe ser un número';
+            document.getElementById('error_phone').innerHTML = '(*) El teléfono inválido.';
+            errores++;
+        }
+        else if (telefono.value.length != 8) {
+            telefono.classList.remove('input-valido');
+            telefono.classList.add('input-invalido');
+            document.getElementById('error_phone').innerHTML = '(*) El teléfono no posee 8 carácteres.';
             errores++;
         }else{
+            document.getElementById('error_phone').innerHTML = '';
             telefono.classList.remove('input-invalido');
             telefono.classList.add('input-valido');
-            document.getElementById('error_phone').innerHTML = '';
+        } 
+        
+        //codigo telefono
+        if (selectPhoneCode.value !== '569' && selectPhoneCode.value !== '562') {
+            telefono.classList.remove('input-valido');
+            telefono.classList.add('input-invalido');
+            document.getElementById('error_phone').innerHTML = '(*) Prefijo no válido.';
+            errores++;
         }
+
         //email
         const emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
         if (email.value.trim() === '' || email.value.trim() == null) {

@@ -10,7 +10,7 @@
                 <img class="logo__auth" src="{{ url('/static/images/logo.png') }}" alt="logo-empresa">
             </a>
         </div>
-        <form action="{{url('/reset')}}" method="post" class="" >
+        <form action="{{url('/reset')}}" method="post" id="reset-password-form" class="" >
             @csrf
             <!--Email-->    
             <div class="input__container">
@@ -21,12 +21,12 @@
             <!--Codigo-->    
             <div class="input__container">    
                 <div class="default-input-form">
-                    <input type="text" name="password_code" placeholder="Código de recuperación" id="email_login" class="inpt-default-form" required>
+                    <input type="text" name="password_code" placeholder="Código de recuperación" id="codigo" class="inpt-default-form" required>
                     <i class="fa-solid fa-envelope"></i>
-                    <div id="error_email_user" class="error_default_input"></div>
+                    <div id="error_codigo_reset" class="error_default_input"></div>
                 </div>
             </div>
-            <button type="submit" name="" id="" class="btn-default-yellow">Validar código</button>
+            <button type="submit" name="" id="btn-reset-password" class="btn-default-yellow mt-2">Validar código</button>
         </form>
         
         <!--Validacion formulario-->
@@ -58,4 +58,7 @@
 
     </div>
 </main>
+@endsection
+@section('JS')
+    <script src="{{url('static/js/reset-password.js')}}"></script>
 @endsection

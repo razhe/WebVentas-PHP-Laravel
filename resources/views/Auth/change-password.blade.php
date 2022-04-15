@@ -10,14 +10,14 @@
                 <img class="logo__auth" src="{{ url('/static/images/logo.png') }}" alt="logo-empresa">
             </a>
         </div>
-        <form action="{{url('/change-password')}}" method="post">
+        <form action="{{url('/change-password')}}" id="change-password-form" method="post">
             @csrf
             <!--Email-->    
             <div class="input__container">    
                 <div class="default-input-form">
                     <input type="hidden" name="email" placeholder="Correo" id="email" value="{{Session::get('email')}}" class="inpt-default-form" required>
                     <i class="fa-solid fa-envelope"></i>
-                    <div id="error_email_user" class="error_default_input"></div>
+                    <div id="error_email_changepass" class="error_default_input"></div>
                 </div>
             </div>
 
@@ -26,7 +26,7 @@
                 <div class="default-input-form">
                     <input type="password" name="password" placeholder="Nueva contraseña" id="password_change" class="inpt-default-form" required>
                     <i class="fa-solid fa-key"></i>
-                    <div id="error_password_user" class="error_default_input"></div>
+                    <div id="error_password_changepass" class="error_default_input"></div>
                 </div>
             </div>
 
@@ -35,10 +35,10 @@
                 <div class="default-input-form">
                     <input type="password" name="cpassword" placeholder="Confirmación contraseña" id="cpassword_change" class="inpt-default-form" required>
                     <i class="fa-solid fa-key"></i>
-                    <div id="error_password_user" class="error_default_input"></div>
+                    <div id="error_cpassword_changepass" class="error_default_input"></div>
                 </div>
             </div>
-            <button type="submit" name="" id="" class="btn-default-yellow">Actualizar contraseña</button>
+            <button type="submit" name="" id="btn-change-password" class="btn-default-yellow mt-2">Actualizar contraseña</button>
         </form>
         
         <!--Validacion formulario-->
@@ -70,4 +70,7 @@
 
     </div>
 </main>
+@endsection
+@section('JS')
+    <script src="{{url('static/js/change-password.js')}}"></script>
 @endsection

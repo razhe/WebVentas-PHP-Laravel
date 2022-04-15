@@ -70,6 +70,7 @@ class AuthController extends Controller
         [
             'name'      => 'required',
             'last_name' => 'required',
+            'phone_code'=> 'required',
             'phone'     => 'required|numeric',
             'email'     => 'required|email|unique:users,email',
             'password'  => 'required|min:8',
@@ -79,6 +80,7 @@ class AuthController extends Controller
         [
             'name.required'      => 'Debe poner su nombre.',
             'last_name.required' => 'Debe poner su apellido.',
+            'phone_code'         => 'Debe tener un código de teléfono',
             'phone.required'     => 'Debe poner un numero de telefono',
             'phone.numeric'      => 'El telefono solo debe contener números',
             'email.required'     => 'Debe poner un correo electrónico.',
@@ -100,7 +102,7 @@ class AuthController extends Controller
             $user-> name      = e($request['name']);
             $user-> last_name = e($request['last_name']);
             $user-> email     = e($request['email']);
-            $user-> phone     = e($request['phone']);
+            $user-> phone     = e($request['phone_code'].'-'.$request['phone']);
             $user-> password  = Hash::make($request['password']);
             $user-> status    = e(1);
             $user-> id_tasks  = e(1);

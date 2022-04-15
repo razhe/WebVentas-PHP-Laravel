@@ -116,7 +116,13 @@
                                     </div>
                 
                                     <!--phone-->    
-                                    <div class="input__container p-1">    
+                                    <div class="input__container input__container__phone p-1"> 
+                                        <div class="select-phone">
+                                            <select name="phone_code" id="select_phone_register">
+                                                <option value="569">+569</option>
+                                                <option value="562">+562</option>
+                                            </select>  
+                                        </div>   
                                         <div class="default-input-form">
                                             <input type="text" name="phone" id="phone_guest"  placeholder="Teléfono" class="inpt-default-form" required>
                                             <i class="fa-solid fa-mobile-screen"></i>

@@ -10,17 +10,17 @@
                 <img class="logo__auth" src="{{ url('/static/images/logo.png') }}" alt="logo-empresa">
             </a>
         </div>
-        <form action="{{url('/recover')}}" method="post" class="login__form">
+        <form action="{{url('/recover')}}" method="post" class="" id="recover-password-form">
             @csrf
             <!--Email-->    
             <div class="input__container">    
                 <div class="default-input-form">
-                    <input type="email" name="email" placeholder="Correo" id="email_login" class="inpt-default-form" required>
+                    <input type="email" name="email" placeholder="Correo" id="email" class="inpt-default-form">
                     <i class="fa-solid fa-envelope"></i>
-                    <div id="error_email_user" class="error_default_input"></div>
+                    <div id="error_email_recoverpass" class="error_default_input"></div>
                 </div>
             </div>
-            <button type="submit" name="" id="" class="btn-default-yellow">Recuperar contraseña</button>
+            <button type="submit" name="" id="btn-recover-password" class="btn-default-yellow mt-2">Recuperar contraseña</button>
         </form>
         
         <!--Validacion formulario-->
@@ -52,4 +52,7 @@
 
     </div>
 </main>
+@endsection
+@section('JS')
+    <script src="{{url('static/js/recover.js')}}"></script>
 @endsection

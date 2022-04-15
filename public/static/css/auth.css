@@ -50,9 +50,25 @@ body{
 .btn-default-yellow:hover{
     opacity: 80%;
 }
+.input__container__phone{
+    display: flex;
+    align-items: baseline;
+}
+.select-phone select{
+    margin-right: 5px !important;
+    border: none;
+    border-bottom: 2px solid var(--secondaryYellow);
+    width: 70px;
+    margin: 8px 0;
+    outline: none;
+    padding: 6px 2px;
+    font-size: 1rem;
+    background: none;
+}
 
 .default-input-form{
     position: relative;
+    width: 100%;
 }
 .default-input-form input{
     width: 100%;

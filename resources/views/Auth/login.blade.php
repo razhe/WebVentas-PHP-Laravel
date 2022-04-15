@@ -11,14 +11,14 @@
                 <img class="logo__auth" src="{{ url('/static/images/logo.png') }}" alt="logo-empresa">
             </a>
         </div>
-        <form action="{{url('/login')}}" method="post" class="login__form">
+        <form action="{{url('/login')}}" method="post" class="login__form" id="login-form">
             @csrf
             <!--Email-->    
             <div class="input__container">    
                 <div class="default-input-form">
                     <input type="email" name="email" placeholder="Correo" id="email_login" class="inpt-default-form" required>
                     <i class="fa-solid fa-envelope"></i>
-                    <div id="error_email_user" class="error_default_input"></div>
+                    <div id="error_email_login" class="error_default_input"></div>
                 </div>
             </div>
             <!--Contraseña-->
@@ -26,10 +26,10 @@
                 <div class="default-input-form">
                     <input type="password" name="password" placeholder="Contraseña" id="password_login" class="inpt-default-form" required>
                     <i class="fa-solid fa-key"></i>
-                    <div id="error_password_user" class="error_default_input"></div>
+                    <div id="error_password_login" class="error_default_input"></div>
                 </div>
             </div>
-            <button type="submit" name="loguearse" id="" class="btn-default-yellow">Iniciar sesión</button>
+            <button type="submit" name="" id="btn-login" class="btn-default-yellow mt-2">Iniciar sesión</button>
         </form>
         
         <!--Validacion formulario-->
@@ -62,4 +62,8 @@
     </div>
 </main>
     
-@stop <!--Declarar el fin de la seccion-->
+@endsection <!--Declarar el fin de la seccion-->
+
+@section('JS')
+    <script src="{{url('static/js/login-auth.js')}}"></script>
+@endsection
