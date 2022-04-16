@@ -24,7 +24,7 @@ class has_products_in_cart
             else:
                 return redirect('/');
             endif;
-        elseif(Auth::user()->id_tasks == "2"):
+        elseif(Auth::check() && Auth::user()->id_tasks == "2"):
             return $next($request);
         else:
             return redirect('/');
