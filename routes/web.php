@@ -73,6 +73,7 @@ Route::get('/checkout/customer-information', [CheckoutController::class, 'getCus
 Route::get('/checkout/payment-method', [CheckoutController::class, 'getPaymentMethod'])-> name('checkout.payment-method');
 Route::get('/checkout/summary-payment', [CheckoutController::class, 'getSummaryPayment'])-> name('checkout.summary-payment');
 Route::get('/checkout/purchase-detail', [CheckoutController::class, 'getPurchaseDetail'])-> name('checkout.purchase-detail');
+Route::post('/checkout/payment-denied', [CheckoutController::class, 'getPaymentDenied'])-> name('checkout.payment-denied');
 
 Route::post('/checkout/save-guest-data', [CheckoutController::class, 'postSaveGuest'])-> name('checkout.postsave-guest-data');
 Route::post('/checkout/save-user-data', [CheckoutController::class, 'postSaveUser'])-> name('checkout.post-save-user-data');

@@ -54,6 +54,7 @@ class CheckoutController extends Controller
         ];
         return view('checkout.summary-payment', $data);
     }
+
     public function getPurchaseDetail(Request $request)
     {
         if (Session::has('pagoPendiente')) {
@@ -75,10 +76,10 @@ class CheckoutController extends Controller
                     $totalCarrito = session('totalCarrito');
 
                     $data = [
+                        'response' => 'OK',
                         'productos' => $carrito,
                         'totales' => $totalCarrito,
                     ];
-                    //dd($data);
                     session()->forget('pagoPendiente');
                     if(Session::has('carrito')){
                         session()->forget('carrito');
@@ -86,7 +87,18 @@ class CheckoutController extends Controller
                     }
                     return view('checkout.purchase-detail', $data);
                 }else{
-
+                    $pago -> estado_pago = $response -> status;
+                    $pago -> modo_pago = $this->validatePaymentType($response -> paymentTypeCode);
+                    $pago -> save();
+                    $data = [
+                        'response' => 'ERROR'
+                    ];
+                    session()->forget('pagoPendiente');
+                    if(Session::has('carrito')){
+                        session()->forget('carrito');
+                        session()->forget('totalCarrito');
+                    }
+                    return view('checkout.purchase-detail', $data);
                 }
             else:
                 return redirect('/');

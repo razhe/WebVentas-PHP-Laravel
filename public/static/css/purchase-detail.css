@@ -53,3 +53,17 @@
     align-items: center;
     flex-wrap: wrap;
 }
+/*Contenedor detail*/
+.section-detail-order{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container-detail-order, 
+.contenedor-payment-denied{
+    max-width: 1150px;
+    background-color: var(--secundaryBackgroundColor);
+    min-height: 600px;
+    border-radius: 4px;
+    border: 1px solid #ebebeb;
+}
