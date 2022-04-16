@@ -81,3 +81,4 @@ Route::post('/checkout/save-payment-method', [CheckoutController::class, 'postCh
 
 //transbank
 Route::post('/transbank/iniciar-compra', [TransbankController::class, 'postIniciarCompra'])-> name('transbank.postiniciar-compra');
+Route::post('/transbank/refud-pay', [TransbankController::class, 'postDevolverPago'])-> name('transbank.postdevolver-pago');

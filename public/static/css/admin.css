@@ -13,7 +13,43 @@ button {
   --topNavbarHeight: 56px;
   --light: #ffffff;
   --grey: #efefef;
+
+  /*capas*/
+	--zIndexLayer1: 6000;
+	--zIndexLayer2: 5000;
+	--zIndexLayer3: 4000;
+	--zIndexLayer4: 3000;
+	--zIndexLayer5: 2000;
+	--zIndexLayer6: 1000;
+	/*Colores*/
+	--primaryOrange: #FF5733;
+	--secundaryOrange: #E47911;
+	--secondaryYellow: #FFC30F;
+	--primaryBlue: #1e202c;
+	--lightBlue: #252736;
+
+	--primaryBackgroundColor: #fff;
+	--secundaryBackgroundColor: #f8f8f8;
+
+  --verde: #00D49C;
+  --rojo: #e60039;
+  --azul: #0385B6;
 }
+.btn-default-yellow{
+    border: none;
+    padding: 5px 10px;
+    background-color: var(--secondaryYellow);
+    outline: none;
+    color: #fff;
+    border-radius: 2px;
+    box-shadow: 0px 0px 17px -6px rgba(0,0,0,0.3);
+    transition: .2s;
+}
+.btn-default-yellow:hover{
+    opacity: 80%;
+}
+
+
 .modal-open{
   padding: 0 !important;
 }

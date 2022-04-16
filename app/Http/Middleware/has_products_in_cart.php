@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Session;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class has_products_in_cart
@@ -23,6 +24,8 @@ class has_products_in_cart
             else:
                 return redirect('/');
             endif;
+        elseif(Auth::user()->id_tasks == "2"):
+            return $next($request);
         else:
             return redirect('/');
         endif;

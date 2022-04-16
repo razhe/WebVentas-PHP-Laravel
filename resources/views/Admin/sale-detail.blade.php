@@ -169,7 +169,13 @@
                                         <td><small>{{$pago-> estado_pago}}</small></td>
                                         @if ($pago -> estado_pago == 'AUTHORIZED')
                                             <td>
-                                                <button>Reembolsar</button>
+                                                <form action="{{url('/transbank/refud-pay')}}" id="form-refund" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="amount" value="{{Crypt::encryptString($venta-> total)}}">
+                                                    <input type="hidden" name="code" value="{{Crypt::encryptString($pago -> id)}}">
+                                                    <input type="hidden" name="token" value="{{Crypt::encryptString($pago -> token)}}">
+                                                    <button type="submit" class="btn-default-yellow" id="btn-refund">Reembolsar</button>
+                                                </form>
                                             </td>
                                         @else
                                             <td>
@@ -226,4 +232,24 @@
 
 @section('JS')
 <script src="{{url('static/js/sales.js')}}"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    $('#form-refund').submit(function(event){
+            event.preventDefault();
+            Swal.fire({
+            title: '¿Estas seguro?',
+            text: "No podrás revertir los cambios.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Confirmar',
+            cancelButtonText: 'Cancelar',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                }
+            })
+        });
+</script>
 @endsection

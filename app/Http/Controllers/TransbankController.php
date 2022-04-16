@@ -17,7 +17,7 @@ use App\Models\Pago;
 use App\Models\Address;
 
 Use Carbon\Carbon;
-use Session, Auth;
+use Session, Auth, Toastr;
 class TransbankController extends Controller
 {
     public function __construct(){
@@ -146,5 +146,40 @@ class TransbankController extends Controller
             'token' => $transaction->token,
         ];
         return $array;
+    }
+
+    public function postDevolverPago(Request $request)
+    {
+        try{
+            $decrypted_id = Crypt::decryptString($request['code']);
+            $decrypted_token = Crypt::decryptString($request['token']);
+            $decrypted_amount = Crypt::decryptString($request['amount']);
+        }catch(\Exception $exception){
+            Toastr::error('Error al procesar las credenciales.', 'Oops...');
+            return back();
+        }
+        $pago = Pago::where('id', $decrypted_id) -> first();
+        if ($pago -> estado_pago == 'AUTHORIZED') {
+            $response = (new Transaction)->refund($decrypted_token, $decrypted_amount);
+            return dd($response);
+                
+            if ($response -> type == 'REVERSED') {
+                $pago -> estado_pago = $response -> type;
+
+                if ($pago -> save()) {
+                    Toastr::success('Se ha devuelto el pago al cliente.', '¡Todo listo!');
+                    return back();
+                }
+            }elseif($response -> type == 'NULLIFIED'){
+                Toastr::warning('No se ha podido completar la devolucion del pago o no esta habilitada.', '¡Atención!');
+                return back();
+            }else{
+                Toastr::error('No se ha podido completar la devolucion del pago.', 'Oops...');
+                return back();
+            }
+        }else{
+            Toastr::warning('Esta compra no tiene disponible el reembolso.', '¡Atención!');
+            return back();
+        }
     }
 }
