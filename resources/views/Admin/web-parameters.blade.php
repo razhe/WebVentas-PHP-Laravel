@@ -203,6 +203,33 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="title__section">
+                            <h3>Métodos de pago</h3>
+                        </div>
+                        <div class="fila-config row m-0 g-0">
+                            <div class="col-lg-4"><span>WebPay:</span></div>
+                            <div class="switch-box col-lg-6">
+                                @if (Config::get('configuracion-global.WebPay') == 'activo')
+                                    <input type="checkbox" id="btn-webpay" class="btn_switch" name="WebPay" value="activo" checked>
+                                @else
+                                    <input type="checkbox" id="btn-webpay" class="btn_switch" name="WebPay" value="activo">
+                                @endif
+                                <label for="btn-webpay" class="lbl-switch">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="fila-config row m-0 g-0">
+                            <div class="col-lg-4"><span>Transferencia bancaria:</span></div>
+                            <div class="switch-box col-lg-6">
+                                @if (Config::get('configuracion-global.Trasnferencia-bancaria') == 'activo')
+                                    <input type="checkbox" id="btn-transferencia" class="btn_switch" name="Trasnferencia-bancaria" value="activo" checked>
+                                @else
+                                    <input type="checkbox" id="btn-transferencia" class="btn_switch" name="Trasnferencia-bancaria" value="activo" checked>
+                                @endif
+                                <label for="btn-transferencia" class="lbl-switch">
+                                </label>
+                            </div>
+                        </div>
                         <div class="btn-globalconfig-box">
                             <button class="btn btn-success" type="submit">Guardar Cambios</button>
                         </div>

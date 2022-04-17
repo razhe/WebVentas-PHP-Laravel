@@ -87,8 +87,11 @@ class CheckoutController extends Controller
 
                     if (Session::has('guest_checkout')) {
                         Mail::to(session('guest_checkout.0.email'))->send(new SendOrderDetails($data));
-                    }else{
+                        session()->forget('guest_checkout');
+                    }
+                    if(Session::has('user_checkout')){
                         Mail::to(Auth::user()->email)->send(new SendOrderDetails($data));
+                        session()->forget('user_checkout');
                     }
 
                     session()->forget('pagoPendiente');

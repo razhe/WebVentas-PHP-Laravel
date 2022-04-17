@@ -53,8 +53,6 @@ class SettingsController extends Controller
                 endif;
             endif;
         endif;
-
-        
     }
     /*==============*/
     /*Web Config*/
@@ -69,7 +67,10 @@ class SettingsController extends Controller
             fopen(config_path().'/configuracion-global.php', 'w');
         endif;
         $file =  fopen(config_path().'/configuracion-global.php', 'w');
-        //$content = '<?php return'.[];
+        
+        $is_logo = false;
+        $logo_actual = Config('configuracion-global.logo');
+
         fwrite($file,'<?php '.PHP_EOL);
         fwrite($file,'return ['.PHP_EOL);
         foreach ($request -> except(['_token']) as $key => $value):
@@ -77,17 +78,27 @@ class SettingsController extends Controller
                 $value = null;
             endif;
             if($key == 'logo'):
+                $is_logo = true;
                 $file_image   = $request->file('logo');
                 $path        = 'static/images/';
                 $file_name   = time().'-'.$file_image->getClientOriginalName();
-                $logo_actual = Config('configuracion-global.logo');
-                File::delete($logo_actual);
-                fwrite($file,"'".$key."' =>"."'" .$path.$file_name ."',".PHP_EOL);
-                $file_image -> move($path, $file_name);
+                $logo_nuevo = $path.$file_name;
+                if ($logo_actual != $logo_nuevo):
+                    File::delete($logo_actual);
+                    fwrite($file,"'".$key."' =>"."'" .$path.$file_name ."',".PHP_EOL);
+                    $file_image -> move($path, $file_name);
+                else:
+                    fwrite($file,"'".$key."' =>"."'" .$logo_actual ."',".PHP_EOL);
+                endif;
             else:
                 fwrite($file,"'".$key."' =>"."'".$value."',".PHP_EOL);
             endif;
-        endforeach; 
+        endforeach;
+
+        if($is_logo == false):
+            fwrite($file,"'logo' =>"."'" .$logo_actual ."',".PHP_EOL);
+        endif;
+
         fwrite($file,'];'.PHP_EOL);
         fclose($file);
         Toastr::success('Se han actualizado las configuraciones globales exitosamente', '¡Todo Listo!');

@@ -12,5 +12,7 @@ return [
 'products_per_page' =>'10',
 'currency' =>'$',
 'iva' =>'21',
-'logo' =>'static/images/1648689912-google-search-central-logo.png',
+'WebPay' =>'activo',
+'Trasnferencia-bancaria' =>'activo',
+'logo' =>'static/images/1650238412-image_large.png',
 ];

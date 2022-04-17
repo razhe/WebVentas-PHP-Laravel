@@ -42,3 +42,48 @@
     display: flex;
     align-items: center;
 }
+/*Switches*/
+.switch-box{
+    padding: 10px;
+}
+.lbl-switch{
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    width: 55px;
+    height: 30px;
+    background-color: #aaa;
+    border-radius: 100px;
+    position: relative;
+    cursor: pointer;
+}
+.lbl-switch:after{
+    position: absolute;
+    content: '';
+    width: 22px;
+    height: 22px;
+    background: #fff;
+    border-radius: 100px;
+    top: 4px;
+    left: 5px;
+    transition: .3s;
+}
+#btn-webpay{
+    display: none;
+}
+#btn-webpay:checked ~ .lbl-switch{
+    background-color: #61A0FF;
+}
+#btn-webpay:checked ~ .lbl-switch:after{
+    left: 28px;
+}
+
+#btn-transferencia{
+    display: none;
+}
+#btn-transferencia:checked ~ .lbl-switch{
+    background-color: #61A0FF;
+}
+#btn-transferencia:checked ~ .lbl-switch:after{
+    left: 28px;
+}  
