@@ -10,6 +10,7 @@ use Validator, Hash, Auth, Mail, Str, Session, Toastr;
 use \App\Models\User;
 //Envio de correos
 use App\Mail\UserSendRecover;
+//encrypting
 use Illuminate\Support\Facades\Crypt;
 class AuthController extends Controller
 {

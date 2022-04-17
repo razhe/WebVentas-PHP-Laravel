@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Crypt;
 //Transbank
 use Transbank\Webpay\WebpayPlus;
 use Transbank\Webpay\WebpayPlus\Transaction;
+//Correos
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendOrderDetails;
 
 class CheckoutController extends Controller
 {
@@ -58,6 +61,7 @@ class CheckoutController extends Controller
     public function getPurchaseDetail(Request $request)
     {
         if (Session::has('pagoPendiente')) {
+            //return view('Email.order-details');
             if($request['token_ws']):
                 $pago = Pago::where('id', session('pagoPendiente.0.id_pago'))
                             -> where('token', session('pagoPendiente.0.token'))
@@ -80,6 +84,13 @@ class CheckoutController extends Controller
                         'productos' => $carrito,
                         'totales' => $totalCarrito,
                     ];
+
+                    if (Session::has('guest_checkout')) {
+                        Mail::to(session('guest_checkout.0.email'))->send(new SendOrderDetails($data));
+                    }else{
+                        Mail::to(Auth::user()->email)->send(new SendOrderDetails($data));
+                    }
+
                     session()->forget('pagoPendiente');
                     if(Session::has('carrito')){
                         session()->forget('carrito');
