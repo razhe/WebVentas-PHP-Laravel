@@ -224,7 +224,7 @@
                                 @if (Config::get('configuracion-global.Trasnferencia-bancaria') == 'activo')
                                     <input type="checkbox" id="btn-transferencia" class="btn_switch" name="Trasnferencia-bancaria" value="activo" checked>
                                 @else
-                                    <input type="checkbox" id="btn-transferencia" class="btn_switch" name="Trasnferencia-bancaria" value="activo" checked>
+                                    <input type="checkbox" id="btn-transferencia" class="btn_switch" name="Trasnferencia-bancaria" value="activo">
                                 @endif
                                 <label for="btn-transferencia" class="lbl-switch">
                                 </label>

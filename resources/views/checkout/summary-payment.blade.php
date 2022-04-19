@@ -81,10 +81,22 @@
                     <p>{{Config::get('configuracion-global.currency').' '.session('totalCarrito.0.total')}}</p>
                 </div>
             </div>
-            <form action="{{url('/transbank/iniciar-compra')}}" method="post">
-                @csrf
-                <button type="submit" class="btn-default-yellow">Completar pedido</button>
-            </form>
+            @if (Session::has('payment-billing'))
+                @if (session('payment-billing.0.medio_pago') == 'WebPay')
+                    <form action="{{url('/transbank/iniciar-compra')}}" method="post">
+                        @csrf
+                        <button type="submit" class="btn-default-yellow">Completar pedido</button>
+                    </form>   
+                @endif
+                @if (session('payment-billing.0.medio_pago') == 'Transferencia-bancaria')
+                    <form action="{{url('')}}" method="post">
+                        @csrf
+                        <button type="submit" class="btn-default-yellow">Completar pedido</button>
+                    </form>   
+                @endif
+                             
+            @endif
+            
         </div>
         
         

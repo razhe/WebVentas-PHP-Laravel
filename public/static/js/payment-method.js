@@ -60,11 +60,14 @@ $.ajaxSetup({
 
 btnGoSummPay.addEventListener('click', function(){
     //let radios = document.getElementsByName('payment-method');
-    let radio = document.getElementById('radio_webpay');
+    let radio_webpay = document.getElementById('radio_webpay');
+    let radio_trasnferencia = document.getElementById('radio_trasnferencia')
     let selectedPayment = '';
 
-    if (radio.checked) {
-        selectedPayment = radio.value;
+    if (!!radio_webpay && radio_webpay.checked) {
+        selectedPayment = radio_webpay.value;
+    }else if( !!radio_trasnferencia && radio_trasnferencia.checked){
+        selectedPayment = radio_trasnferencia.value;
     }
 
     if (selectedPayment != '') {
@@ -88,7 +91,7 @@ btnGoSummPay.addEventListener('click', function(){
                 document.getElementById('error_rut_boleta').innerHTML = '';
             }
             
-            if (selectedPayment !== 'WebPay') {
+            if (selectedPayment !== 'WebPay' && selectedPayment !== 'Transferencia-bancaria') {
                 toastr["error"]("Medio de pago no aceptado.", "Oops... ha ocurrido algo inesperado.");
                 errores++;
             }

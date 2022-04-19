@@ -35,13 +35,30 @@
                     <div class="titulo_formas_pago">
                         <h4>Elija una forma de pago</h4>
                     </div>
-                    <label for="radio_webpay" class="label_radio_documento">
-                        <input type="radio" id="radio_webpay" class="" name="payment-method" value="WebPay">
-                        <div class="radio__radio">
-                            <div class="icon-selected"><i class="fa-solid fa-check"></i></div>
-                            <img src="{{asset('img/pagina/logo-webpay.png')}}" alt="">
+                    @if (Config::get('configuracion-global.WebPay') == 'activo')
+                        <div class="box-metodo-pago">
+                            <small class="tag-min-advertencia">WebPay:</small>
+                            <label for="radio_webpay" class="label_radio_documento">
+                                <input type="radio" id="radio_webpay" class="" name="payment-method" value="WebPay">
+                                <div class="radio__radio">
+                                    <div class="icon-selected"><i class="fa-solid fa-check"></i></div>
+                                    <img src="{{asset('img/pagina/logo-webpay.png')}}" alt="">
+                                </div>
+                            </label>
                         </div>
-                    </label>
+                    @endif
+                    @if (Config::get('configuracion-global.Trasnferencia-bancaria') == 'activo')
+                        <div class="box-metodo-pago">
+                            <small class="tag-min-advertencia">Transferencia Bancaria:</small>
+                            <label for="radio_trasnferencia" class="label_radio_documento">
+                                <input type="radio" id="radio_trasnferencia" class="" name="payment-method" value="Transferencia-bancaria">
+                                <div class="radio__radio">
+                                    <div class="icon-selected"><i class="fa-solid fa-check"></i></div>
+                                    <img src="{{asset('img/pagina/bank.png')}}" alt="">
+                                </div>
+                            </label>
+                        </div>
+                    @endif
                 </div>
             </div>
             <div class="box-contenido">

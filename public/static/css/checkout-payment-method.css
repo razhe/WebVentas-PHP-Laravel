@@ -93,16 +93,19 @@
     color: #424242;
     font-weight: 600;
 }
-
+.box-metodo-pago{
+    width: 30%;
+}
 .box-formas-pago .radio__radio{
     position: relative;
     height: 65px;
     border: 1px solid #c7c7c7;
     border-radius: 3px;
     transition: .2s;
-    width: 30%;
+    width: 100%;
     text-align: center;
     display: flex;
+    justify-content: center;
 }
 .box-formas-pago .radio__radio img{
     margin-left: 40px;
