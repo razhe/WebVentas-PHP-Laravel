@@ -6,6 +6,30 @@ let csfr_token = document.getElementsByName('csrf-token')[0].getAttribute('conte
     inpt_cart = document.getElementsByClassName('inpt_cart_quant');
     removeBtnCart = document.getElementsByClassName('btn-remove-item');
 
+function number_format_js(number, decimals, dec_point, thousands_point) {
+    if (!decimals) {
+        var len = number.toString().split('.').length;
+        decimals = len > 1 ? len : 0;
+    }
+
+    if (!dec_point) {
+        dec_point = '.';
+    }
+
+    if (!thousands_point) {
+        thousands_point = ',';
+    }
+
+    number = parseFloat(number).toFixed(decimals);
+
+    number = number.replace(".", dec_point);
+
+    var splitNum = number.split(dec_point);
+    splitNum[0] = splitNum[0].replace(/\B(?=(\d{3})+(?!\d))/g, thousands_point);
+    number = splitNum.join(dec_point);
+
+    return number;
+}
 
 
 $.ajaxSetup({
@@ -44,28 +68,28 @@ function listarCarrito() {
                                 <img src="${data.carrito[i].imagen}" alt="">
                                 <div>
                                     <p>${data.carrito[i].nombre}</p>
-                                    <small>precio: <span>${currency+data.carrito[i].precio}</span></small><br>
+                                    <small>precio: <span>${currency + number_format_js(data.carrito[i].precio,0,'','.')}</span></small><br>
                                     <button class="btn-remove-item" data-parent="${data.carrito[i].id}">remover</button>
                                 </div>
                             </div>
                         </td>
                         <td><input class="inpt_cart_quant" type="number" value="${data.carrito[i].cantidad}" data-parent="${data.carrito[i].id}" min="1" max="${data.carrito[i].stock}"></td>
-                        <td>${currency + data.carrito[i].subtotal}</td>
+                        <td>${currency + number_format_js(data.carrito[i].subtotal,0,'','.')}</td>
                     </tr>
                     `;
                 }
                 htmlTotalCarrito += `
                 <tr>
                     <td>Total Neto</td>
-                    <td>${currency + Math.round(data.totalCarrito[0].total_neto)}</td>
+                    <td>${currency + number_format_js(data.totalCarrito[0].total_neto,0,'','.')}</td>
                 </tr>
                 <tr>
                     <td>IVA</td>
-                    <td>${currency + Math.round(data.totalCarrito[0].iva)}</td>
+                    <td>${currency + number_format_js(data.totalCarrito[0].iva,0,'','.')}</td>
                 </tr>
                 <tr>
                     <td>Total</td>
-                    <td>${currency + Math.round(data.totalCarrito[0].total)}</td>
+                    <td>${currency + number_format_js(data.totalCarrito[0].total,0,'','.')}</td>
                 </tr>
                 `;
                 btnCheckOut.innerHTML = 

@@ -131,8 +131,8 @@
                                             <div class="detalle-item-producto">
                                                 <small class="">{{$product -> brand_name}}</small>
                                                 <div class="product-prices-box">
-                                                    <small class="old-price">{{Config::get('configuracion-global.currency').$product -> price}}</small>
-                                                    <small class="">{{Config::get('configuracion-global.currency').$product -> price - round((($product -> discount * $product -> price) / 100))}}</small>
+                                                    <small class="old-price">{{Config::get('configuracion-global.currency').number_format($product -> price, 0,  '', '.')}}</small>
+                                                    <small class="">{{Config::get('configuracion-global.currency').number_format($product -> price - round((($product -> discount * $product -> price) / 100)), 0,  '', '.')}}</small>
                                                 </div>
                                             </div>
                                         </div>
@@ -151,7 +151,7 @@
                                         <div class="detalle-item-producto">
                                             <small class="">{{$product -> brand_name}}</small>
                                             <div class="product-prices-box">
-                                                <small class="">{{Config::get('configuracion-global.currency').$product -> price}}</small>
+                                                <small class="">{{Config::get('configuracion-global.currency').number_format($product -> price, 0,  '', '.')}}</small>
                                             </div>
                                         </div>
                                     </div>

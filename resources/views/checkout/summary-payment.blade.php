@@ -55,7 +55,7 @@
                                     </td>
                                     <td>{{$cart['cantidad']}}</td>
                                     
-                                    <td><p>{{Config::get('configuracion-global.currency').$cart['subtotal']}}</p></td>
+                                    <td><p>{{Config::get('configuracion-global.currency').number_format($cart['subtotal'], 0,  '', '.')}}</p></td>
                                 </tr>
                             @endforeach
                         </tbody>    
@@ -70,15 +70,15 @@
             <div class="lista_costos">
                 <div class="total-neto item-costos">
                     <h4>Total Neto</h4>
-                    <p>{{Config::get('configuracion-global.currency').' '.session('totalCarrito.0.total_neto')}}</p>
+                    <p>{{Config::get('configuracion-global.currency').' '.number_format(session('totalCarrito.0.total_neto'), 0,  '', '.')}}</p>
                 </div>
                 <div class="iva item-costos">
                     <h4>IVA</h4>
-                    <p>{{Config::get('configuracion-global.currency').' '.session('totalCarrito.0.iva')}}</p>
+                    <p>{{Config::get('configuracion-global.currency').' '.number_format(session('totalCarrito.0.iva'), 0,  '', '.')}}</p>
                 </div>
                 <div class="total item-costos">
                     <h4>Total</h4>
-                    <p>{{Config::get('configuracion-global.currency').' '.session('totalCarrito.0.total')}}</p>
+                    <p>{{Config::get('configuracion-global.currency').' '.number_format(session('totalCarrito.0.total'), 0,  '', '.')}}</p>
                 </div>
             </div>
             @if (Session::has('payment-billing'))

@@ -43,6 +43,8 @@ class CheckoutController extends Controller
         $data =[
             'address' => $address,
         ];
+        //Validar pasos de compra
+        session(['estado-proceso-compra' => '1']);
         return view('checkout.customer-information', $data);
     }
     public function getPaymentMethod()
