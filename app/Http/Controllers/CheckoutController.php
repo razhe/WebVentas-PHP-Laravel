@@ -43,23 +43,174 @@ class CheckoutController extends Controller
         $data =[
             'address' => $address,
         ];
-        //Validar pasos de compra
-        session(['estado-proceso-compra' => '1']);
+        //Validar las etapas de compra
+        session(['estado-proceso-compra' => '1']);//Si es >= 2 que permita pasar a payment method. Crear middleware que elimine esta variable de sesion.
+
         return view('checkout.customer-information', $data);
     }
     public function getPaymentMethod()
     {
-        return view('checkout.payment-method');
+        if (Session::has('estado-proceso-compra')) {
+            if (session('estado-proceso-compra') >= '2') {
+                return view('checkout.payment-method');
+            }else{
+                return redirect('/');
+            }
+        } else {
+            return redirect('/');
+        }
     }
     public function getSummaryPayment()
     {
+        if (Session::has('estado-proceso-compra')) {
+            if (session('estado-proceso-compra') >= '3') {
+                return view('checkout.payment-method');
+            }else{
+                return redirect('/');
+            }
+        } else {
+            return redirect('/');
+        }
         $arreglo = session('carrito');
         $data = [
             'productos' => $arreglo
         ];
         return view('checkout.summary-payment', $data);
     }
+    //customer info
+    public function postSaveGuest(Request $request)
+    {
+        $rules = 
+        [
+            'name'      => 'required',
+            'last_name' => 'required',
+            'phone'     => 'required|numeric',
+            'email'     => 'required|email',
+            'address' => 'required',
+            'residency'  => 'required|integer',
+            'comuna'  => 'required|integer',
+        ];
+        $messages=
+        [
+            'name.required'      => 'Debe poner su nombre.',
+            'last_name.required' => 'Debe poner su apellido.',
+            'phone.required'     => 'Debe poner un numero de telefono',
+            'phone.numeric'      => 'El telefono solo debe contener números',
+            'email.required'     => 'Debe poner un correo electrónico.',
+            'email.email'        => 'El formato de su correo electronico no es válido.',
+            'address.required' => 'Debe especificar una dirección.',
+            'residency.required' => 'Debe especificar una dirección.',
+            'residency.integer' => 'Error al intentar guardar la residencia.',
+            'comuna.required' => 'Debe especificar una comuna.',
+            'comuna.integer' => 'Error al intentar guardar la comuna.',
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator -> fails()):
+            return back() -> withErrors($validator)->with('MsgResponse','')->with( 'typealert', 'danger');
+        else:
+            if (Session::has('user_checkout')) {
+                session()->forget('user_checkout');//por seguridad reiniciar la variable
+            }
+            $arreglo[]=[
+                'name' => $request['name'],
+                'last_name' => $request['last_name'],
+                'phone' => $request['phone'],
+                'email' => $request['email'],
+                'address' => $request['address'],
+                'residency' => $request['residency'],
+                'comuna' => $request['comuna'],
+            ];
+            session(['guest_checkout' => $arreglo]);
+            if (Session::has('guest_checkout')) {
+                //Validar las etapas de compra
+                session(['estado-proceso-compra' => '2']);
+                return redirect('/checkout/payment-method');
+            }
+        endif;
+    }
 
+    public function postSaveUser(Request $request)
+    {
+        $rules = 
+        [
+            'direccion'      => 'required',
+        ];
+        $messages=
+        [
+            'direccion.required'      => 'Debe seleccionar una dirección.',
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator -> fails()):
+            return back() -> withErrors($validator)->with('MsgResponse','')->with( 'typealert', 'danger');
+        else:
+            if (Session::has('guest_checkout')) {
+                session()->forget('guest_checkout');//por seguridad reiniciar la variable
+            }
+            try{
+                $decrypted_address = Crypt::decryptString($request['direccion']);
+            }catch(\Exception $exception){
+                return view('errors.request-denied');
+            }
+            
+            $veficacionDireccion = Address::where('id', $decrypted_address)
+                                        ->where('id_user', Auth::user() -> id) -> get();
+            if (!empty($veficacionDireccion)) {
+                $preferences[]=[
+                    'direccion_id' => $decrypted_address,
+                ];
+                session(['user_checkout' => $preferences]);
+                if (Session::has('user_checkout')) {
+                    //Validar las etapas de compra
+                    session(['estado-proceso-compra' => '2']);
+                    return redirect('/checkout/payment-method');
+                }
+            }else{
+                return back() ->with('MsgResponse','Esa dirección no éxiste o no pertenece a usted.')->with( 'typealert', 'danger');
+            }
+
+        endif;
+    }
+    //Payment method
+    public function postCheckoutPaymentMethod(Request $request)
+    {
+        if (Session::has('payment-billing')) {
+            session()->forget('payment-billing');
+        }
+
+        if ($request['tipo_documento'] == 'boleta') {
+            $arreglo[]=[
+                'tipo_doc' => $request['tipo_documento'],
+                'medio_pago' => $request['medio_pago'],
+                'rut' => $request['rut'],
+            ];
+            session(['payment-billing' => $arreglo]);
+        }elseif ($request['tipo_documento'] == 'factura') {
+            $arreglo[]=[
+                'tipo_doc' => $request['tipo_documento'],
+                'medio_pago' => $request['medio_pago'],
+                'razon_social' => $request['razon_social'],
+                'rut' => $request['rut'],
+                'giro' => $request['giro'],
+                'ciudad' => $request['ciudad'],
+                'comuna' => $request['comuna'],
+                'direccion' => $request['direccion'],
+                'telefono' => $request['telefono'],
+            ];
+            session(['payment-billing' => $arreglo]);
+        }else{
+            Toastr::error('Error con el documento de facturación.', 'Oops...');
+            return back();
+        }
+        $data = [
+            'facturacion' => session('payment-billing'),
+        ];
+        //Validar las etapas de compra
+        session(['estado-proceso-compra' => '3']);
+        $nextRequest = url('/checkout/summary-payment');
+        
+        return response($nextRequest);
+    }
+    //Detalle de la compra
     public function getPurchaseDetail(Request $request)
     {
         if (Session::has('pagoPendiente')) {
@@ -122,129 +273,6 @@ class CheckoutController extends Controller
         }else{
             return redirect('/');
         }
-    }
-    public function postSaveGuest(Request $request)
-    {
-        $rules = 
-        [
-            'name'      => 'required',
-            'last_name' => 'required',
-            'phone'     => 'required|numeric',
-            'email'     => 'required|email',
-            'address' => 'required',
-            'residency'  => 'required|integer',
-            'comuna'  => 'required|integer',
-        ];
-        $messages=
-        [
-            'name.required'      => 'Debe poner su nombre.',
-            'last_name.required' => 'Debe poner su apellido.',
-            'phone.required'     => 'Debe poner un numero de telefono',
-            'phone.numeric'      => 'El telefono solo debe contener números',
-            'email.required'     => 'Debe poner un correo electrónico.',
-            'email.email'        => 'El formato de su correo electronico no es válido.',
-            'address.required' => 'Debe especificar una dirección.',
-            'residency.required' => 'Debe especificar una dirección.',
-            'residency.integer' => 'Error al intentar guardar la residencia.',
-            'comuna.required' => 'Debe especificar una comuna.',
-            'comuna.integer' => 'Error al intentar guardar la comuna.',
-        ];
-        $validator = Validator::make($request->all(), $rules, $messages);
-        if ($validator -> fails()):
-            return back() -> withErrors($validator)->with('MsgResponse','')->with( 'typealert', 'danger');
-        else:
-            if (Session::has('user_checkout')) {
-                session()->forget('user_checkout');//por seguridad reiniciar la variable
-            }
-            $arreglo[]=[
-                'name' => $request['name'],
-                'last_name' => $request['last_name'],
-                'phone' => $request['phone'],
-                'email' => $request['email'],
-                'address' => $request['address'],
-                'residency' => $request['residency'],
-                'comuna' => $request['comuna'],
-            ];
-            session(['guest_checkout' => $arreglo]);
-            if (Session::has('guest_checkout')) {
-                return redirect('/checkout/payment-method');
-            }
-        endif;
-    }
-    public function postSaveUser(Request $request)
-    {
-        $rules = 
-        [
-            'direccion'      => 'required',
-        ];
-        $messages=
-        [
-            'direccion.required'      => 'Debe seleccionar una dirección.',
-        ];
-        $validator = Validator::make($request->all(), $rules, $messages);
-        if ($validator -> fails()):
-            return back() -> withErrors($validator)->with('MsgResponse','')->with( 'typealert', 'danger');
-        else:
-            if (Session::has('guest_checkout')) {
-                session()->forget('guest_checkout');//por seguridad reiniciar la variable
-            }
-            try{
-                $decrypted_address = Crypt::decryptString($request['direccion']);
-            }catch(\Exception $exception){
-                return view('errors.request-denied');
-            }
-            
-            $veficacionDireccion = Address::where('id', $decrypted_address)
-                                        ->where('id_user', Auth::user() -> id) -> get();
-            if (!empty($veficacionDireccion)) {
-                $preferences[]=[
-                    'direccion_id' => $decrypted_address,
-                ];
-                session(['user_checkout' => $preferences]);
-                if (Session::has('user_checkout')) {
-                    return redirect('/checkout/payment-method');
-                }
-            }else{
-                return back() ->with('MsgResponse','Esa dirección no éxiste o no pertenece a usted.')->with( 'typealert', 'danger');
-            }
-
-        endif;
-    }
-    public function postCheckoutPaymentMethod(Request $request)
-    {
-        if (Session::has('payment-billing')) {
-            session()->forget('payment-billing');
-        }
-
-        if ($request['tipo_documento'] == 'boleta') {
-            $arreglo[]=[
-                'tipo_doc' => $request['tipo_documento'],
-                'medio_pago' => $request['medio_pago'],
-                'rut' => $request['rut'],
-            ];
-            session(['payment-billing' => $arreglo]);
-        }elseif ($request['tipo_documento'] == 'factura') {
-            $arreglo[]=[
-                'tipo_doc' => $request['tipo_documento'],
-                'medio_pago' => $request['medio_pago'],
-                'razon_social' => $request['razon_social'],
-                'rut' => $request['rut'],
-                'giro' => $request['giro'],
-                'ciudad' => $request['ciudad'],
-                'comuna' => $request['comuna'],
-                'direccion' => $request['direccion'],
-                'telefono' => $request['telefono'],
-            ];
-            session(['payment-billing' => $arreglo]);
-        }else{
-            Toastr::error('Error con el documento de facturación.', 'Oops...');
-            return back();
-        }
-        $data = [
-            'facturacion' => session('payment-billing'),
-        ];
-        $nextRequest = url('/checkout/summary-payment');
-        return response($nextRequest);
     }
 
     public function validatePaymentType($valor){ // Valida el medio de pago

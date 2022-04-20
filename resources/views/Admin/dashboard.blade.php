@@ -23,7 +23,7 @@
                                 <div class="col-lg-3 col-md-6 d-flex stat my-3">
                                     <div class="mx-auto">
                                         <h6 class="text-muted">Contraste ingresos (Men)</h6>
-                                        <h3 class="font-weight-bold">{{Config::get('configuracion-global.currency'). ' ' . $metricasVentas[0] -> total_mes}}</h3>     
+                                        <h3 class="font-weight-bold">{{Config::get('configuracion-global.currency'). ' ' . number_format($metricasVentas[0] -> total_mes, 0,  '', '.')}}</h3>     
                                         @if (round((($metricasVentas[0] -> total_mes - $metricasVentas[1] -> total_mes) / $metricasVentas[1] -> total_mes) * 100) > 0)
                                             <h6 class="text-success"><i class="bi bi-arrow-up-circle-fill"></i> {{round((($metricasVentas[0] -> total_mes - $metricasVentas[1] -> total_mes) / $metricasVentas[1] -> total_mes) * 100)}} %</h6>
                                         @else

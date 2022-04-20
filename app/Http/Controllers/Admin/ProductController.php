@@ -15,6 +15,7 @@ class ProductController extends Controller
         $this-> middleware('auth');
         $this-> middleware('admincheck');
         $this-> middleware('user.status');
+        $this -> middleware('purchase.step-process');
     }
     public function getProducts(){
         $products=DB::select('CALL select_products()');

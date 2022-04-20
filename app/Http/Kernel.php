@@ -69,5 +69,7 @@ class Kernel extends HttpKernel
         'user.status' => \App\Http\Middleware\UserStatus::class,
         //validacion del carrito con productos
         'cart.count' => \App\Http\Middleware\has_products_in_cart::class,
+        //validacion del proceso de compra
+        'purchase.step-process' => \App\Http\Middleware\purchase_steps_processs::class,
     ];
 }

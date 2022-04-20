@@ -13,6 +13,7 @@ class DashboardController extends Controller
         $this-> middleware('auth');
         $this-> middleware('admincheck');
         $this-> middleware('user.status');
+        $this -> middleware('purchase.step-process');
     }
     public function getDashboard(){
         $metricas_ventas = DB::select('CALL select_metrics_on_dashboard_ventas()');

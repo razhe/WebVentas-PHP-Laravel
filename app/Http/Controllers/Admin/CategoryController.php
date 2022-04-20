@@ -17,6 +17,7 @@ class CategoryController extends Controller
         $this-> middleware('auth');
         $this-> middleware('admincheck');
         $this-> middleware('user.status');
+        $this -> middleware('purchase.step-process');
     }
     public function getCategories(){
         $categories = Category::where('categories.status', '<>', '3') -> orderBy('id', 'Asc')->get();

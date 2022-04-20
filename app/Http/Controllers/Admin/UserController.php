@@ -13,6 +13,7 @@ class UserController extends Controller
         $this-> middleware('auth');
         $this-> middleware('admincheck');
         $this-> middleware('user.status');
+        $this -> middleware('purchase.step-process');
     }
     public function getUsers(){
         $users = User::where('users.status', '<>', '3') -> orderBy('id', 'Asc')->get();

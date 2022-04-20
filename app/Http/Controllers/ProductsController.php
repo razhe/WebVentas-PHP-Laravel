@@ -14,6 +14,7 @@ class ProductsController extends Controller
 {
     public function __Construct(){
         $this-> middleware('user.status');
+        $this -> middleware('purchase.step-process');
     }
 
     public function getProducts(Request $request)

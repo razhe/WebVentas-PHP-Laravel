@@ -14,6 +14,7 @@ class SettingsController extends Controller
         $this-> middleware('auth');
         $this-> middleware('admincheck');
         $this-> middleware('user.status');
+        $this -> middleware('purchase.step-process');
     }
     /*==============*/
     /*Banner*/
