@@ -66,7 +66,7 @@ btnGoSummPay.addEventListener('click', function(){
 
     if (!!radio_webpay && radio_webpay.checked) {
         selectedPayment = radio_webpay.value;
-    }else if( !!radio_trasnferencia && radio_trasnferencia.checked){
+    }else if(!!radio_trasnferencia && radio_trasnferencia.checked){
         selectedPayment = radio_trasnferencia.value;
     }
 
@@ -95,7 +95,6 @@ btnGoSummPay.addEventListener('click', function(){
                 toastr["error"]("Medio de pago no aceptado.", "Oops... ha ocurrido algo inesperado.");
                 errores++;
             }
-
             if (errores == 0) {
                 $.ajax({
                     url: '../checkout/save-payment-method',
@@ -106,6 +105,7 @@ btnGoSummPay.addEventListener('click', function(){
                         rut: rut.value,
                     },
                     success: function(data) { 
+                        //console.log(data);
                         window.location.replace(data);
                     } 
                 });

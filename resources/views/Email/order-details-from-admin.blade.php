@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Detalles de la orden</h1>
-    @if ($detalles_pago[0]['tipo_doc'] == 'boleta')
+    @if (!empty($ventas[0] -> id_boleta))
         <h2>boleta</h2>
     @else
         <h2>factura</h2>

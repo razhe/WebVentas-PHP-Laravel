@@ -75,11 +75,13 @@ class TransbankController extends Controller
                     $address = DB::select('CALL select_full_addres_by_id(?)', array(session('user_checkout.0.direccion_id')));
      
                     $boleta -> client = Auth::user()->name.' '.Auth::user()->last_name;
+                    $boleta -> email = Auth::user()->email;
                     $boleta -> phone = Auth::user()->phone;      
                     $boleta -> address = $address[0] -> full_address;
                 }
                 if(Session::has('guest_checkout')){
                     $boleta -> client = session('guest_checkout.0.name').' '.session('guest_checkout.0.last_name');
+                    $boleta -> email = session('guest_checkout.0.email');
                     $boleta -> phone = session('guest_checkout.0.phone');
                     $boleta -> address = session('guest_checkout.0.address').' ('.session('guest_checkout.0.residency').'), '.session('guest_checkout.0.comuna').'.';
                 }
@@ -98,9 +100,11 @@ class TransbankController extends Controller
                 $factura -> telefono = session('payment-billing.0.telefono');
                 if(Session::has('user_checkout')){
                     $factura -> cliente = Auth::user()->name.' '.Auth::user()->last_name;
+                    $factura -> email = Auth::user()->email;
                 }
                 if(Session::has('guest_checkout')){
                     $factura -> cliente = session('guest_checkout.0.name').' '.session('guest_checkout.0.last_name');
+                    $factura -> email = session('guest_checkout.0.email');
                 }
                 $factura -> save();
                 //Order

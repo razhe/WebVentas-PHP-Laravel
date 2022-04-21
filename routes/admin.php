@@ -67,7 +67,8 @@ Route::prefix('/admin')->group(function(){
     route::get('/sales',[SalesController::class, 'getSales']);
     route::get('/sale-detail',[SalesController::class, 'getSaleDetail']);
 
-    route::post('/sales/change-order-status',[SalesController::class, 'postChangeOrderStatus']);
+    route::post('/sales/change-order-status-webpay',[SalesController::class, 'postChangeOrderStatusWebPay']);
+    route::post('/sales/change-order-status-bankTransfer',[SalesController::class, 'postChangeOrderStatusBankTransfer']);
 });
 
 

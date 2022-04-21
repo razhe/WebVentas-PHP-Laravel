@@ -80,6 +80,8 @@ Route::post('/checkout/save-user-data', [CheckoutController::class, 'postSaveUse
 
 Route::post('/checkout/save-payment-method', [CheckoutController::class, 'postCheckoutPaymentMethod'])-> name('checkout.postsave-payment-method');
 
+Route::post('/checkout/bank-transfer', [CheckoutController::class, 'postBankTransfer'])-> name('checkout.postbank-transfer');
+
 //transbank
 Route::post('/transbank/iniciar-compra', [TransbankController::class, 'postIniciarCompra'])-> name('transbank.postiniciar-compra');
 Route::post('/transbank/refud-pay', [TransbankController::class, 'postDevolverPago'])-> name('transbank.postdevolver-pago');

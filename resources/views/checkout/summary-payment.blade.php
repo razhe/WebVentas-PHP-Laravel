@@ -89,7 +89,7 @@
                     </form>   
                 @endif
                 @if (session('payment-billing.0.medio_pago') == 'Transferencia-bancaria')
-                    <form action="{{url('')}}" method="post">
+                    <form action="{{url('/checkout/bank-transfer')}}" method="post">
                         @csrf
                         <button type="submit" class="btn-default-yellow">Completar pedido</button>
                     </form>   
