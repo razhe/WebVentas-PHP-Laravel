@@ -66,10 +66,29 @@ class SalesController extends Controller
             }catch(\Exception $exception){
                 return view('errors.request-denied');
             }
-            if($request['order_status'] == 1 || $request['order_status'] == 2 || $request['order_status'] == 3 || $request['order_status'] == 4){
+            if($request['order_status'] == 1 || $request['order_status'] == 2 || $request['order_status'] == 3 || $request['order_status'] == 4 || $request['order_status'] == 5){
                 $orden = Order::where('id',$decrypted_id) -> first();
+                if($orden -> status == 1 && $request['order_status'] != 5){
+                    Toastr::error('Petición denegada', '¡Oops...!');
+                    return back();
+                    exit;
+                }
+                if($orden -> status == 2 && $request['order_status'] < 2 && $request['order_status'] > 5){
+                    Toastr::error('Petición denegada', '¡Oops...!');
+                    return back();
+                    exit;
+                }
+                if($orden -> status == 3 && $request['order_status'] < 2 && $request['order_status'] > 5){
+                    Toastr::error('Petición denegada', '¡Oops...!');
+                    return back();
+                    exit;
+                }
+                if($orden -> status == 4 && $request['order_status'] < 2 && $request['order_status'] > 4){
+                    Toastr::error('Petición denegada', '¡Oops...!');
+                    return back();
+                    exit;
+                }
                 $orden -> status = e($request['order_status']);
-
                 $orden -> save();
                 Toastr::success('El estado de la orden se ha actualizado correctamente', '¡Todo Listo!');
                 return back();

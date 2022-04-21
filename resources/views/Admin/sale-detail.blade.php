@@ -86,6 +86,7 @@
                                                             <input type="hidden" name="cv" value="{{Crypt::encryptString($venta-> id)}}">
                                                             <select id="" onchange="this.form.submit();"  name="order_status" class="form-select brand-select" aria-label="Default select example" name="">
                                                                 <option value="1" selected><small>Pendiente</small></option>
+                                                                <option value="5">Cancelada</option>
                                                             </select>
                                                         </form>
                                                     </div>
@@ -101,6 +102,7 @@
                                                                 <option value="2" selected>Autorizado</option>
                                                                 <option value="3">En despacho</option>
                                                                 <option value="4" >Entregado</option>
+                                                                <option value="5">Cancelada</option>
                                                             </select>
                                                         </form>
                                                     </div>
@@ -116,6 +118,7 @@
                                                                 <option value="2">Autorizado</option>
                                                                 <option value="3" selected >En despacho</option>
                                                                 <option value="4" >Entregado</option>
+                                                                <option value="5">Cancelada</option>
                                                             </select>
                                                         </form>
                                                     </div>
@@ -134,6 +137,11 @@
                                                             </select>
                                                         </form>
                                                     </div>
+                                                </td>
+                                                @break
+                                            @case(5)
+                                                <td>
+                                                   <small>Cancelada</small>
                                                 </td>
                                                 @break
                                         @endswitch
@@ -157,6 +165,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Modo de pago</th>
+                                    <th>Medio de pago</th>
                                     <th>Estado del pago</th>
                                     <th>Acción</th>
                                 </tr>
@@ -166,8 +175,9 @@
                                     <tr>
                                         <td><small>{{$pago-> id}}</small></td>
                                         <td><small>{{$pago-> modo_pago}}</small></td>
+                                        <td><small>{{$pago-> medio_pago}}</small></td>
                                         <td><small>{{$pago-> estado_pago}}</small></td>
-                                        @if ($pago -> estado_pago == 'AUTHORIZED')
+                                        @if ($pago -> estado_pago == 'AUTHORIZED' && $pago -> medio_pago == 'WebPay')
                                             <td>
                                                 <form action="{{url('/transbank/refud-pay')}}" id="form-refund" method="post">
                                                     @csrf
