@@ -341,54 +341,60 @@ class CheckoutController extends Controller
                 $pago = Pago::where('id', session('pagoPendiente.0.id_pago'))
                             -> where('token', session('pagoPendiente.0.token'))
                             -> first();
-                $response = (new Transaction)->commit($request['token_ws']);
-                if ($response->status == 'AUTHORIZED' and $response -> responseCode == 0) {
-                    $pago -> modo_pago = $this->validatePaymentType($response -> paymentTypeCode);
-                    $pago -> estado_pago = $response -> status;
-
-                    if($pago -> save()){
-                        $orden = Order::where('id', session('pagoPendiente.0.id_orden')) -> first();
-                        $orden -> status = 2;
-                        $orden -> save();
-                    }
-
-                    $data = [
-                        'response' => 'OK',
-                        'detalles_pago' => session('payment-billing'),
-                        'productos' => session('carrito'),
-                        'totales' => session('totalCarrito'),
-                    ];
-
-                    if (Session::has('guest_checkout')) {
-                        Mail::to(session('guest_checkout.0.email'))->send(new SendOrderDetails($data));
-                        session()->forget('guest_checkout');
-                    }
-                    if(Session::has('user_checkout')){
-                        Mail::to(Auth::user()->email)->send(new SendOrderDetails($data));
-                        session()->forget('user_checkout');
-                    }
-
-                    session()->forget('pagoPendiente');
-                    if(Session::has('carrito')){
-                        session()->forget('carrito');
-                        session()->forget('totalCarrito');
-                    }
-                    session()->forget('estado-proceso-compra');
-                    return view('checkout.purchase-detail', $data);
+                $token_match = $_GET['token_ws'] ?? $_POST['token_ws'] ?? null;
+                if (!$token_match) {
+                    // Revisa más detalles en Revisar más detalles más arriba en los distintos flujos y ejemplos de código de esto en https://github.com/TransbankDevelopers/transbank-sdk-php/examples/webpay-plus/index.php
+                    die ('No es un flujo de pago normal.');  
                 }else{
-                    $pago -> estado_pago = $response -> status;
-                    $pago -> modo_pago = $this->validatePaymentType($response -> paymentTypeCode);
-                    $pago -> save();
-                    $data = [
-                        'response' => 'ERROR'
-                    ];
-                    session()->forget('pagoPendiente');
-                    if(Session::has('carrito')){
-                        session()->forget('carrito');
-                        session()->forget('totalCarrito');
-                    }
-                    session()->forget('estado-proceso-compra');
-                    return view('checkout.purchase-detail', $data);
+                    $response = (new Transaction)->commit($request['token_ws']);
+                    if ($response->status == 'AUTHORIZED' and $response -> responseCode == 0) {
+                        $pago -> modo_pago = $this->validatePaymentType($response -> paymentTypeCode);
+                        $pago -> estado_pago = $response -> status;
+
+                        if($pago -> save()){
+                            $orden = Order::where('id', session('pagoPendiente.0.id_orden')) -> first();
+                            $orden -> status = 2;
+                            $orden -> save();
+                        }
+
+                        $data = [
+                            'response' => 'OK',
+                            'detalles_pago' => session('payment-billing'),
+                            'productos' => session('carrito'),
+                            'totales' => session('totalCarrito'),
+                        ];
+
+                        if (Session::has('guest_checkout')) {
+                            Mail::to(session('guest_checkout.0.email'))->send(new SendOrderDetails($data));
+                            session()->forget('guest_checkout');
+                        }
+                        if(Session::has('user_checkout')){
+                            Mail::to(Auth::user()->email)->send(new SendOrderDetails($data));
+                            session()->forget('user_checkout');
+                        }
+
+                        session()->forget('pagoPendiente');
+                        if(Session::has('carrito')){
+                            session()->forget('carrito');
+                            session()->forget('totalCarrito');
+                        }
+                        session()->forget('estado-proceso-compra');
+                        return view('checkout.purchase-detail', $data);
+                    }else{
+                        $pago -> estado_pago = $response -> status;
+                        $pago -> modo_pago = $this->validatePaymentType($response -> paymentTypeCode);
+                        $pago -> save();
+                        $data = [
+                            'response' => 'ERROR'
+                        ];
+                        session()->forget('pagoPendiente');
+                        if(Session::has('carrito')){
+                            session()->forget('carrito');
+                            session()->forget('totalCarrito');
+                        }
+                        session()->forget('estado-proceso-compra');
+                        return view('checkout.purchase-detail', $data);
+                    }   
                 }
             else:
                 return redirect('/');
