@@ -29,7 +29,7 @@ class SendOrderDetailsFromAdmin extends Mailable
      */
     public function build()
     {
-        return $this-> from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'))
+        return $this-> from(config('configuracion-global.post_sales_email'), config('configuracion-global.name'))
                     -> view('Email.order-details-from-admin')
                     -> subject('Detalle - Orden de compra.')
                     -> with($this->data);

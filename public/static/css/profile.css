@@ -19,6 +19,63 @@
     opacity: 80%;
 }
 
+.input__container__phone{
+    display: flex;
+    align-items: baseline;
+}
+.select-phone select{
+    margin-right: 5px !important;
+    border: none;
+    border-bottom: 2px solid var(--secondaryYellow);
+    width: 70px;
+    margin: 8px 0;
+    outline: none;
+    padding: 6px 2px;
+    font-size: 1rem;
+    background: none;
+}
+.default-input-form{
+    position: relative;
+    width: 100%;
+}
+.default-input-form input{
+    width: 100%;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    margin: 8px 0;
+    outline: none;
+    padding: 5px 8px;
+    padding-left: 40px;
+    transition: .3s;
+}
+.default-input-form input:focus{
+    border-color: var(--secundaryOrange);
+}
+.default-input-form i{
+    position: absolute;
+    left: 0;
+    top: 8px;
+    padding: 9px 10px;
+    font-size: 1.1rem;
+    color: #aaa;
+    transition: .3s
+}
+
+.input-invalido{
+    border-color: var(--rojo) !important;
+    box-shadow: 1px 0px 8px -4px hsla(345, 100%, 50%, 0.42);
+}
+
+.input-valido{
+    border-color: var(--verde) !important;
+    box-shadow: 1px 0px 5px -4px rgba(0,212,156,0.42);
+}
+.error_default_input{
+    font-size: .9rem;
+    color: #464646;
+}
+/*Fin Configuracion global*/
+/**/
 #volver-listar-direcciones{
     color: #707070;
     background-color: #ececec;

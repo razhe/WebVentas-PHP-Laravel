@@ -46,6 +46,7 @@ class UserProfileController extends Controller
             'name'      => 'required',
             'last_name' => 'required',
             'phone'     => 'required|numeric',
+            'phone_code'=> 'required',
         ];
         $messages=
         [
@@ -53,6 +54,7 @@ class UserProfileController extends Controller
             'last_name.required' => 'Debe poner su apellido.',
             'phone.required'     => 'Debe poner un numero de telefono',
             'phone.numeric'      => 'El telefono solo debe contener números',
+            'phone_code.require' => 'El código del telefono es requerido.'
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator -> fails()):
@@ -61,7 +63,7 @@ class UserProfileController extends Controller
             $user = User::where('id', Auth::user()->id) -> first();
             $user-> name      = e($request['name']);
             $user-> last_name = e($request['last_name']);
-            $user-> phone     = e($request['phone']);
+            $user-> phone     = e($request['phone_code'].'-'.$request['phone']);
             if ($user -> save()):
                 Toastr::success('Usuario actualizado con Éxito', '¡Todo Listo!');
                 return back();
@@ -115,7 +117,7 @@ class UserProfileController extends Controller
         $messages=
         [
             'address.required' => 'Debe especificar una dirección.',
-            'residency.required' => 'Debe especificar una dirección.',
+            'residency.required' => 'Debe especificar una residencia.',
             'residency.integer' => 'Error al intentar guardar la residencia.',
             'comuna.required' => 'Debe especificar una comuna.',
             'comuna.integer' => 'Error al intentar guardar la comuna.',

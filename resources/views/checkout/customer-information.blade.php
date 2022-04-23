@@ -3,7 +3,7 @@
 
 @section('CSS')
     <!--CSS-->
-        <link rel="stylesheet" href="{{url('static/css/checkout-customers.css')}}">
+        <link rel="stylesheet" href="{{url('static/css/checkout-customers.css?v='.time())}}">
 @endsection
 
 @section('content')

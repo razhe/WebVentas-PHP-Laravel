@@ -1,6 +1,6 @@
 @extends('layout')
 @section('CSS')
-    <link rel="stylesheet" href="{{url('static/css/details-product.css')}}">
+    <link rel="stylesheet" href="{{url('static/css/details-product.css?v='.time())}}">
     <link rel="stylesheet" href="{{url('static/libs/Glider/glider.css')}}">
 @endsection
 

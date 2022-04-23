@@ -13,7 +13,7 @@
         <!--CSS Bootstrap-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">  
         <!--Componente para urls absolutas-->
-        <link rel="stylesheet" href="{{ url('/static/css/layout.css') }}">
+        <link rel="stylesheet" href="{{ url('/static/css/layout.css?v='.time()) }}">
         <!--CSS Bootstrap Icons-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.7.2/font/bootstrap-icons.min.css" integrity="sha512-1fPmaHba3v4A7PaUsComSM4TBsrrRGs+/fv0vrzafQ+Rw+siILTiJa0NtFfvGeyY5E182SDTaF5PqP+XOHgJag==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!--CSS Toastr-->

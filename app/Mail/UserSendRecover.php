@@ -29,7 +29,7 @@ class UserSendRecover extends Mailable
      */
     public function build()
     {
-        return $this-> from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'))
+        return $this-> from(config('configuracion-global.contact_email'), config('configuracion-global.name'))
                     -> view('Email.user_pass_recover')
                     -> subject('Correo de recuperación de contraseña')
                     -> with($this->data);

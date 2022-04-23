@@ -2,7 +2,7 @@
 
 @section('CSS')
     <!--Css-->
-        <link rel="stylesheet" href="{{url('static/css/profile.css')}}">
+        <link rel="stylesheet" href="{{url('static/css/profile.css?v='.time())}}">
 @endsection
 
 @section('title', 'Perfil')
@@ -48,88 +48,88 @@
             <div class="contenido-perfil">
                 <div id="box-perfil-principal" class="box-perfil-principal box-contenido">
                     <h4>¡Hola: {{Auth::user()-> name}}!</h4>
-                    <form class="register__form needs-validation" action="{{url('/profile/update-profile')}}" method="post" novalidate>
+                    <form class="register__form" id="form-profile-data" action="{{url('/profile/update-profile')}}" method="post">
                         @csrf
-                        <!--Nombre-->
-                        <div class="2-columns-row row mt-4">
-                            <div class="input__container col-md-6">
-                                <label for="name">Nombre:</label>
-                                <div class="input-group">
-                                    <span class="input-group-text" id="basic-addon1">
-                                        <i class="fa-solid fa-user"></i>
-                                    </span>
-                                    <input type="text" value="{{Auth::user() -> name}}" name="name" class="form-control" required>
+                        <div class="row m-0 g-0">
+                            <!--nombre-->    
+                            <div class="input__container col-lg-6 col-md-6 p-1">    
+                                <div class="default-input-form">
+                                    <input type="text" name="name" value="{{Auth::user() -> name}}" id="name_user" placeholder="Nombre" class="inpt-default-form" required>
+                                    <i class="fa-solid fa-user"></i>
+                                    <div id="error_name" class="error_default_input"></div>
                                 </div>
                             </div>
-                            <!--Apellido-->
-                            <div class="input__container col-md-6">
-                                <label for="last_name">Apellido:</label>
-                                <div class="input-group">
-                                    <span class="input-group-text" id="basic-addon1">
-                                        <i class="fa-solid fa-user"></i>
-                                    </span>
-                                    <input type="text" value="{{Auth::user() -> last_name}}" name="last_name" class="form-control" required>
+                            <!--apellido-->    
+                            <div class="input__container col-lg-6 col-md-6 p-1">    
+                                <div class="default-input-form">
+                                    <input type="text" name="last_name" value="{{Auth::user() -> last_name}}" id="last_name_user"  placeholder="Apellido" class="inpt-default-form" required>
+                                    <i class="fa-solid fa-user"></i>
+                                    <div id="error_last_name" class="error_default_input"></div>
                                 </div>
                             </div>
                         </div>
-                        <!--Telefono-->
-                        <div class="input__container mt-4">
-                            <label for="phone">Número telefónico:</label>
-                            <div class="input-group">
-                                <span class="input-group-text" id="basic-addon1">
-                                    <i class="fa-solid fa-phone"></i>
-                                </span>
-                                <input type="text" value="{{Auth::user() -> phone}}" name="phone" class="form-control" required>
+    
+                        <!--phone-->    
+                        <div class="input__container input__container__phone p-1"> 
+                            <div class="select-phone">
+                                <select name="phone_code" id="select_phone_user">
+                                    <option value="569">+569</option>
+                                    <option value="562">+562</option>
+                                </select>  
+                            </div>   
+                            
+                            <div class="default-input-form">
+                                <input type="text" name="phone" value="@php
+                                    $data = explode("-", Auth::user() -> phone);
+                                    echo(e($data[1]))
+                                @endphp" id="phone_user"  placeholder="Teléfono" class="inpt-default-form" required>
+                                <i class="fa-solid fa-mobile-screen"></i>
+                                <div id="error_phone" class="error_default_input"></div>
                             </div>
                         </div>
-                        <!--Email-->
-                        <div class="input__container mt-4">
-                            <label for="email">Correo electrónico:</label>
-                            <div class="input-group">
-                                <span class="input-group-text" id="basic-addon1">
-                                    <i class="fa-solid fa-envelope"></i>
-                                </span>
-                                <input type="email" value="{{Auth::user() -> email}}" name="email" class="form-control" disabled>
+                        <!--Email-->    
+                        <div class="input__container p-1">    
+                            <div class="default-input-form">
+                                <input type="email" name="email" value="{{Auth::user() -> email}}" id="email_user"  placeholder="Correo" class="inpt-default-form" disabled>
+                                <i class="fa-solid fa-envelope"></i>
+                                <div id="error_email" class="error_default_input"></div>
                             </div>
                         </div>
-                        <button type="submit" class="btn-default-yellow mt-3">Actualizar datos</button>
+
+                        <button type="submit" id="update-profile-info" class="btn-default-yellow mt-3">Actualizar datos</button>
                     </form>
                 </div>
                 <div id="box-contraseña" class="box-contraseña box-contenido">
                     <h4>Cambiar contraseña</h4>
-                    <form class="register__form needs-validation" action="{{url('/profile/update-password')}}" method="post" novalidate>
+                    <form class="register__form" id="form-profile-password" action="{{url('/profile/update-password')}}" method="post">
                         @csrf
-                        <!--Contraseña actual-->
-                        <div class="input__container mt-2">
-                            <label for="apassword">Contraseña actual:</label>
-                            <div class="input-group">
-                                <span class="input-group-text" id="basic-addon1">
-                                    <i class="fa-solid fa-lock"></i>
-                                </span>
-                                <input type="password" name="apassword" class="form-control" required>
+                        <!--Actual Contraseña-->
+                        <div class="input__container p-1">                                   
+                            <div class="default-input-form">
+                                <input type="password" name="apassword" placeholder="Contraseña actual" id="apassword" class="inpt-default-form" required>
+                                <i class="fa-solid fa-key"></i>
+                                <div id="error_apassword_profile" class="error_default_input"></div>
                             </div>
                         </div>
 
-                        <div class="input__container mt-2">
-                            <label for="password">Nueva contraseña:</label>
-                            <div class="input-group">
-                                <span class="input-group-text" id="basic-addon1">
-                                    <i class="fa-solid fa-unlock"></i>
-                                </span>
-                                <input type="password" placeholder="" name="password" class="form-control" required>
+                        <!--nueva Contraseña-->
+                        <div class="input__container p-1">                                   
+                            <div class="default-input-form">
+                                <input type="password" name="password" placeholder="Nueva contraseña" id="npassword" class="inpt-default-form" required>
+                                <i class="fa-solid fa-key"></i>
+                                <div id="error_npassword_profile" class="error_default_input"></div>
                             </div>
                         </div>
-                        <!--Contraseña 2-->
-                        <div class="input__container mt-2">
-                            <label for="cpassword">Confirme contraseña:</label>
-                            <div class="input-group">
-                                <span class="input-group-text" id="basic-addon1">
-                                    <i class="fa-solid fa-unlock"></i>
-                                </span>
-                                <input type="password" placeholder="" name="cpassword" class="form-control" required>
+
+                        <!--Confirmación Contraseña-->
+                        <div class="input__container p-1">                                   
+                            <div class="default-input-form">
+                                <input type="password" name="cpassword" placeholder="Confirmación contraseña" id="cpassword" class="inpt-default-form" required>
+                                <i class="fa-solid fa-key"></i>
+                                <div id="error_cpassword_profile" class="error_default_input"></div>
                             </div>
                         </div>
-                        <input type="submit" name="actualizar_contraseña" value="Actualizar contraseña" class="btn-default-yellow mt-4">
+                        <input type="submit" name="actualizar_contraseña" id="update-password-profile" value="Actualizar contraseña" class="btn-default-yellow mt-4">
                     </form>
                 </div>
 
@@ -142,8 +142,8 @@
                             <div class="contenido-direccion">
                                 <p>Dirección: <span>{{$direccion -> address}}</span></p>
                                 <p>Edificio recidencial: <span>{{$direccion -> residency}}</span></p>
-                                <p>Región: <span>{{$direccion -> comuna_name}}</span></p>
-                                <p>Comuna: <span>{{$direccion -> region_name}}</span></p>
+                                <p>Comuna: <span>{{$direccion -> comuna_name}}</span></p>
+                                <p>Región: <span>{{$direccion -> region_name}}</span></p>
 
                                 <div class="opciones-direccion">
                                     <form action="{{url('/profile/delete-address')}}" method="post">
@@ -159,45 +159,44 @@
                 </div>
                 <div id="box-direcciones-agregar" class="box-direcciones box-contenido">
                     <button type="button" id="volver-listar-direcciones" class=""><i class="fa-solid fa-arrow-left-long"></i> Volver</button>
-                    <form class="needs-validation" action="{{url('/profile/create-address')}}" method="post" novalidate>
+                    <form class="" id="form-add-address" action="{{url('/profile/create-address')}}" method="post">
                         @csrf
-                         <!--direccion-->
-                         <div class="input__container mt-1 p-1">
-                            <label for="phone">Dirección:</label>
-                            <div class="input-group">
-                                <span class="input-group-text" id="basic-addon1">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                </span>
-                                <input type="text" placeholder="Ej. Número, pasaje, calle/avenida" value="" name="address" class="form-control" required>
+                        <!--direccion-->    
+                        <div class="input__container p-1">    
+                            <div class="default-input-form">
+                                <input type="text" name="address" id="address"  placeholder="Dirección" class="inpt-default-form" required>
+                                <i class="fa-solid fa-location-dot"></i>
+                                <div id="error_address" class="error_default_input"></div>
                             </div>
                         </div>
+
                         <div class="form-group mt-1 p-1">
-                            <label for="inputState">Recidencia:</label>
-                            <select id="inputState" name="residency" class="form-control form-select" aria-label="Default select example">
-                                <option selected disabled>Seleccione:</option>
+                            <select name="residency" id="residency"  class="form-control form-select" aria-label="Default select example">
+                                <option selected value="" disabled>Residencia...</option>
                                 <option value="8976">Casa</option>
                                 <option value="4932">Departamento</option>
                                 <option value="3456">Recinto empresarial</option>
                             </select>
+                            <div id="error_residency" class="error_default_input"></div>
                         </div>
                         
-                        <div class="row m-0 g-0 fila-locacion">
+                        <div class="row m-0 g-0">
                             <!--region-->
-                            <div class="region-field form-group col-lg-6 col-md-5 mt-1 p-1">
-                                <label for="inputState">Región:</label>
-                                <select id="select-region" name="region" class="form-control form-select" aria-label="Default select example">
+                            <div class="form-group col-lg-6 col-md-6 mt-1 p-1">
+                                <select name="region" id="region" class="form-control form-select" aria-label="Default select example">
                                     <option value="region-metropolitana" selected>Region Metropolitana</option>
                                 </select>
+                                <div id="error_region" class="error_default_input"></div>
                             </div>
+
                             <!--comuna-->
-                            <div class="comuna-field form-group col-lg-6 col-md-5 mt-1 p-1">
-                                <label for="inputState">Comuna:</label>
-                                <select id="select-comuna" name="comuna" class="form-control form-select" aria-label="Default select example">
-                                    <option selected disabled>Seleccione una región:</option>
+                            <div class="form-group col-lg-6 col-md-6 mt-1 p-1">
+                                <select name="comuna" id="select-comuna"  class="form-control form-select" aria-label="Default select example">
                                 </select>
+                                <div id="error_comuna" class="error_default_input"></div>
                             </div>
                         </div>
-                        <span class="tag-min-advertencia">*Por el momento los envíos solo están disponibles para la región metropolitana.</span>
+                        <span class="tag-min-advertencia mt-2">*Por el momento los envíos solo están disponibles para la región metropolitana.</span>
                         <br>
                         <button type="submit" class="btn-default-yellow" id="btn-guardar-direc">Guardar dirección</button>
                     </form>

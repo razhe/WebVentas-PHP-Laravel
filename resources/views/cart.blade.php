@@ -1,6 +1,6 @@
 @extends('layout')
 @section('CSS')
-    <link rel="stylesheet" href="{{url('static/css/cart.css')}}">
+    <link rel="stylesheet" href="{{url('static/css/cart.css?v='.time())}}">
 @endsection
 
 @section('title', 'Carrito')

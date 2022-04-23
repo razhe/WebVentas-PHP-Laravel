@@ -1,6 +1,6 @@
 @extends('layout')
 @section('CSS')
-    <link rel="stylesheet" href="{{url('static/css/products.css')}}">
+    <link rel="stylesheet" href="{{url('static/css/products.css?v='.time())}}">
 @endsection
 @section('title', 'Catálogo')
 

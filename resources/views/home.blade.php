@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('CSS')
-    <link rel="stylesheet" href="{{url('static/css/home.css')}}">
+    <link rel="stylesheet" href="{{url('static/css/home.css?v='.time())}}">
     <link rel="stylesheet" href="{{url('static/libs/Glider/glider.css')}}">
 @endsection
 

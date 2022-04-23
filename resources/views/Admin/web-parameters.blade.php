@@ -2,7 +2,7 @@
 
 @section('CSS')
     <!--CSS-->
-        <link rel="stylesheet" href="{{url('static/css/web-config.css')}}">
+        <link rel="stylesheet" href="{{url('static/css/web-config.css?v='.time())}}">
 @endsection
 
 @section('title', 'Configuración')
@@ -67,6 +67,12 @@
                             <div class="col-lg-4"><span>Correo contacto:</span></div>
                             <div class="form-group col-lg-6">
                                 <input type="text" value="{{Config::get('configuracion-global.contact_email');}}" name="contact_email" class="form-control" id="" placeholder="example@yourdomain.com">
+                            </div>
+                        </div>
+                        <div class="fila-config row m-0 g-0">
+                            <div class="col-lg-4"><span>Correo post ventas:</span></div>
+                            <div class="form-group col-lg-6">
+                                <input type="text" value="{{Config::get('configuracion-global.post_sales_email');}}" name="post_sales_email" class="form-control" id="" placeholder="example@yourdomain.com">
                             </div>
                         </div>
                         <div class="fila-config row m-0 g-0">

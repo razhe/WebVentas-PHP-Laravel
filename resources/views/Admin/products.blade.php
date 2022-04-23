@@ -2,7 +2,7 @@
 @extends('Admin.masterDashboard')
 
 @section('CSS')
-    <link rel="stylesheet" type="text/css" href="{{url('static\libs\DataTables\datatables.min.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{url('static\libs\DataTables\datatables.min.css?v='.time())}}"/>
 @endsection
 
 @section('title', 'Productos')
