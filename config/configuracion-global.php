@@ -13,7 +13,6 @@ return [
 'products_per_page' =>'10',
 'currency' =>'$',
 'iva' =>'21',
-'WebPay' =>'activo',
 'Trasnferencia-bancaria' =>'activo',
 'logo' =>'static/images/1650238412-image_large.png',
 ];

@@ -158,7 +158,7 @@ class SalesController extends Controller
                             $documento = Factura::where('id', $venta[0] -> id_factura) -> get();
                         }
             
-                        $pago = Pago::where('id', $venta[0] -> id_pago) -> get();
+                        $pago = Pago::where('id', $venta[0] -> id_pago) -> first();
                         $pago -> estado_pago = 'CONFIRMED';
                         $pago -> save();
 

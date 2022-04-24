@@ -19,6 +19,7 @@ class UserProfileController extends Controller
     public function __Construct(){
         $this-> middleware('user.status');
         $this -> middleware('purchase.step-process');
+        $this-> middleware('auth');
     }
     public function getProfile()
     {
