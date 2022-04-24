@@ -46,39 +46,42 @@ ul,li{
 	transition: .2s;
 	overflow: hidden;
 }
-.hover-navbar:before{
-	content: '';
-	position: absolute;
-	top: 9px;
-	transform: rotate(-225deg);
-	left: -10px;
-	width: 7px;
-	height: 7px;
-	border-top: 2px solid var(--secundaryOrange);
-	border-left: 2px solid var(--secundaryOrange);
-	transition: .5s;
-}
-.hover-navbar:after{
-	content: '';
-	position: absolute;
-	top: 9px;
-	transform: rotate(-50deg);
-	right: -10px;
-	width: 7px;
-	height: 7px;
-	border-top: 2px solid var(--secundaryOrange);
-	border-left: 2px solid var(--secundaryOrange);
-	transition: .5s;
-}
-.hover-navbar:hover:before{
-	left: -2px;
-}
-.hover-navbar:hover:after{
-	right: -2px;
-}
 .hover-navbar:hover{
 	color: #f1f1f1;
 }
+@media (min-width:800px){
+	.hover-navbar:before{
+		content: '';
+		position: absolute;
+		top: 9px;
+		transform: rotate(-225deg);
+		left: -10px;
+		width: 7px;
+		height: 7px;
+		border-top: 2px solid var(--secundaryOrange);
+		border-left: 2px solid var(--secundaryOrange);
+		transition: .5s;
+	}
+	.hover-navbar:after{
+		content: '';
+		position: absolute;
+		top: 9px;
+		transform: rotate(-50deg);
+		right: -10px;
+		width: 7px;
+		height: 7px;
+		border-top: 2px solid var(--secundaryOrange);
+		border-left: 2px solid var(--secundaryOrange);
+		transition: .5s;
+	}
+	.hover-navbar:hover:before{
+		left: -2px;
+	}
+	.hover-navbar:hover:after{
+		right: -2px;
+	}
+}
+
 
 /*
 ================
@@ -367,24 +370,25 @@ header{
 	display: none;
 }
 
-.grid .categorias a {
+.grid .categorias small {
 	color: #000;
 	font-size: 14px;
 	display: flex;
 	justify-content: space-between;
 	padding: 10px 20px;
+	cursor: pointer;
 }
 
-.grid .categorias a i {
+.grid .categorias small i {
 	display: none;
 }
 
-.grid .categorias a:hover {
+.grid .categorias small:hover {
 	color: #E47911;
 	font-weight: 600;
 }
 
-.grid .categorias a:hover i {
+.grid .categorias small:hover i {
 	display: inline-block;
 }
 
@@ -464,33 +468,6 @@ header{
         visibility: hidden;
     }
     
-}
-.page-loading::before {
-    content:" ";
-    display:block;
-    position:fixed;
-    z-index:var(--zIndexLayer1);
-    height:2px;
-    width:0%;
-    top:0;
-    left:0;
-    background-color:#06D;
-    animation: page-load both ease-in-out .3s;
-    box-shadow:0 2px 2px rgba(0,0,0,.2);
-}
-
-.page-loaded::before {
-    content:" ";
-    display:block;
-    position:fixed;
-    z-index:var(--zIndexLayer1);
-    height:2px;
-    width:0%;
-    top:0;
-    left:0;
-    background-color:#06D;
-    animation: page-loaded both ease-in-out .35s;
-    box-shadow:0 2px 2px rgba(0,0,0,.2);
 }
 
 /* ------------------------- */

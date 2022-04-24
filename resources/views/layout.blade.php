@@ -30,20 +30,22 @@
         <nav class="menu" id="menu">
             <div class="contenedor seccion-superior-nav" id="seccion-superior-nav">
                 <div class="contenedor-logo-nav">
-                    <img src="{{url('/static/images/logo.png')}}" alt="">
+                    <a href="{{url('/')}}" title="Visitar {{Config::get('configuracion-global.name')}}">
+                        <img src="{{asset(Config::get('configuracion-global.logo'))}}" alt="tienda {{Config::get('configuracion-global.name')}}" title="{{Config::get('configuracion-global.name')}}">
+                    </a>
                 </div>
                 <div class="contenedor-busq-nav ">
                     <form class="form-buscar" action="{{url('/product/search/')}}" method="post">
                         @csrf
                         <div class="busqueda-box input-group">
                             <input type="text" name="search" class="inpt-search-nav" placeholder="Busca aquí...">
-                            <button class="btn-buscar-nav" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <button class="btn-buscar-nav" type="submit" title="Buscar producto"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div> 
                     </form>              
                 </div>
                 <div class="contenedor-opt-usr">
                     <div class="contenedor-carrito">
-                        <div class=""><a href="{{url('/cart')}}"><i class="fa-solid fa-bag-shopping"></i></a></div>
+                        <div class=""><a href="{{url('/cart')}}" title="carrito de compras"><i class="fa-solid fa-bag-shopping"></i></a></div>
                         @if (Session::has('totalCarrito'))
                             <div class=""><div class="contador-carrito">{{session('totalCarrito.0.cantidadProductos')}}</div></div>
                         @else
@@ -54,10 +56,10 @@
             </div>
             
             <div class="contenedor contenedor-btn-nav">
-                <button id="btn-menu-barras" class="btn-menu-barras">
+                <button id="btn-menu-barras" class="btn-menu-barras" title="Abrir menú">
                     <i class="fa-solid fa-bars"></i>
                 </button>
-                <button id="btn-menu-cerrar" class="btn-menu-cerrar">
+                <button id="btn-menu-cerrar" class="btn-menu-cerrar" title="Cerrar menú">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
@@ -68,9 +70,9 @@
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="contenedor-enlaces-directos">
-                        <a class="direct__links hover-navbar" href="{{url('/')}}">Inicio</a>
-                        <a class="direct__links hover-navbar" href="{{url('/products')}}">Tienda</a>
-                        <a class="direct__links hover-navbar" href="#">Contacto</a>
+                        <a class="direct__links hover-navbar" href="{{url('/')}}" title="Bienvenidos a {{Config::get('configuracion-global.name')}}">Inicio</a>
+                        <a class="direct__links hover-navbar" href="{{url('/products')}}" title="Todos los productos">Tienda</a>
+                        <a class="direct__links hover-navbar" href="#" target="Conocenos">Contacto</a>
                         <div class="content__user" id="content-user">
                             <li class="user__list">
                                 @if (Auth::guest())
@@ -103,20 +105,20 @@
             <div class="contenedor contenedor-grid">
                 <div class="grid" id="grid">
                     <div class="categorias">
-                        <button class="btn-regresar"><i class="fa-solid fa-circle-left"></i> Regresar</button>
+                        <button class="btn-regresar" title="Regresar"><i class="fa-solid fa-circle-left"></i> Regresar</button>
                         <h3 class="subtitulo">Categorias</h3>                    
                         @foreach ($categories as $category)
-                        <a href="#" data-categoria="{{$category->name}}">{{$category->name}} <i class="fa-solid fa-chevron-right"></i></a>
+                        <small data-categoria="{{$category->name}}" title="Categoría {{$category->name}}">{{$category->name}} <i class="fa-solid fa-chevron-right"></i></small>
                         @endforeach  
                     </div>
     
                     <div class="contenedor-subcategorias">
                         <div class="subcategoria">
                             <div class="enlaces-subcategoria">
-                                <button class="btn-regresar"><i class="fa-solid fa-circle-left"></i>Regresar</button>
+                                <button class="btn-regresar" title="Regresar"><i class="fa-solid fa-circle-left"></i>Regresar</button>
                                 <h3 data-categoria="" id="subtitulo" class="subtitulo item-subcategoria"></h3>
                                 @foreach ($subcategories as $subcategory)
-                                <a data-categoria="{{$subcategory -> category_name}}" class="item-subcategoria" href="{{url('/products?subcategory='.$subcategory -> slug)}}">{{$subcategory -> name}}</a>
+                                <a data-categoria="{{$subcategory -> category_name}}" title="Comprar {{$subcategory -> name}}" class="item-subcategoria" href="{{url('/products?subcategory='.$subcategory -> slug)}}">{{$subcategory -> name}}</a>
                                 @endforeach 
                             </div>
                         </div>

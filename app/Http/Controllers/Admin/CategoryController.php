@@ -57,7 +57,7 @@ class CategoryController extends Controller
             $upload_file = $path. $file_name;
             //mover la imagen con el paquete intervention image
             Image::make($file)
-                ->resize(1000, null, function ($constraint) {
+                ->resize(1000, 667, function ($constraint) {
                     $constraint->aspectRatio();
                 }) 
                 -> save($upload_file);
@@ -126,7 +126,7 @@ class CategoryController extends Controller
                 $upload_file = $path. $file_name;
                 //mover la imagen con el paquete intervention image
                 Image::make($file)
-                    ->resize(1000, null, function ($constraint) {
+                    ->resize(1000, 667, function ($constraint) {
                         $constraint->aspectRatio();
                     }) 
                     -> save($upload_file);

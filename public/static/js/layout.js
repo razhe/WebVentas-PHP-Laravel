@@ -37,8 +37,8 @@ userBtnOptions.addEventListener('click', () => {
 		userBtnOptions.classList.toggle('activo-movil');
 	}
 });
-
 /*user*/
+
 btnDepartamentos.addEventListener('mouseover', () => {
 	if(!esDispositivoMovil()){
 		grid.classList.add('activo');
@@ -51,7 +51,7 @@ grid.addEventListener('mouseleave', () => {
 	}
 });
 //Subcategorias escritorio
-document.querySelectorAll('#menu .categorias a').forEach((elemento) => {
+document.querySelectorAll('#menu .categorias small').forEach((elemento) => {
 	elemento.addEventListener('mouseenter', (e) => {
 		let subtitulo = document.getElementById('subtitulo')
 		subtitulo.setAttribute('data-categoria', elemento.dataset.categoria);
@@ -95,7 +95,7 @@ document.querySelector('#grid .categorias .btn-regresar').addEventListener('clic
 	btnCerrarMenu.classList.remove('activo');
 });
 //subcategorías movil
-document.querySelectorAll('#menu .categorias a').forEach((elemento) => {
+document.querySelectorAll('#menu .categorias small').forEach((elemento) => {
 	elemento.addEventListener('click', (e) => {
 		let subtitulo = document.getElementById('subtitulo')
 		subtitulo.setAttribute('data-categoria', elemento.dataset.categoria);
